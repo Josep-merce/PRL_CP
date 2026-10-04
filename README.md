@@ -2,11 +2,6 @@
 
 Web estàtica (HTML + CSS inline, sense build) del curs **[FCOS02] Bàsic de prevenció de riscos laborals**, dins del CP IFCT0510 Gestió de sistemes informàtics. Idioma: català.
 
-## Estructura
-- `index.html` — portada del curs amb la distribució d'hores i una targeta per mòdul (M01–M04).
-- `mX.html` — pàgina índex de cada mòdul, amb enllaços a les sessions.
-- `mX_cNN.html` — sessió NN del mòdul X. Cada sessió enllaça a l'anterior, la següent i l'índex del mòdul.
-
 | Mòdul | Títol | Hores | Estat |
 |---|---|---|---|
 | M01 | Conceptes bàsics sobre seguretat i salut en el treball | 7 h | `m1.html` + sessions `m1_c01`–`m1_c07` |
