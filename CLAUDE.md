@@ -10,7 +10,7 @@ Web estàtica (HTML + CSS inline, sense build) del curs **[FCOS02] Bàsic de pre
 | Mòdul | Títol | Hores | Estat |
 |---|---|---|---|
 | M01 | Conceptes bàsics sobre seguretat i salut en el treball | 7 h | `m1.html` + sessions `m1_c01`–`m1_c07` |
-| M02 | Riscos generals i la seva prevenció | 14 h | pendent |
+| M02 | Riscos generals i la seva prevenció | 14 h | `m2.html` + sessions `m2_c01`–`m2_c08` (falten `m2_c09`–`m2_c14`) |
 | M03 | Riscos específics i la seva prevenció en el sector | 5 h | pendent |
 | M04 | Elements bàsics de gestió de la prevenció de riscos | 4 h | pendent |
 

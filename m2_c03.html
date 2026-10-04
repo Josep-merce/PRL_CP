@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FCOS02/M02 Sessió 3: Risc elèctric</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F5F6;
+    --paper:#FFFFFF;
+    --ink:#1F2933;
+    --muted:#5F6B76;
+    --line:#D9DEE3;
+    --header:#1F2933;
+    --blue:#1F5A8C;    /* obligació */
+    --amber:#C99A06;   /* advertència */
+    --amber-2:#B5651D;
+    --green:#2E7D4F;   /* condició segura */
+    --red:#A63D2F;
+    --blue-soft:#EAF1F7;
+    --green-soft:#E8F3EC;
+    --red-soft:#F8EAE7;
+    --amber-soft:#FBF4DE;
+    --amber-line:#E6D39B;
+    --font:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+
+  /* Capçalera */
+  .top{background:var(--header);color:#fff;border-bottom:3px solid var(--amber)}
+  .top-inner{max-width:1040px;margin:0 auto;padding:clamp(2rem,5vw,3.25rem) clamp(1.25rem,5vw,3rem)}
+  .top-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem 1.5rem}
+  .cp{color:#C3CBD3;font-size:.95rem;font-weight:500}
+  .back{color:#C3CBD3;font-size:.9rem;text-decoration:none;border-bottom:1px solid transparent;transition:color .15s ease,border-color .15s ease}
+  .back:hover{color:#fff;border-bottom-color:#C3CBD3}
+  .back:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:2px}
+  .title-row{display:flex;align-items:flex-start;gap:1rem;margin-top:.9rem}
+  .title-row .num{width:48px;height:48px;font-size:1.3rem;margin-top:.15rem;border:2px solid #fff}
+  .code{display:block;color:var(--amber);font-weight:600;font-size:.95rem}
+  h1{font-weight:600;font-size:clamp(1.7rem,4vw,2.45rem);line-height:1.15;letter-spacing:-.01em;margin-top:.15rem}
+
+  .wrap{max-width:1040px;margin:0 auto;padding:clamp(1.75rem,4vw,2.75rem) clamp(1.25rem,5vw,3rem) 3rem}
+  h2{font-weight:600;font-size:1.3rem;line-height:1.3;margin:2.5rem 0 1rem}
+  .num{flex:none;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--amber);color:var(--ink);font-weight:600}
+
+  .box{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:6px;padding:1.3rem 1.35rem}
+  .box p{max-width:72ch}
+  .box p + p{margin-top:.6rem}
+  .muted{color:var(--muted)}
+  .lead{max-width:72ch;margin-bottom:1rem}
+
+  /* Avís */
+  .warn{background:var(--red-soft);border:1px solid #E5C2BB;border-left:4px solid var(--red);border-radius:6px;padding:1rem 1.25rem;margin-top:1rem;color:#5E2219}
+  .warn strong{font-weight:600}
+
+  /* Explicacions */
+  .terms{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
+  .term{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:6px;padding:1.1rem 1.25rem}
+  .term h3{font-weight:600;font-size:1.08rem}
+  .term p{margin-top:.35rem;font-size:.97rem}
+  .term ul{margin:.4rem 0 0 1.1rem;font-size:.97rem}
+  .term li{margin-top:.15rem}
+  .term .ex{color:var(--muted);font-size:.92rem;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--line)}
+  .term .src{display:block;color:var(--muted);font-size:.82rem;margin-top:.45rem}
+  .term.wide{grid-column:1 / -1}
+  @media (max-width:820px){.terms{grid-template-columns:1fr}}
+
+  /* Activitats */
+  .activity{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:6px;padding:1.3rem 1.35rem}
+  .act-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.4rem 1rem}
+  .act-head h3{font-weight:600;font-size:1.15rem}
+  .act-head .info{color:var(--muted);font-size:.9rem}
+  .instr{margin-top:.5rem;max-width:72ch}
+
+  .q{border-top:1px solid var(--line);padding:.9rem 0}
+  .q:first-of-type{margin-top:1rem}
+  .q legend{font-weight:500;padding:0;max-width:72ch}
+  fieldset.q{border:0;border-top:1px solid var(--line)}
+  .opts{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.55rem}
+  .opt{position:relative}
+  .opt input{position:absolute;opacity:0;width:1px;height:1px}
+  .opt span{display:inline-block;padding:.35rem .95rem;border:1px solid #B7C0C8;border-radius:999px;cursor:pointer;font-size:.93rem;background:var(--paper)}
+  .opt input:checked + span{background:var(--blue);border-color:var(--blue);color:#fff}
+  .opt input:focus-visible + span{outline:3px solid var(--blue);outline-offset:2px}
+  .opts.col{flex-direction:column;align-items:flex-start}
+  .opts.col .opt span{border-radius:6px}
+
+  .match{display:grid;grid-template-columns:1fr minmax(12rem,15rem);gap:.6rem 1rem;align-items:center;border-top:1px solid var(--line);padding:.8rem 0}
+  .match:first-of-type{margin-top:1rem}
+  .match label{max-width:62ch}
+  select{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1px solid #B7C0C8;border-radius:6px;padding:.45rem .6rem;width:100%}
+  select:focus-visible,textarea:focus-visible{outline:3px solid var(--blue);outline-offset:1px}
+  @media (max-width:620px){.match{grid-template-columns:1fr}}
+
+  .fb{grid-column:1 / -1;display:none;font-size:.9rem;border-radius:6px;padding:.5rem .75rem;margin-top:.55rem}
+  .fb.show{display:block}
+  .fb.ok{background:var(--green-soft);color:#1E5A37}
+  .fb.ko{background:var(--red-soft);color:#7E2D22}
+  .fb.empty{background:var(--bg);color:var(--muted)}
+
+  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)}
+  button{font:inherit;font-weight:600;font-size:.95rem;border-radius:6px;padding:.55rem 1.1rem;cursor:pointer;border:1px solid var(--blue)}
+  button.primary{background:var(--blue);color:#fff}
+  button.primary:hover{background:#184A74}
+  button.ghost{background:var(--paper);color:var(--blue)}
+  button.ghost:hover{background:var(--blue-soft)}
+  button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .score{font-weight:600}
+
+  textarea{font:inherit;font-size:.97rem;width:100%;min-height:7rem;margin-top:.3rem;border:1px solid #B7C0C8;border-radius:6px;padding:.7rem .8rem;resize:vertical;color:var(--ink)}
+  .tlabel{display:block;margin-top:.9rem;font-size:.9rem;color:var(--muted)}
+  .hint{color:var(--muted);font-size:.9rem;margin-top:.5rem}
+  .story{background:var(--bg);border-radius:6px;padding:1rem 1.15rem;margin-top:1rem;max-width:72ch}
+  .story p + p{margin-top:.5rem}
+  .steps{margin:.75rem 0 0 1.2rem;max-width:72ch}
+  .steps li{margin-top:.35rem}
+  .tbl{overflow-x:auto;margin-top:1rem}
+  table{border-collapse:collapse;width:100%;min-width:30rem;font-size:.95rem}
+  th,td{text-align:left;padding:.55rem .75rem;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-weight:600;background:var(--bg)}
+
+  .closing{background:var(--amber-soft);border:1px solid var(--amber-line);border-left:4px solid var(--amber);border-radius:6px;padding:1.2rem 1.35rem}
+  .closing ul{margin:.5rem 0 0 1.1rem}
+  .closing li{margin-top:.25rem}
+
+  /* Navegació entre sessions */
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:2.5rem}
+  .pager a{flex:1;max-width:48%;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:.85rem 1.1rem;color:inherit;text-decoration:none;transition:border-color .15s ease,box-shadow .15s ease}
+  .pager a:hover{border-color:#B7C0C8;box-shadow:0 4px 14px rgba(31,41,51,.08)}
+  .pager a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .pager .k{display:block;font-size:.85rem;color:var(--muted);font-weight:500}
+  .pager strong{font-weight:600}
+  .pager .next{text-align:right;margin-left:auto}
+
+  footer{margin-top:2.75rem;padding-top:1.1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="top-bar">
+      <p class="cp">CP IFCT0510 Gestió de sistemes informàtics</p>
+      <a class="back" href="m2.html">Tornar al mòdul M02</a>
+    </div>
+    <div class="title-row">
+      <span class="num" aria-hidden="true">3</span>
+      <div>
+        <span class="code">FCOS02/M02, sessió 3 (1 h)</span>
+        <h1>Risc elèctric</h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="box" aria-label="Objectiu de la sessió">
+    <p><strong>En aquesta sessió</strong> aprendràs què és el risc elèctric, la diferència entre contacte directe i indirecte, quins efectes té el corrent en el cos i les normes bàsiques per treballar de manera segura.</p>
+  </section>
+
+  <h2>Què és el risc elèctric</h2>
+  <p class="muted lead">El Reial decret 614/2001 regula la protecció davant del risc elèctric. Diu, per exemple, que els treballs en instal·lacions elèctriques només els poden fer persones autoritzades o qualificades, i que per norma general s'han de fer sense tensió.</p>
+  <section class="terms">
+    <article class="term">
+      <h3>Risc elèctric</h3>
+      <p>Possibilitat de patir un dany pel corrent elèctric: electrocució, cremades, caigudes per l'ensurt o incendis provocats per l'electricitat.</p>
+      <p class="ex">Exemple: connectar un equip a una regleta sobrecarregada que s'escalfa.</p>
+    </article>
+    <article class="term">
+      <h3>Contacte directe</h3>
+      <p>Tocar una part que normalment té tensió.</p>
+      <p class="ex">Exemple: tocar el coure d'un cable pelat o els borns de les bateries d'un SAI obert.</p>
+    </article>
+    <article class="term">
+      <h3>Contacte indirecte</h3>
+      <p>Tocar una part que normalment no té tensió, però que en té per culpa d'una avaria.</p>
+      <p class="ex">Exemple: tocar la carcassa metàl·lica d'un servidor que té un cable intern malmès.</p>
+    </article>
+    <article class="term">
+      <h3>Efectes del corrent en el cos</h3>
+      <p>La gravetat depèn de la intensitat del corrent, del temps que dura el contacte i del recorregut pel cos. Si passa pel cor, per exemple de mà a peu, és més greu. Amb la pell mullada passa més fàcilment.</p>
+      <ul><li>Contraccions musculars: la persona no pot deixar anar el cable.</li><li>Dificultat per respirar.</li><li>Alteracions del ritme del cor.</li><li>Cremades.</li></ul>
+    </article>
+  </section>
+  <h2>Com ens protegim</h2>
+  <section class="terms">
+    <article class="term">
+      <h3>Proteccions de la instal·lació</h3>
+      <p>La instal·lació elèctrica té elements que protegeixen les persones i els equips.</p>
+      <ul><li>Aïllament dels cables i les carcasses.</li><li>Presa de terra: desvia el corrent d'una avaria cap a terra.</li><li>Interruptor diferencial: talla el corrent quan detecta una fuga. Protegeix contra els contactes indirectes.</li><li>Magnetotèrmic: protegeix la instal·lació de sobrecàrregues i curtcircuits.</li></ul>
+    </article>
+    <article class="term">
+      <h3>El SAI, un cas especial</h3>
+      <p>Un SAI té bateries i continua donant corrent encara que el desconnectis de la paret. Per això no s'ha d'obrir ni manipular per dins si no tens la formació i l'autorització.</p>
+      <p class="ex">Exemple: desendollar el SAI de la paret no vol dir que les seves sortides hagin deixat de tenir tensió.</p>
+    </article>
+    <article class="term">
+      <h3>Normes bàsiques per a tothom</h3>
+      <p>Encara que no treballis en instal·lacions elèctriques, has de seguir aquestes normes:</p>
+      <ul><li>No obris quadres elèctrics ni equips si no estàs autoritzat.</li><li>No connectis regletes l'una darrere l'altra ni les sobrecarreguis.</li><li>Desconnecta tirant de l'endoll, no del cable.</li><li>No toquis res elèctric amb les mans mullades.</li><li>Si un equip fa olor de cremat o fa espurnes, desconnecta'l si pots fer-ho sense perill i avisa.</li></ul>
+    </article>
+    <article class="term">
+      <h3>Treballar sense tensió</h3>
+      <p>Quan una persona autoritzada ha de treballar en una instal·lació, el RD 614/2001 fixa uns passos per deixar-la sense tensió:</p>
+      <ul><li>Desconnectar.</li><li>Impedir que es torni a connectar.</li><li>Verificar que no hi ha tensió.</li><li>Posar a terra i en curtcircuit.</li><li>Protegir-se dels elements propers amb tensió i senyalitzar la zona.</li></ul>
+      <span class="src">Aquests passos se solen anomenar les cinc regles d'or.</span>
+    </article>
+  </section>
+  <h2>Activitat 1</h2>
+  <section class="activity" aria-labelledby="a1-title">
+    <div class="act-head">
+      <h3 id="a1-title">Mites sobre l'electricitat</h3>
+      <span class="info">Autoavaluable</span>
+    </div>
+    <p class="instr">Marca si cada frase és vertadera o falsa.</p>
+    <div id="a1"></div>
+    <div class="actions">
+      <button type="button" class="primary" data-check="a1">Comprova les respostes</button>
+      <button type="button" class="ghost" data-reset="a1">Torna a començar</button>
+      <span class="score" id="a1-score" aria-live="polite"></span>
+    </div>
+  </section>
+  <h2>Activitat 2</h2>
+  <section class="activity" aria-labelledby="a2-title">
+    <div class="act-head">
+      <h3 id="a2-title">Directe o indirecte?</h3>
+      <span class="info">Autoavaluable</span>
+    </div>
+    <p class="instr">Tria el tipus de contacte elèctric de cada situació.</p>
+    <div id="a2"></div>
+    <div class="actions">
+      <button type="button" class="primary" data-check="a2">Comprova les respostes</button>
+      <button type="button" class="ghost" data-reset="a2">Torna a començar</button>
+      <span class="score" id="a2-score" aria-live="polite"></span>
+    </div>
+  </section>
+  <h2>Activitat 3</h2>
+  <section class="activity" aria-labelledby="a3-title">
+    <div class="act-head">
+      <h3 id="a3-title">Un company enganxat al SAI</h3>
+      <span class="info">La valora el formador</span>
+    </div>
+    <p class="instr">Llegeix el cas i respon les preguntes.</p>
+    <div class="story">
+      <p>En Marc està canviant les bateries del SAI de la sala de servidors. De sobte sents un crit: està rígid, amb la mà enganxada a l'equip.</p>
+      <p>1. Què fas primer i per què?</p>
+      <p>2. Què no has de fer de cap manera?</p>
+      <p>3. Què fas quan ja no està en contacte amb el corrent?</p>
+      <p>4. Quina mesura hauria evitat l'accident?</p>
+    </div>
+    <label for="a3-text" class="tlabel">Respostes a les preguntes 1 a 4</label>
+    <textarea id="a3-text" placeholder="Escriu aquí la teva resposta..."></textarea>
+    <p class="hint">El text no es desa. Quan acabis, comparteix la resposta amb el grup o lliura-la com t'indiqui el formador.</p>
+  </section>
+
+  <h2>Tancament</h2>
+  <section class="closing">
+    <p><strong>Idees clau d'avui</strong></p>
+    <ul>
+      <li>El contacte directe és amb una part que té tensió; l'indirecte, amb una part que en té per una avaria.</li>
+      <li>El diferencial i la presa de terra protegeixen contra els contactes indirectes.</li>
+      <li>Un SAI pot donar corrent encara que estigui desendollat.</li>
+      <li>Si algú queda enganxat al corrent, primer es talla el corrent: mai se'l toca directament.</li>
+    </ul>
+  </section>
+
+  <nav class="pager" aria-label="Navegació entre sessions">
+    <a href="m2_c02.html"><span class="k">Sessió anterior</span><strong>Eines, màquines i treballs de manteniment</strong></a>
+    <a class="next" href="m2_c04.html"><span class="k">Següent sessió</span><strong>Incendis</strong></a>
+  </nav>
+
+  <footer>
+    <span>CP IFCT0510 Gestió de sistemes informàtics</span>
+    <span>[FCOS02] Bàsic de prevenció de riscos laborals</span>
+  </footer>
+
+</div>
+
+<script>
+  var ACT = {
+ "a1": {
+  "type": "vf",
+  "items": [
+   {
+    "q": "Els 230 volts de la xarxa d'un edifici no són perillosos per a les persones.",
+    "a": false,
+    "e": "La tensió d'un endoll normal pot ser mortal."
+   },
+   {
+    "q": "Un SAI desconnectat de la paret pot continuar donant corrent.",
+    "a": true,
+    "e": "Té bateries."
+   },
+   {
+    "q": "L'interruptor diferencial protegeix contra els contactes indirectes.",
+    "a": true
+   },
+   {
+    "q": "Si portes calçat de goma, pots tocar qualsevol cable sense perill.",
+    "a": false,
+    "e": "El calçat no garanteix l'aïllament i el corrent pot passar de mà a mà."
+   },
+   {
+    "q": "Amb les mans mullades, el corrent passa més fàcilment pel cos.",
+    "a": true
+   },
+   {
+    "q": "Connectar regletes l'una darrere l'altra és una bona solució si falten endolls.",
+    "a": false,
+    "e": "Es poden sobrecarregar i escalfar, i provocar un incendi."
+   },
+   {
+    "q": "Un tècnic de sistemes pot obrir el quadre elèctric de la sala si té pressa.",
+    "a": false,
+    "e": "Només hi poden treballar persones autoritzades o qualificades."
+   }
+  ]
+ },
+ "a2": {
+  "type": "select",
+  "options": [
+   "Contacte directe",
+   "Contacte indirecte"
+  ],
+  "placeholder": "Tria el tipus",
+  "items": [
+   {
+    "q": "Toques el coure d'un cable pelat d'una regleta.",
+    "a": "Contacte directe"
+   },
+   {
+    "q": "Toques la carcassa metàl·lica d'un rack que té corrent per una avaria.",
+    "a": "Contacte indirecte"
+   },
+   {
+    "q": "Fiques un tornavís dins d'un endoll.",
+    "a": "Contacte directe"
+   },
+   {
+    "q": "Toques la caixa metàl·lica d'un servidor amb un defecte d'aïllament.",
+    "a": "Contacte indirecte"
+   },
+   {
+    "q": "Toques els borns de les bateries d'un SAI obert.",
+    "a": "Contacte directe"
+   },
+   {
+    "q": "Et recolzes en una canaleta metàl·lica que té tensió perquè un cable de dins està mal connectat.",
+    "a": "Contacte indirecte"
+   }
+  ]
+ }
+};
+
+  function el(tag, attrs, txt){
+    var n = document.createElement(tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (txt !== undefined) n.textContent = txt;
+    return n;
+  }
+  function shuffle(a){ a = a.slice(); for (var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+
+  function build(id){
+    var cfg = ACT[id], box = document.getElementById(id);
+    box.innerHTML = '';
+    cfg.items.forEach(function(item, i){
+      if (cfg.type === 'select'){
+        var row = el('div', {'class':'match'});
+        row.appendChild(el('label', {'for':id+'-s'+i}, (cfg.nonum ? '' : (i+1) + '. ') + item.q));
+        var s = el('select', {id:id+'-s'+i});
+        s.appendChild(el('option', {value:''}, cfg.placeholder || 'Tria una opció'));
+        (cfg.shuffle ? shuffle(cfg.options) : cfg.options).forEach(function(t){ s.appendChild(el('option', {value:t}, t)); });
+        row.appendChild(s);
+        row.appendChild(el('div', {'class':'fb', id:id+'-fb'+i}));
+        box.appendChild(row);
+      } else {
+        var fs = el('fieldset', {'class':'q'});
+        fs.appendChild(el('legend', {}, (i+1) + '. ' + item.q));
+        var opts = el('div', {'class': cfg.type === 'mcq' ? 'opts col' : 'opts'});
+        var list = cfg.type === 'vf' ? ['Vertader','Fals'] : item.opts;
+        list.forEach(function(o, k){
+          var lab = el('label', {'class':'opt'});
+          lab.appendChild(el('input', {type:'radio', name:id+'-r'+i, value:String(k)}));
+          lab.appendChild(el('span', {}, o));
+          opts.appendChild(lab);
+        });
+        fs.appendChild(opts);
+        fs.appendChild(el('div', {'class':'fb', id:id+'-fb'+i}));
+        box.appendChild(fs);
+      }
+    });
+    document.getElementById(id+'-score').textContent = '';
+  }
+
+  function check(id){
+    var cfg = ACT[id], ok = 0;
+    cfg.items.forEach(function(item, i){
+      var fb = document.getElementById(id+'-fb'+i), val = null, right, correct;
+      if (cfg.type === 'select'){
+        val = document.getElementById(id+'-s'+i).value || null;
+        correct = item.a; right = val === item.a;
+      } else {
+        var sel = document.querySelector('input[name="'+id+'-r'+i+'"]:checked');
+        val = sel ? Number(sel.value) : null;
+        var ans = cfg.type === 'vf' ? (item.a ? 0 : 1) : item.a;
+        correct = cfg.type === 'vf' ? (item.a ? 'Vertader' : 'Fals') : item.opts[item.a];
+        right = val === ans;
+      }
+      var extra = item.e ? ' ' + item.e : '';
+      fb.className = 'fb show';
+      if (val === null){ fb.classList.add('empty'); fb.textContent = 'Sense resposta. La correcta és: ' + correct + '.' + extra; return; }
+      if (right){ ok++; fb.classList.add('ok'); fb.textContent = 'Correcte.' + extra; }
+      else { fb.classList.add('ko'); fb.textContent = 'No és correcte. La correcta és: ' + correct + '.' + extra; }
+    });
+    document.getElementById(id+'-score').textContent = ok + ' de ' + cfg.items.length + ' encerts';
+  }
+
+  document.querySelectorAll('[data-check]').forEach(function(b){ b.addEventListener('click', function(){ check(b.dataset.check); }); });
+  document.querySelectorAll('[data-reset]').forEach(function(b){ b.addEventListener('click', function(){ build(b.dataset.reset); }); });
+  Object.keys(ACT).forEach(build);
+</script>
+</body>
+</html>

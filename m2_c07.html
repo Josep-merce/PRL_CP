@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FCOS02/M02 Sessió 7: Càrrega física</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F5F6;
+    --paper:#FFFFFF;
+    --ink:#1F2933;
+    --muted:#5F6B76;
+    --line:#D9DEE3;
+    --header:#1F2933;
+    --blue:#1F5A8C;    /* obligació */
+    --amber:#C99A06;   /* advertència */
+    --amber-2:#B5651D;
+    --green:#2E7D4F;   /* condició segura */
+    --red:#A63D2F;
+    --blue-soft:#EAF1F7;
+    --green-soft:#E8F3EC;
+    --red-soft:#F8EAE7;
+    --amber-soft:#FBF4DE;
+    --amber-line:#E6D39B;
+    --font:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+
+  /* Capçalera */
+  .top{background:var(--header);color:#fff;border-bottom:3px solid var(--amber)}
+  .top-inner{max-width:1040px;margin:0 auto;padding:clamp(2rem,5vw,3.25rem) clamp(1.25rem,5vw,3rem)}
+  .top-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem 1.5rem}
+  .cp{color:#C3CBD3;font-size:.95rem;font-weight:500}
+  .back{color:#C3CBD3;font-size:.9rem;text-decoration:none;border-bottom:1px solid transparent;transition:color .15s ease,border-color .15s ease}
+  .back:hover{color:#fff;border-bottom-color:#C3CBD3}
+  .back:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:2px}
+  .title-row{display:flex;align-items:flex-start;gap:1rem;margin-top:.9rem}
+  .title-row .num{width:48px;height:48px;font-size:1.3rem;margin-top:.15rem;border:2px solid #fff}
+  .code{display:block;color:var(--amber);font-weight:600;font-size:.95rem}
+  h1{font-weight:600;font-size:clamp(1.7rem,4vw,2.45rem);line-height:1.15;letter-spacing:-.01em;margin-top:.15rem}
+
+  .wrap{max-width:1040px;margin:0 auto;padding:clamp(1.75rem,4vw,2.75rem) clamp(1.25rem,5vw,3rem) 3rem}
+  h2{font-weight:600;font-size:1.3rem;line-height:1.3;margin:2.5rem 0 1rem}
+  .num{flex:none;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--amber);color:var(--ink);font-weight:600}
+
+  .box{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:6px;padding:1.3rem 1.35rem}
+  .box p{max-width:72ch}
+  .box p + p{margin-top:.6rem}
+  .muted{color:var(--muted)}
+  .lead{max-width:72ch;margin-bottom:1rem}
+
+  /* Avís */
+  .warn{background:var(--red-soft);border:1px solid #E5C2BB;border-left:4px solid var(--red);border-radius:6px;padding:1rem 1.25rem;margin-top:1rem;color:#5E2219}
+  .warn strong{font-weight:600}
+
+  /* Explicacions */
+  .terms{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
+  .term{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:6px;padding:1.1rem 1.25rem}
+  .term h3{font-weight:600;font-size:1.08rem}
+  .term p{margin-top:.35rem;font-size:.97rem}
+  .term ul{margin:.4rem 0 0 1.1rem;font-size:.97rem}
+  .term li{margin-top:.15rem}
+  .term .ex{color:var(--muted);font-size:.92rem;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--line)}
+  .term .src{display:block;color:var(--muted);font-size:.82rem;margin-top:.45rem}
+  .term.wide{grid-column:1 / -1}
+  @media (max-width:820px){.terms{grid-template-columns:1fr}}
+
+  /* Activitats */
+  .activity{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:6px;padding:1.3rem 1.35rem}
+  .act-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.4rem 1rem}
+  .act-head h3{font-weight:600;font-size:1.15rem}
+  .act-head .info{color:var(--muted);font-size:.9rem}
+  .instr{margin-top:.5rem;max-width:72ch}
+
+  .q{border-top:1px solid var(--line);padding:.9rem 0}
+  .q:first-of-type{margin-top:1rem}
+  .q legend{font-weight:500;padding:0;max-width:72ch}
+  fieldset.q{border:0;border-top:1px solid var(--line)}
+  .opts{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.55rem}
+  .opt{position:relative}
+  .opt input{position:absolute;opacity:0;width:1px;height:1px}
+  .opt span{display:inline-block;padding:.35rem .95rem;border:1px solid #B7C0C8;border-radius:999px;cursor:pointer;font-size:.93rem;background:var(--paper)}
+  .opt input:checked + span{background:var(--blue);border-color:var(--blue);color:#fff}
+  .opt input:focus-visible + span{outline:3px solid var(--blue);outline-offset:2px}
+  .opts.col{flex-direction:column;align-items:flex-start}
+  .opts.col .opt span{border-radius:6px}
+
+  .match{display:grid;grid-template-columns:1fr minmax(12rem,15rem);gap:.6rem 1rem;align-items:center;border-top:1px solid var(--line);padding:.8rem 0}
+  .match:first-of-type{margin-top:1rem}
+  .match label{max-width:62ch}
+  select{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1px solid #B7C0C8;border-radius:6px;padding:.45rem .6rem;width:100%}
+  select:focus-visible,textarea:focus-visible{outline:3px solid var(--blue);outline-offset:1px}
+  @media (max-width:620px){.match{grid-template-columns:1fr}}
+
+  .fb{grid-column:1 / -1;display:none;font-size:.9rem;border-radius:6px;padding:.5rem .75rem;margin-top:.55rem}
+  .fb.show{display:block}
+  .fb.ok{background:var(--green-soft);color:#1E5A37}
+  .fb.ko{background:var(--red-soft);color:#7E2D22}
+  .fb.empty{background:var(--bg);color:var(--muted)}
+
+  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)}
+  button{font:inherit;font-weight:600;font-size:.95rem;border-radius:6px;padding:.55rem 1.1rem;cursor:pointer;border:1px solid var(--blue)}
+  button.primary{background:var(--blue);color:#fff}
+  button.primary:hover{background:#184A74}
+  button.ghost{background:var(--paper);color:var(--blue)}
+  button.ghost:hover{background:var(--blue-soft)}
+  button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .score{font-weight:600}
+
+  textarea{font:inherit;font-size:.97rem;width:100%;min-height:7rem;margin-top:.3rem;border:1px solid #B7C0C8;border-radius:6px;padding:.7rem .8rem;resize:vertical;color:var(--ink)}
+  .tlabel{display:block;margin-top:.9rem;font-size:.9rem;color:var(--muted)}
+  .hint{color:var(--muted);font-size:.9rem;margin-top:.5rem}
+  .story{background:var(--bg);border-radius:6px;padding:1rem 1.15rem;margin-top:1rem;max-width:72ch}
+  .story p + p{margin-top:.5rem}
+  .steps{margin:.75rem 0 0 1.2rem;max-width:72ch}
+  .steps li{margin-top:.35rem}
+  .tbl{overflow-x:auto;margin-top:1rem}
+  table{border-collapse:collapse;width:100%;min-width:30rem;font-size:.95rem}
+  th,td{text-align:left;padding:.55rem .75rem;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-weight:600;background:var(--bg)}
+
+  .closing{background:var(--amber-soft);border:1px solid var(--amber-line);border-left:4px solid var(--amber);border-radius:6px;padding:1.2rem 1.35rem}
+  .closing ul{margin:.5rem 0 0 1.1rem}
+  .closing li{margin-top:.25rem}
+
+  /* Navegació entre sessions */
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:2.5rem}
+  .pager a{flex:1;max-width:48%;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:.85rem 1.1rem;color:inherit;text-decoration:none;transition:border-color .15s ease,box-shadow .15s ease}
+  .pager a:hover{border-color:#B7C0C8;box-shadow:0 4px 14px rgba(31,41,51,.08)}
+  .pager a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .pager .k{display:block;font-size:.85rem;color:var(--muted);font-weight:500}
+  .pager strong{font-weight:600}
+  .pager .next{text-align:right;margin-left:auto}
+
+  footer{margin-top:2.75rem;padding-top:1.1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="top-bar">
+      <p class="cp">CP IFCT0510 Gestió de sistemes informàtics</p>
+      <a class="back" href="m2.html">Tornar al mòdul M02</a>
+    </div>
+    <div class="title-row">
+      <span class="num" aria-hidden="true">7</span>
+      <div>
+        <span class="code">FCOS02/M02, sessió 7 (1 h)</span>
+        <h1>Càrrega física</h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="box" aria-label="Objectiu de la sessió">
+    <p><strong>En aquesta sessió</strong> aprendràs a reconèixer els riscos de la càrrega física (esforços, postures, manipulació manual de càrregues i moviments repetitius) i la tècnica correcta per aixecar una càrrega.</p>
+  </section>
+
+  <h2>La càrrega física</h2>
+  <p class="muted lead">La càrrega física és l'esforç que fa el cos per treballar. Quan és excessiva, provoca cansament i, amb el temps, lesions als músculs, als tendons i a l'esquena, que s'anomenen trastorns musculoesquelètics.</p>
+  <section class="terms">
+    <article class="term">
+      <h3>Esforços físics</h3>
+      <p>Fer força per empènyer, estirar, girar o aguantar objectes.</p>
+      <p class="ex">Exemple: empènyer un rack amb rodes ple d'equips per la rampa del magatzem.</p>
+    </article>
+    <article class="term">
+      <h3>Postura de treball</h3>
+      <p>La posició del cos mentre treballes. Són perjudicials les postures forçades (ajupit, agenollat, amb els braços per sobre del cap o amb el tronc girat) i les postures estàtiques mantingudes molta estona.</p>
+      <p class="ex">Exemple: connectar cables a la part de baix del rack ajupit durant mitja hora.</p>
+    </article>
+    <article class="term">
+      <h3>Manipulació manual de càrregues</h3>
+      <p>Aixecar, portar, empènyer o estirar un objecte amb la força del cos. El Reial decret 487/1997 la regula. La Guia tècnica de l'INSST la considera a partir de 3 kg i recomana no aixecar més de 25 kg en condicions normals. Per a algunes persones el límit recomanat és més baix.</p>
+      <p class="ex">Exemple: treure de la caixa i pujar al rack un servidor de 25 kg.</p>
+      <span class="src">Reial decret 487/1997 i Guia tècnica de l'INSST per a la manipulació manual de càrregues.</span>
+    </article>
+    <article class="term">
+      <h3>Moviments repetitius</h3>
+      <p>Fer el mateix moviment moltes vegades seguides amb poc descans. Poden provocar tendinitis o problemes al canell.</p>
+      <p class="ex">Exemple: crimpar centenars de connectors RJ45 en una sola jornada.</p>
+    </article>
+  </section>
+  <h2>Com aixecar una càrrega</h2>
+  <p class="muted lead">Si no es pot evitar la manipulació amb ajudes mecàniques (carretons, plataformes elevadores) o amb l'ajuda d'un company, cal seguir aquesta tècnica.</p>
+  <section class="terms">
+    <article class="term wide">
+      <h3>Tècnica correcta</h3>
+      <p>Sis passos:</p>
+      <ul><li>Planifica: mira el pes i el recorregut, i treu els obstacles.</li><li>Col·loca els peus separats, un una mica més endavant que l'altre, a prop de la càrrega.</li><li>Doblega els genolls i mantén l'esquena recta.</li><li>Agafa la càrrega amb fermesa, amb tota la mà.</li><li>Aixeca't fent força amb les cames, sense sacsejades, amb la càrrega enganxada al cos.</li><li>Per girar, mou els peus: no giris el tronc.</li></ul>
+    </article>
+    <article class="term wide">
+      <h3>Altres mesures</h3>
+      <p>Per reduir la càrrega física:</p>
+      <ul><li>Fer servir carretons i plataformes.</li><li>Demanar ajuda per als equips pesants o voluminosos.</li><li>Fer pauses i alternar tasques.</li><li>Treballar a una alçada còmoda.</li><li>Fer servir eines que necessitin menys força.</li></ul>
+    </article>
+  </section>
+  <h2>Activitat 1</h2>
+  <section class="activity" aria-labelledby="a1-title">
+    <div class="act-head">
+      <h3 id="a1-title">Aixecar sense fer-se mal</h3>
+      <span class="info">Autoavaluable</span>
+    </div>
+    <p class="instr">Tria la resposta correcta de cada pregunta.</p>
+    <div id="a1"></div>
+    <div class="actions">
+      <button type="button" class="primary" data-check="a1">Comprova les respostes</button>
+      <button type="button" class="ghost" data-reset="a1">Torna a començar</button>
+      <span class="score" id="a1-score" aria-live="polite"></span>
+    </div>
+  </section>
+  <h2>Activitat 2</h2>
+  <section class="activity" aria-labelledby="a2-title">
+    <div class="act-head">
+      <h3 id="a2-title">Posa en ordre la tècnica</h3>
+      <span class="info">Autoavaluable</span>
+    </div>
+    <p class="instr">Posa els passos per aixecar una càrrega en l'ordre correcte.</p>
+    <div id="a2"></div>
+    <div class="actions">
+      <button type="button" class="primary" data-check="a2">Comprova les respostes</button>
+      <button type="button" class="ghost" data-reset="a2">Torna a començar</button>
+      <span class="score" id="a2-score" aria-live="polite"></span>
+    </div>
+  </section>
+  <h2>Activitat 3</h2>
+  <section class="activity" aria-labelledby="a3-title">
+    <div class="act-head">
+      <h3 id="a3-title">Pràctica d'aixecament per parelles</h3>
+      <span class="info">La valora el formador</span>
+    </div>
+    <p class="instr">Per parelles, una persona aixeca una caixa buida o lleugera (la que indiqui el formador), la porta uns metres i la deixa sobre una taula. L'altra persona observa i comprova cada punt de la llista. Després canvieu els papers.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Punt que s'observa</th><th>Sí / No</th></tr></thead>
+        <tbody>
+          <tr><td>Ha mirat el recorregut abans d'aixecar la caixa.</td><td></td></tr>
+          <tr><td>Ha col·locat els peus separats i a prop de la caixa.</td><td></td></tr>
+          <tr><td>Ha doblegat els genolls i ha mantingut l'esquena recta.</td><td></td></tr>
+          <tr><td>Ha portat la caixa enganxada al cos.</td><td></td></tr>
+          <tr><td>Ha girat movent els peus, sense girar el tronc.</td><td></td></tr>
+          <tr><td>Ha deixat la caixa doblegant els genolls o a l'alçada de la taula, sense sacsejades.</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <label for="a3-text" class="tlabel">Resultat de l'observació i què ha de millorar el company</label>
+    <textarea id="a3-text" placeholder="Escriu aquí la teva resposta..."></textarea>
+    <p class="hint">El text no es desa. Quan acabis, comparteix la resposta amb el grup o lliura-la com t'indiqui el formador.</p>
+  </section>
+
+  <h2>Tancament</h2>
+  <section class="closing">
+    <p><strong>Idees clau d'avui</strong></p>
+    <ul>
+      <li>La càrrega física excessiva provoca cansament i lesions als músculs, als tendons i a l'esquena.</li>
+      <li>Abans d'aixecar a mà, pensa si pots fer servir un carretó o demanar ajuda.</li>
+      <li>Genolls doblegats, esquena recta i càrrega enganxada al cos.</li>
+      <li>Per girar, es mouen els peus, no el tronc.</li>
+    </ul>
+  </section>
+
+  <nav class="pager" aria-label="Navegació entre sessions">
+    <a href="m2_c06.html"><span class="k">Sessió anterior</span><strong>Agents químics i biològics</strong></a>
+    <a class="next" href="m2_c08.html"><span class="k">Següent sessió</span><strong>Càrrega mental, fatiga, insatisfacció i assetjament</strong></a>
+  </nav>
+
+  <footer>
+    <span>CP IFCT0510 Gestió de sistemes informàtics</span>
+    <span>[FCOS02] Bàsic de prevenció de riscos laborals</span>
+  </footer>
+
+</div>
+
+<script>
+  var ACT = {
+ "a1": {
+  "type": "mcq",
+  "items": [
+   {
+    "q": "Has d'aixecar una caixa des de terra. Com col·loques l'esquena?",
+    "opts": [
+     "Doblegada, perquè arribes més avall.",
+     "Recta, doblegant els genolls.",
+     "Girada cap al costat on la deixaràs.",
+     "Tant se val, si la caixa pesa poc."
+    ],
+    "a": 1
+   },
+   {
+    "q": "On ha d'anar la càrrega mentre la portes?",
+    "opts": [
+     "Tan lluny del cos com puguis.",
+     "Damunt del cap.",
+     "Enganxada al cos.",
+     "Agafada només amb una mà."
+    ],
+    "a": 2
+   },
+   {
+    "q": "Has de deixar la caixa en una taula que és al teu costat. Com ho fas?",
+    "opts": [
+     "Giro el tronc i la deixo.",
+     "Moc els peus per girar tot el cos.",
+     "La llanço amb compte.",
+     "Giro el tronc de pressa perquè pesi menys estona."
+    ],
+    "a": 1
+   },
+   {
+    "q": "Un servidor pesa 30 kg i és molt voluminós. Què és el més adequat?",
+    "opts": [
+     "L'aixeco sol fent força amb les cames.",
+     "Faig servir un carretó o una plataforma, o demano ajuda.",
+     "L'arrossego per terra.",
+     "L'aixeco sol de pressa."
+    ],
+    "a": 1
+   },
+   {
+    "q": "Quin d'aquests és un moviment repetitiu?",
+    "opts": [
+     "Pujar un servidor al rack un cop al mes.",
+     "Crimpar connectors durant tota la jornada.",
+     "Moure una cadira.",
+     "Obrir la porta de la sala."
+    ],
+    "a": 1
+   }
+  ]
+ },
+ "a2": {
+  "type": "select",
+  "options": [
+   "Pas 1",
+   "Pas 2",
+   "Pas 3",
+   "Pas 4",
+   "Pas 5",
+   "Pas 6"
+  ],
+  "placeholder": "Tria el pas",
+  "nonum": true,
+  "items": [
+   {
+    "q": "Agafar la càrrega amb fermesa, amb tota la mà.",
+    "a": "Pas 4"
+   },
+   {
+    "q": "Mirar el pes i el recorregut, i treure els obstacles.",
+    "a": "Pas 1"
+   },
+   {
+    "q": "Per girar, moure els peus sense girar el tronc.",
+    "a": "Pas 6"
+   },
+   {
+    "q": "Doblegar els genolls i mantenir l'esquena recta.",
+    "a": "Pas 3"
+   },
+   {
+    "q": "Aixecar-se amb la força de les cames, sense sacsejades, amb la càrrega enganxada al cos.",
+    "a": "Pas 5"
+   },
+   {
+    "q": "Col·locar els peus separats, a prop de la càrrega.",
+    "a": "Pas 2"
+   }
+  ]
+ }
+};
+
+  function el(tag, attrs, txt){
+    var n = document.createElement(tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (txt !== undefined) n.textContent = txt;
+    return n;
+  }
+  function shuffle(a){ a = a.slice(); for (var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+
+  function build(id){
+    var cfg = ACT[id], box = document.getElementById(id);
+    box.innerHTML = '';
+    cfg.items.forEach(function(item, i){
+      if (cfg.type === 'select'){
+        var row = el('div', {'class':'match'});
+        row.appendChild(el('label', {'for':id+'-s'+i}, (cfg.nonum ? '' : (i+1) + '. ') + item.q));
+        var s = el('select', {id:id+'-s'+i});
+        s.appendChild(el('option', {value:''}, cfg.placeholder || 'Tria una opció'));
+        (cfg.shuffle ? shuffle(cfg.options) : cfg.options).forEach(function(t){ s.appendChild(el('option', {value:t}, t)); });
+        row.appendChild(s);
+        row.appendChild(el('div', {'class':'fb', id:id+'-fb'+i}));
+        box.appendChild(row);
+      } else {
+        var fs = el('fieldset', {'class':'q'});
+        fs.appendChild(el('legend', {}, (i+1) + '. ' + item.q));
+        var opts = el('div', {'class': cfg.type === 'mcq' ? 'opts col' : 'opts'});
+        var list = cfg.type === 'vf' ? ['Vertader','Fals'] : item.opts;
+        list.forEach(function(o, k){
+          var lab = el('label', {'class':'opt'});
+          lab.appendChild(el('input', {type:'radio', name:id+'-r'+i, value:String(k)}));
+          lab.appendChild(el('span', {}, o));
+          opts.appendChild(lab);
+        });
+        fs.appendChild(opts);
+        fs.appendChild(el('div', {'class':'fb', id:id+'-fb'+i}));
+        box.appendChild(fs);
+      }
+    });
+    document.getElementById(id+'-score').textContent = '';
+  }
+
+  function check(id){
+    var cfg = ACT[id], ok = 0;
+    cfg.items.forEach(function(item, i){
+      var fb = document.getElementById(id+'-fb'+i), val = null, right, correct;
+      if (cfg.type === 'select'){
+        val = document.getElementById(id+'-s'+i).value || null;
+        correct = item.a; right = val === item.a;
+      } else {
+        var sel = document.querySelector('input[name="'+id+'-r'+i+'"]:checked');
+        val = sel ? Number(sel.value) : null;
+        var ans = cfg.type === 'vf' ? (item.a ? 0 : 1) : item.a;
+        correct = cfg.type === 'vf' ? (item.a ? 'Vertader' : 'Fals') : item.opts[item.a];
+        right = val === ans;
+      }
+      var extra = item.e ? ' ' + item.e : '';
+      fb.className = 'fb show';
+      if (val === null){ fb.classList.add('empty'); fb.textContent = 'Sense resposta. La correcta és: ' + correct + '.' + extra; return; }
+      if (right){ ok++; fb.classList.add('ok'); fb.textContent = 'Correcte.' + extra; }
+      else { fb.classList.add('ko'); fb.textContent = 'No és correcte. La correcta és: ' + correct + '.' + extra; }
+    });
+    document.getElementById(id+'-score').textContent = ok + ' de ' + cfg.items.length + ' encerts';
+  }
+
+  document.querySelectorAll('[data-check]').forEach(function(b){ b.addEventListener('click', function(){ check(b.dataset.check); }); });
+  document.querySelectorAll('[data-reset]').forEach(function(b){ b.addEventListener('click', function(){ build(b.dataset.reset); }); });
+  Object.keys(ACT).forEach(build);
+</script>
+</body>
+</html>

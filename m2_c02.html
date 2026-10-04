@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FCOS02/M02 Sessió 2: Eines, màquines i treballs de manteniment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F5F6;
+    --paper:#FFFFFF;
+    --ink:#1F2933;
+    --muted:#5F6B76;
+    --line:#D9DEE3;
+    --header:#1F2933;
+    --blue:#1F5A8C;    /* obligació */
+    --amber:#C99A06;   /* advertència */
+    --amber-2:#B5651D;
+    --green:#2E7D4F;   /* condició segura */
+    --red:#A63D2F;
+    --blue-soft:#EAF1F7;
+    --green-soft:#E8F3EC;
+    --red-soft:#F8EAE7;
+    --amber-soft:#FBF4DE;
+    --amber-line:#E6D39B;
+    --font:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+
+  /* Capçalera */
+  .top{background:var(--header);color:#fff;border-bottom:3px solid var(--amber)}
+  .top-inner{max-width:1040px;margin:0 auto;padding:clamp(2rem,5vw,3.25rem) clamp(1.25rem,5vw,3rem)}
+  .top-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem 1.5rem}
+  .cp{color:#C3CBD3;font-size:.95rem;font-weight:500}
+  .back{color:#C3CBD3;font-size:.9rem;text-decoration:none;border-bottom:1px solid transparent;transition:color .15s ease,border-color .15s ease}
+  .back:hover{color:#fff;border-bottom-color:#C3CBD3}
+  .back:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:2px}
+  .title-row{display:flex;align-items:flex-start;gap:1rem;margin-top:.9rem}
+  .title-row .num{width:48px;height:48px;font-size:1.3rem;margin-top:.15rem;border:2px solid #fff}
+  .code{display:block;color:var(--amber);font-weight:600;font-size:.95rem}
+  h1{font-weight:600;font-size:clamp(1.7rem,4vw,2.45rem);line-height:1.15;letter-spacing:-.01em;margin-top:.15rem}
+
+  .wrap{max-width:1040px;margin:0 auto;padding:clamp(1.75rem,4vw,2.75rem) clamp(1.25rem,5vw,3rem) 3rem}
+  h2{font-weight:600;font-size:1.3rem;line-height:1.3;margin:2.5rem 0 1rem}
+  .num{flex:none;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--amber);color:var(--ink);font-weight:600}
+
+  .box{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:6px;padding:1.3rem 1.35rem}
+  .box p{max-width:72ch}
+  .box p + p{margin-top:.6rem}
+  .muted{color:var(--muted)}
+  .lead{max-width:72ch;margin-bottom:1rem}
+
+  /* Avís */
+  .warn{background:var(--red-soft);border:1px solid #E5C2BB;border-left:4px solid var(--red);border-radius:6px;padding:1rem 1.25rem;margin-top:1rem;color:#5E2219}
+  .warn strong{font-weight:600}
+
+  /* Explicacions */
+  .terms{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
+  .term{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:6px;padding:1.1rem 1.25rem}
+  .term h3{font-weight:600;font-size:1.08rem}
+  .term p{margin-top:.35rem;font-size:.97rem}
+  .term ul{margin:.4rem 0 0 1.1rem;font-size:.97rem}
+  .term li{margin-top:.15rem}
+  .term .ex{color:var(--muted);font-size:.92rem;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--line)}
+  .term .src{display:block;color:var(--muted);font-size:.82rem;margin-top:.45rem}
+  .term.wide{grid-column:1 / -1}
+  @media (max-width:820px){.terms{grid-template-columns:1fr}}
+
+  /* Activitats */
+  .activity{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:6px;padding:1.3rem 1.35rem}
+  .act-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.4rem 1rem}
+  .act-head h3{font-weight:600;font-size:1.15rem}
+  .act-head .info{color:var(--muted);font-size:.9rem}
+  .instr{margin-top:.5rem;max-width:72ch}
+
+  .q{border-top:1px solid var(--line);padding:.9rem 0}
+  .q:first-of-type{margin-top:1rem}
+  .q legend{font-weight:500;padding:0;max-width:72ch}
+  fieldset.q{border:0;border-top:1px solid var(--line)}
+  .opts{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.55rem}
+  .opt{position:relative}
+  .opt input{position:absolute;opacity:0;width:1px;height:1px}
+  .opt span{display:inline-block;padding:.35rem .95rem;border:1px solid #B7C0C8;border-radius:999px;cursor:pointer;font-size:.93rem;background:var(--paper)}
+  .opt input:checked + span{background:var(--blue);border-color:var(--blue);color:#fff}
+  .opt input:focus-visible + span{outline:3px solid var(--blue);outline-offset:2px}
+  .opts.col{flex-direction:column;align-items:flex-start}
+  .opts.col .opt span{border-radius:6px}
+
+  .match{display:grid;grid-template-columns:1fr minmax(12rem,15rem);gap:.6rem 1rem;align-items:center;border-top:1px solid var(--line);padding:.8rem 0}
+  .match:first-of-type{margin-top:1rem}
+  .match label{max-width:62ch}
+  select{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1px solid #B7C0C8;border-radius:6px;padding:.45rem .6rem;width:100%}
+  select:focus-visible,textarea:focus-visible{outline:3px solid var(--blue);outline-offset:1px}
+  @media (max-width:620px){.match{grid-template-columns:1fr}}
+
+  .fb{grid-column:1 / -1;display:none;font-size:.9rem;border-radius:6px;padding:.5rem .75rem;margin-top:.55rem}
+  .fb.show{display:block}
+  .fb.ok{background:var(--green-soft);color:#1E5A37}
+  .fb.ko{background:var(--red-soft);color:#7E2D22}
+  .fb.empty{background:var(--bg);color:var(--muted)}
+
+  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)}
+  button{font:inherit;font-weight:600;font-size:.95rem;border-radius:6px;padding:.55rem 1.1rem;cursor:pointer;border:1px solid var(--blue)}
+  button.primary{background:var(--blue);color:#fff}
+  button.primary:hover{background:#184A74}
+  button.ghost{background:var(--paper);color:var(--blue)}
+  button.ghost:hover{background:var(--blue-soft)}
+  button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .score{font-weight:600}
+
+  textarea{font:inherit;font-size:.97rem;width:100%;min-height:7rem;margin-top:.3rem;border:1px solid #B7C0C8;border-radius:6px;padding:.7rem .8rem;resize:vertical;color:var(--ink)}
+  .tlabel{display:block;margin-top:.9rem;font-size:.9rem;color:var(--muted)}
+  .hint{color:var(--muted);font-size:.9rem;margin-top:.5rem}
+  .story{background:var(--bg);border-radius:6px;padding:1rem 1.15rem;margin-top:1rem;max-width:72ch}
+  .story p + p{margin-top:.5rem}
+  .steps{margin:.75rem 0 0 1.2rem;max-width:72ch}
+  .steps li{margin-top:.35rem}
+  .tbl{overflow-x:auto;margin-top:1rem}
+  table{border-collapse:collapse;width:100%;min-width:30rem;font-size:.95rem}
+  th,td{text-align:left;padding:.55rem .75rem;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-weight:600;background:var(--bg)}
+
+  .closing{background:var(--amber-soft);border:1px solid var(--amber-line);border-left:4px solid var(--amber);border-radius:6px;padding:1.2rem 1.35rem}
+  .closing ul{margin:.5rem 0 0 1.1rem}
+  .closing li{margin-top:.25rem}
+
+  /* Navegació entre sessions */
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:2.5rem}
+  .pager a{flex:1;max-width:48%;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:.85rem 1.1rem;color:inherit;text-decoration:none;transition:border-color .15s ease,box-shadow .15s ease}
+  .pager a:hover{border-color:#B7C0C8;box-shadow:0 4px 14px rgba(31,41,51,.08)}
+  .pager a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .pager .k{display:block;font-size:.85rem;color:var(--muted);font-weight:500}
+  .pager strong{font-weight:600}
+  .pager .next{text-align:right;margin-left:auto}
+
+  footer{margin-top:2.75rem;padding-top:1.1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="top-bar">
+      <p class="cp">CP IFCT0510 Gestió de sistemes informàtics</p>
+      <a class="back" href="m2.html">Tornar al mòdul M02</a>
+    </div>
+    <div class="title-row">
+      <span class="num" aria-hidden="true">2</span>
+      <div>
+        <span class="code">FCOS02/M02, sessió 2 (1 h)</span>
+        <h1>Eines, màquines i treballs de manteniment</h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="box" aria-label="Objectiu de la sessió">
+    <p><strong>En aquesta sessió</strong> aprendràs a reconèixer els riscos de les eines manuals i elèctriques, de les màquines i dels treballs de manteniment, i les normes bàsiques per evitar-los.</p>
+  </section>
+
+  <h2>Eines i màquines</h2>
+  <p class="muted lead">El Reial decret 1215/1997 regula els equips de treball. L'empresa ha de donar equips adequats a la feina i mantenir-los en bon estat. La persona treballadora els ha d'utilitzar segons les instruccions, un deure que ja vam veure al M01.</p>
+  <section class="terms">
+    <article class="term">
+      <h3>Eines manuals</h3>
+      <p>Tornavís, alicates, cúter, crimpadora o pelacables. Poden causar talls, cops i projeccions de petites peces.</p>
+      <ul><li>Fes servir cada eina per a allò per al qual està pensada.</li><li>Comprova que està en bon estat.</li><li>Guarda-la al seu lloc, mai a la butxaca.</li><li>Talla sempre en direcció contrària al cos.</li></ul>
+      <p class="ex">Exemple: fer servir un pelacables per pelar el cable de xarxa, en comptes del cúter.</p>
+    </article>
+    <article class="term">
+      <h3>Eines elèctriques portàtils</h3>
+      <p>Trepant, tornavís elèctric o serra. Hi ha risc elèctric, de projecció de partícules i d'atrapament.</p>
+      <ul><li>Revisa el cable i l'endoll abans de començar.</li><li>Desconnecta-la per canviar la broca o la fulla.</li><li>Fes servir ulleres si hi ha projeccions.</li></ul>
+      <p class="ex">Exemple: foradar la paret per passar una canaleta amb ulleres de protecció.</p>
+    </article>
+    <article class="term">
+      <h3>Màquines</h3>
+      <p>Equips amb parts mòbils que poden atrapar, tallar o projectar. Els resguards i les aturades d'emergència en protegeixen.</p>
+      <ul><li>Mai retiris ni anul·lis un resguard.</li><li>No posis les mans a la zona de perill amb la màquina en marxa.</li><li>Evita la roba ampla, les polseres i els cabells deixats anar a prop de parts que giren.</li></ul>
+      <p class="ex">Exemple: una destructora de paper o els ventiladors d'un servidor obert.</p>
+    </article>
+    <article class="term">
+      <h3>Senyals d'un equip en mal estat</h3>
+      <p>Cables pelats, carcasses trencades, sorolls estranys, olor de cremat o escalfament. Si en trobes un, no el facis servir i avisa la persona responsable.</p>
+      <p class="ex">Exemple: un tornavís elèctric que fa espurnes en posar-lo en marxa.</p>
+    </article>
+  </section>
+  <h2>Treballs de manteniment</h2>
+  <p class="muted lead">El manteniment té més risc que la feina normal: es treballa amb l'equip obert, fora de la rutina i sovint amb pressa. Per això cal seguir uns passos fixos.</p>
+  <section class="terms">
+    <article class="term wide">
+      <h3>Passos bàsics d'un manteniment segur</h3>
+      <p>Abans de tocar l'interior d'un equip:</p>
+      <ul><li>Aturar l'equip de manera controlada.</li><li>Desconnectar-lo de totes les fonts d'energia.</li><li>Evitar que algú el torni a connectar: bloquejar-lo i posar-hi un rètol.</li><li>Comprovar que no hi ha energia ni parts en moviment.</li><li>Fer la feina.</li><li>Tornar a posar els resguards i les tapes i comprovar que tot funciona.</li></ul>
+      <p class="ex">Exemple: canviar una font d'alimentació d'un servidor amb un rètol de "No connectar, en manteniment".</p>
+    </article>
+  </section>
+  <h2>Activitat 1</h2>
+  <section class="activity" aria-labelledby="a1-title">
+    <div class="act-head">
+      <h3 id="a1-title">Eines: què és correcte?</h3>
+      <span class="info">Autoavaluable</span>
+    </div>
+    <p class="instr">Tria la resposta correcta de cada pregunta.</p>
+    <div id="a1"></div>
+    <div class="actions">
+      <button type="button" class="primary" data-check="a1">Comprova les respostes</button>
+      <button type="button" class="ghost" data-reset="a1">Torna a començar</button>
+      <span class="score" id="a1-score" aria-live="polite"></span>
+    </div>
+  </section>
+  <h2>Activitat 2</h2>
+  <section class="activity" aria-labelledby="a2-title">
+    <div class="act-head">
+      <h3 id="a2-title">Quin risc té cada tasca?</h3>
+      <span class="info">Autoavaluable</span>
+    </div>
+    <p class="instr">Tria el risc principal de cada situació.</p>
+    <div id="a2"></div>
+    <div class="actions">
+      <button type="button" class="primary" data-check="a2">Comprova les respostes</button>
+      <button type="button" class="ghost" data-reset="a2">Torna a començar</button>
+      <span class="score" id="a2-score" aria-live="polite"></span>
+    </div>
+  </section>
+  <h2>Activitat 3</h2>
+  <section class="activity" aria-labelledby="a3-title">
+    <div class="act-head">
+      <h3 id="a3-title">Canviar un ventilador amb seguretat</h3>
+      <span class="info">Autoavaluable</span>
+    </div>
+    <p class="instr">Has de canviar el ventilador d'un servidor. Posa els passos en l'ordre correcte.</p>
+    <div id="a3"></div>
+    <div class="actions">
+      <button type="button" class="primary" data-check="a3">Comprova les respostes</button>
+      <button type="button" class="ghost" data-reset="a3">Torna a començar</button>
+      <span class="score" id="a3-score" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <h2>Tancament</h2>
+  <section class="closing">
+    <p><strong>Idees clau d'avui</strong></p>
+    <ul>
+      <li>Cada eina per a la seva feina, en bon estat i guardada al seu lloc.</li>
+      <li>Un equip en mal estat no es fa servir: es retira i s'avisa.</li>
+      <li>Els resguards de les màquines no es treuen mai.</li>
+      <li>Abans d'un manteniment: aturar, desconnectar, bloquejar, comprovar i, en acabar, tornar a deixar-ho tot segur.</li>
+    </ul>
+  </section>
+
+  <nav class="pager" aria-label="Navegació entre sessions">
+    <a href="m2_c01.html"><span class="k">Sessió anterior</span><strong>Llocs de treball, emmagatzematge i transport</strong></a>
+    <a class="next" href="m2_c03.html"><span class="k">Següent sessió</span><strong>Risc elèctric</strong></a>
+  </nav>
+
+  <footer>
+    <span>CP IFCT0510 Gestió de sistemes informàtics</span>
+    <span>[FCOS02] Bàsic de prevenció de riscos laborals</span>
+  </footer>
+
+</div>
+
+<script>
+  var ACT = {
+ "a1": {
+  "type": "mcq",
+  "items": [
+   {
+    "q": "Has d'obrir una caixa de cartró amb un cúter. Què és correcte?",
+    "opts": [
+     "Tallar cap a tu, que fas més força.",
+     "Tallar en direcció contrària al cos, amb la fulla justa.",
+     "Treure tota la fulla per tallar més de pressa.",
+     "Aguantar la caixa amb la mà al davant del cúter."
+    ],
+    "a": 1
+   },
+   {
+    "q": "El cable del tornavís elèctric està pelat a prop de l'endoll. Què fas?",
+    "opts": [
+     "El tapo amb cinta aïllant i continuo.",
+     "El faig servir amb compte de no tocar aquella zona.",
+     "No el faig servir i aviso perquè el retirin o el reparin.",
+     "El connecto a una altra regleta."
+    ],
+    "a": 2
+   },
+   {
+    "q": "Abans de canviar la broca del trepant, has de...",
+    "opts": [
+     "Desconnectar-lo.",
+     "Posar-lo a la velocitat mínima.",
+     "Posar-te guants.",
+     "Treure-li la bateria només si és sense fil."
+    ],
+    "a": 0,
+    "e": "Tant si té cable com bateria, cal treure-li l'alimentació."
+   },
+   {
+    "q": "On portes el tornavís quan puges a una escala?",
+    "opts": [
+     "A la butxaca dels pantalons.",
+     "A la boca.",
+     "En un cinturó o una bossa portaeines.",
+     "A la mà, juntament amb l'altra eina."
+    ],
+    "a": 2
+   },
+   {
+    "q": "Una màquina té un resguard que molesta per treballar. Què fas?",
+    "opts": [
+     "El trec i el torno a posar en acabar.",
+     "No el trec i comunico el problema.",
+     "El trec si treballo amb compte.",
+     "El trec si porto guants."
+    ],
+    "a": 1
+   },
+   {
+    "q": "Quina eina és la més adequada per pelar un cable de xarxa?",
+    "opts": [
+     "Un cúter.",
+     "Les dents.",
+     "Un pelacables.",
+     "Unes tisores qualssevol."
+    ],
+    "a": 2
+   }
+  ]
+ },
+ "a2": {
+  "type": "select",
+  "options": [
+   "Atrapament",
+   "Tall",
+   "Projecció de partícules",
+   "Contacte elèctric"
+  ],
+  "placeholder": "Tria el risc",
+  "items": [
+   {
+    "q": "Posar la mà a la boca d'una destructora encesa per treure un paper encallat.",
+    "a": "Atrapament"
+   },
+   {
+    "q": "Foradar la paret amb un trepant per passar un cable.",
+    "a": "Projecció de partícules"
+   },
+   {
+    "q": "Tallar brides de plàstic amb un cúter.",
+    "a": "Tall"
+   },
+   {
+    "q": "Fer servir un tornavís elèctric amb el cable malmès.",
+    "a": "Contacte elèctric"
+   },
+   {
+    "q": "Una polsera s'enganxa al ventilador d'un equip obert i en marxa.",
+    "a": "Atrapament"
+   },
+   {
+    "q": "Agafar la vora esmolada d'una xapa en desmuntar un rack.",
+    "a": "Tall"
+   }
+  ]
+ },
+ "a3": {
+  "type": "select",
+  "options": [
+   "Pas 1",
+   "Pas 2",
+   "Pas 3",
+   "Pas 4",
+   "Pas 5"
+  ],
+  "placeholder": "Tria el pas",
+  "items": [
+   {
+    "q": "Comprovar que l'equip no té corrent ni parts en moviment.",
+    "a": "Pas 3"
+   },
+   {
+    "q": "Tancar l'equip, tornar-lo a connectar i comprovar que funciona.",
+    "a": "Pas 5"
+   },
+   {
+    "q": "Apagar l'equip de manera controlada.",
+    "a": "Pas 1"
+   },
+   {
+    "q": "Canviar el ventilador.",
+    "a": "Pas 4"
+   },
+   {
+    "q": "Desconnectar els cables d'alimentació i posar un rètol de \"No connectar, en manteniment\".",
+    "a": "Pas 2"
+   }
+  ],
+  "nonum": true
+ }
+};
+
+  function el(tag, attrs, txt){
+    var n = document.createElement(tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (txt !== undefined) n.textContent = txt;
+    return n;
+  }
+  function shuffle(a){ a = a.slice(); for (var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+
+  function build(id){
+    var cfg = ACT[id], box = document.getElementById(id);
+    box.innerHTML = '';
+    cfg.items.forEach(function(item, i){
+      if (cfg.type === 'select'){
+        var row = el('div', {'class':'match'});
+        row.appendChild(el('label', {'for':id+'-s'+i}, (cfg.nonum ? '' : (i+1) + '. ') + item.q));
+        var s = el('select', {id:id+'-s'+i});
+        s.appendChild(el('option', {value:''}, cfg.placeholder || 'Tria una opció'));
+        (cfg.shuffle ? shuffle(cfg.options) : cfg.options).forEach(function(t){ s.appendChild(el('option', {value:t}, t)); });
+        row.appendChild(s);
+        row.appendChild(el('div', {'class':'fb', id:id+'-fb'+i}));
+        box.appendChild(row);
+      } else {
+        var fs = el('fieldset', {'class':'q'});
+        fs.appendChild(el('legend', {}, (i+1) + '. ' + item.q));
+        var opts = el('div', {'class': cfg.type === 'mcq' ? 'opts col' : 'opts'});
+        var list = cfg.type === 'vf' ? ['Vertader','Fals'] : item.opts;
+        list.forEach(function(o, k){
+          var lab = el('label', {'class':'opt'});
+          lab.appendChild(el('input', {type:'radio', name:id+'-r'+i, value:String(k)}));
+          lab.appendChild(el('span', {}, o));
+          opts.appendChild(lab);
+        });
+        fs.appendChild(opts);
+        fs.appendChild(el('div', {'class':'fb', id:id+'-fb'+i}));
+        box.appendChild(fs);
+      }
+    });
+    document.getElementById(id+'-score').textContent = '';
+  }
+
+  function check(id){
+    var cfg = ACT[id], ok = 0;
+    cfg.items.forEach(function(item, i){
+      var fb = document.getElementById(id+'-fb'+i), val = null, right, correct;
+      if (cfg.type === 'select'){
+        val = document.getElementById(id+'-s'+i).value || null;
+        correct = item.a; right = val === item.a;
+      } else {
+        var sel = document.querySelector('input[name="'+id+'-r'+i+'"]:checked');
+        val = sel ? Number(sel.value) : null;
+        var ans = cfg.type === 'vf' ? (item.a ? 0 : 1) : item.a;
+        correct = cfg.type === 'vf' ? (item.a ? 'Vertader' : 'Fals') : item.opts[item.a];
+        right = val === ans;
+      }
+      var extra = item.e ? ' ' + item.e : '';
+      fb.className = 'fb show';
+      if (val === null){ fb.classList.add('empty'); fb.textContent = 'Sense resposta. La correcta és: ' + correct + '.' + extra; return; }
+      if (right){ ok++; fb.classList.add('ok'); fb.textContent = 'Correcte.' + extra; }
+      else { fb.classList.add('ko'); fb.textContent = 'No és correcte. La correcta és: ' + correct + '.' + extra; }
+    });
+    document.getElementById(id+'-score').textContent = ok + ' de ' + cfg.items.length + ' encerts';
+  }
+
+  document.querySelectorAll('[data-check]').forEach(function(b){ b.addEventListener('click', function(){ check(b.dataset.check); }); });
+  document.querySelectorAll('[data-reset]').forEach(function(b){ b.addEventListener('click', function(){ build(b.dataset.reset); }); });
+  Object.keys(ACT).forEach(build);
+</script>
+</body>
+</html>
