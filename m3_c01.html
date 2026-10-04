@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FCOS02/M03 Sessió 1: El CPD, l'armari de comunicacions i el treball en alçada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F5F6;
+    --paper:#FFFFFF;
+    --ink:#1F2933;
+    --muted:#5F6B76;
+    --line:#D9DEE3;
+    --header:#1F2933;
+    --blue:#1F5A8C;    /* obligació */
+    --amber:#C99A06;   /* advertència */
+    --amber-2:#B5651D;
+    --green:#2E7D4F;   /* condició segura */
+    --red:#A63D2F;
+    --blue-soft:#EAF1F7;
+    --green-soft:#E8F3EC;
+    --red-soft:#F8EAE7;
+    --amber-soft:#FBF4DE;
+    --amber-line:#E6D39B;
+    --amber-2-soft:#F8EDE3;
+    --amber-2-line:#E3C3A6;
+    --font:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+
+  /* Capçalera */
+  .top{background:var(--header);color:#fff;border-bottom:3px solid var(--amber)}
+  .top-inner{max-width:1040px;margin:0 auto;padding:clamp(2rem,5vw,3.25rem) clamp(1.25rem,5vw,3rem)}
+  .top-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem 1.5rem}
+  .cp{color:#C3CBD3;font-size:.95rem;font-weight:500}
+  .back{color:#C3CBD3;font-size:.9rem;text-decoration:none;border-bottom:1px solid transparent;transition:color .15s ease,border-color .15s ease}
+  .back:hover{color:#fff;border-bottom-color:#C3CBD3}
+  .back:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:2px}
+  .title-row{display:flex;align-items:flex-start;gap:1rem;margin-top:.9rem}
+  .title-row .num{width:48px;height:48px;font-size:1.3rem;margin-top:.15rem;border:2px solid #fff}
+  .code{display:block;color:var(--amber);font-weight:600;font-size:.95rem}
+  h1{font-weight:600;font-size:clamp(1.7rem,4vw,2.45rem);line-height:1.15;letter-spacing:-.01em;margin-top:.15rem}
+
+  .wrap{max-width:1040px;margin:0 auto;padding:clamp(1.75rem,4vw,2.75rem) clamp(1.25rem,5vw,3rem) 3rem}
+  h2{font-weight:600;font-size:1.3rem;line-height:1.3;margin:2.5rem 0 1rem}
+  .num{flex:none;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--amber-2);color:#fff;font-weight:600}
+
+  .box{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--amber-2);border-radius:6px;padding:1.3rem 1.35rem}
+  .box p{max-width:72ch}
+  .box p + p{margin-top:.6rem}
+  .muted{color:var(--muted)}
+  .lead{max-width:72ch;margin-bottom:1rem}
+
+  /* Avís */
+  .warn{background:var(--red-soft);border:1px solid #E5C2BB;border-left:4px solid var(--red);border-radius:6px;padding:1rem 1.25rem;margin-top:1rem;color:#5E2219}
+  .warn strong{font-weight:600}
+
+  /* Explicacions */
+  .terms{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
+  .term{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--amber-2);border-radius:6px;padding:1.1rem 1.25rem}
+  .term h3{font-weight:600;font-size:1.08rem}
+  .term p{margin-top:.35rem;font-size:.97rem}
+  .term ul{margin:.4rem 0 0 1.1rem;font-size:.97rem}
+  .term li{margin-top:.15rem}
+  .term .ex{color:var(--muted);font-size:.92rem;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--line)}
+  .term .src{display:block;color:var(--muted);font-size:.82rem;margin-top:.45rem}
+  .term.wide{grid-column:1 / -1}
+  @media (max-width:820px){.terms{grid-template-columns:1fr}}
+
+  /* Activitats */
+  .activity{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:6px;padding:1.3rem 1.35rem}
+  .act-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.4rem 1rem}
+  .act-head h3{font-weight:600;font-size:1.15rem}
+  .act-head .info{color:var(--muted);font-size:.9rem}
+  .instr{margin-top:.5rem;max-width:72ch}
+
+  .q{border-top:1px solid var(--line);padding:.9rem 0}
+  .q:first-of-type{margin-top:1rem}
+  .q legend{font-weight:500;padding:0;max-width:72ch}
+  fieldset.q{border:0;border-top:1px solid var(--line)}
+  .opts{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.55rem}
+  .opt{position:relative}
+  .opt input{position:absolute;opacity:0;width:1px;height:1px}
+  .opt span{display:inline-block;padding:.35rem .95rem;border:1px solid #B7C0C8;border-radius:999px;cursor:pointer;font-size:.93rem;background:var(--paper)}
+  .opt input:checked + span{background:var(--blue);border-color:var(--blue);color:#fff}
+  .opt input:focus-visible + span{outline:3px solid var(--blue);outline-offset:2px}
+  .opts.col{flex-direction:column;align-items:flex-start}
+  .opts.col .opt span{border-radius:6px}
+
+  .match{display:grid;grid-template-columns:1fr minmax(12rem,15rem);gap:.6rem 1rem;align-items:center;border-top:1px solid var(--line);padding:.8rem 0}
+  .match:first-of-type{margin-top:1rem}
+  .match label{max-width:62ch}
+  select{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1px solid #B7C0C8;border-radius:6px;padding:.45rem .6rem;width:100%}
+  select:focus-visible,textarea:focus-visible{outline:3px solid var(--blue);outline-offset:1px}
+  @media (max-width:620px){.match{grid-template-columns:1fr}}
+
+  .fb{grid-column:1 / -1;display:none;font-size:.9rem;border-radius:6px;padding:.5rem .75rem;margin-top:.55rem}
+  .fb.show{display:block}
+  .fb.ok{background:var(--green-soft);color:#1E5A37}
+  .fb.ko{background:var(--red-soft);color:#7E2D22}
+  .fb.empty{background:var(--bg);color:var(--muted)}
+
+  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)}
+  button{font:inherit;font-weight:600;font-size:.95rem;border-radius:6px;padding:.55rem 1.1rem;cursor:pointer;border:1px solid var(--blue)}
+  button.primary{background:var(--blue);color:#fff}
+  button.primary:hover{background:#184A74}
+  button.ghost{background:var(--paper);color:var(--blue)}
+  button.ghost:hover{background:var(--blue-soft)}
+  button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .score{font-weight:600}
+
+  textarea{font:inherit;font-size:.97rem;width:100%;min-height:7rem;margin-top:.3rem;border:1px solid #B7C0C8;border-radius:6px;padding:.7rem .8rem;resize:vertical;color:var(--ink)}
+  .tlabel{display:block;margin-top:.9rem;font-size:.9rem;color:var(--muted)}
+  .hint{color:var(--muted);font-size:.9rem;margin-top:.5rem}
+  .story{background:var(--bg);border-radius:6px;padding:1rem 1.15rem;margin-top:1rem;max-width:72ch}
+  .story p + p{margin-top:.5rem}
+  .steps{margin:.75rem 0 0 1.2rem;max-width:72ch}
+  .steps li{margin-top:.35rem}
+  .tbl{overflow-x:auto;margin-top:1rem}
+  table{border-collapse:collapse;width:100%;min-width:30rem;font-size:.95rem}
+  th,td{text-align:left;padding:.55rem .75rem;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-weight:600;background:var(--bg)}
+
+  .closing{background:var(--amber-2-soft);border:1px solid var(--amber-2-line);border-left:4px solid var(--amber-2);border-radius:6px;padding:1.2rem 1.35rem}
+  .closing ul{margin:.5rem 0 0 1.1rem}
+  .closing li{margin-top:.25rem}
+
+  /* Navegació entre sessions */
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:2.5rem}
+  .pager a{flex:1;max-width:48%;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:.85rem 1.1rem;color:inherit;text-decoration:none;transition:border-color .15s ease,box-shadow .15s ease}
+  .pager a:hover{border-color:#B7C0C8;box-shadow:0 4px 14px rgba(31,41,51,.08)}
+  .pager a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .pager .k{display:block;font-size:.85rem;color:var(--muted);font-weight:500}
+  .pager strong{font-weight:600}
+  .pager .next{text-align:right;margin-left:auto}
+
+  footer{margin-top:2.75rem;padding-top:1.1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+
+  /* Afegits M03 */
+  .terms > *{min-width:0}
+  .term ol{margin:.4rem 0 0 1.2rem;font-size:.97rem}
+  .term ol li{margin-top:.2rem}
+  .roles{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-top:1rem}
+  .role{border:1px solid var(--line);border-radius:6px;padding:.8rem 1rem}
+  .role strong{display:block;font-weight:600}
+  .role p{font-size:.95rem;margin-top:.25rem}
+  @media (max-width:620px){.roles{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="top-bar">
+      <p class="cp">CP IFCT0510 Gestió de sistemes informàtics</p>
+      <a class="back" href="m3.html">Tornar al mòdul M03</a>
+    </div>
+    <div class="title-row">
+      <span class="num" aria-hidden="true">1</span>
+      <div>
+        <span class="code">FCOS02/M03, sessió 1 (1 h)</span>
+        <h1>El CPD, l'armari de comunicacions i el treball en alçada</h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="box" aria-label="Objectiu de la sessió">
+    <p><strong>En aquesta sessió</strong> aprendràs a reconèixer els riscos dels llocs on es treballa amb els equips (la sala de servidors, els racks i els armaris de comunicacions) i els de les tasques en alçada, com instal·lar un punt d'accés al sostre.</p>
+  </section>
+
+  <h2>La sala de servidors (CPD)</h2>
+  <p class="muted lead">Un CPD (centre de processament de dades) és la sala on hi ha els servidors, l'emmagatzematge i els equips de xarxa. Al M02 ja vas veure que hi ha risc elèctric, d'incendi, soroll i calor. Aquí veurem què més s'hi ha de vigilar.</p>
+  <section class="terms">
+    <article class="term">
+      <h3>Racks</h3>
+      <p>Un rack és l'armari metàl·lic on es cargolen els equips. Ple, pot pesar centenars de quilos. Els riscos principals són la bolcada, els atrapaments de dits entre l'equip i els rails i els talls amb les vores de les xapes.</p>
+      <ul><li>Ha d'estar ancorat al terra o tenir posats els peus estabilitzadors.</li><li>Es carrega de baix a dalt: els equips més pesants, a la part de baix.</li><li>Només s'estira un equip sobre guies a la vegada.</li></ul>
+      <p class="ex">Exemple: treure alhora dos servidors amb guies de la part de dalt d'un rack mig buit pot fer que bolqui cap endavant.</p>
+    </article>
+    <article class="term">
+      <h3>Cablejat, fals terra i sortides</h3>
+      <p>Molts CPD tenen fals terra: rajoles que s'aixequen per passar cables i aire fred per sota. Ja vas veure al M02 que una rajola aixecada és un forat on pots caure.</p>
+      <ul><li>Els cables van per safates o canaletes, mai pel terra d'un passadís.</li><li>Les rajoles s'aixequen amb la ventosa i el forat es protegeix mentre està obert.</li><li>La porta i el camí fins a la sortida han d'estar lliures.</li></ul>
+      <p class="ex">Exemple: un carro de material aparcat davant la porta et pot impedir sortir de pressa si sona l'alarma.</p>
+    </article>
+    <article class="term">
+      <h3>Bancs de bateries del SAI</h3>
+      <p>Al M02 vas veure que el SAI dona corrent encara que el desconnectis de la paret. Les bateries tenen, a més, altres riscos.</p>
+      <ul><li>Pesen molt: risc de sobreesforç i de cops als peus si cauen.</li><li>Poden contenir àcid corrosiu. Una bateria inflada, trencada o que perd líquid no es toca sense protecció.</li><li>En carregar-se poden desprendre gasos inflamables: la zona ha d'estar ventilada i sense flames.</li><li>Una eina metàl·lica sobre els borns fa un curtcircuit: espurnes i cremades.</li></ul>
+      <p class="ex">Exemple: deixar una clau anglesa sobre el banc de bateries pot provocar una espurna i cremar-te les mans.</p>
+    </article>
+    <article class="term">
+      <h3>Extinció automàtica per gas</h3>
+      <p>Molts CPD s'apaguen amb gas en lloc d'aigua per no fer malbé els equips. Segons el gas, després d'una descàrrega l'aire de la sala pot tenir poc oxigen o ser perillós de respirar.</p>
+      <ul><li>En sentir el preavís, surt de la sala (ho vas veure al M02).</li><li>No hi tornis a entrar fins que s'hagi ventilat i t'hi autoritzin.</li><li>La porta s'ha de poder obrir des de dins. No la calcis ni la bloquegis.</li><li>Si el sistema té un polsador per aturar el dispar, només el fa servir qui ho té assignat.</li></ul>
+      <p class="ex">Exemple: entrar a comprovar si el foc s'ha apagat just després de la descàrrega.</p>
+    </article>
+  </section>
+  <h2>L'armari de comunicacions</h2>
+  <p class="muted lead">És el rack on hi ha els switches i el cablejat d'una planta o d'un edifici. Sovint és en un espai que ningú ha pensat per treballar-hi.</p>
+  <section class="terms">
+    <article class="term">
+      <h3>Espais petits</h3>
+      <p>Poca llum, calor, poc espai per moure's i, de vegades, en llocs que s'utilitzen per a altres coses. Hi ha risc de cops, postures forçades i ensopegades.</p>
+      <p class="ex">Exemple: un armari dins el magatzem de neteja, amb ampolles de lleixiu al terra i un sol fluorescent.</p>
+    </article>
+    <article class="term">
+      <h3>Armaris murals</h3>
+      <p>Armaris penjats a la paret, sovint a 2 m o més de terra. Per obrir-los i treballar-hi cal pujar, i la porta oberta pot quedar a l'altura del cap.</p>
+      <p class="ex">Exemple: connectar un pegat en un armari mural del passadís mentre la gent passa per sota.</p>
+    </article>
+  </section>
+  <h2>Treball en alçada</h2>
+  <p class="muted lead">És qualsevol feina en què et pots caure des d'un lloc elevat. El Reial decret 1215/1997, modificat pel Reial decret 2177/2004, diu com s'han d'utilitzar les escales de mà i els altres equips per treballar en alçada.</p>
+  <section class="terms">
+    <article class="term">
+      <h3>El fals sostre</h3>
+      <p>Les plaques del fals sostre no aguanten el pes d'una persona. A sobre hi pot haver cables elèctrics, pols i fibres.</p>
+      <ul><li>No t'hi recolzis ni hi posis el pes del cos.</li><li>Abans d'obrir-lo, comprova si hi passen línies elèctriques.</li><li>Protegeix-te els ulls de la pols que cau.</li></ul>
+      <p class="ex">Exemple: aixecar una placa per passar un cable de xarxa fins a un punt d'accés.</p>
+    </article>
+    <article class="term">
+      <h3>Escales de mà</h3>
+      <p>Què diu la norma:</p>
+      <ul><li>Com a lloc de treball, només s'utilitzen si no està justificat fer servir un equip més segur.</li><li>No hi pot pujar més d'una persona alhora.</li><li>Puja i baixa de cara a l'escala i amb les mans lliures; les eines, al cinturó portaeines.</li><li>A més de 3,5 m d'alçada, si la feina et fa perdre l'equilibri, cal un sistema anticaigudes o una altra protecció.</li><li>S'han de revisar periòdicament.</li></ul>
+      <p class="ex">Exemple: instal·lar un punt d'accés a 4 m de terra aguantant el suport amb les dues mans, dalt d'una escala de mà.</p>
+    </article>
+    <article class="term">
+      <h3>Plataformes amb baranes</h3>
+      <p>Escales de plataforma o plataformes mòbils amb una base ampla i baranes on et pots aguantar de peu. Són més segures que l'escala de mà per a feines que duren una estona.</p>
+      <p class="ex">Exemple: una escala de plataforma per passar una tarda cablejant pel fals sostre de l'oficina.</p>
+    </article>
+    <article class="term">
+      <h3>Cadires, taules i caixes</h3>
+      <p>No són per pujar-hi. Una cadira amb rodes, encara menys.</p>
+      <p class="ex">Exemple: pujar a una taula per arribar a un armari mural perquè l'escala és a l'altra planta.</p>
+    </article>
+  </section>
+  <h2>Activitat 1</h2>
+  <section class="activity" aria-labelledby="a1-title">
+    <div class="act-head">
+      <h3 id="a1-title">Quin risc hi ha?</h3>
+      <span class="info">Autoavaluable</span>
+    </div>
+    <p class="instr">Tria el risc principal de cada situació.</p>
+    <div id="a1"></div>
+    <div class="actions">
+      <button type="button" class="primary" data-check="a1">Comprova les respostes</button>
+      <button type="button" class="ghost" data-reset="a1">Torna a començar</button>
+      <span class="score" id="a1-score" aria-live="polite"></span>
+    </div>
+  </section>
+  <h2>Activitat 2</h2>
+  <section class="activity" aria-labelledby="a2-title">
+    <div class="act-head">
+      <h3 id="a2-title">Vertader o fals?</h3>
+      <span class="info">Autoavaluable</span>
+    </div>
+    <p class="instr">Marca si cada frase és vertadera o falsa.</p>
+    <div id="a2"></div>
+    <div class="actions">
+      <button type="button" class="primary" data-check="a2">Comprova les respostes</button>
+      <button type="button" class="ghost" data-reset="a2">Torna a començar</button>
+      <span class="score" id="a2-score" aria-live="polite"></span>
+    </div>
+  </section>
+  <h2>Activitat 3</h2>
+  <section class="activity" aria-labelledby="a3-title">
+    <div class="act-head">
+      <h3 id="a3-title">Inspecció d'una sala de servidors</h3>
+      <span class="info">La valora el formador</span>
+    </div>
+    <p class="instr">Llegeix la descripció. Escriu almenys 5 riscos que hi trobis. Per a cada un, indica si és de les condicions de seguretat, del medi ambient de treball o un altre risc, i explica què pot passar. En aquesta activitat no cal que proposis mesures: ho farem a la sessió 3.</p>
+    <div class="story">
+      <p>Una empresa de 60 persones té la sala de servidors al soterrani. Hi ha tres racks. El més nou encara no està cargolat al terra i té els dos servidors més pesants a la part de dalt.</p>
+      <p>El banc de bateries del SAI és en un racó, al costat d'unes caixes de cartró buides. Una de les bateries es veu inflada.</p>
+      <p>Al passadís calent hi fa 38 °C. Hi ha una rajola del fals terra aixecada, tapada amb una caixa. Davant la porta de sortida hi ha un carro de material.</p>
+      <p>A l'entrada hi ha un cartell del sistema d'extinció per gas, però ningú sap què vol dir el pilot taronja que s'encén de vegades.</p>
+      <p>L'armari de comunicacions de la segona planta és dins el magatzem de neteja, amb poca llum i ampolles de lleixiu al terra. Per arribar als punts d'accés del sostre del vestíbul, a 4 m, es fa servir una escala de tisora de 2 m i una cadira.</p>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Risc</th><th>Tipus</th><th>Què pot passar</th></tr></thead>
+        <tbody><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr></tbody>
+      </table>
+    </div>
+    <label for="a3-text" class="tlabel">Riscos que has trobat</label>
+    <textarea id="a3-text" placeholder="Escriu aquí la teva resposta..."></textarea>
+    <p class="hint">El text no es desa. Quan acabis, comparteix la resposta amb el grup o lliura-la com t'indiqui el formador.</p>
+  </section>
+  <h2>Tancament</h2>
+  <section class="closing">
+    <p><strong>Idees clau d'avui</strong></p>
+    <ul>
+      <li>Un rack ha d'estar ancorat, es carrega de baix a dalt i s'estira un sol equip a la vegada.</li>
+      <li>Les bateries pesen, poden tenir àcid i fer espurnes: es manipulen amb protecció i en una zona ventilada.</li>
+      <li>Amb extinció per gas, surt amb el preavís i no tornis a entrar fins que t'hi autoritzin.</li>
+      <li>El fals sostre no aguanta pes, i l'escala de mà és l'última opció per treballar en alçada.</li>
+    </ul>
+  </section>
+
+  <nav class="pager" aria-label="Navegació entre sessions">
+    <a class="next" href="m3_c02.html"><span class="k">Següent sessió</span><strong>Pantalles, guàrdies i feina fora de l'oficina</strong></a>
+  </nav>
+
+  <footer>
+    <span>CP IFCT0510 Gestió de sistemes informàtics</span>
+    <span>[FCOS02] Bàsic de prevenció de riscos laborals</span>
+  </footer>
+
+</div>
+
+<script>
+  var ACT = {
+ "a1": {
+  "type": "select",
+  "options": [
+   "Bolcada o caiguda d'objectes",
+   "Caiguda a diferent nivell",
+   "Ensopegada",
+   "Contacte elèctric o curtcircuit",
+   "Contacte amb àcid",
+   "Falta d'oxigen"
+  ],
+  "placeholder": "Tria el risc",
+  "items": [
+   {
+    "q": "Estires alhora dos servidors amb guies de la part de dalt d'un rack que no està ancorat.",
+    "a": "Bolcada o caiguda d'objectes"
+   },
+   {
+    "q": "Una bateria del SAI està inflada i perd líquid, i l'agafes sense guants.",
+    "a": "Contacte amb àcid"
+   },
+   {
+    "q": "Entres a la sala just després que s'hagi descarregat el sistema d'extinció per gas.",
+    "a": "Falta d'oxigen"
+   },
+   {
+    "q": "Recolzes el genoll en una placa del fals sostre per arribar al punt d'accés.",
+    "a": "Caiguda a diferent nivell"
+   },
+   {
+    "q": "Un cable de connexió travessa el passadís entre dos racks, a l'altura dels turmells.",
+    "a": "Ensopegada"
+   },
+   {
+    "q": "Deixes una clau anglesa sobre els borns del banc de bateries.",
+    "a": "Contacte elèctric o curtcircuit"
+   }
+  ]
+ },
+ "a2": {
+  "type": "vf",
+  "items": [
+   {
+    "q": "En un rack, els equips més pesants es munten a dalt perquè es vegin millor.",
+    "a": false,
+    "e": "Van a baix: així el centre de gravetat és baix i el rack és estable."
+   },
+   {
+    "q": "Les plaques del fals sostre aguanten el pes d'una persona si s'hi recolza amb compte.",
+    "a": false,
+    "e": "No estan fetes per aguantar pes."
+   },
+   {
+    "q": "Dues persones poden pujar alhora a la mateixa escala de mà si és prou llarga.",
+    "a": false,
+    "e": "A una escala de mà només hi puja una persona."
+   },
+   {
+    "q": "Si sona el preavís del sistema d'extinció, tens temps d'acabar la feina abans de sortir.",
+    "a": false,
+    "e": "El preavís és per sortir de seguida, abans que es descarregui el gas."
+   },
+   {
+    "q": "L'armari de comunicacions no ha de servir de magatzem de caixes ni de productes de neteja.",
+    "a": true
+   },
+   {
+    "q": "Treballant a més de 3,5 m d'alçada, si la feina et fa perdre l'equilibri, cal un sistema anticaigudes o una altra protecció.",
+    "a": true
+   },
+   {
+    "q": "Una bateria inflada es pot continuar fent servir si el SAI no dona cap alarma.",
+    "a": false,
+    "e": "S'ha de retirar seguint les instruccions del fabricant."
+   }
+  ]
+ }
+};
+
+  function el(tag, attrs, txt){
+    var n = document.createElement(tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (txt !== undefined) n.textContent = txt;
+    return n;
+  }
+  function shuffle(a){ a = a.slice(); for (var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+
+  function build(id){
+    var cfg = ACT[id], box = document.getElementById(id);
+    box.innerHTML = '';
+    cfg.items.forEach(function(item, i){
+      if (cfg.type === 'select'){
+        var row = el('div', {'class':'match'});
+        row.appendChild(el('label', {'for':id+'-s'+i}, (cfg.nonum ? '' : (i+1) + '. ') + item.q));
+        var s = el('select', {id:id+'-s'+i});
+        s.appendChild(el('option', {value:''}, cfg.placeholder || 'Tria una opció'));
+        (cfg.shuffle ? shuffle(cfg.options) : cfg.options).forEach(function(t){ s.appendChild(el('option', {value:t}, t)); });
+        row.appendChild(s);
+        row.appendChild(el('div', {'class':'fb', id:id+'-fb'+i}));
+        box.appendChild(row);
+      } else {
+        var fs = el('fieldset', {'class':'q'});
+        fs.appendChild(el('legend', {}, (i+1) + '. ' + item.q));
+        var opts = el('div', {'class': cfg.type === 'mcq' ? 'opts col' : 'opts'});
+        var list = cfg.type === 'vf' ? ['Vertader','Fals'] : item.opts;
+        list.forEach(function(o, k){
+          var lab = el('label', {'class':'opt'});
+          lab.appendChild(el('input', {type:'radio', name:id+'-r'+i, value:String(k)}));
+          lab.appendChild(el('span', {}, o));
+          opts.appendChild(lab);
+        });
+        fs.appendChild(opts);
+        fs.appendChild(el('div', {'class':'fb', id:id+'-fb'+i}));
+        box.appendChild(fs);
+      }
+    });
+    document.getElementById(id+'-score').textContent = '';
+  }
+
+  function check(id){
+    var cfg = ACT[id], ok = 0;
+    cfg.items.forEach(function(item, i){
+      var fb = document.getElementById(id+'-fb'+i), val = null, right, correct;
+      if (cfg.type === 'select'){
+        val = document.getElementById(id+'-s'+i).value || null;
+        correct = item.a; right = val === item.a;
+      } else {
+        var sel = document.querySelector('input[name="'+id+'-r'+i+'"]:checked');
+        val = sel ? Number(sel.value) : null;
+        var ans = cfg.type === 'vf' ? (item.a ? 0 : 1) : item.a;
+        correct = cfg.type === 'vf' ? (item.a ? 'Vertader' : 'Fals') : item.opts[item.a];
+        right = val === ans;
+      }
+      var extra = item.e ? ' ' + item.e : '';
+      fb.className = 'fb show';
+      if (val === null){ fb.classList.add('empty'); fb.textContent = 'Sense resposta. La correcta és: ' + correct + '.' + extra; return; }
+      if (right){ ok++; fb.classList.add('ok'); fb.textContent = 'Correcte.' + extra; }
+      else { fb.classList.add('ko'); fb.textContent = 'No és correcte. La correcta és: ' + correct + '.' + extra; }
+    });
+    document.getElementById(id+'-score').textContent = ok + ' de ' + cfg.items.length + ' encerts';
+  }
+
+  document.querySelectorAll('[data-check]').forEach(function(b){ b.addEventListener('click', function(){ check(b.dataset.check); }); });
+  document.querySelectorAll('[data-reset]').forEach(function(b){ b.addEventListener('click', function(){ build(b.dataset.reset); }); });
+  Object.keys(ACT).forEach(build);
+</script>
+</body>
+</html>
