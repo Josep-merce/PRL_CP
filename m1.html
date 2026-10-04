@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FCOS02/M01 Conceptes bàsics sobre seguretat i salut en el treball</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F5F6;
+    --paper:#FFFFFF;
+    --ink:#1F2933;
+    --muted:#5F6B76;
+    --line:#D9DEE3;
+    --header:#1F2933;
+    --blue:#1F5A8C;    /* obligació */
+    --amber:#C99A06;   /* advertència */
+    --amber-2:#B5651D;
+    --green:#2E7D4F;   /* condició segura */
+    --blue-soft:#EAF1F7;
+    --font:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+
+  /* Capçalera */
+  .top{background:var(--header);color:#fff;border-bottom:3px solid var(--amber)}
+  .top-inner{max-width:1040px;margin:0 auto;padding:clamp(2rem,5vw,3.25rem) clamp(1.25rem,5vw,3rem)}
+  .top-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem 1.5rem}
+  .cp{color:#C3CBD3;font-size:.95rem;font-weight:500}
+  .back{color:#C3CBD3;font-size:.9rem;text-decoration:none;border-bottom:1px solid transparent;transition:color .15s ease,border-color .15s ease}
+  .back:hover{color:#fff;border-bottom-color:#C3CBD3}
+  .back:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:2px}
+  .title-row{display:flex;align-items:flex-start;gap:1rem;margin-top:.9rem}
+  .title-row .sign{width:48px;height:48px;margin-top:.2rem}
+  h1{font-weight:600;font-size:clamp(1.7rem,4vw,2.45rem);line-height:1.15;letter-spacing:-.01em}
+  .code{color:var(--amber);font-weight:600;margin-right:.35rem}
+
+  .wrap{max-width:1040px;margin:0 auto;padding:clamp(1.75rem,4vw,2.75rem) clamp(1.25rem,5vw,3rem) 3rem}
+
+  h2{font-weight:600;font-size:1.3rem;line-height:1.3;margin:2.5rem 0 1rem}
+
+  /* Resum del mòdul */
+  .summary{display:grid;grid-template-columns:auto 1fr;background:var(--paper);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .cell{padding:1rem 1.25rem;border-top:4px solid var(--blue);border-right:1px solid var(--line)}
+  .cell:last-child{border-right:0}
+  .cell .k{display:block;font-size:.85rem;font-weight:500;color:var(--muted)}
+  .cell .v{display:block;font-size:1.6rem;font-weight:600;line-height:1.2;margin-top:.2rem}
+  .cell .v small{font-size:.95rem;font-weight:500;color:var(--muted);margin-left:.15rem}
+  .cell .obj{display:block;font-size:1.08rem;font-weight:500;margin-top:.3rem;max-width:60ch}
+  .cell.dur{min-width:9rem}
+  @media (max-width:620px){
+    .summary{grid-template-columns:1fr}
+    .cell{border-right:0}
+    .cell + .cell{border-top:1px solid var(--line)}
+  }
+
+  /* Resultats d'aprenentatge */
+  .outcomes{display:grid;grid-template-columns:1.6fr 1fr;gap:1.1rem}
+  .panel{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:6px;padding:1.25rem 1.35rem}
+  .panel h3{font-weight:600;font-size:1.05rem;margin-bottom:.75rem}
+  .panel > ul{list-style:none}
+  .panel > ul > li{padding:.7rem 0;border-top:1px solid var(--line)}
+  .panel > ul > li:first-child{border-top:0;padding-top:0}
+  .panel > ul > li:last-child{padding-bottom:0}
+  .panel strong{font-weight:600;display:block}
+  .panel .sub{color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .panel ul ul{list-style:none;margin-top:.35rem}
+  .panel ul ul li{color:var(--muted);font-size:.93rem;padding-left:1rem;position:relative}
+  .panel ul ul li::before{content:"";position:absolute;left:0;top:.68em;width:6px;height:2px;background:var(--blue)}
+  .panel ul ul ul{margin-top:.1rem}
+  .panel ul ul ul li::before{width:4px;background:var(--line)}
+  @media (max-width:820px){.outcomes{grid-template-columns:1fr}}
+
+  /* Targetes de sessió */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
+  .card{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:stretch;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:1.3rem 1.35rem 1.1rem;color:inherit;text-decoration:none;transition:border-color .15s ease,box-shadow .15s ease}
+  .card:hover{border-color:#B7C0C8;border-left-color:var(--accent);box-shadow:0 4px 14px rgba(31,41,51,.08)}
+  .card:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .card.m1{--accent:var(--blue)}
+  .num{width:40px;height:40px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--blue);color:#fff;font-weight:600;font-size:1.05rem}
+  .body{display:flex;flex-direction:column;height:100%}
+  .mod{font-size:.85rem;font-weight:500;color:var(--muted)}
+  .card h3{font-weight:600;font-size:1.12rem;line-height:1.3;margin-top:.15rem}
+  .card p{color:var(--muted);font-size:.93rem;margin-top:.5rem;flex:1}
+  .meta{display:flex;justify-content:space-between;align-items:center;gap:.75rem;margin-top:1rem;padding-top:.75rem;border-top:1px solid var(--line)}
+  .h{font-weight:600;font-size:1rem;margin-left:auto}
+
+  /* Sessió d'avaluació */
+  .card.eval{grid-column:1 / -1;background:var(--blue-soft);border-color:#BFD0E0;border-left-color:var(--blue)}
+  .card.eval .num{background:var(--paper);color:var(--blue);border:2px solid var(--blue)}
+  .card.eval .meta{border-top-color:#BFD0E0}
+  .tag{font-size:.82rem;font-weight:600;color:var(--blue);background:var(--paper);border:1px solid var(--blue);border-radius:999px;padding:.12rem .65rem}
+
+  .card.disabled{cursor:not-allowed;opacity:.5;filter:grayscale(.8)}
+  .card.disabled:hover{box-shadow:none;border-color:var(--line)}
+
+  /* Avaluació */
+  .assess{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:6px;padding:1.3rem 1.35rem}
+  .assess-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem 1rem}
+  .assess-head h3{font-weight:600;font-size:1.12rem}
+  .assess-head span{color:var(--muted);font-size:.93rem}
+  .parts{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:1rem}
+  .part{border:1px solid var(--line);border-radius:6px;padding:.8rem 1rem}
+  .part strong{display:block;font-weight:600}
+  .part span{color:var(--muted);font-size:.9rem}
+  .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)}
+  .rules div{font-size:.95rem}
+  .rules .k{display:block;font-size:.85rem;color:var(--muted);font-weight:500}
+  .rules .v{font-weight:600}
+  .note{color:var(--muted);font-size:.9rem;margin-top:1rem;max-width:72ch}
+  @media (max-width:820px){.parts,.rules{grid-template-columns:1fr}}
+
+  footer{margin-top:2.75rem;padding-top:1.1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem}
+
+  @media (max-width:820px){.grid{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="top-bar">
+      <p class="cp">CP IFCT0510 Gestió de sistemes informàtics</p>
+      <a class="back" href="index.html">Tornar a l'índex</a>
+    </div>
+    <div class="title-row">
+      <svg class="sign" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="18" fill="#1F5A8C" stroke="#fff" stroke-width="1.5"/>
+        <circle cx="20" cy="12" r="2.8" fill="#fff"/>
+        <rect x="17.6" y="17" width="4.8" height="14" rx="1.5" fill="#fff"/>
+      </svg>
+      <h1><span class="code">FCOS02/M01</span>Conceptes bàsics sobre seguretat i salut en el treball</h1>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="summary" aria-label="Resum del mòdul">
+    <div class="cell dur"><span class="k">Durada</span><span class="v">7<small>h</small></span></div>
+    <div class="cell"><span class="k">Objectiu</span><span class="obj">Identificar el marc conceptual i legislatiu en el qual es desenvolupa la prevenció de riscos laborals.</span></div>
+  </section>
+
+  <h2>Resultats d'aprenentatge</h2>
+  <section class="outcomes">
+    <div class="panel">
+      <h3>Coneixements i capacitats</h3>
+      <ul>
+        <li>
+          <strong>Distinció de la terminologia de seguretat i salut en el treball establerta a la normativa</strong>
+          <ul><li>Treball</li><li>Salut</li><li>Altres termes</li></ul>
+        </li>
+        <li>
+          <strong>Diferenciació dels tipus de riscos laborals i dels possibles danys derivats del treball</strong>
+          <ul>
+            <li>Factors de risc</li>
+            <li>Conseqüències dels riscos
+              <ul>
+                <li>Accidents de treball</li>
+                <li>Malalties professionals</li>
+                <li>Altres danys per a la salut</li>
+                <li>Repercussions econòmiques i de funcionament</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Coneixement dels fonaments jurídics de la prevenció i de les normes bàsiques d'aplicació directa a Espanya</strong>
+          <ul>
+            <li>Drets i deures bàsics</li>
+            <li>Directives comunitàries: abast i fonaments jurídics, directives de seguretat i salut en el treball, directives de seguretat del producte</li>
+            <li>Llei 31/1995, de 8 de novembre, de prevenció de riscos laborals</li>
+            <li>Reglament dels Serveis de Prevenció (Reial decret 39/1997, de 17 de gener)</li>
+            <li>Reglamentacions tècniques específiques derivades de la Llei</li>
+            <li>Altres disposicions</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Habilitats</h3>
+      <ul>
+        <li>
+          <strong>Sensibilització</strong>
+          <span class="sub">Sobre la importància d'adoptar mètodes segurs durant l'activitat laboral a l'empresa.</span>
+        </li>
+        <li>
+          <strong>Conscienciació</strong>
+          <span class="sub">Sobre la necessitat de conèixer i mantenir actualitzada la normativa de seguretat i salut en el treball.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <h2>Sessions</h2>
+
+  <!--
+  ============================================================
+   COM DESACTIVAR UNA SESSIÓ QUE ENCARA NO TOCA
+   Totes les targetes comencen actives amb  class="card m1".
+   Per desactivar-la temporalment, afegeix-hi  disabled :
+        class="card m1"        ->   class="card m1 disabled"
+        class="card m1 eval"   ->   class="card m1 eval disabled"
+  ============================================================
+  -->
+
+  <main class="grid">
+
+    <a class="card m1" href="m1_c01.html">
+      <span class="num" aria-hidden="true">1</span>
+      <div class="body">
+        <span class="mod">Sessió 1</span>
+        <h3>Presentació, avaluació inicial i terminologia</h3>
+        <p>Presentació del curs, avaluació inicial per conèixer el punt de partida i termes bàsics: treball, salut i altres.</p>
+        <div class="meta"><span class="h">1 h</span></div>
+      </div>
+    </a>
+
+    <a class="card m1" href="m1_c02.html">
+      <span class="num" aria-hidden="true">2</span>
+      <div class="body">
+        <span class="mod">Sessió 2</span>
+        <h3>Riscos i danys derivats del treball</h3>
+        <p>Factors de risc i les seves conseqüències: accidents de treball, malalties professionals i altres danys per a la salut.</p>
+        <div class="meta"><span class="h">1 h</span></div>
+      </div>
+    </a>
+
+    <a class="card m1" href="m1_c03.html">
+      <span class="num" aria-hidden="true">3</span>
+      <div class="body">
+        <span class="mod">Sessió 3</span>
+        <h3>Repercussions dels danys i mètodes segurs</h3>
+        <p>Què costen els danys a la persona i a l'empresa, i per què val la pena treballar amb mètodes segurs.</p>
+        <div class="meta"><span class="h">1 h</span></div>
+      </div>
+    </a>
+
+    <a class="card m1" href="m1_c04.html">
+      <span class="num" aria-hidden="true">4</span>
+      <div class="body">
+        <span class="mod">Sessió 4</span>
+        <h3>Drets i deures en PRL</h3>
+        <p>Drets i deures bàsics de les persones treballadores i de l'empresa en matèria de prevenció.</p>
+        <div class="meta"><span class="h">1 h</span></div>
+      </div>
+    </a>
+
+    <a class="card m1" href="m1_c05.html">
+      <span class="num" aria-hidden="true">5</span>
+      <div class="body">
+        <span class="mod">Sessió 5</span>
+        <h3>Directives comunitàries i marc legal bàsic</h3>
+        <p>Directives europees de seguretat i salut i de seguretat del producte, Llei 31/1995 i Reglament dels Serveis de Prevenció.</p>
+        <div class="meta"><span class="h">1 h</span></div>
+      </div>
+    </a>
+
+    <a class="card m1" href="m1_c06.html">
+      <span class="num" aria-hidden="true">6</span>
+      <div class="body">
+        <span class="mod">Sessió 6</span>
+        <h3>Reglamentacions tècniques i normativa</h3>
+        <p>Reglamentacions tècniques derivades de la Llei, altres disposicions i com estar al dia de la normativa.</p>
+        <div class="meta"><span class="h">1 h</span></div>
+      </div>
+    </a>
+
+    <a class="card m1 eval" href="m1_c07.html">
+      <span class="num" aria-hidden="true">7</span>
+      <div class="body">
+        <span class="mod">Sessió 7</span>
+        <h3>Síntesi i prova M1</h3>
+        <p>Repàs dels conceptes clau del mòdul i realització de la prova d'avaluació del M1.</p>
+        <div class="meta"><span class="tag">Sessió d'avaluació</span><span class="h">1 h</span></div>
+      </div>
+    </a>
+
+  </main>
+
+  <h2>Avaluació del mòdul</h2>
+  <section class="assess" aria-label="Avaluació del mòdul">
+    <div class="assess-head">
+      <h3>Prova M1</h3>
+      <span>Sessió 7, 30 minuts</span>
+    </div>
+    <div class="parts">
+      <div class="part"><strong>Test</strong><span>Preguntes de 4 opcions amb una sola resposta correcta.</span></div>
+      <div class="part"><strong>Preguntes curtes</strong><span>Respostes breus sobre conceptes i normativa del mòdul.</span></div>
+      <div class="part"><strong>Cas breu</strong><span>Aplicació dels conceptes a una situació de treball.</span></div>
+    </div>
+    <div class="rules">
+      <div><span class="k">Puntuació</span><span class="v">Sobre 10</span></div>
+      <div><span class="k">Apte</span><span class="v">A partir de 5</span></div>
+      <div><span class="k">Resultat</span><span class="v">Apte / No apte</span></div>
+    </div>
+    <p class="note">L'avaluació inicial de la sessió 1 serveix per conèixer el punt de partida del grup i no compta per a la nota del mòdul.</p>
+  </section>
+
+  <footer>
+    <span>CP IFCT0510 Gestió de sistemes informàtics</span>
+    <span>[FCOS02] Bàsic de prevenció de riscos laborals</span>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.card').forEach(function(card){
+    if(card.classList.contains('disabled')){
+      card.setAttribute('aria-disabled','true');
+      card.setAttribute('tabindex','-1');
+    }
+    card.addEventListener('click', function(e){
+      if(card.classList.contains('disabled')) e.preventDefault();
+    });
+  });
+</script>
+</body>
+</html>
