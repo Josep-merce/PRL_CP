@@ -13,9 +13,3 @@ Web estàtica (HTML + CSS inline, sense build) del curs **[FCOS02] Bàsic de pre
 | M02 | Riscos generals i la seva prevenció | 14 h | `m2.html` + sessions `m2_c01`–`m2_c14` |
 | M03 | Riscos específics i la seva prevenció en el sector | 5 h | `m3.html` + sessions `m3_c01`–`m3_c03` i `m3_c05` (falta `m3_c04`) |
 | M04 | Elements bàsics de gestió de la prevenció de riscos | 4 h | `m4.html` + sessions `m4_c01`–`m4_c04` |
-
-## Convencions
-- Font IBM Plex Sans (Google Fonts). Colors definits com a variables a `:root` de cada pàgina:
-  blau `#1F5A8C` (M01, obligació), groc `#C99A06` (M02, advertència), taronja `#B5651D` (M03), verd `#2E7D4F` (M04, condició segura).
-- Per desactivar temporalment una targeta de mòdul a `index.html`, afegir la classe `disabled` (`class="card m2 disabled"`).
-- Mantenir l'estil i l'estructura de les pàgines existents en crear-ne de noves.
