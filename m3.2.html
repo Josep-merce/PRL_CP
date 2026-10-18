@@ -1,0 +1,1191 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mòdul 3 · Part 2 · Psicosocials, fora de l'oficina i cas</title>
+<meta name="description" content="Mòdul 3 del curs bàsic de PRL, part 2: riscos psicosocials TIC, treball fora de l'oficina i cas d'aplicació.">
+<style>
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5;
+    --text:#1b2330; --muted:#5a6577; --line:#dde2ea;
+    --accent:#e0661b; --accent-soft:#fdeee4;
+    --m1:#2f6fd1; --m2:#c2410c; --m3:#0f8a6a; --m4:#caa005;
+    --danger:#b91c1c; --danger-soft:#fdecec;
+    --warn:#b45309; --warn-soft:#fef3c7;
+    --law:#1d4ed8; --law-soft:#eaf1fd;
+    --ok-soft:#d1f5e3;
+    --radius:14px; --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.06);
+    --c:var(--m3); --on-c:#ffffff; --c-deep:#0b6e55;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+      --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+      --accent:#f08a46; --accent-soft:#2b1d14;
+      --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+      --danger:#f87171; --danger-soft:#2c1717;
+      --warn:#fbbf24; --warn-soft:#2b2410;
+      --law:#7aa6f5; --law-soft:#182435;
+      --ok-soft:#133227;
+      --on-c:#0f141b; --c-deep:#0f7a5e;
+      --shadow:none;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+    --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+    --accent:#f08a46; --accent-soft:#2b1d14;
+    --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+    --danger:#f87171; --danger-soft:#2c1717;
+    --warn:#fbbf24; --warn-soft:#2b2410;
+    --law:#7aa6f5; --law-soft:#182435;
+    --ok-soft:#133227;
+    --on-c:#0f141b; --c-deep:#0f7a5e;
+    --shadow:none;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;}
+  a{color:var(--accent)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px}
+
+  header.hero{background:linear-gradient(135deg,#1b2330 0%,#2a3a52 100%);color:#fff;padding:40px 0 34px}
+  .hero .back{display:inline-flex;align-items:center;gap:6px;color:#cfd8e6;text-decoration:none;font-size:.9rem;font-weight:600}
+  .hero .back:hover{color:#fff}
+  .hero .tag{display:inline-block;background:var(--c);color:var(--on-c);font-weight:800;font-size:.8rem;
+    letter-spacing:.06em;padding:4px 10px;border-radius:999px;margin-top:16px}
+  .hero h1{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.2;margin:12px 0 8px}
+  .hero p{max-width:640px;color:#cfd8e6;margin:0}
+
+  nav.top{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--line)}
+  nav.top .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  nav.top a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:.9rem;
+    padding:13px 10px;border-bottom:3px solid transparent}
+  nav.top a:hover{color:var(--text);border-bottom-color:var(--c)}
+
+  main{padding-bottom:40px}
+  section{padding:40px 0 4px;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:0}
+  .unit-no{display:inline-block;background:var(--c);color:var(--on-c);font-weight:800;border-radius:8px;
+    padding:3px 9px;font-size:.82rem;margin-bottom:10px}
+  h2{font-size:1.4rem;margin:0 0 4px}
+  h3{font-size:1.1rem;margin:28px 0 8px}
+  .lead{color:var(--muted);margin:4px 0 20px}
+  p{margin:0 0 14px}
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin-bottom:6px}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  .objectius{border-left:5px solid var(--c)}
+  .objectius h3{margin-top:0;font-size:1rem}
+  .objectius ul{margin-bottom:0}
+  .objectius .note{margin:12px 0 0;font-size:.88rem;color:var(--muted)}
+
+  .law{background:var(--law-soft);border:1px solid var(--law);border-left-width:5px;
+    border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .law .tit{font-weight:800;color:var(--law);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .law p{margin:0;font-size:.95rem}
+  .law p+p{margin-top:8px}
+  .law ul{margin:6px 0 0;font-size:.95rem}
+
+  .example{background:var(--accent-soft);border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .example .tit{font-weight:800;color:var(--accent);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .example p{margin:0}
+  .example p+p{margin-top:8px}
+
+  .alert{background:var(--danger-soft);border:1px solid var(--danger);border-left-width:5px;
+    border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .alert .tit{font-weight:800;color:var(--danger);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .alert p{margin:0;font-size:.95rem}
+  .alert p+p{margin-top:8px}
+
+  table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:.93rem}
+  table caption{text-align:left;font-weight:700;margin-bottom:8px;color:var(--text)}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:var(--surface-2);font-weight:700}
+  .table-scroll{overflow-x:auto;margin:0 0 18px}
+  .table-scroll table{margin:0}
+
+  .activity{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin:0 0 16px;display:flex;gap:14px;align-items:flex-start}
+  .activity .badge{flex:0 0 auto;background:var(--accent);color:#fff;font-weight:800;border-radius:10px;
+    padding:5px 10px;font-size:.82rem}
+  .activity .body{width:100%;min-width:0}
+  .activity .body h4{margin:0 0 4px;font-size:1rem}
+  .activity .body p{margin:0 0 6px}
+  .activity .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .pill{font-size:.8rem;padding:3px 10px;border-radius:8px;background:var(--surface-2);color:var(--text)}
+  .pill.mat{background:var(--surface-2)}
+
+  .glossary dl{margin:0}
+  .glossary dt{font-weight:700;margin-top:10px}
+  .glossary dt:first-child{margin-top:0}
+  .glossary dd{margin:2px 0 0;color:var(--muted)}
+
+  .resum{background:var(--surface-2);border-radius:var(--radius);padding:16px 18px;margin:0 0 18px}
+  .resum .tit{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:8px}
+  .resum ul{margin:0}
+
+  .scheme{background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin:0 0 18px;font-size:.93rem}
+  .scheme .tit{font-weight:700;margin-bottom:10px}
+  .pyramid{display:flex;flex-direction:column;align-items:center;gap:2px;margin:10px 0}
+  .pyramid div{color:#fff;font-size:.82rem;font-weight:700;padding:7px 10px;border-radius:6px;text-align:center;max-width:100%}
+
+  /* Esquemes de flux */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px;margin:10px 0}
+  .flow .step{flex:1 1 120px;background:var(--c-deep);color:#fff;border-radius:10px;padding:10px 12px;font-size:.85rem}
+  .flow .step b{display:block;font-size:.95rem;margin-bottom:2px}
+  .flow .arrow{align-self:center;color:var(--muted);font-weight:800}
+  .loop-note{margin:8px 0 0;font-size:.88rem;color:var(--muted)}
+
+  /* Esquema de postura (SVG) */
+  .posture svg{width:100%;height:auto;display:block}
+  .posture .ln{stroke:var(--text);stroke-width:3;stroke-linecap:round;fill:none}
+  .posture .fur{stroke:var(--muted);stroke-width:3;stroke-linecap:round;fill:none}
+  .posture .scr{fill:var(--c);stroke:none}
+  .posture .gaze{stroke:var(--c);stroke-width:2;stroke-dasharray:6 5;fill:none}
+  .posture .dim{stroke:var(--accent);stroke-width:2;fill:none}
+  .posture text{fill:var(--muted);font:12px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .posture text.hl{fill:var(--accent);font-weight:700}
+
+  /* Esquema de rack */
+  .rack{max-width:420px;margin:10px auto;border:3px solid var(--muted);border-radius:8px;padding:6px;display:flex;flex-direction:column;gap:4px}
+  .rack div{border-radius:5px;padding:8px 10px;font-size:.82rem;font-weight:700;color:#fff;display:flex;justify-content:space-between;gap:10px}
+  .rack div span{font-weight:400;opacity:.9}
+  .rack-legs{max-width:420px;margin:0 auto;display:flex;justify-content:space-between;padding:0 18px;color:var(--muted);font-size:.8rem;font-weight:700}
+
+  details.drop{background:var(--surface-2);border-radius:var(--radius);padding:10px 14px;margin:0 0 14px}
+  details.drop summary{cursor:pointer;font-weight:700}
+  details.drop .res-links{margin:10px 0 2px}
+  details.drop ul{margin:10px 0 2px}
+
+  .exam-box{background:var(--danger-soft);border:1px solid var(--danger);border-left-width:5px;
+    border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+  .exam-box .tit{color:var(--danger);font-weight:800;margin-bottom:6px}
+  .exam-box ul{margin:8px 0 0}
+
+  .quiz-btn{background:var(--surface-2);border:1px solid var(--line);color:var(--text);border-radius:8px;
+    padding:7px 14px;cursor:pointer;font:inherit;font-size:.86rem;font-weight:600}
+  .quiz-btn:hover{border-color:var(--c)}
+  .quiz-btn.primary{background:var(--c);border-color:var(--c);color:var(--on-c)}
+  .quiz{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
+  .sub{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)}
+  .sub:first-child{margin-top:0;padding-top:0;border-top:0}
+  .sub-tit{font-weight:800;margin:0 0 10px}
+  .q{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .q:last-of-type{border-bottom:0;margin-bottom:0;padding-bottom:0}
+  .q-text{font-weight:700;margin:0 0 8px}
+  .q label{display:block;background:var(--surface-2);border-radius:8px;padding:8px 12px;margin-bottom:6px;
+    cursor:pointer;font-size:.93rem}
+  .q label:hover{background:var(--line)}
+  .q input{margin-right:8px}
+  .q.ok label.sel{background:var(--ok-soft);outline:2px solid var(--m3)}
+  .q.ko label.sel{background:var(--danger-soft);outline:2px solid var(--danger)}
+  .q.done label.right{background:var(--ok-soft);outline:2px solid var(--m3)}
+  .q-score{font-weight:700;margin-top:14px}
+  .q-just{margin:8px 0 0;padding:8px 12px;background:var(--surface-2);border-radius:8px;
+    font-size:.88rem;color:var(--muted)}
+  .crit{display:inline-block;background:var(--danger);color:#fff;font-size:.72rem;font-weight:800;
+    letter-spacing:.04em;border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:middle}
+
+  .fq{margin-bottom:16px}
+  .fq-label{display:block;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .fq textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+    color:var(--text);padding:9px 12px;font:inherit;font-size:.93rem;resize:vertical}
+  .fq textarea:focus{outline:2px solid var(--c);border-color:var(--c)}
+  .fq-model{margin:8px 0 0;padding:8px 12px;background:var(--accent-soft);border-radius:8px;
+    font-size:.9rem;color:var(--text)}
+  .fq-model strong{color:var(--accent)}
+
+  /* Sortida d'eines i autoavaluacions */
+  .tool-out{background:var(--surface-2);border-radius:8px;padding:12px 14px;font-size:.92rem;margin-top:14px}
+  .tool-out ul{margin:6px 0 0}
+  .tool-out .verdict{font-weight:800;font-size:1rem;margin:0 0 6px}
+  .tag-ok{color:#15803d;font-weight:800}
+  .tag-no{color:var(--danger);font-weight:800}
+  .tag-warn{color:var(--warn);font-weight:800}
+
+  /* Qüestionari d'autoavaluació PVD (A16) */
+  .aq-group{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--c);margin:16px 0 6px}
+  .aq-group:first-child{margin-top:0}
+  .aq{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--surface-2);
+    border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:.93rem}
+  .aq .opts{display:flex;gap:6px;flex-wrap:wrap}
+  .aq .opts label{display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--line);
+    border-radius:8px;padding:4px 10px;cursor:pointer;font-size:.86rem;font-weight:600;white-space:nowrap}
+  .aq .opts label:hover{border-color:var(--c)}
+  .aq.is-si{outline:2px solid var(--m3);background:var(--ok-soft)}
+  .aq.is-no{outline:2px solid var(--danger);background:var(--danger-soft)}
+  @media (max-width:600px){ .aq{grid-template-columns:1fr} }
+
+  /* Checklist (A8) */
+  .ck-phase{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--c);margin:16px 0 6px}
+  .ck-phase:first-child{margin-top:0}
+  .ck{background:var(--surface-2);border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:.93rem}
+  .ck > label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+  .ck input{margin-top:5px;flex:0 0 auto;width:17px;height:17px;accent-color:var(--c)}
+  .ck.ck-ok{outline:2px solid var(--m3);background:var(--ok-soft)}
+  .ck.ck-ko{outline:2px solid var(--danger);background:var(--danger-soft)}
+  .ck.ck-miss{outline:2px dashed var(--warn);background:var(--warn-soft)}
+  .ck .q-just{background:var(--surface)}
+
+  /* Exercici de valoració amb desplegables (cas 3.5) */
+  .mrow{display:grid;grid-template-columns:minmax(200px,2fr) 170px;gap:8px;align-items:center;
+    background:var(--surface-2);border-radius:8px;padding:10px 12px;margin-bottom:8px}
+  .mrow .ph{font-weight:700;font-size:.93rem}
+  .mrow .ph small{display:block;font-weight:400;color:var(--muted);font-size:.82rem}
+  .mrow select{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+    color:var(--text);padding:8px 10px;font:inherit;font-size:.9rem}
+  .mrow select:focus{outline:2px solid var(--c);border-color:var(--c)}
+  .mrow select.ok{outline:2px solid var(--m3);background:var(--ok-soft)}
+  .mrow select.ko{outline:2px solid var(--danger);background:var(--danger-soft)}
+  .mrow .q-just{grid-column:1/-1;margin:2px 0 0;background:var(--surface)}
+  .mhead{display:grid;grid-template-columns:minmax(200px,2fr) 170px;gap:8px;
+    font-size:.8rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:0 12px 4px}
+  @media (max-width:600px){
+    .mrow,.mhead{grid-template-columns:1fr}
+    .mhead span+span{display:none}
+  }
+
+  /* Votació de casos (A23) */
+  .vote-block{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .vote-block:last-of-type{border-bottom:0}
+  .vote-block .quiz-btn{text-align:left}
+
+  .res-links{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
+  .res-links a{font-size:.88rem;background:var(--surface-2);color:var(--text);text-decoration:none;
+    padding:6px 12px;border-radius:999px}
+  details.drop .res-links a{background:var(--surface)}
+  .res-links a:hover{color:var(--accent)}
+
+  footer{margin-top:20px;padding:24px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem;
+    display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+  .theme-btn{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;
+    padding:6px 10px;cursor:pointer;font:inherit;font-size:.85rem}
+
+  @media print{
+    nav.top,.theme-btn{display:none}
+    header.hero{background:none;color:#000}
+    .hero p,.hero .back{color:#000}
+  }
+
+  /* Pàgina d'entrada del mòdul: targetes de les parts */
+  .parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:0 0 18px}
+  a.part-card{display:flex;flex-direction:column;text-decoration:none;color:var(--text);background:var(--surface);
+    border:1px solid var(--line);border-top:5px solid var(--c);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);
+    transition:transform .15s ease,border-color .15s ease}
+  a.part-card:hover{transform:translateY(-2px);border-color:var(--c)}
+  a.part-card .unit-no{align-self:flex-start}
+  a.part-card h3{margin:0 0 6px;font-size:1.15rem}
+  a.part-card p{color:var(--muted);margin:0 0 10px;font-size:.93rem}
+  a.part-card ul{margin:0 0 12px;font-size:.92rem}
+  a.part-card .go{margin-top:auto;font-weight:700;color:var(--c)}
+  .pager{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin:24px 0 0}
+  .pager a{text-decoration:none;font-weight:700;background:var(--surface);border:1px solid var(--line);
+    border-radius:10px;padding:10px 14px;color:var(--text)}
+  .pager a:hover{border-color:var(--c);color:var(--c)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a class="back" href="m3.html">← Tornar al mòdul 3</a>
+    <div class="tag">MÒDUL 3 · PART 2</div>
+    <h1>Riscos específics del sector TIC (2)</h1>
+    <p>Els riscos psicosocials del sector, el treball fora de l'oficina i un cas d'aplicació per avaluar un lloc TIC complet.</p>
+  </div>
+</header>
+
+<nav class="top" aria-label="Unitats del mòdul">
+  <div class="wrap">
+    <a href="#objectius">Objectius</a>
+    <a href="#u3">3.3 Riscos psicosocials</a>
+    <a href="#u4">3.4 Fora de l'oficina</a>
+    <a href="#u5">3.5 Cas d'aplicació</a>
+    <a href="#glossari">Glossari</a>
+    <a href="#prova2">Prova M3.2</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="objectius">
+    <div class="card objectius">
+      <h3>Objectius d'aquesta part</h3>
+      <ul>
+        <li>Reconèixer els riscos psicosocials del sector TIC (tecnoestrès, guàrdies, hiperconnexió, pressió de tiquets) i proposar millores organitzatives.</li>
+        <li>Conèixer els drets i les obligacions del teletreball (Llei 10/2021) i el dret a la desconnexió digital.</li>
+        <li>Aplicar mesures preventives en les intervencions a casa del client, els desplaçaments i el treball en solitari.</li>
+        <li>Fer una avaluació elemental d'un lloc TIC complet: identificar els riscos, valorar-los amb el mètode de l'INSST i proposar mesures segons l'art. 15 LPRL.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- UNITAT 3.3 -->
+  <section id="u3">
+    <span class="unit-no">3.3</span>
+    <h2>Riscos psicosocials en el sector TIC</h2>
+    <p class="lead">Al sector TIC el que més desgasta sovint no és el pes d'un servidor, sinó la manera com s'organitza la feina: incidències que no s'acaben mai, el mòbil que vibra a les onze de la nit, terminis impossibles i eines que canvien cada pocs mesos.</p>
+
+    <h3>Què són els riscos psicosocials?</h3>
+    <p>Són els riscos que provenen de l'<strong>organització del treball</strong>, del contingut de la tasca i de les relacions a la feina, i que poden afectar la salut física, psíquica i social. No són "problemes personals": la Llei els inclou expressament dins de les condicions de treball que l'empresa ha d'avaluar i prevenir.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 4.7.d LPRL</strong>: les condicions de treball inclouen les característiques de l'<strong>organització i l'ordenació del treball</strong> que influeixen en la magnitud dels riscos.</p>
+      <p><strong>Art. 15.1.d i 15.1.g LPRL</strong>: cal adaptar el treball a la persona (atenuar el treball monòton i repetitiu) i planificar la prevenció integrant-hi la tècnica, l'organització del treball, les condicions de treball, les relacions socials i els factors ambientals.</p>
+      <p>Per avaluar-los, els serveis de prevenció fan servir mètodes validats, com el <strong>FPSICO</strong> de l'INSST o el <strong>CoPsoQ-istas21</strong>. Aquesta avaluació correspon a l'especialitat d'ergonomia i psicosociologia aplicada (nivell superior).</p>
+    </div>
+
+    <h3>El tecnoestrès</h3>
+    <p>El <strong>tecnoestrès</strong> és un estat psicològic negatiu relacionat amb l'ús de les tecnologies de la informació i la comunicació, o amb l'amenaça d'haver-les de fer servir. L'INSST el descriu a la <strong>NTP 730</strong> i en distingeix diverses formes:</p>
+    <div class="table-scroll">
+    <table>
+      <caption>Formes de tecnoestrès i com es manifesten al sector</caption>
+      <thead><tr><th>Forma</th><th>Què és</th><th>Exemple TIC</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tecnoansietat</strong></td><td>Tensió i malestar davant l'ús de tecnologies, sovint per por de no saber-les fer servir o de fer-hi errors.</td><td>Un tècnic a qui obliguen a gestionar un clúster de contenidors nou sense formació prèvia i que té por de fer caure el servei.</td></tr>
+        <tr><td><strong>Tecnofatiga</strong></td><td>Cansament i esgotament mental per l'ús continuat de tecnologies i la sobrecàrrega d'informació.</td><td>Una administradora que segueix cinc canals de xat, el correu, les alertes de monitoratge i el gestor de tiquets alhora.</td></tr>
+        <tr><td><strong>Tecnoaddicció</strong></td><td>Necessitat incontrolable de fer servir les tecnologies en tot moment i lloc.</td><td>Un programador que no pot deixar de mirar el canal de l'equip durant les vacances "per si de cas".</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Les mesures preventives són sobretot organitzatives: <strong>formació</strong> abans d'implantar eines noves, implicar l'equip en l'elecció de les eines, reduir el nombre de canals i definir quin canal es fa servir per a cada cosa, i garantir temps sense interrupcions per a la feina que requereix concentració.</p>
+
+    <h3>Guàrdies i disponibilitat</h3>
+    <p>Molts serveis TIC funcionen les 24 hores: hi ha <strong>guàrdies presencials</strong> (el tècnic és al CPD o a l'oficina) i <strong>guàrdies localitzades</strong> (el tècnic és a casa però ha d'estar disponible i respondre en un temps determinat). Mal organitzades, provoquen falta de descans, dificultats per conciliar i fatiga acumulada, que alhora augmenta el risc d'errors i d'accidents.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Estatut dels Treballadors (ET)</strong>: <strong>art. 34</strong> (jornada; entre el final d'una jornada i l'inici de la següent hi ha d'haver un mínim de <strong>12 hores</strong>, art. 34.3; registre diari de jornada, art. 34.9) i <strong>art. 37.1</strong> (descans setmanal mínim d'un dia i mig ininterromput).</p>
+      <p>Si una guàrdia localitzada compta o no com a temps de treball depèn del cas. La jurisprudència del Tribunal de Justícia de la UE ha considerat temps de treball les guàrdies amb restriccions tan intenses (per exemple, un temps de resposta molt curt) que limiten molt la llibertat del treballador. Com es compensen i quantes se'n poden fer sol estar regulat al <strong>conveni col·lectiu</strong>: cal consultar el que s'aplica a l'empresa.</p>
+    </div>
+
+    <ul>
+      <li><strong>Rotació equitativa</strong> de les guàrdies entre tot l'equip i calendari conegut amb antelació.</li>
+      <li>Garantir el <strong>descans</strong> després d'una nit amb incidències (no començar la jornada següent a la mateixa hora com si res).</li>
+      <li><strong>Procediments d'escalada</strong> clars: què es resol a la guàrdia i què pot esperar a l'endemà.</li>
+      <li>Mitjans adequats (portàtil, connexió, accés remot) per no haver de desplaçar-se de nit si no cal.</li>
+    </ul>
+
+    <h3>Hiperconnexió i dret a la desconnexió digital</h3>
+    <p>El mòbil de feina, el xat de l'equip i el correu al telèfon fan que la jornada no acabi mai si ningú ho regula. La <strong>hiperconnexió</strong> impedeix la recuperació (el descans mental) i és una de les causes de la fatiga i de l'esgotament professional.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 88 de la Llei orgànica 3/2018</strong>, de protecció de dades personals i garantia dels drets digitals, i <strong>art. 20 bis ET</strong>: els treballadors tenen dret a la <strong>desconnexió digital</strong> per garantir, fora del temps de treball, el respecte al descans, als permisos i a les vacances, i a la seva intimitat personal i familiar.</p>
+      <p>L'empresa, amb audiència dels representants dels treballadors, ha d'elaborar una <strong>política interna</strong> que defineixi com s'exerceix aquest dret i ha de fer accions de formació i sensibilització sobre un ús raonable de les eines tecnològiques que eviti el risc de <strong>fatiga informàtica</strong>.</p>
+      <p>Per al teletreball, ho recull també l'<strong>art. 18 de la Llei 10/2021</strong>.</p>
+    </div>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Una empresa de desenvolupament aprova una política de desconnexió: fora d'horari no s'envien missatges per qüestions que poden esperar (es programen per a l'endemà), el xat mostra l'estat "fora de la jornada" i només el telèfon de guàrdia pot rebre avisos urgents. Ningú no pot ser penalitzat per no respondre fora del seu horari si no està de guàrdia.</p>
+    </div>
+
+    <h3>Pressió de tiquets i terminis</h3>
+    <p>Un equip de suport viu amb una cua de tiquets, uns acords de nivell de servei (SLA) i, sovint, mètriques públiques de rendiment. Quan la càrrega és superior a la capacitat de l'equip de manera continuada, apareixen la <strong>càrrega mental</strong>, l'estrès i, a llarg termini, la <strong>síndrome d'esgotament professional</strong> (<em>burnout</em>): cansament emocional, distanciament de la feina i sensació d'ineficàcia.</p>
+
+    <div class="scheme">
+      <div class="tit">Quan la feina es torna estressant: demandes, control i suport</div>
+      <div class="flow">
+        <div class="step"><b>Demandes altes</b>Molts tiquets, terminis ajustats, interrupcions constants, clients enfadats.</div><span class="arrow">+</span>
+        <div class="step"><b>Poc control</b>Sense autonomia per prioritzar ni decidir com i quan fer la feina.</div><span class="arrow">+</span>
+        <div class="step"><b>Poc suport</b>Sense ajuda dels companys ni dels responsables quan hi ha un problema.</div><span class="arrow">=</span>
+        <div class="step" style="background:var(--danger)"><b>Risc psicosocial alt</b>Estrès, errors, conflictes, baixes i rotació de personal.</div>
+      </div>
+      <p class="loop-note">Aquest és el model clàssic de demandes, control i suport (Karasek i Johnson). Per reduir el risc no sempre cal reduir la feina: augmentar l'autonomia i el suport també protegeix.</p>
+    </div>
+
+    <ul>
+      <li>Dimensionar l'equip segons la càrrega real i revisar els SLA que són impossibles de complir.</li>
+      <li>Criteris de <strong>priorització</strong> clars, decidits per l'organització i no pel client que crida més.</li>
+      <li>Donar <strong>autonomia</strong> per organitzar la cua i evitar el control minut a minut.</li>
+      <li>Evitar rànquings públics que generin competència entre companys.</li>
+      <li>Protocol davant de <strong>clients agressius</strong>: el tècnic pot tallar una trucada amb insults i escalar el cas.</li>
+      <li>Espais de suport: reunions breus per repartir la feina, mentoria per als nous.</li>
+    </ul>
+
+    <p>Recorda la classificació del Mòdul 1: l'estrès o el <em>burnout</em> no figuren al quadre de malalties professionals del RD 1299/2006. Són <strong>altres danys derivats del treball</strong>, tot i que un trastorn psíquic es pot reconèixer com a <strong>accident de treball</strong> si es prova que la seva causa exclusiva és la feina (<strong>art. 156.2.e LGSS</strong>).</p>
+
+    <div class="resum">
+      <div class="tit">Resum 3.3</div>
+      <ul>
+        <li>Els riscos psicosocials neixen de l'organització del treball i s'han d'avaluar i prevenir com qualsevol altre risc (arts. 4.7 i 15.1.g LPRL).</li>
+        <li>Tecnoestrès: tecnoansietat, tecnofatiga i tecnoaddicció. Es prevé amb formació, menys canals i temps sense interrupcions.</li>
+        <li>Guàrdies: rotació equitativa, descans garantit (12 h entre jornades, art. 34.3 ET) i compensació segons conveni.</li>
+        <li>Dret a la desconnexió digital: art. 88 LO 3/2018 i art. 20 bis ET; l'empresa ha de tenir una política interna.</li>
+        <li>Pressió de tiquets: demandes altes + poc control + poc suport = risc alt. La solució és organitzativa.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- A18 -->
+  <div class="activity">
+    <span class="badge">A18</span>
+    <div class="body">
+      <h4>Tres millores organitzatives per a un equip de suport tècnic</h4>
+      <p>Llegeix el cas i proposa una millora organitzativa per a cadascun dels tres àmbits. Després prem «Corregeix» per veure'n un exemple model. No cal que coincideixi: n'hi ha prou que la teva proposta ataqui la causa del problema.</p>
+      <div class="meta">
+        <span class="pill mat">Individual o en parelles</span>
+        <span class="pill mat">Es corregeix en grup</span>
+        <button class="quiz-btn" data-toggle="a18Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a18Box" class="quiz" hidden data-kind="open">
+        <div class="example" style="margin-bottom:14px">
+          <div class="tit">El cas</div>
+          <p>L'equip de suport d'una empresa de serveis informàtics té sis persones, però dues són de baixa. A la cua hi ha 150 tiquets oberts i la pantalla de l'oficina mostra un rànquing de qui en tanca més. Les guàrdies de cap de setmana les fan sempre les mateixes dues persones, perquè "són les que més en saben". El responsable envia missatges al xat de l'equip a qualsevol hora, també a les 11 de la nit, i espera resposta. Fa tres mesos es va canviar l'eina de tiquets sense formació, i encara hi ha qui no sap fer-la servir bé.</p>
+        </div>
+        <form>
+          <div class="fq">
+            <label class="fq-label" for="a18-1">1. Càrrega i ritme de treball — la meva proposta:</label>
+            <textarea id="a18-1" rows="3" placeholder="Escriu aquí la teva millora..." data-model="Reforçar l'equip mentre duren les baixes (personal de suport temporal o redistribuir la feina amb altres àrees), revisar els SLA i fixar criteris de priorització clars. Retirar el rànquing públic, que genera pressió i competència, i fer servir les dades per dimensionar l'equip, no per comparar persones."></textarea>
+            <p class="fq-model" hidden></p>
+          </div>
+          <div class="fq">
+            <label class="fq-label" for="a18-2">2. Guàrdies i desconnexió digital — la meva proposta:</label>
+            <textarea id="a18-2" rows="3" placeholder="Escriu aquí la teva millora..." data-model="Calendari de guàrdies rotatori i conegut amb antelació entre tot l'equip, formant la resta de persones perquè puguin entrar a la rotació. Garantir el descans després de les guàrdies i compensar-les segons el conveni. Aprovar una política de desconnexió digital (art. 88 LO 3/2018): fora d'horari només s'avisa el telèfon de guàrdia i per a urgències."></textarea>
+            <p class="fq-model" hidden></p>
+          </div>
+          <div class="fq">
+            <label class="fq-label" for="a18-3">3. Eines, formació i suport — la meva proposta:</label>
+            <textarea id="a18-3" rows="3" placeholder="Escriu aquí la teva millora..." data-model="Fer una formació pràctica sobre la nova eina de tiquets dins de la jornada (art. 19 LPRL), amb una guia ràpida i una persona de referència per a dubtes. En el futur, consultar l'equip abans de canviar d'eina (art. 33 LPRL) i fer reunions breus setmanals per repartir la feina i detectar sobrecàrregues."></textarea>
+            <p class="fq-model" hidden></p>
+          </div>
+        </form>
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+          <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+        </div>
+        <p class="q-score" hidden>Compara les teves propostes amb els exemples. Una bona millora és organitzativa (actua sobre la causa) i no es limita a dir als treballadors que "gestionin millor l'estrès".</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNITAT 3.4 -->
+  <section id="u4">
+    <span class="unit-no">3.4</span>
+    <h2>Treball fora de l'oficina</h2>
+    <p class="lead">Molts professionals TIC no treballen sempre al mateix lloc: teletreballen des de casa, van a les oficines dels clients, reparen equips en domicilis particulars o es desplacen amb la furgoneta d'un encàrrec a l'altre. Els riscos els acompanyen allà on van, i la prevenció també hi ha d'arribar.</p>
+
+    <h3>El teletreball</h3>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Llei 10/2021</strong>, de treball a distància.</p>
+      <ul>
+        <li><strong>Art. 1</strong>: s'aplica al treball a distància <strong>regular</strong>, que és el que es fa, en un període de referència de tres mesos, almenys en un <strong>30 % de la jornada</strong> (o el percentatge proporcional equivalent).</li>
+        <li><strong>Art. 5</strong>: és <strong>voluntari</strong> per a les dues parts i <strong>reversible</strong>. <strong>Art. 6 i 7</strong>: cal un <strong>acord per escrit</strong> amb un contingut mínim (mitjans, horari, lloc, durada...).</li>
+        <li><strong>Arts. 11 i 12</strong>: l'empresa ha de proporcionar els mitjans, equips i eines necessaris i compensar les despeses relacionades amb el treball a distància.</li>
+        <li><strong>Art. 15</strong>: les persones que teletreballen tenen dret a una protecció adequada en matèria de seguretat i salut.</li>
+        <li><strong>Art. 16</strong>: l'avaluació de riscos ha de tenir en compte els riscos característics d'aquesta modalitat, especialment els <strong>psicosocials, ergonòmics i organitzatius</strong>. S'ha de limitar a la <strong>zona habilitada</strong> per treballar, no a tot l'habitatge. Si cal una visita, s'ha de justificar i requereix el <strong>permís</strong> de la persona treballadora; si no el dona, l'avaluació es fa amb la informació que aporti ella mateixa.</li>
+        <li><strong>Art. 18</strong>: dret a la desconnexió digital.</li>
+      </ul>
+    </div>
+
+    <div class="table-scroll">
+    <table>
+      <caption>Riscos habituals del teletreball i mesures</caption>
+      <thead><tr><th>Risc</th><th>Causa</th><th>Mesura</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ergonòmics</strong> (TME, fatiga visual)</td><td>Treballar al sofà, a la taula de la cuina o només amb el portàtil.</td><td>Aplicar els mateixos criteris del RD 488/1997 (unitat 3.1): cadira regulable, pantalla o suport, teclat i ratolí externs. L'empresa n'ha de dotar els mitjans.</td></tr>
+        <tr><td><strong>Psicosocials</strong></td><td>Aïllament, jornada que s'allarga, barreja de feina i vida personal.</td><td>Horari pactat, dret a la desconnexió, contacte regular amb l'equip, trobades presencials.</td></tr>
+        <tr><td><strong>Seguretat</strong> (caigudes, contactes elèctrics, incendi)</td><td>Cables pel terra, regletes encadenades, espai desordenat.</td><td>Zona de treball endreçada, instal·lació elèctrica en bon estat, cables recollits.</td></tr>
+        <tr><td><strong>Entorn</strong></td><td>Poca llum, soroll, calor o fred.</td><td>Triar una zona amb llum natural lateral, ventilada i el més tranquil·la possible.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Una programadora teletreballa tres dies a la setmana. L'empresa li envia un qüestionari d'autoavaluació de la zona de treball (similar a l'A16 de la part 1) i, a partir de les respostes, li proporciona una cadira regulable, una pantalla externa i un teclat. Si durant la jornada cau a casa mentre va a buscar un document a l'impressora del seu despatx, els tribunals han tendit a aplicar la <strong>presumpció d'accident de treball</strong> quan passa en temps i lloc de treball, encara que el lloc sigui el domicili.</p>
+    </div>
+
+    <h3>Intervencions a l'empresa o a casa del client</h3>
+    <p>El tècnic que va a les instal·lacions d'un client entra en un lloc que no coneix: no sap on són les sortides d'emergència, quins riscos hi ha ni quines normes internes s'apliquen.</p>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 24 LPRL</strong> i <strong>RD 171/2004</strong>, de coordinació d'activitats empresarials. Quan treballadors de diverses empreses coincideixen en un mateix centre, les empreses han de <strong>cooperar</strong> (art. 4) i l'empresari <strong>titular</strong> del centre ha d'<strong>informar</strong> les altres dels riscos del centre, les mesures de prevenció i les mesures d'emergència (art. 7). L'empresa del tècnic, al seu torn, ha de transmetre aquesta informació als seus treballadors.</p>
+    </div>
+    <ul>
+      <li>Abans d'anar-hi: conèixer la tasca, l'accés i els riscos previsibles (alçada, CPD amb extinció per gas, zones industrials).</li>
+      <li>En arribar: presentar-se al responsable, demanar la informació de riscos i d'emergència i seguir-ne les normes.</li>
+      <li>A casa d'un <strong>particular</strong> no hi ha coordinació d'activitats en sentit legal, però els riscos hi són: instal·lacions elèctriques deficients, espais desordenats, animals domèstics o clients conflictius. L'empresa els ha de tenir en compte a la seva avaluació i donar instruccions al tècnic.</li>
+      <li>El tècnic té dret a <strong>no fer una tasca</strong> si troba un risc greu i imminent (per exemple, un quadre elèctric amb cables pelats): atura's, explica-ho al client i comunica-ho a la teva empresa (art. 21 LPRL).</li>
+      <li>Davant d'un client agressiu: no entrar en el conflicte, sortir del domicili si cal i comunicar-ho. La violència de tercers també és un risc laboral.</li>
+    </ul>
+
+    <h3>Desplaçaments i seguretat viària</h3>
+    <p>Els accidents de trànsit són una de les principals causes d'accidents de treball mortals. Per a un tècnic de camp, el vehicle és una eina de treball més.</p>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 156.2.a LGSS</strong>: és accident de treball el que pateix el treballador en anar o tornar del lloc de treball (<strong>accident <em>in itinere</em></strong>). L'accident que es produeix durant un desplaçament fet <strong>per raó de la feina</strong> dins de la jornada (anar a casa d'un client) també és accident de treball: s'anomena <strong>accident en missió</strong>.</p>
+    </div>
+    <ul>
+      <li><strong>Planificar</strong> la ruta i els temps: una agenda que obliga a córrer per arribar és un risc organitzatiu.</li>
+      <li><strong>No fer servir el mòbil</strong> mentre es condueix, ni tan sols per mirar el següent tiquet. Respondre quan el vehicle estigui aturat.</li>
+      <li><strong>Subjectar la càrrega</strong>: un servidor solt al seient del darrere es converteix en un projectil en una frenada. A la furgoneta, separació entre la cabina i la zona de càrrega.</li>
+      <li>Revisar el vehicle (pneumàtics, llums, frens) i fer pauses en desplaçaments llargs.</li>
+      <li>Si es fan servir bicicleta o patinet per moure's per la ciutat: casc, il·luminació i normes de circulació.</li>
+    </ul>
+
+    <h3>Treball en solitari</h3>
+    <p>Un tècnic que treballa sol al CPD a les tres de la matinada o en una nau buida d'un client no té ningú que l'ajudi si pateix un accident o un malestar. No hi ha una norma general que prohibeixi treballar sol, però l'empresa ho ha d'avaluar (art. 16 LPRL) i ha de prendre mesures.</p>
+
+    <div class="scheme">
+      <div class="tit">Protocol bàsic de treball en solitari</div>
+      <div class="flow">
+        <div class="step"><b>1. Abans</b>Algú de l'empresa sap on vas, què faràs i quan preveus acabar.</div><span class="arrow">→</span>
+        <div class="step"><b>2. Durant</b>Comunicació periòdica pactada (trucada o aplicació) i mòbil amb bateria i cobertura.</div><span class="arrow">→</span>
+        <div class="step"><b>3. Si no respon</b>Si no hi ha resposta en el temps previst, l'empresa activa l'avís i, si cal, el 112.</div><span class="arrow">→</span>
+        <div class="step"><b>4. En acabar</b>Comunicar que has acabat i has sortit del lloc.</div>
+      </div>
+      <p class="loop-note">Hi ha dispositius i aplicacions d'"home mort" que avisen automàticament si el treballador no es mou o no confirma que està bé.</p>
+    </div>
+    <ul>
+      <li><strong>No s'han de fer sols</strong> els treballs amb risc elevat: treballs en instal·lacions elèctriques, en alçada amb risc de caiguda, en espais confinats o la manipulació de càrregues pesades.</li>
+      <li>Formació en primers auxilis i en el pla d'emergència del lloc.</li>
+      <li>Saber identificar la ubicació exacta per poder donar-la al 112 (adreça, planta, sala).</li>
+    </ul>
+
+    <div class="resum">
+      <div class="tit">Resum 3.4</div>
+      <ul>
+        <li>Teletreball (Llei 10/2021): regular a partir del 30 % de la jornada; voluntari, reversible i per escrit; l'empresa dota els mitjans i avalua els riscos de la zona de treball (art. 16).</li>
+        <li>Al centre d'un client: coordinació d'activitats (art. 24 LPRL, RD 171/2004); el titular informa dels riscos i de les emergències.</li>
+        <li>Accident <em>in itinere</em> (anar i tornar de la feina) i en missió (desplaçaments per feina): tots dos són accident de treball.</li>
+        <li>Seguretat viària: planificar, no fer servir el mòbil, càrrega subjecta.</li>
+        <li>Treball en solitari: protocol de comunicació i mai sols en tasques de risc elevat.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- A23 -->
+  <div class="activity">
+    <span class="badge">A23</span>
+    <div class="body">
+      <h4>Cas: el tècnic que va sol a reparar la xarxa d'un client</h4>
+      <p>Llegeix el cas, vota a cada situació i llegeix la resposta raonada. Després debateu en grup quins riscos té el tècnic i quines mesures caldria prendre.</p>
+      <div class="meta">
+        <span class="pill mat">Debat en grup</span>
+        <span class="pill mat">Cas imprès</span>
+        <button class="quiz-btn" data-toggle="a23Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a23Box" class="quiz" hidden data-kind="vote">
+        <div class="example" style="margin-bottom:14px">
+          <div class="tit">El cas</div>
+          <p>És divendres a les 19 h. En Marc, tècnic de xarxes, rep un avís urgent: una empresa de logística s'ha quedat sense xarxa al magatzem. Hi va sol amb la furgoneta, perquè la resta de l'equip ja ha plegat, i no diu a ningú on va. Quan hi arriba, el vigilant li obre i se'n va. El switch avariat és dins d'un armari penjat a la paret, a 4 metres d'alçada, i l'única escala que troba és una escala de mà simple. A l'interior de la nau gairebé no hi ha cobertura de mòbil. El vigilant li ha comentat que "aquell armari de vegades fa espurnes".</p>
+        </div>
+
+        <div class="vote-block">
+          <p class="q-text">1. En Marc ha de fer la reparació tal com està, perquè és urgent i el client espera?</p>
+          <div class="meta">
+            <button class="quiz-btn" data-vote="si" type="button">✅ Sí, que la faci</button>
+            <button class="quiz-btn" data-vote="no" type="button">⛔ No, cal aturar-se</button>
+          </div>
+          <template data-for="si"><strong>Revisem-ho.</strong> La urgència del client no fa desaparèixer els riscos. En Marc treballa sol, sense comunicació, en alçada (4 m) amb una escala de mà i en un armari amb indicis de defecte elèctric. Això reuneix diversos riscos greus alhora i, si pateix una caiguda o un contacte elèctric, ningú no ho sabrà. L'art. 21 LPRL li permet interrompre l'activitat davant un risc greu i imminent, i l'art. 29 l'obliga a vetllar per la seva pròpia seguretat.</template>
+          <template data-for="no"><strong>Correcte.</strong> Hi ha massa riscos greus alhora: treball en solitari sense comunicació ni cobertura, treball en alçada a 4 m amb una escala de mà simple i un armari amb indicis de defecte elèctric ("fa espurnes"). En Marc ha d'aturar-se, comunicar la situació a la seva empresa i al client i planificar la intervenció amb els mitjans adequats (art. 21 i 29 LPRL). La urgència és del client; el risc és d'en Marc.</template>
+          <p class="q-just vote-result" hidden></p>
+        </div>
+
+        <div class="vote-block">
+          <p class="q-text">2. Si l'empresa decideix fer la intervenció aquella mateixa nit, quina és la condició prèvia imprescindible?</p>
+          <div class="meta">
+            <button class="quiz-btn" data-vote="a" type="button">🧤 Que es posi guants i ulleres</button>
+            <button class="quiz-btn" data-vote="b" type="button">👥 Que no hi vagi sol i que s'hi treballi sense tensió i amb un equip d'alçada adequat</button>
+            <button class="quiz-btn" data-vote="c" type="button">📞 Que el cap el truqui al cap d'unes hores</button>
+          </div>
+          <template data-for="a"><strong>No n'hi ha prou.</strong> Els EPI són l'última barrera, no la primera (art. 15 LPRL). Uns guants no eviten una caiguda des de 4 metres ni protegeixen d'un defecte elèctric en un armari en tensió. Cal eliminar o reduir el risc a l'origen: no treballar sol, tallar la tensió de l'armari (ho ha de fer personal autoritzat, RD 614/2001) i fer servir un equip adequat per treballar en alçada (plataforma o escala adequada i, si cal, EPI anticaigudes, RD 1215/1997).</template>
+          <template data-for="b"><strong>Correcte.</strong> Aquestes són les mesures que ataquen els riscos principals: anar-hi acompanyat (o amb un protocol de comunicació que funcioni sense cobertura), deixar l'armari sense tensió amb personal autoritzat (art. 4 i annex II RD 614/2001) i fer servir un mitjà adequat per a una alçada de 4 m (RD 1215/1997, annex II 4.2: a més de 3,5 m amb esforços perillosos cal EPI anticaigudes o mesures alternatives). A més, el client ha d'informar dels riscos del seu centre (RD 171/2004).</template>
+          <template data-for="c"><strong>Massa tard.</strong> Una trucada al cap d'unes hores no evita l'accident ni permet ajudar a temps. Un protocol de treball en solitari ha de tenir comunicacions freqüents i una alerta si no hi ha resposta, i en tasques de risc elevat (alçada, electricitat) la mesura és no treballar sol. Tampoc resol el risc elèctric ni el de caiguda.</template>
+          <p class="q-just vote-result" hidden></p>
+        </div>
+
+        <details class="drop" style="margin-top:14px">
+          <summary>💬 Per al debat: riscos i mesures del cas</summary>
+          <div class="table-scroll" style="margin-top:10px">
+          <table>
+            <thead><tr><th>Risc</th><th>Mesura</th></tr></thead>
+            <tbody>
+              <tr><td>Treball en solitari sense comunicació</td><td>Protocol de comunicació, algú sap on és i quan acaba; no fer sol tasques de risc elevat.</td></tr>
+              <tr><td>Caiguda a diferent nivell (4 m)</td><td>Plataforma elevadora o escala adequada; EPI anticaigudes si cal; mai una escala simple per a esforços a aquesta alçada.</td></tr>
+              <tr><td>Contacte elèctric (armari que "fa espurnes")</td><td>Treballar sense tensió amb personal autoritzat (cinc regles d'or); si hi ha risc greu, no tocar res i avisar.</td></tr>
+              <tr><td>Desconeixement dels riscos del centre</td><td>Coordinació d'activitats: el client informa dels riscos i de les emergències (RD 171/2004).</td></tr>
+              <tr><td>Desplaçament amb pressa i cansament</td><td>Planificar l'avís, no conduir amb presses ni amb el mòbil, respectar el descans.</td></tr>
+              <tr><td>Pressió del client i fatiga</td><td>Procediment d'urgències fora d'horari amb guàrdia organitzada i criteris clars del que es pot fer.</td></tr>
+            </tbody>
+          </table>
+          </div>
+        </details>
+
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn do-reset" type="button">🔄 Torna a votar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNITAT 3.5 -->
+  <section id="u5">
+    <span class="unit-no">3.5</span>
+    <h2>Cas d'aplicació: un lloc TIC complet</h2>
+    <p class="lead">Ha arribat el moment d'ajuntar tot el que hem vist als quatre mòduls: identificar els riscos d'un lloc de treball real, valorar-los amb el mètode de l'INSST i proposar mesures seguint la jerarquia de l'art. 15 LPRL.</p>
+
+    <h3>El procediment</h3>
+    <div class="scheme">
+      <div class="tit">De l'observació a la mesura</div>
+      <div class="flow">
+        <div class="step"><b>1. Observar</b>Recórrer el lloc i anotar les situacions de risc concretes.</div><span class="arrow">→</span>
+        <div class="step"><b>2. Identificar</b>Posar nom a cada risc (caiguda, contacte elèctric, TME...).</div><span class="arrow">→</span>
+        <div class="step"><b>3. Valorar</b>Probabilitat × conseqüències = nivell de risc.</div><span class="arrow">→</span>
+        <div class="step"><b>4. Proposar mesures</b>Eliminar, combatre a l'origen, protecció col·lectiva i, al final, EPI.</div>
+      </div>
+    </div>
+
+    <h3>Recordatori: el mètode de valoració de l'INSST</h3>
+    <div class="table-scroll">
+    <table>
+      <caption>Nivell de risc segons la probabilitat i les conseqüències</caption>
+      <thead><tr><th>Probabilitat \ Conseqüències</th><th>Lleugerament danyoses</th><th>Danyoses</th><th>Extremadament danyoses</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Baixa</strong></td><td>Trivial</td><td>Tolerable</td><td>Moderat</td></tr>
+        <tr><td><strong>Mitjana</strong></td><td>Tolerable</td><td>Moderat</td><td>Important</td></tr>
+        <tr><td><strong>Alta</strong></td><td>Moderat</td><td>Important</td><td><strong>Intolerable</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <ul>
+      <li><strong>Trivial</strong>: no cal cap acció específica.</li>
+      <li><strong>Tolerable</strong>: no calen mesures noves, però s'han de mantenir les que hi ha i comprovar-les.</li>
+      <li><strong>Moderat</strong>: cal reduir el risc en un termini determinat.</li>
+      <li><strong>Important</strong>: no s'ha de començar el treball fins que s'hagi reduït el risc; si ja s'està fent, cal actuar de seguida.</li>
+      <li><strong>Intolerable</strong>: no s'ha de començar ni continuar el treball fins que es redueixi el risc. Si no és possible, s'ha de prohibir.</li>
+    </ul>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>"Ensopegar amb el cable del portàtil que creua el passadís." Probabilitat mitjana (hi passa molta gent cada dia), conseqüències lleugerament danyoses (contusions o una torçada lleu) → <strong>Tolerable</strong>. Tot i això, la mesura és tan senzilla (canaleta o reubicar l'endoll) que val la pena aplicar-la de seguida: combatre el risc a l'origen.</p>
+    </div>
+
+    <div class="resum">
+      <div class="tit">Resum 3.5</div>
+      <ul>
+        <li>Observar, identificar, valorar i proposar: aquest és el procediment d'una avaluació elemental de riscos.</li>
+        <li>El nivell de risc surt de combinar probabilitat i conseqüències; com més alt, més urgent és actuar.</li>
+        <li>Les mesures segueixen la jerarquia de l'art. 15 LPRL: primer eliminar o combatre a l'origen, després protecció col·lectiva i, al final, EPI.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CAS D'APLICACIÓ -->
+  <div class="activity">
+    <span class="badge">CAS</span>
+    <div class="body">
+      <h4>Cas d'aplicació: avaluació elemental d'una petita empresa de serveis informàtics</h4>
+      <p>Llegeix la descripció del lloc i fes les tres parts. Treballeu en grups i, en acabar, feu la posada en comú amb el formador.</p>
+      <div class="meta">
+        <span class="pill mat">Treball en grups</span>
+        <span class="pill mat">Autoavaluable + posada en comú</span>
+        <span class="pill mat">Descripció o fotos d'un lloc TIC</span>
+        <button class="quiz-btn" data-toggle="casBox" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="casBox" class="quiz" hidden>
+        <div class="example" style="margin-bottom:14px">
+          <div class="tit">El lloc: TecnoServeis, 12 treballadors</div>
+          <p>TecnoServeis té una oficina en un primer pis amb vuit llocs amb pantalla, un petit CPD i un tècnic de camp. En la visita s'observa el següent:</p>
+          <ol style="margin:8px 0 0">
+            <li>Les taules de la fila del finestral tenen la pantalla d'esquena a la finestra, i no hi ha persianes.</li>
+            <li>Tres programadors treballen tota la jornada amb el portàtil sobre la taula, sense teclat ni pantalla externs.</li>
+            <li>Al passadís que va al CPD hi ha una regleta al terra i diversos cables que travessen el pas.</li>
+            <li>Al CPD, el rack no està ancorat i el SAI és a la part de dalt.</li>
+            <li>Al CPD s'hi guarden caixes de cartró d'embalatge i papers.</li>
+            <li>Per canviar els punts d'accés Wi-Fi del sostre (a 3 metres) es fa servir una cadira de rodes.</li>
+            <li>El tècnic de suport fa guàrdies localitzades una setmana de cada dues, rep missatges del responsable fora d'horari i no hi ha cap política de desconnexió.</li>
+            <li>El tècnic de camp va sol als clients amb la furgoneta i no comunica a ningú on és.</li>
+          </ol>
+        </div>
+
+        <div class="sub" data-kind="risks">
+          <p class="sub-tit">Part 1. Quins riscos hi ha? Marca només els que es poden deduir de la descripció</p>
+          <form>
+            <div class="ck" data-ok="1" data-just="Correcte (punt 1). Amb la finestra darrere la pantalla hi ha enlluernament i contrastos forts: fatiga visual. La pantalla ha d'anar perpendicular a la finestra i amb persianes regulables (annex RD 488/1997).">
+              <label><input type="checkbox"><span class="ck-text">Fatiga visual per enlluernaments i reflexos a les pantalles.</span></label>
+            </div>
+            <div class="ck" data-ok="1" data-just="Correcte (punt 2). El portàtil fet servir de manera continuada no permet tenir pantalla i teclat a l'alçada correcta: postures forçades de coll i esquena.">
+              <label><input type="checkbox"><span class="ck-text">Trastorns musculoesquelètics (coll, esquena) per postures forçades amb el portàtil.</span></label>
+            </div>
+            <div class="ck" data-ok="1" data-just="Correcte (punt 3). Els cables que travessen el pas són una causa típica de caigudes al mateix nivell (RD 486/1997).">
+              <label><input type="checkbox"><span class="ck-text">Caiguda al mateix nivell per ensopegar amb cables.</span></label>
+            </div>
+            <div class="ck" data-ok="1" data-just="Correcte (punt 4). Un rack sense ancorar i amb l'equip més pesat a dalt té el centre de gravetat alt: pot bolcar i atrapar una persona.">
+              <label><input type="checkbox"><span class="ck-text">Bolcada del rack i atrapament.</span></label>
+            </div>
+            <div class="ck" data-ok="1" data-just="Correcte (punt 5). El cartró i el paper són combustible al costat d'equips elèctrics que generen calor: augmenta el risc d'incendi i la càrrega de foc del CPD.">
+              <label><input type="checkbox"><span class="ck-text">Incendi per acumulació de material combustible al CPD.</span></label>
+            </div>
+            <div class="ck" data-ok="1" data-just="Correcte (punt 6). Pujar a una cadira de rodes per treballar a 3 m és un risc de caiguda a diferent nivell. Cal una escala de mà adequada (RD 1215/1997, annex II 4.2).">
+              <label><input type="checkbox"><span class="ck-text">Caiguda a diferent nivell.</span></label>
+            </div>
+            <div class="ck" data-ok="1" data-just="Correcte (punt 7). Guàrdies freqüents i missatges fora d'horari sense política de desconnexió: fatiga, falta de descans i tecnoestrès (art. 88 LO 3/2018).">
+              <label><input type="checkbox"><span class="ck-text">Riscos psicosocials: fatiga i tecnoestrès per guàrdies i hiperconnexió.</span></label>
+            </div>
+            <div class="ck" data-ok="1" data-just="Correcte (punt 8). Treballar sol sense comunicar on és impedeix rebre ajuda en cas d'accident; a més, hi ha el risc viari dels desplaçaments.">
+              <label><input type="checkbox"><span class="ck-text">Treball en solitari sense comunicació i accidents de trànsit en els desplaçaments.</span></label>
+            </div>
+            <div class="ck" data-ok="0" data-just="No es dedueix de la descripció. A l'oficina no hi ha cap font de soroll d'aquest nivell; 87 dB(A) és el valor límit del RD 286/2006, propi d'ambients industrials molt sorollosos.">
+              <label><input type="checkbox"><span class="ck-text">Exposició a soroll per sobre de 87 dB(A) a l'oficina.</span></label>
+            </div>
+            <div class="ck" data-ok="0" data-just="No és correcte. És un mite: les pantalles actuals no emeten radiacions ionitzants. Els problemes de les PVD són visuals, posturals i mentals.">
+              <label><input type="checkbox"><span class="ck-text">Exposició a radiacions ionitzants emeses per les pantalles.</span></label>
+            </div>
+            <div class="ck" data-ok="0" data-just="No es dedueix de la descripció. Una empresa de serveis informàtics no té contacte amb pacients ni amb material biològic; aquest risc és propi de sectors com el sanitari (RD 664/1997).">
+              <label><input type="checkbox"><span class="ck-text">Exposició a agents biològics per contacte amb pacients.</span></label>
+            </div>
+            <div class="ck" data-ok="0" data-just="No es dedueix de la descripció. No hi ha màquines amb parts mòbils com premses o serres: aquest risc és propi de sectors industrials.">
+              <label><input type="checkbox"><span class="ck-text">Atrapament per màquines amb parts mòbils (premses, serres).</span></label>
+            </div>
+          </form>
+          <div class="meta" style="margin-top:14px">
+            <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+            <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+          </div>
+          <div class="tool-out" hidden></div>
+        </div>
+
+        <div class="sub" data-kind="match" data-note="Fes servir la taula de la unitat 3.5: la fila és la probabilitat i la columna, les conseqüències.">
+          <p class="sub-tit">Part 2. Valora el nivell de cada risc amb el mètode de l'INSST</p>
+          <div class="mhead"><span>Risc</span><span>Nivell</span></div>
+          <form>
+            <div class="mrow" data-just="Probabilitat alta × extremadament danyoses = Intolerable. No es pot tornar a fer fins que es disposi d'una escala adequada.">
+              <div class="ph">Caiguda des de la cadira de rodes (punt 6)<small>Probabilitat alta (es fa cada vegada) · Conseqüències extremadament danyoses (fractures greus)</small></div>
+              <select data-correct="int" aria-label="Nivell del risc de caiguda"><option value="">—</option><option value="tri">Trivial</option><option value="tol">Tolerable</option><option value="mod">Moderat</option><option value="imp">Important</option><option value="int">Intolerable</option></select>
+            </div>
+            <div class="mrow" data-just="Probabilitat mitjana × extremadament danyoses = Important. Cal ancorar el rack i redistribuir els equips abans de continuar treballant-hi.">
+              <div class="ph">Bolcada del rack (punt 4)<small>Probabilitat mitjana · Conseqüències extremadament danyoses (atrapament)</small></div>
+              <select data-correct="imp" aria-label="Nivell del risc de bolcada"><option value="">—</option><option value="tri">Trivial</option><option value="tol">Tolerable</option><option value="mod">Moderat</option><option value="imp">Important</option><option value="int">Intolerable</option></select>
+            </div>
+            <div class="mrow" data-just="Probabilitat alta × lleugerament danyoses = Moderat. Cal corregir-ho en un termini determinat.">
+              <div class="ph">Fatiga visual per enlluernament (punt 1)<small>Probabilitat alta (cada tarda) · Conseqüències lleugerament danyoses (molèsties reversibles)</small></div>
+              <select data-correct="mod" aria-label="Nivell del risc de fatiga visual"><option value="">—</option><option value="tri">Trivial</option><option value="tol">Tolerable</option><option value="mod">Moderat</option><option value="imp">Important</option><option value="int">Intolerable</option></select>
+            </div>
+            <div class="mrow" data-just="Probabilitat mitjana × danyoses = Moderat. Cal aplicar mesures organitzatives en un termini determinat.">
+              <div class="ph">Fatiga i tecnoestrès per les guàrdies (punt 7)<small>Probabilitat mitjana · Conseqüències danyoses</small></div>
+              <select data-correct="mod" aria-label="Nivell del risc psicosocial"><option value="">—</option><option value="tri">Trivial</option><option value="tol">Tolerable</option><option value="mod">Moderat</option><option value="imp">Important</option><option value="int">Intolerable</option></select>
+            </div>
+            <div class="mrow" data-just="Probabilitat mitjana × lleugerament danyoses = Tolerable. Tot i això, la mesura és senzilla i convé aplicar-la.">
+              <div class="ph">Ensopegada amb els cables (punt 3)<small>Probabilitat mitjana · Conseqüències lleugerament danyoses</small></div>
+              <select data-correct="tol" aria-label="Nivell del risc d'ensopegada"><option value="">—</option><option value="tri">Trivial</option><option value="tol">Tolerable</option><option value="mod">Moderat</option><option value="imp">Important</option><option value="int">Intolerable</option></select>
+            </div>
+          </form>
+          <div class="meta" style="margin-top:14px">
+            <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+            <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+          </div>
+          <p class="q-score" hidden></p>
+        </div>
+
+        <div class="sub" data-kind="open">
+          <p class="sub-tit">Part 3. Proposa mesures seguint la jerarquia de l'art. 15 LPRL</p>
+          <form>
+            <div class="fq">
+              <label class="fq-label" for="cas-1">Caiguda des de la cadira (punt 6):</label>
+              <textarea id="cas-1" rows="2" placeholder="Quina mesura proposes?" data-model="Prohibir immediatament fer servir cadires per pujar-hi (risc intolerable). Comprar una escala de tisora amb element antiobertura adequada a l'alçada, formar en el seu ús (RD 1215/1997, annex II 4.2) i, si es pot, instal·lar els punts d'accés de manera que es puguin gestionar sense pujar-hi."></textarea>
+              <p class="fq-model" hidden></p>
+            </div>
+            <div class="fq">
+              <label class="fq-label" for="cas-2">Bolcada del rack i incendi al CPD (punts 4 i 5):</label>
+              <textarea id="cas-2" rows="2" placeholder="Quina mesura proposes?" data-model="Ancorar el rack o desplegar-ne els estabilitzadors, baixar el SAI a la part inferior i reorganitzar els equips de més pesat a més lleuger. Retirar del CPD tot el material combustible (cartró i paper) i fer-ne un emmagatzematge fora de la sala. Mesures col·lectives, a l'origen, sense necessitat d'EPI."></textarea>
+              <p class="fq-model" hidden></p>
+            </div>
+            <div class="fq">
+              <label class="fq-label" for="cas-3">Guàrdies i tècnic de camp sol (punts 7 i 8):</label>
+              <textarea id="cas-3" rows="2" placeholder="Quina mesura proposes?" data-model="Rotar les guàrdies entre més persones, garantir el descans i aprovar una política de desconnexió digital (art. 88 LO 3/2018). Per al tècnic de camp, un protocol de treball en solitari: comunicar on va i quan acaba, contactes periòdics i prohibició de fer sol tasques de risc elevat (alçada, electricitat)."></textarea>
+              <p class="fq-model" hidden></p>
+            </div>
+          </form>
+          <div class="meta" style="margin-top:14px">
+            <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+            <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+          </div>
+          <p class="q-score" hidden>Revisa que les teves mesures actuïn primer sobre l'origen del risc i que la protecció col·lectiva vagi abans que l'EPI (art. 15 LPRL).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOSSARI -->
+  <section id="glossari">
+    <span class="unit-no" style="background:var(--muted);color:#fff">📖</span>
+    <h2>Glossari del mòdul</h2>
+    <div class="card glossary">
+      <dl>
+        <dt>Pantalla de visualització de dades (PVD)</dt><dd>Pantalla alfanumèrica o gràfica, sigui quin sigui el procediment de visualització utilitzat (art. 2 RD 488/1997).</dd>
+        <dt>Usuari de PVD</dt><dd>Treballador que fa servir la pantalla de manera habitual i durant una part rellevant de la seva feina; segons la guia tècnica, més de 4 h diàries o 20 h setmanals.</dd>
+        <dt>Guia tècnica</dt><dd>Document de l'INSST que interpreta un reial decret i en concreta l'aplicació. No és obligatòria, però és el criteri tècnic de referència.</dd>
+        <dt>Fatiga visual</dt><dd>Conjunt de molèsties oculars (sequedat, coïssor, visió borrosa, mal de cap) per l'esforç visual continuat; normalment és reversible amb el descans.</dd>
+        <dt>Enlluernament</dt><dd>Molèstia o pèrdua de visió causada per una font de llum intensa en el camp visual, com una finestra darrere la pantalla.</dd>
+        <dt>Trastorn musculoesquelètic (TME)</dt><dd>Lesió de músculs, tendons, nervis o articulacions per postures mantingudes, moviments repetitius o esforços.</dd>
+        <dt>Pausa</dt><dd>Interrupció del treball amb pantalla o canvi d'activitat per reduir la càrrega visual i postural (art. 3 RD 488/1997).</dd>
+        <dt>Treball sense tensió</dt><dd>Treball en una instal·lació elèctrica després d'haver-la deixat sense tensió amb el procediment de l'annex II del RD 614/2001.</dd>
+        <dt>Cinc regles d'or</dt><dd>Desconnectar, bloquejar, verificar l'absència de tensió, posar a terra i en curtcircuit, i senyalitzar i protegir la zona.</dd>
+        <dt>Treballador autoritzat / qualificat</dt><dd>Treballador amb la formació i l'autorització de l'empresa per fer determinats treballs amb risc elèctric (art. 2 RD 614/2001).</dd>
+        <dt>Descàrrega electrostàtica (ESD)</dt><dd>Descàrrega sobtada de l'electricitat estàtica acumulada, que pot fer malbé els components electrònics.</dd>
+        <dt>Polsera antiestàtica</dt><dd>Element que connecta la persona a terra per protegir els components de l'ESD. No protegeix contra el risc elèctric i només s'usa amb l'equip desendollat.</dd>
+        <dt>SAI</dt><dd>Sistema d'alimentació ininterrompuda: equip amb bateries que continua subministrant tensió encara que es talli la xarxa.</dd>
+        <dt>Estabilitzador antibolcada</dt><dd>Peu o suport que impedeix que un rack bolqui en extreure'n equips.</dd>
+        <dt>Manipulació manual de càrregues</dt><dd>Operació de transport o subjecció d'una càrrega per una o diverses persones (RD 487/1997). Pes de referència: 25 kg en condicions ideals.</dd>
+        <dt>Terra tècnic</dt><dd>Terra elevat de plaques desmuntables sota el qual passen cables i aire condicionat, habitual als CPD.</dd>
+        <dt>Passadís fred / calent</dt><dd>Organització del CPD on l'aire fred entra pel davant dels equips i l'aire calent surt pel darrere.</dd>
+        <dt>Extinció per gas</dt><dd>Sistema automàtic que apaga el foc inundant la sala amb un gas inert, un agent químic o CO<sub>2</sub>; pot causar asfíxia.</dd>
+        <dt>Alarma de pre-descàrrega</dt><dd>Senyal acústic i lluminós que avisa uns segons abans que es descarregui el gas d'extinció: cal sortir immediatament.</dd>
+        <dt>Coordinació d'activitats empresarials</dt><dd>Cooperació i intercanvi d'informació entre empreses que coincideixen en un mateix centre de treball (art. 24 LPRL, RD 171/2004).</dd>
+        <dt>Risc psicosocial</dt><dd>Risc derivat de l'organització del treball, el contingut de la tasca i les relacions a la feina.</dd>
+        <dt>Tecnoestrès</dt><dd>Estat psicològic negatiu relacionat amb l'ús de les TIC. Inclou la tecnoansietat, la tecnofatiga i la tecnoaddicció (NTP 730).</dd>
+        <dt>Síndrome d'esgotament professional (burnout)</dt><dd>Resposta a l'estrès laboral crònic: cansament emocional, distanciament de la feina i sensació d'ineficàcia.</dd>
+        <dt>Guàrdia localitzada</dt><dd>Temps en què el treballador no és al lloc de treball però ha d'estar disponible per atendre incidències.</dd>
+        <dt>Desconnexió digital</dt><dd>Dret a no respondre comunicacions de feina fora del temps de treball (art. 88 LO 3/2018, art. 20 bis ET).</dd>
+        <dt>Treball a distància regular</dt><dd>El que es fa fora del centre de treball almenys en un 30 % de la jornada en un període de tres mesos (Llei 10/2021).</dd>
+        <dt>Accident <em>in itinere</em></dt><dd>Accident de treball que es produeix en anar o tornar del lloc de treball (art. 156.2.a LGSS).</dd>
+        <dt>Accident en missió</dt><dd>Accident de treball que es produeix durant un desplaçament fet per raó de la feina.</dd>
+        <dt>Treball en solitari</dt><dd>Feina que es fa sense cap altra persona a prop que pugui ajudar en cas d'accident o malestar.</dd>
+        <dt>Nivell de risc</dt><dd>Resultat de combinar la probabilitat i les conseqüències d'un risc (trivial, tolerable, moderat, important o intolerable) segons el mètode de l'INSST.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- RECURSOS -->
+  <section>
+    <h2 style="font-size:1.1rem">Recursos per aprofundir</h2>
+    <div class="res-links">
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-8671" target="_blank" rel="noopener">RD 488/1997 (BOE)</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2001-11881" target="_blank" rel="noopener">RD 614/2001 (BOE)</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-8670" target="_blank" rel="noopener">RD 487/1997 (BOE)</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2021-11472" target="_blank" rel="noopener">Llei 10/2021 (BOE)</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673" target="_blank" rel="noopener">LO 3/2018 (BOE)</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2004-1848" target="_blank" rel="noopener">RD 171/2004 (BOE)</a>
+      <a href="https://www.insst.es/" target="_blank" rel="noopener">INSST</a>
+      <a href="https://osha.europa.eu/ca" target="_blank" rel="noopener">EU-OSHA</a>
+      <a href="https://treball.gencat.cat/ca/ambits/seguretat_salut_laboral/" target="_blank" rel="noopener">Seguretat i salut laboral (Generalitat)</a>
+    </div>
+  </section>
+
+  <!-- PROVA M3.2 -->
+  <section id="prova2">
+    <div class="exam-box">
+      <div class="tit">📝 Prova M3.2</div>
+      <p style="margin:0">Test de 20 preguntes amb 4 opcions de resposta cadascuna, sobre els continguts de les unitats 3.3, 3.4 i 3.5. Cada encert val 0,5 punts i els errors no resten.</p>
+      <ul>
+        <li>Cal un mínim de <strong>5/10</strong> (10 encerts) per ser APTE en aquesta prova.</li>
+        <li>Les notes de les proves no es compensen entre si: cal l'APTE a la prova M3.1 i a la prova M3.2.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pager">
+    <a href="m3.1.html">← Part 1: PVD, muntatge i CPD</a>
+    <a href="m3.html">Mòdul 3 ↑</a>
+  </div>
+
+</main>
+
+<footer>
+  <span>Mòdul 3 · Part 2 · Riscos específics del sector TIC · Curs bàsic de PRL, sector informàtica</span>
+  <button class="theme-btn" id="themeBtn" type="button">🌓 Canvia el tema</button>
+</footer>
+
+<script>
+  // Mostrar / amagar cada activitat
+  document.querySelectorAll('[data-toggle]').forEach(function(btn){
+    var box = document.getElementById(btn.getAttribute('data-toggle'));
+    btn.addEventListener('click', function(){
+      var open = !box.hidden;
+      box.hidden = open;
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.textContent = open ? 'Mostra l\'activitat' : 'Amaga l\'activitat';
+    });
+  });
+
+  // Test: corregeix (verd/vermell + justificació) i reinicia
+  document.querySelectorAll('[data-kind="test"]').forEach(function(root){
+    var form = root.querySelector('form');
+    var scoreEl = root.querySelector('.q-score');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var qs = form.querySelectorAll('.q'), answered = 0, correct = 0, critKo = 0;
+      qs.forEach(function(q){
+        var name = q.querySelector('input').name;
+        var chosen = form.querySelector('input[name="' + name + '"]:checked');
+        var right = q.getAttribute('data-correct');
+        var isCrit = !!q.querySelector('.crit');
+        q.classList.remove('ok','ko');
+        q.classList.add('done');
+        q.querySelectorAll('label').forEach(function(l){
+          l.classList.remove('sel','right');
+          if (l.querySelector('input').value === right) l.classList.add('right');
+        });
+        if (q.hasAttribute('data-just')){
+          var j = q.querySelector('.q-just');
+          if (!j){ j = document.createElement('p'); j.className = 'q-just'; q.appendChild(j); }
+          j.innerHTML = q.getAttribute('data-just');
+          j.hidden = false;
+        }
+        if (chosen){
+          answered++;
+          chosen.closest('label').classList.add('sel');
+          if (chosen.value === right){ correct++; q.classList.add('ok'); }
+          else { q.classList.add('ko'); if (isCrit) critKo++; }
+        } else if (isCrit){ critKo++; }
+      });
+      scoreEl.hidden = false;
+      var txt = answered < qs.length
+        ? 'Has respost ' + answered + ' de ' + qs.length + ' preguntes. Es mostren les respostes correctes en verd i la justificació.'
+        : 'Resultat: ' + correct + ' de ' + qs.length + ' correctes.';
+      if (form.querySelector('.crit')){
+        txt += critKo
+          ? ' ⚠️ Has fallat o deixat en blanc ' + critKo + ' pregunta' + (critKo === 1 ? '' : 'es') + ' crítica' + (critKo === 1 ? '' : 'es') + ': repassa-la' + (critKo === 1 ? '' : 'es') + ', perquè en un cas real hi hauria una persona en perill.'
+          : ' ✅ Totes les preguntes crítiques són correctes.';
+      }
+      scoreEl.textContent = txt;
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      form.reset();
+      form.querySelectorAll('label').forEach(function(l){ l.classList.remove('sel','right'); });
+      form.querySelectorAll('.q').forEach(function(q){ q.classList.remove('ok','ko','done'); });
+      form.querySelectorAll('.q-just').forEach(function(p){ p.hidden = true; });
+      scoreEl.hidden = true;
+      scoreEl.textContent = '';
+    });
+  });
+
+  // Resposta oberta: mostra l'exemple model i reinicia
+  document.querySelectorAll('[data-kind="open"]').forEach(function(root){
+    var note = root.querySelector('.q-score');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      root.querySelectorAll('.fq').forEach(function(fq){
+        var ta = fq.querySelector('textarea');
+        var m = fq.querySelector('.fq-model');
+        m.innerHTML = '<strong>Exemple proposat:</strong> ' + ta.getAttribute('data-model');
+        m.hidden = false;
+      });
+      if (note) note.hidden = false;
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      root.querySelectorAll('textarea').forEach(function(ta){ ta.value = ''; });
+      root.querySelectorAll('.fq-model').forEach(function(m){ m.hidden = true; m.innerHTML = ''; });
+      if (note) note.hidden = true;
+    });
+  });
+
+  // Autoavaluació Sí / No amb missatge orientatiu (A16)
+  document.querySelectorAll('[data-kind="autoeval"]').forEach(function(root){
+    var form = root.querySelector('form');
+    var out = root.querySelector('.tool-out');
+    var items = form.querySelectorAll('.aq');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var si = 0, no = 0, empty = 0, tips = [];
+      items.forEach(function(it){
+        it.classList.remove('is-si','is-no');
+        var ch = it.querySelector('input:checked');
+        if (!ch){ empty++; return; }
+        if (ch.value === 'na') return;
+        if (ch.value === 'si'){ si++; it.classList.add('is-si'); }
+        else {
+          no++; it.classList.add('is-no');
+          tips.push('<li><strong>' + it.getAttribute('data-area') + ':</strong> ' + it.getAttribute('data-tip') + '</li>');
+        }
+      });
+      out.hidden = false;
+      if (si + no === 0){
+        out.innerHTML = 'Respon almenys una pregunta per poder fer l\'avaluació.';
+        return;
+      }
+      var verdict;
+      if (no === 0){
+        verdict = '<p class="verdict"><span class="tag-ok">✅ Lloc ben condicionat.</span></p><p style="margin:0">No has detectat cap deficiència. Mantén els bons hàbits: pauses, postura i revisió periòdica de la vista.</p>';
+      } else if (no <= 3){
+        verdict = '<p class="verdict"><span class="tag-warn">🟡 Millores puntuals.</span></p><p style="margin:0">El lloc és correcte en general, però hi ha ' + no + ' aspecte' + (no === 1 ? '' : 's') + ' a millorar. La majoria es poden corregir tu mateix en pocs minuts.</p>';
+      } else if (no <= 7){
+        verdict = '<p class="verdict"><span class="tag-warn">🟠 Cal revisar el lloc.</span></p><p style="margin:0">Hi ha ' + no + ' deficiències. Corregeix les que depenen de tu i comunica la resta al teu responsable o al delegat de prevenció (art. 29 LPRL).</p>';
+      } else {
+        verdict = '<p class="verdict"><span class="tag-no">🔴 Lloc amb moltes deficiències.</span></p><p style="margin:0">Hi ha ' + no + ' deficiències. Comunica-ho al responsable de PRL o al delegat de prevenció: segurament cal revisar l\'avaluació d\'aquest lloc (art. 3 RD 488/1997).</p>';
+      }
+      out.innerHTML = verdict +
+        (tips.length ? '<p style="margin:10px 0 0"><strong>Què pots millorar:</strong></p><ul>' + tips.join('') + '</ul>' : '') +
+        (empty ? '<p style="margin:8px 0 0;color:var(--muted)">Has deixat ' + empty + ' pregunta' + (empty === 1 ? '' : 'es') + ' sense respondre.</p>' : '') +
+        '<p style="margin:8px 0 0;color:var(--muted)">Resultat orientatiu: ' + si + ' sí, ' + no + ' no. No substitueix l\'avaluació de riscos del lloc, que l\'ha de fer el servei de prevenció.</p>';
+      out.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      form.reset();
+      items.forEach(function(it){ it.classList.remove('is-si','is-no'); });
+      out.hidden = true;
+      out.innerHTML = '';
+    });
+  });
+
+  // Checklist amb accions correctes, trampes i ítems crítics (A8)
+  document.querySelectorAll('[data-kind="checklist"]').forEach(function(root){
+    var form = root.querySelector('form');
+    var out = root.querySelector('.tool-out');
+    var items = form.querySelectorAll('.ck');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var good = 0, missing = [], traps = [], critFail = [];
+      items.forEach(function(it){
+        var cb = it.querySelector('input');
+        var shouldCheck = it.getAttribute('data-ok') === '1';
+        var crit = it.hasAttribute('data-crit');
+        var text = it.querySelector('.ck-text').textContent;
+        it.classList.remove('ck-ok','ck-ko','ck-miss');
+        if (shouldCheck === cb.checked){
+          good++; it.classList.add('ck-ok');
+        } else if (shouldCheck){
+          it.classList.add('ck-miss'); missing.push(text);
+          if (crit) critFail.push('No has marcat: ' + text);
+        } else {
+          it.classList.add('ck-ko'); traps.push(text);
+          if (crit) critFail.push('Has marcat una acció perillosa: ' + text);
+        }
+        var j = it.querySelector('.q-just');
+        if (!j){ j = document.createElement('p'); j.className = 'q-just'; it.appendChild(j); }
+        j.innerHTML = it.getAttribute('data-just');
+        j.hidden = false;
+      });
+      var verdict;
+      if (critFail.length){
+        verdict = '<p class="verdict"><span class="tag-no">⛔ No és segur començar.</span></p><p style="margin:0">Hi ha errors en passos crítics, que en un cas real podrien causar un contacte elèctric:</p><ul><li>' + critFail.join('</li><li>') + '</li></ul>';
+      } else if (missing.length || traps.length){
+        verdict = '<p class="verdict"><span class="tag-warn">⚠️ Gairebé.</span></p><p style="margin:0">Els passos crítics són correctes, però ' +
+          (missing.length ? 'has oblidat ' + missing.length + ' pas' + (missing.length === 1 ? '' : 'sos') : '') +
+          (missing.length && traps.length ? ' i ' : '') +
+          (traps.length ? 'has marcat ' + traps.length + ' acció' + (traps.length === 1 ? '' : 'ns') + ' incorrecta' + (traps.length === 1 ? '' : 'es') : '') +
+          '. Revisa els ítems en groc (oblidats) i en vermell (incorrectes).</p>';
+      } else {
+        verdict = '<p class="verdict"><span class="tag-ok">✅ Checklist correcta.</span></p><p style="margin:0">Has identificat tots els passos segurs i has descartat totes les accions incorrectes. Ja pots fer la pràctica amb el servidor.</p>';
+      }
+      out.hidden = false;
+      out.innerHTML = verdict + '<p style="margin:8px 0 0;color:var(--muted)">Ítems ben resolts: ' + good + ' de ' + items.length + '. Verd: correcte; groc: t\'has oblidat de marcar-lo; vermell: no s\'havia de marcar.</p>';
+      out.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      form.reset();
+      items.forEach(function(it){ it.classList.remove('ck-ok','ck-ko','ck-miss'); });
+      form.querySelectorAll('.q-just').forEach(function(p){ p.hidden = true; });
+      out.hidden = true;
+      out.innerHTML = '';
+    });
+  });
+
+  // Votació de casos amb resposta raonada (A23)
+  document.querySelectorAll('[data-kind="vote"]').forEach(function(root){
+    root.querySelectorAll('.vote-block').forEach(function(block){
+      var result = block.querySelector('.vote-result');
+      block.querySelectorAll('[data-vote]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          block.querySelectorAll('[data-vote]').forEach(function(b){ b.classList.remove('primary'); });
+          btn.classList.add('primary');
+          var tpl = block.querySelector('template[data-for="' + btn.getAttribute('data-vote') + '"]');
+          result.innerHTML = tpl ? tpl.innerHTML : '';
+          result.hidden = false;
+        });
+      });
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      root.querySelectorAll('[data-vote]').forEach(function(b){ b.classList.remove('primary'); });
+      root.querySelectorAll('.vote-result').forEach(function(r){ r.hidden = true; r.innerHTML = ''; });
+    });
+  });
+
+  // Identificació de riscos amb distractors (cas 3.5, part 1)
+  document.querySelectorAll('[data-kind="risks"]').forEach(function(root){
+    var form = root.querySelector('form');
+    var out = root.querySelector('.tool-out');
+    var items = form.querySelectorAll('.ck');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var total = 0, found = 0, wrong = 0;
+      items.forEach(function(it){
+        var cb = it.querySelector('input');
+        var real = it.getAttribute('data-ok') === '1';
+        it.classList.remove('ck-ok','ck-ko','ck-miss');
+        if (real) total++;
+        if (real && cb.checked){ found++; it.classList.add('ck-ok'); }
+        else if (real){ it.classList.add('ck-miss'); }
+        else if (cb.checked){ wrong++; it.classList.add('ck-ko'); }
+        else { it.classList.add('ck-ok'); }
+        var j = it.querySelector('.q-just');
+        if (!j){ j = document.createElement('p'); j.className = 'q-just'; it.appendChild(j); }
+        j.innerHTML = it.getAttribute('data-just');
+        j.hidden = false;
+      });
+      var verdict;
+      if (found === total && !wrong){
+        verdict = '<p class="verdict"><span class="tag-ok">✅ Molt bé.</span></p><p style="margin:0">Has detectat els ' + total + ' riscos del lloc i no n\'has marcat cap que no hi sigui.</p>';
+      } else if (found >= total - 2 && wrong <= 1){
+        verdict = '<p class="verdict"><span class="tag-warn">🟡 Gairebé.</span></p><p style="margin:0">Has detectat ' + found + ' de ' + total + ' riscos' + (wrong ? ' i n\'has marcat ' + wrong + ' que no es dedueix de la descripció' : '') + '. Revisa els ítems en groc i en vermell.</p>';
+      } else {
+        verdict = '<p class="verdict"><span class="tag-no">🔴 Cal repassar-ho.</span></p><p style="margin:0">Has detectat ' + found + ' de ' + total + ' riscos' + (wrong ? ' i n\'has marcat ' + wrong + ' que no hi són' : '') + '. Torna a llegir la descripció punt per punt: cada punt amaga almenys un risc.</p>';
+      }
+      out.hidden = false;
+      out.innerHTML = verdict + '<p style="margin:8px 0 0;color:var(--muted)">Verd: correcte; groc: risc real que no has marcat; vermell: has marcat un risc que no es dedueix de la descripció.</p>';
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      form.reset();
+      items.forEach(function(it){ it.classList.remove('ck-ok','ck-ko','ck-miss'); });
+      form.querySelectorAll('.q-just').forEach(function(p){ p.hidden = true; });
+      out.hidden = true;
+      out.innerHTML = '';
+    });
+  });
+
+  // Aparellar amb desplegables (cas 3.5, part 2)
+  document.querySelectorAll('[data-kind="match"]').forEach(function(root){
+    var form = root.querySelector('form');
+    var scoreEl = root.querySelector('.q-score');
+    var sels = form.querySelectorAll('select');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var good = 0, empty = 0;
+      sels.forEach(function(sel){
+        sel.classList.remove('ok','ko');
+        if (!sel.value){ empty++; sel.classList.add('ko'); return; }
+        if (sel.value === sel.getAttribute('data-correct')){ good++; sel.classList.add('ok'); }
+        else { sel.classList.add('ko'); }
+      });
+      form.querySelectorAll('.mrow').forEach(function(row){
+        var j = row.querySelector('.q-just');
+        if (!j){ j = document.createElement('p'); j.className = 'q-just'; row.appendChild(j); }
+        j.innerHTML = row.getAttribute('data-just');
+        j.hidden = false;
+      });
+      scoreEl.hidden = false;
+      scoreEl.textContent = 'Resultat: ' + good + ' de ' + sels.length + ' correctes' +
+        (empty ? ' (' + empty + ' sense resposta)' : '') + '. Verd: correcte; vermell: revisa-ho. ' + (root.getAttribute('data-note') || '');
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      form.reset();
+      sels.forEach(function(sel){ sel.classList.remove('ok','ko'); });
+      form.querySelectorAll('.q-just').forEach(function(p){ p.hidden = true; });
+      scoreEl.hidden = true;
+      scoreEl.textContent = '';
+    });
+  });
+
+  // Tema clar / fosc (comparteix preferència amb la resta de mòduls)
+  var root = document.documentElement;
+  try { var t = localStorage.getItem('prl-theme'); if (t) root.setAttribute('data-theme', t); } catch(e){}
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme') ||
+      (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('prl-theme', next); } catch(e){}
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1343 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mòdul 3 · Part 1 · PVD, muntatge i CPD</title>
+<meta name="description" content="Mòdul 3 del curs bàsic de PRL, part 1: lloc amb pantalles de visualització i ergonomia; muntatge, manteniment d'equips i CPD.">
+<style>
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5;
+    --text:#1b2330; --muted:#5a6577; --line:#dde2ea;
+    --accent:#e0661b; --accent-soft:#fdeee4;
+    --m1:#2f6fd1; --m2:#c2410c; --m3:#0f8a6a; --m4:#caa005;
+    --danger:#b91c1c; --danger-soft:#fdecec;
+    --warn:#b45309; --warn-soft:#fef3c7;
+    --law:#1d4ed8; --law-soft:#eaf1fd;
+    --ok-soft:#d1f5e3;
+    --radius:14px; --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.06);
+    --c:var(--m3); --on-c:#ffffff; --c-deep:#0b6e55;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+      --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+      --accent:#f08a46; --accent-soft:#2b1d14;
+      --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+      --danger:#f87171; --danger-soft:#2c1717;
+      --warn:#fbbf24; --warn-soft:#2b2410;
+      --law:#7aa6f5; --law-soft:#182435;
+      --ok-soft:#133227;
+      --on-c:#0f141b; --c-deep:#0f7a5e;
+      --shadow:none;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+    --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+    --accent:#f08a46; --accent-soft:#2b1d14;
+    --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+    --danger:#f87171; --danger-soft:#2c1717;
+    --warn:#fbbf24; --warn-soft:#2b2410;
+    --law:#7aa6f5; --law-soft:#182435;
+    --ok-soft:#133227;
+    --on-c:#0f141b; --c-deep:#0f7a5e;
+    --shadow:none;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;}
+  a{color:var(--accent)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px}
+
+  header.hero{background:linear-gradient(135deg,#1b2330 0%,#2a3a52 100%);color:#fff;padding:40px 0 34px}
+  .hero .back{display:inline-flex;align-items:center;gap:6px;color:#cfd8e6;text-decoration:none;font-size:.9rem;font-weight:600}
+  .hero .back:hover{color:#fff}
+  .hero .tag{display:inline-block;background:var(--c);color:var(--on-c);font-weight:800;font-size:.8rem;
+    letter-spacing:.06em;padding:4px 10px;border-radius:999px;margin-top:16px}
+  .hero h1{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.2;margin:12px 0 8px}
+  .hero p{max-width:640px;color:#cfd8e6;margin:0}
+
+  nav.top{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--line)}
+  nav.top .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  nav.top a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:.9rem;
+    padding:13px 10px;border-bottom:3px solid transparent}
+  nav.top a:hover{color:var(--text);border-bottom-color:var(--c)}
+
+  main{padding-bottom:40px}
+  section{padding:40px 0 4px;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:0}
+  .unit-no{display:inline-block;background:var(--c);color:var(--on-c);font-weight:800;border-radius:8px;
+    padding:3px 9px;font-size:.82rem;margin-bottom:10px}
+  h2{font-size:1.4rem;margin:0 0 4px}
+  h3{font-size:1.1rem;margin:28px 0 8px}
+  .lead{color:var(--muted);margin:4px 0 20px}
+  p{margin:0 0 14px}
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin-bottom:6px}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  .objectius{border-left:5px solid var(--c)}
+  .objectius h3{margin-top:0;font-size:1rem}
+  .objectius ul{margin-bottom:0}
+  .objectius .note{margin:12px 0 0;font-size:.88rem;color:var(--muted)}
+
+  .law{background:var(--law-soft);border:1px solid var(--law);border-left-width:5px;
+    border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .law .tit{font-weight:800;color:var(--law);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .law p{margin:0;font-size:.95rem}
+  .law p+p{margin-top:8px}
+  .law ul{margin:6px 0 0;font-size:.95rem}
+
+  .example{background:var(--accent-soft);border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .example .tit{font-weight:800;color:var(--accent);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .example p{margin:0}
+  .example p+p{margin-top:8px}
+
+  .alert{background:var(--danger-soft);border:1px solid var(--danger);border-left-width:5px;
+    border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .alert .tit{font-weight:800;color:var(--danger);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .alert p{margin:0;font-size:.95rem}
+  .alert p+p{margin-top:8px}
+
+  table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:.93rem}
+  table caption{text-align:left;font-weight:700;margin-bottom:8px;color:var(--text)}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:var(--surface-2);font-weight:700}
+  .table-scroll{overflow-x:auto;margin:0 0 18px}
+  .table-scroll table{margin:0}
+
+  .activity{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin:0 0 16px;display:flex;gap:14px;align-items:flex-start}
+  .activity .badge{flex:0 0 auto;background:var(--accent);color:#fff;font-weight:800;border-radius:10px;
+    padding:5px 10px;font-size:.82rem}
+  .activity .body{width:100%;min-width:0}
+  .activity .body h4{margin:0 0 4px;font-size:1rem}
+  .activity .body p{margin:0 0 6px}
+  .activity .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .pill{font-size:.8rem;padding:3px 10px;border-radius:8px;background:var(--surface-2);color:var(--text)}
+  .pill.mat{background:var(--surface-2)}
+
+  .glossary dl{margin:0}
+  .glossary dt{font-weight:700;margin-top:10px}
+  .glossary dt:first-child{margin-top:0}
+  .glossary dd{margin:2px 0 0;color:var(--muted)}
+
+  .resum{background:var(--surface-2);border-radius:var(--radius);padding:16px 18px;margin:0 0 18px}
+  .resum .tit{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:8px}
+  .resum ul{margin:0}
+
+  .scheme{background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin:0 0 18px;font-size:.93rem}
+  .scheme .tit{font-weight:700;margin-bottom:10px}
+  .pyramid{display:flex;flex-direction:column;align-items:center;gap:2px;margin:10px 0}
+  .pyramid div{color:#fff;font-size:.82rem;font-weight:700;padding:7px 10px;border-radius:6px;text-align:center;max-width:100%}
+
+  /* Esquemes de flux */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px;margin:10px 0}
+  .flow .step{flex:1 1 120px;background:var(--c-deep);color:#fff;border-radius:10px;padding:10px 12px;font-size:.85rem}
+  .flow .step b{display:block;font-size:.95rem;margin-bottom:2px}
+  .flow .arrow{align-self:center;color:var(--muted);font-weight:800}
+  .loop-note{margin:8px 0 0;font-size:.88rem;color:var(--muted)}
+
+  /* Esquema de postura (SVG) */
+  .posture svg{width:100%;height:auto;display:block}
+  .posture .ln{stroke:var(--text);stroke-width:3;stroke-linecap:round;fill:none}
+  .posture .fur{stroke:var(--muted);stroke-width:3;stroke-linecap:round;fill:none}
+  .posture .scr{fill:var(--c);stroke:none}
+  .posture .gaze{stroke:var(--c);stroke-width:2;stroke-dasharray:6 5;fill:none}
+  .posture .dim{stroke:var(--accent);stroke-width:2;fill:none}
+  .posture text{fill:var(--muted);font:12px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .posture text.hl{fill:var(--accent);font-weight:700}
+
+  /* Esquema de rack */
+  .rack{max-width:420px;margin:10px auto;border:3px solid var(--muted);border-radius:8px;padding:6px;display:flex;flex-direction:column;gap:4px}
+  .rack div{border-radius:5px;padding:8px 10px;font-size:.82rem;font-weight:700;color:#fff;display:flex;justify-content:space-between;gap:10px}
+  .rack div span{font-weight:400;opacity:.9}
+  .rack-legs{max-width:420px;margin:0 auto;display:flex;justify-content:space-between;padding:0 18px;color:var(--muted);font-size:.8rem;font-weight:700}
+
+  details.drop{background:var(--surface-2);border-radius:var(--radius);padding:10px 14px;margin:0 0 14px}
+  details.drop summary{cursor:pointer;font-weight:700}
+  details.drop .res-links{margin:10px 0 2px}
+  details.drop ul{margin:10px 0 2px}
+
+  .exam-box{background:var(--danger-soft);border:1px solid var(--danger);border-left-width:5px;
+    border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+  .exam-box .tit{color:var(--danger);font-weight:800;margin-bottom:6px}
+  .exam-box ul{margin:8px 0 0}
+
+  .quiz-btn{background:var(--surface-2);border:1px solid var(--line);color:var(--text);border-radius:8px;
+    padding:7px 14px;cursor:pointer;font:inherit;font-size:.86rem;font-weight:600}
+  .quiz-btn:hover{border-color:var(--c)}
+  .quiz-btn.primary{background:var(--c);border-color:var(--c);color:var(--on-c)}
+  .quiz{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
+  .sub{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)}
+  .sub:first-child{margin-top:0;padding-top:0;border-top:0}
+  .sub-tit{font-weight:800;margin:0 0 10px}
+  .q{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .q:last-of-type{border-bottom:0;margin-bottom:0;padding-bottom:0}
+  .q-text{font-weight:700;margin:0 0 8px}
+  .q label{display:block;background:var(--surface-2);border-radius:8px;padding:8px 12px;margin-bottom:6px;
+    cursor:pointer;font-size:.93rem}
+  .q label:hover{background:var(--line)}
+  .q input{margin-right:8px}
+  .q.ok label.sel{background:var(--ok-soft);outline:2px solid var(--m3)}
+  .q.ko label.sel{background:var(--danger-soft);outline:2px solid var(--danger)}
+  .q.done label.right{background:var(--ok-soft);outline:2px solid var(--m3)}
+  .q-score{font-weight:700;margin-top:14px}
+  .q-just{margin:8px 0 0;padding:8px 12px;background:var(--surface-2);border-radius:8px;
+    font-size:.88rem;color:var(--muted)}
+  .crit{display:inline-block;background:var(--danger);color:#fff;font-size:.72rem;font-weight:800;
+    letter-spacing:.04em;border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:middle}
+
+  .fq{margin-bottom:16px}
+  .fq-label{display:block;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .fq textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+    color:var(--text);padding:9px 12px;font:inherit;font-size:.93rem;resize:vertical}
+  .fq textarea:focus{outline:2px solid var(--c);border-color:var(--c)}
+  .fq-model{margin:8px 0 0;padding:8px 12px;background:var(--accent-soft);border-radius:8px;
+    font-size:.9rem;color:var(--text)}
+  .fq-model strong{color:var(--accent)}
+
+  /* Sortida d'eines i autoavaluacions */
+  .tool-out{background:var(--surface-2);border-radius:8px;padding:12px 14px;font-size:.92rem;margin-top:14px}
+  .tool-out ul{margin:6px 0 0}
+  .tool-out .verdict{font-weight:800;font-size:1rem;margin:0 0 6px}
+  .tag-ok{color:#15803d;font-weight:800}
+  .tag-no{color:var(--danger);font-weight:800}
+  .tag-warn{color:var(--warn);font-weight:800}
+
+  /* Qüestionari d'autoavaluació PVD (A16) */
+  .aq-group{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--c);margin:16px 0 6px}
+  .aq-group:first-child{margin-top:0}
+  .aq{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--surface-2);
+    border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:.93rem}
+  .aq .opts{display:flex;gap:6px;flex-wrap:wrap}
+  .aq .opts label{display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--line);
+    border-radius:8px;padding:4px 10px;cursor:pointer;font-size:.86rem;font-weight:600;white-space:nowrap}
+  .aq .opts label:hover{border-color:var(--c)}
+  .aq.is-si{outline:2px solid var(--m3);background:var(--ok-soft)}
+  .aq.is-no{outline:2px solid var(--danger);background:var(--danger-soft)}
+  @media (max-width:600px){ .aq{grid-template-columns:1fr} }
+
+  /* Checklist (A8) */
+  .ck-phase{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--c);margin:16px 0 6px}
+  .ck-phase:first-child{margin-top:0}
+  .ck{background:var(--surface-2);border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:.93rem}
+  .ck > label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+  .ck input{margin-top:5px;flex:0 0 auto;width:17px;height:17px;accent-color:var(--c)}
+  .ck.ck-ok{outline:2px solid var(--m3);background:var(--ok-soft)}
+  .ck.ck-ko{outline:2px solid var(--danger);background:var(--danger-soft)}
+  .ck.ck-miss{outline:2px dashed var(--warn);background:var(--warn-soft)}
+  .ck .q-just{background:var(--surface)}
+
+  /* Exercici de valoració amb desplegables (cas 3.5) */
+  .mrow{display:grid;grid-template-columns:minmax(200px,2fr) 170px;gap:8px;align-items:center;
+    background:var(--surface-2);border-radius:8px;padding:10px 12px;margin-bottom:8px}
+  .mrow .ph{font-weight:700;font-size:.93rem}
+  .mrow .ph small{display:block;font-weight:400;color:var(--muted);font-size:.82rem}
+  .mrow select{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+    color:var(--text);padding:8px 10px;font:inherit;font-size:.9rem}
+  .mrow select:focus{outline:2px solid var(--c);border-color:var(--c)}
+  .mrow select.ok{outline:2px solid var(--m3);background:var(--ok-soft)}
+  .mrow select.ko{outline:2px solid var(--danger);background:var(--danger-soft)}
+  .mrow .q-just{grid-column:1/-1;margin:2px 0 0;background:var(--surface)}
+  .mhead{display:grid;grid-template-columns:minmax(200px,2fr) 170px;gap:8px;
+    font-size:.8rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:0 12px 4px}
+  @media (max-width:600px){
+    .mrow,.mhead{grid-template-columns:1fr}
+    .mhead span+span{display:none}
+  }
+
+  /* Votació de casos (A23) */
+  .vote-block{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .vote-block:last-of-type{border-bottom:0}
+  .vote-block .quiz-btn{text-align:left}
+
+  .res-links{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
+  .res-links a{font-size:.88rem;background:var(--surface-2);color:var(--text);text-decoration:none;
+    padding:6px 12px;border-radius:999px}
+  details.drop .res-links a{background:var(--surface)}
+  .res-links a:hover{color:var(--accent)}
+
+  footer{margin-top:20px;padding:24px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem;
+    display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+  .theme-btn{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;
+    padding:6px 10px;cursor:pointer;font:inherit;font-size:.85rem}
+
+  @media print{
+    nav.top,.theme-btn{display:none}
+    header.hero{background:none;color:#000}
+    .hero p,.hero .back{color:#000}
+  }
+
+  /* Pàgina d'entrada del mòdul: targetes de les parts */
+  .parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:0 0 18px}
+  a.part-card{display:flex;flex-direction:column;text-decoration:none;color:var(--text);background:var(--surface);
+    border:1px solid var(--line);border-top:5px solid var(--c);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);
+    transition:transform .15s ease,border-color .15s ease}
+  a.part-card:hover{transform:translateY(-2px);border-color:var(--c)}
+  a.part-card .unit-no{align-self:flex-start}
+  a.part-card h3{margin:0 0 6px;font-size:1.15rem}
+  a.part-card p{color:var(--muted);margin:0 0 10px;font-size:.93rem}
+  a.part-card ul{margin:0 0 12px;font-size:.92rem}
+  a.part-card .go{margin-top:auto;font-weight:700;color:var(--c)}
+  .pager{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin:24px 0 0}
+  .pager a{text-decoration:none;font-weight:700;background:var(--surface);border:1px solid var(--line);
+    border-radius:10px;padding:10px 14px;color:var(--text)}
+  .pager a:hover{border-color:var(--c);color:var(--c)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a class="back" href="m3.html">← Tornar al mòdul 3</a>
+    <div class="tag">MÒDUL 3 · PART 1</div>
+    <h1>Riscos específics del sector TIC (1)</h1>
+    <p>El lloc amb pantalla i l'ergonomia; el muntatge i el manteniment d'equips, i els riscos propis del CPD.</p>
+  </div>
+</header>
+
+<nav class="top" aria-label="Unitats del mòdul">
+  <div class="wrap">
+    <a href="#objectius">Objectius</a>
+    <a href="#u1">3.1 PVD i ergonomia</a>
+    <a href="#u2">3.2 Muntatge, manteniment i CPD</a>
+    <a href="#glossari">Glossari</a>
+    <a href="#prova1">Prova M3.1</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="objectius">
+    <div class="card objectius">
+      <h3>Objectius d'aquesta part</h3>
+      <ul>
+        <li>Identificar els requisits d'un lloc de treball amb pantalles de visualització (RD 488/1997) i comprovar si el propi lloc els compleix.</li>
+        <li>Reconèixer la fatiga visual i els trastorns musculoesquelètics i les mesures per prevenir-los, incloses les pauses i la vigilància de la salut.</li>
+        <li>Aplicar procediments segurs en el muntatge i el manteniment d'equips: treball sense tensió, protecció davant ESD i talls, i manipulació de servidors i racks.</li>
+        <li>Identificar els riscos propis del CPD (soroll, calor, extinció per gas) i saber com actuar davant l'alarma d'extinció.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- UNITAT 3.1 -->
+  <section id="u1">
+    <span class="unit-no">3.1</span>
+    <h2>El lloc de treball amb pantalles de visualització (PVD) i l'ergonomia</h2>
+    <p class="lead">És el lloc de treball més habitual del sector: programadors, administradors de sistemes, tècnics de suport, dissenyadors. Sembla un lloc "sense riscos", però és l'origen de molts dels problemes de salut més freqüents de la professió: mal d'esquena, de coll, de canell i fatiga visual.</p>
+
+    <h3>Qui és "usuari de PVD"?</h3>
+    <p>La normativa específica s'aplica als treballadors que fan servir la pantalla de manera habitual i durant una part rellevant de la jornada. No n'hi ha prou amb tenir un ordinador a la taula.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 488/1997</strong>, sobre disposicions mínimes de seguretat i salut relatives al treball amb equips que inclouen pantalles de visualització.</p>
+      <ul>
+        <li><strong>Art. 1</strong>: objecte i àmbit. L'apartat 3 n'exclou, entre d'altres, els sistemes portàtils <em>sempre que no s'utilitzin de manera continuada en un lloc de treball</em>, els sistemes informàtics destinats al públic i els equips a bord de vehicles.</li>
+        <li><strong>Art. 2</strong>: defineix el "treballador" com qui utilitza l'equip amb pantalla <em>de manera habitual i durant una part rellevant del seu treball normal</em>.</li>
+        <li><strong>Art. 3</strong>: obligació d'avaluar els riscos (vista, problemes físics i càrrega mental), de complir els requisits de l'annex i d'organitzar la feina perquè el treball amb pantalla s'alterni amb altres tasques o amb pauses.</li>
+        <li><strong>Art. 4</strong>: vigilància de la salut, també dels ulls i de la vista, abans de començar, periòdicament i quan apareguin trastorns. Si cal, l'empresa ha de facilitar dispositius correctors especials.</li>
+        <li><strong>Arts. 5 i 6</strong>: informació, formació, consulta i participació dels treballadors.</li>
+        <li><strong>Annex</strong>: requisits mínims de la pantalla, el teclat, la taula, la cadira, l'entorn i el programari.</li>
+      </ul>
+      <p>La <strong>Guia tècnica de l'INSST</strong> per a aquest RD concreta el criteri: es consideren usuaris els qui fan <strong>més de 4 hores diàries o 20 hores setmanals</strong> de treball efectiu amb pantalla; no ho són els qui en fan <strong>menys de 2 hores diàries o 10 setmanals</strong>; entremig, cal valorar-ho cas per cas. Les guies tècniques no són normes obligatòries, però són el criteri de referència.</p>
+    </div>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Una desenvolupadora que passa 7 hores diàries programant és clarament usuària de PVD. Un tècnic de camp que passa el dia instal·lant cablejat i només obre el portàtil 30 minuts per tancar tiquets no ho és, tot i que treballa amb ordinadors. En canvi, si aquest mateix tècnic fa servir el portàtil sis hores al dia a la mateixa taula, el portàtil ja no queda exclòs: s'està fent servir de manera continuada.</p>
+    </div>
+
+    <h3>Els elements del lloc: pantalla, teclat, taula i cadira</h3>
+    <p>L'annex del RD 488/1997 fixa com han de ser els elements del lloc. La guia tècnica ho tradueix en recomanacions pràctiques que pots comprovar tu mateix.</p>
+
+    <div class="table-scroll">
+    <table>
+      <caption>Requisits de l'annex del RD 488/1997 i recomanacions pràctiques de la guia tècnica</caption>
+      <thead><tr><th>Element</th><th>Què exigeix l'annex</th><th>Com es concreta a la pràctica</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pantalla</strong></td><td>Caràcters ben definits, imatge estable sense parpelleig, brillantor i contrast fàcils de regular, orientable i inclinable, sense reflexos.</td><td>Distància d'almenys <strong>40 cm</strong> (aprox. un braç estirat). La part superior de la pantalla a l'<strong>alçada dels ulls o una mica per sota</strong>. Pantalla davant teu, no de costat.</td></tr>
+        <tr><td><strong>Teclat</strong></td><td>Inclinable i independent de la pantalla, superfície mat, símbols llegibles, espai al davant per recolzar braços i mans.</td><td>Deixa uns <strong>10 cm</strong> lliures entre el teclat i la vora de la taula per recolzar els avantbraços. Canells rectes, sense doblegar-los cap amunt.</td></tr>
+        <tr><td><strong>Ratolí</strong></td><td>(Dins dels requisits generals de l'equip.)</td><td>Al mateix nivell i ben a prop del teclat. Si el fas servir molt, alterna mà o valora un ratolí vertical.</td></tr>
+        <tr><td><strong>Taula</strong></td><td>Poc reflectant, dimensions suficients per col·locar els elements amb flexibilitat, espai per a una postura còmoda. Faristol estable i regulable per als documents.</td><td>Superfície mat. Espai lliure a sota per moure les cames. Documents a la mateixa alçada i distància que la pantalla.</td></tr>
+        <tr><td><strong>Cadira</strong></td><td>Estable, que permeti llibertat de moviments; seient d'alçada regulable; respatller reclinable i d'alçada ajustable; reposapeus per a qui el demani.</td><td>Peus plans a terra (o al reposapeus), genolls i colzes a uns <strong>90°</strong>, l'esquena recolzada, especialment la zona lumbar. Cinc rodes per a l'estabilitat.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="scheme posture">
+      <div class="tit">Postura correcta davant la pantalla</div>
+      <svg viewBox="0 0 560 300" role="img" aria-label="Esquema d'una persona asseguda correctament davant d'una pantalla, amb la mirada a l'alçada de la part superior de la pantalla, distància d'almenys 40 cm, colzes i genolls a 90 graus i peus recolzats.">
+        <!-- terra -->
+        <line class="fur" x1="20" y1="282" x2="540" y2="282"/>
+        <!-- taula -->
+        <line class="fur" x1="255" y1="152" x2="490" y2="152"/>
+        <line class="fur" x1="478" y1="152" x2="478" y2="282"/>
+        <!-- teclat -->
+        <rect x="292" y="144" width="52" height="6" rx="2" class="scr" opacity=".55"/>
+        <!-- pantalla (vista lateral) -->
+        <rect x="430" y="72" width="9" height="66" rx="2" class="scr"/>
+        <line class="fur" x1="440" y1="105" x2="452" y2="105"/>
+        <line class="fur" x1="452" y1="105" x2="452" y2="150"/>
+        <line class="fur" x1="436" y1="150" x2="466" y2="150"/>
+        <!-- cadira -->
+        <line class="fur" x1="172" y1="200" x2="280" y2="200"/>
+        <line class="fur" x1="172" y1="200" x2="160" y2="110"/>
+        <line class="fur" x1="222" y1="200" x2="222" y2="262"/>
+        <line class="fur" x1="186" y1="270" x2="258" y2="270"/>
+        <circle cx="190" cy="276" r="5" class="fur"/><circle cx="254" cy="276" r="5" class="fur"/>
+        <!-- persona -->
+        <circle cx="200" cy="70" r="18" class="ln"/>
+        <line class="ln" x1="198" y1="88" x2="188" y2="192"/>
+        <line class="ln" x1="196" y1="102" x2="204" y2="146"/>
+        <line class="ln" x1="204" y1="146" x2="298" y2="146"/>
+        <line class="ln" x1="188" y1="192" x2="285" y2="192"/>
+        <line class="ln" x1="285" y1="192" x2="285" y2="276"/>
+        <line class="ln" x1="285" y1="276" x2="312" y2="276"/>
+        <!-- mirada -->
+        <line class="gaze" x1="216" y1="70" x2="430" y2="76"/>
+        <!-- distància -->
+        <line class="dim" x1="218" y1="44" x2="430" y2="44"/>
+        <line class="dim" x1="218" y1="38" x2="218" y2="50"/>
+        <line class="dim" x1="430" y1="38" x2="430" y2="50"/>
+        <text x="300" y="36" class="hl">≥ 40 cm</text>
+        <!-- etiquetes -->
+        <text x="446" y="66">Part superior a l'alçada</text>
+        <text x="446" y="80">dels ulls o una mica per sota</text>
+        <text x="106" y="140">Suport</text>
+        <text x="106" y="154">lumbar</text>
+        <text x="208" y="138" class="hl">colze ~90°</text>
+        <text x="292" y="214" class="hl">genoll ~90°</text>
+        <text x="318" y="272">Peus recolzats</text>
+        <text x="318" y="286">(o reposapeus)</text>
+        <text x="300" y="134">canells rectes</text>
+      </svg>
+    </div>
+
+    <h3>L'entorn: il·luminació, enlluernaments, soroll i temperatura</h3>
+    <p>Un bon equip mal col·locat pot generar tants problemes com un equip dolent. La causa més freqüent de molèsties visuals a les oficines no és la pantalla en si, sinó els <strong>reflexos</strong> i els <strong>contrastos</strong> de llum.</p>
+    <ul>
+      <li><strong>Il·luminació</strong>: el RD 486/1997 (annex IV) fixa un mínim de 500 lux per a tasques amb exigències visuals altes, i la guia tècnica de PVD recomana uns 500 lux per a les tasques habituals d'oficina (lectura, escriptura, introducció de dades).</li>
+      <li><strong>Enlluernaments i reflexos</strong>: la pantalla s'ha de col·locar <strong>perpendicular a les finestres</strong>. Si la finestra és darrere la pantalla, enlluerna; si és darrere teu, es reflecteix a la pantalla. Les finestres han de tenir cortines o persianes regulables (annex del RD 488/1997, apartat 2).</li>
+      <li><strong>Soroll</strong>: no ha de pertorbar l'atenció ni la comunicació. En una oficina oberta amb un equip de suport al telèfon, el soroll de fons és un factor de fatiga mental.</li>
+      <li><strong>Temperatura i humitat</strong>: per a treballs sedentaris d'oficina, el RD 486/1997 (annex III) fixa un interval de 17 a 27 °C i una humitat relativa del 30 al 70 %. La guia de PVD recomana marges més estrets per al confort. L'aire massa sec agreuja la sequedat ocular.</li>
+    </ul>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Un tècnic de suport es queixa de mal de cap cada tarda. Té la pantalla d'esquena a un finestral orientat a ponent: a partir de les 4 el sol fa que la pantalla sembli fosca i ell força la vista. La solució més eficaç i barata no és comprar una pantalla nova: és <strong>girar la taula 90°</strong> perquè la finestra quedi al costat i baixar la persiana a les hores de sol directe. És un exemple de combatre el risc a l'origen (art. 15.1.c LPRL).</p>
+    </div>
+
+    <h3>La fatiga visual</h3>
+    <p>Davant la pantalla parpellegem menys, enfoquem sempre a la mateixa distància i treballem amb contrastos de llum. El resultat és la <strong>fatiga visual</strong>: ulls secs, coïssor, vermellor, visió borrosa, dificultat per enfocar i mal de cap. Normalment és reversible i desapareix amb el descans, però és un senyal que el lloc o l'organització de la feina no són adequats.</p>
+    <ul>
+      <li>Corregir l'origen: reflexos, brillantor excessiva, mida de lletra massa petita, distància incorrecta.</li>
+      <li>Fer <strong>pauses visuals</strong>: mirar lluny de tant en tant relaxa la musculatura que enfoca. Un consell pràctic molt estès és la regla "20-20-20": cada 20 minuts, mirar uns 20 segons un punt allunyat (uns 6 metres). No és una norma, però és fàcil de recordar.</li>
+      <li>Parpellejar de manera conscient i evitar corrents d'aire directes als ulls.</li>
+      <li>Fer servir la <strong>vigilància de la salut</strong> (art. 4 RD 488/1997): la revisió de la vista és un dret. Si cal una correcció específica per a la distància de pantalla, l'empresa l'ha de facilitar.</li>
+    </ul>
+
+    <h3>Els trastorns musculoesquelètics (TME)</h3>
+    <p>Són lesions de músculs, tendons, nervis i articulacions causades per postures mantingudes, moviments repetitius i manca de descans. En el sector TIC són el dany per a la salut més freqüent.</p>
+    <div class="table-scroll">
+    <table>
+      <caption>TME més freqüents en llocs amb PVD</caption>
+      <thead><tr><th>Zona i trastorn</th><th>Causa habitual al sector</th><th>Prevenció</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Coll</strong> (cervicàlgia)</td><td>Pantalla massa alta, massa baixa o de costat; portàtil sense suport; telèfon entre l'orella i l'espatlla.</td><td>Pantalla davant i a l'alçada correcta; suport per al portàtil; auriculars per al telèfon.</td></tr>
+        <tr><td><strong>Esquena</strong> (dorsàlgia, lumbàlgia)</td><td>Seure sense recolzar l'esquena; cadira no regulable; moltes hores sense aixecar-se.</td><td>Cadira regulada, suport lumbar, canvis de postura i pauses actives.</td></tr>
+        <tr><td><strong>Canell i mà</strong> (tendinitis, síndrome del túnel carpià)</td><td>Ús intensiu del ratolí i el teclat amb el canell doblegat; ratolí lluny del teclat.</td><td>Canells rectes, ratolí a prop, recolzar els avantbraços, dreceres de teclat, alternar tasques.</td></tr>
+        <tr><td><strong>Espatlla i colze</strong> (epicondilitis)</td><td>Braç estirat cap al ratolí; taula massa alta respecte a la cadira.</td><td>Colzes a prop del cos i a uns 90°; ajustar l'alçada de la cadira i, si cal, posar reposapeus.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Recorda la distinció del Mòdul 1: la síndrome del túnel carpià per moviments repetitius pot ser <strong>malaltia professional</strong> si es dona en les condicions del quadre del RD 1299/2006; un mal d'esquena puntual sense aquest reconeixement és un <strong>altre dany derivat del treball</strong>.</p>
+
+    <h3>Pauses i organització de la feina</h3>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 3 RD 488/1997</strong>: l'empresari ha d'organitzar l'activitat de manera que el treball diari amb pantalla s'alterni amb altres tasques o, quan no sigui possible, amb <strong>pauses</strong> o canvis d'activitat que redueixin la càrrega de treball davant la pantalla.</p>
+      <p>La norma no fixa una durada exacta. La <strong>guia tècnica de l'INSST</strong> recomana, orientativament, pauses d'uns <strong>10 a 15 minuts cada 60 a 90 minuts</strong> de treball continuat, i insisteix que són millors les pauses <strong>curtes i freqüents</strong> que les llargues i escasses. Les pauses concretes poden estar regulades al conveni col·lectiu: consulta el que s'aplica a la teva empresa.</p>
+    </div>
+    <p>Una pausa no és només "deixar de teclejar mentre es mira el mòbil": ha de permetre descansar la vista i canviar de postura. Aixecar-se a buscar aigua, fer uns estiraments de coll i espatlles o fer una trucada dempeus són bones pauses.</p>
+
+    <h3>Portàtils, doble pantalla i altres situacions habituals</h3>
+    <ul>
+      <li><strong>Portàtil fent servir de manera continuada</strong>: el portàtil uneix pantalla i teclat, i és impossible tenir-los tots dos a l'alçada correcta. Si s'utilitza de manera continuada en un lloc de treball, deixa d'estar exclòs del RD 488/1997 (art. 1.3) i cal adaptar-lo: <strong>teclat i ratolí externs</strong> i un <strong>suport</strong> que elevi la pantalla, o bé una pantalla externa.</li>
+      <li><strong>Doble pantalla</strong>: si en fas servir una molt més que l'altra, la principal va <strong>davant teu</strong> i la secundària al costat. Si les fas servir per igual, col·loca-les juntes, en forma de V obert, amb la unió davant del teu nas. Totes dues a la mateixa alçada, distància i brillantor.</li>
+      <li><strong>Taules regulables (seure-dempeus)</strong>: alternar postures és beneficiós, però estar dempeus moltes hores seguides també cansa. L'objectiu és el canvi, no substituir una postura estàtica per una altra.</li>
+      <li><strong>Teletreball</strong>: el lloc de casa també ha de complir aquests requisits; ho veurem a la unitat 3.4.</li>
+    </ul>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Un administrador de sistemes treballa amb el portàtil de l'empresa connectat a dues pantalles externes, però continua escrivint amb el teclat del portàtil, que queda arraconat a un costat. Resultat: gira el tronc cap a l'esquerra tot el dia i acaba amb dolor dorsal. Amb un teclat extern centrat davant la pantalla principal i el portàtil tancat o elevat com a tercera pantalla, el problema desapareix.</p>
+    </div>
+
+    <details class="drop">
+      <summary>🎬 Recursos per a l'aula</summary>
+      <ul>
+        <li>Projecta una foto d'un lloc de l'aula i que el grup trobi errors de col·locació abans de fer l'A16.</li>
+        <li>Demana als alumnes que es facin una foto de perfil al seu lloc i la comparin amb l'esquema de postura.</li>
+        <li>Un luxòmetre (o una app de mòbil, com a valor orientatiu) per mesurar la il·luminació de diferents taules.</li>
+      </ul>
+      <div class="res-links">
+        <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-8671" target="_blank" rel="noopener">RD 488/1997 (BOE)</a>
+        <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-8669" target="_blank" rel="noopener">RD 486/1997 (BOE)</a>
+        <a href="https://www.insst.es/" target="_blank" rel="noopener">INSST (guia tècnica de PVD)</a>
+        <a href="https://osha.europa.eu/ca" target="_blank" rel="noopener">EU-OSHA (TME)</a>
+      </div>
+    </details>
+
+    <div class="resum">
+      <div class="tit">Resum 3.1</div>
+      <ul>
+        <li>El RD 488/1997 protegeix qui fa servir la pantalla de manera habitual; segons la guia tècnica, més de 4 h diàries o 20 h setmanals.</li>
+        <li>Pantalla a ≥ 40 cm i amb la part superior a l'alçada dels ulls; teclat amb espai per recolzar-se; cadira regulable; peus recolzats; colzes i genolls a uns 90°.</li>
+        <li>Pantalla perpendicular a les finestres; uns 500 lux; sense reflexos.</li>
+        <li>Fatiga visual i TME són els danys més habituals: es prevenen amb un lloc ben condicionat, pauses curtes i freqüents (art. 3) i vigilància de la salut (art. 4).</li>
+        <li>Un portàtil fet servir de manera continuada necessita teclat, ratolí i suport o pantalla externs.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- A16 -->
+  <div class="activity">
+    <span class="badge">A16</span>
+    <div class="body">
+      <h4>Autoavaluació del meu lloc de treball amb PVD</h4>
+      <p>Seu al teu lloc de l'aula (o pensa en el de la feina) i respon cada pregunta mirant-lo de debò, no de memòria. En acabar, prem «Avalua el meu lloc»: veuràs un resultat orientatiu i què pots millorar. Està inspirat en la llista de comprovació de la guia tècnica de l'INSST; si vols fer l'avaluació completa, fes servir la versió oficial.</p>
+      <div class="meta">
+        <span class="pill mat">Individual</span>
+        <span class="pill mat">Autoavaluable</span>
+        <span class="pill mat">PCs de l'aula</span>
+        <button class="quiz-btn" data-toggle="a16Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a16Box" class="quiz" hidden data-kind="autoeval">
+        <form>
+          <p class="aq-group">Pantalla</p>
+          <div class="aq" data-area="Pantalla" data-tip="Puja o baixa la pantalla (o posa-hi un suport) fins que la part superior quedi a l'alçada dels ulls o una mica per sota.">
+            <span>1. La part superior de la pantalla queda a l'alçada dels ulls o una mica per sota.</span>
+            <span class="opts"><label><input type="radio" name="p1" value="si"> Sí</label><label><input type="radio" name="p1" value="no"> No</label></span>
+          </div>
+          <div class="aq" data-area="Pantalla" data-tip="Allunya la pantalla fins a un mínim de 40 cm (un braç estirat). Si llavors no llegeixes bé, augmenta la mida de la lletra, no t'hi acostis.">
+            <span>2. La pantalla és a 40 cm o més dels ulls (aproximadament, un braç estirat).</span>
+            <span class="opts"><label><input type="radio" name="p2" value="si"> Sí</label><label><input type="radio" name="p2" value="no"> No</label></span>
+          </div>
+          <div class="aq" data-area="Pantalla" data-tip="Ajusta la brillantor i el contrast a la llum de la sala. Si la imatge parpelleja o no és estable, comunica-ho perquè revisin l'equip.">
+            <span>3. La imatge és estable i pots ajustar fàcilment la brillantor i el contrast.</span>
+            <span class="opts"><label><input type="radio" name="p3" value="si"> Sí</label><label><input type="radio" name="p3" value="no"> No</label></span>
+          </div>
+          <div class="aq" data-area="Pantalla" data-tip="Inclina o gira la pantalla, baixa la persiana o canvia la posició de la taula per eliminar reflexos i enlluernaments.">
+            <span>4. A la pantalla no hi veus reflexos de finestres ni de llums.</span>
+            <span class="opts"><label><input type="radio" name="p4" value="si"> Sí</label><label><input type="radio" name="p4" value="no"> No</label></span>
+          </div>
+
+          <p class="aq-group">Teclat i ratolí</p>
+          <div class="aq" data-area="Teclat" data-tip="Separa el teclat de la vora de la taula uns 10 cm perquè puguis recolzar-hi els avantbraços.">
+            <span>5. Tens espai davant del teclat per recolzar-hi els avantbraços o les mans.</span>
+            <span class="opts"><label><input type="radio" name="p5" value="si"> Sí</label><label><input type="radio" name="p5" value="no"> No</label></span>
+          </div>
+          <div class="aq" data-area="Ratolí" data-tip="Acosta el ratolí al teclat i a la mateixa alçada, de manera que el braç quedi a prop del cos i el canell recte.">
+            <span>6. El ratolí és a prop del teclat, al mateix nivell, i el canell et queda recte.</span>
+            <span class="opts"><label><input type="radio" name="p6" value="si"> Sí</label><label><input type="radio" name="p6" value="no"> No</label></span>
+          </div>
+
+          <p class="aq-group">Taula i cadira</p>
+          <div class="aq" data-area="Cadira" data-tip="Demana una cadira amb seient regulable en alçada i respatller regulable en alçada i inclinació (annex RD 488/1997). És un requisit mínim, no un luxe.">
+            <span>7. La cadira té alçada regulable i el respatller es pot ajustar en alçada i inclinació.</span>
+            <span class="opts"><label><input type="radio" name="p7" value="si"> Sí</label><label><input type="radio" name="p7" value="no"> No</label></span>
+          </div>
+          <div class="aq" data-area="Postura" data-tip="Regula la cadira perquè els colzes quedin a l'alçada de la taula; si llavors els peus no arriben a terra, demana un reposapeus.">
+            <span>8. Assegut, tens els peus plans a terra (o en un reposapeus) i els genolls a uns 90°.</span>
+            <span class="opts"><label><input type="radio" name="p8" value="si"> Sí</label><label><input type="radio" name="p8" value="no"> No</label></span>
+          </div>
+          <div class="aq" data-area="Taula" data-tip="Retira caixes, CPU o cables de sota la taula: has de poder moure les cames lliurement.">
+            <span>9. Sota la taula hi ha espai lliure per moure les cames.</span>
+            <span class="opts"><label><input type="radio" name="p9" value="si"> Sí</label><label><input type="radio" name="p9" value="no"> No</label></span>
+          </div>
+          <div class="aq" data-area="Taula" data-tip="Endreça la taula perquè hi càpiguen bé pantalla, teclat i documents. Si la superfície és brillant i fa reflexos, comunica-ho.">
+            <span>10. La taula és mat i té prou espai per a la pantalla, el teclat i els documents.</span>
+            <span class="opts"><label><input type="radio" name="p10" value="si"> Sí</label><label><input type="radio" name="p10" value="no"> No</label></span>
+          </div>
+
+          <p class="aq-group">Entorn</p>
+          <div class="aq" data-area="Il·luminació" data-tip="Col·loca la pantalla perpendicular a les finestres: ni davant (enlluerna) ni d'esquena (reflexos).">
+            <span>11. La pantalla queda perpendicular a les finestres (no les tens ni davant ni d'esquena).</span>
+            <span class="opts"><label><input type="radio" name="p11" value="si"> Sí</label><label><input type="radio" name="p11" value="no"> No</label></span>
+          </div>
+          <div class="aq" data-area="Ambient" data-tip="Comunica al responsable les molèsties de temperatura o corrents d'aire. Evita tenir una sortida d'aire condicionat apuntant-te a la cara.">
+            <span>12. La temperatura és confortable i no tens corrents d'aire molestos a la cara.</span>
+            <span class="opts"><label><input type="radio" name="p12" value="si"> Sí</label><label><input type="radio" name="p12" value="no"> No</label></span>
+          </div>
+          <div class="aq" data-area="Soroll" data-tip="Si el soroll et dificulta concentrar-te, proposa espais de concentració, normes d'ús dels telèfons o auriculars amb cancel·lació per a feines que ho requereixin.">
+            <span>13. El soroll de l'entorn no et dificulta la concentració.</span>
+            <span class="opts"><label><input type="radio" name="p13" value="si"> Sí</label><label><input type="radio" name="p13" value="no"> No</label></span>
+          </div>
+
+          <p class="aq-group">Organització i salut</p>
+          <div class="aq" data-area="Pauses" data-tip="Fes pauses curtes i freqüents (orientativament, 10–15 min cada 60–90 min) o alterna la pantalla amb altres tasques (art. 3 RD 488/1997).">
+            <span>14. Alternes la feina amb pantalla amb altres tasques o fas pauses curtes de manera regular.</span>
+            <span class="opts"><label><input type="radio" name="p14" value="si"> Sí</label><label><input type="radio" name="p14" value="no"> No</label></span>
+          </div>
+          <div class="aq" data-area="Vigilància de la salut" data-tip="Tens dret a una vigilància de la salut que inclogui la vista (art. 4 RD 488/1997). Pregunta-ho al responsable de PRL o al delegat de prevenció.">
+            <span>15. T'han ofert la vigilància de la salut, incloent-hi la revisió de la vista.</span>
+            <span class="opts"><label><input type="radio" name="p15" value="si"> Sí</label><label><input type="radio" name="p15" value="no"> No</label></span>
+          </div>
+          <div class="aq" data-area="Portàtil" data-tip="Si treballes amb el portàtil de manera continuada, fes servir teclat i ratolí externs i un suport que elevi la pantalla, o connecta'l a una pantalla externa.">
+            <span>16. Si fas servir el portàtil moltes hores, tens teclat i ratolí externs i suport o pantalla externa.</span>
+            <span class="opts"><label><input type="radio" name="p16" value="si"> Sí</label><label><input type="radio" name="p16" value="no"> No</label><label><input type="radio" name="p16" value="na"> No hi aplica</label></span>
+          </div>
+        </form>
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn primary do-check" type="button">Avalua el meu lloc</button>
+          <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+        </div>
+        <div class="tool-out" hidden></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNITAT 3.2 -->
+  <section id="u2">
+    <span class="unit-no">3.2</span>
+    <h2>Muntatge, manteniment d'equips i CPD</h2>
+    <p class="lead">Obrir una torre, canviar una font, muntar un rack o passar cablejat pel sostre: són tasques que fan cada dia tècnics de microinformàtica, de sistemes i de xarxes. Aquí apareixen riscos de seguretat "clàssics" (electricitat, talls, càrregues, caigudes) i les condicions particulars d'un centre de processament de dades.</p>
+
+    <h3>Riscos elèctrics i treballs sense tensió</h3>
+    <p>Un ordinador o un servidor funcionen a baixa tensió a dins, però s'alimenten de la xarxa de 230 V. A més, hi ha elements que <strong>guarden energia encara que estiguin desendollats</strong>: els condensadors de la font d'alimentació i les bateries dels SAI. El contacte elèctric pot causar des d'una sacsejada fins a cremades, aturada cardíaca i caigudes provocades per l'ensurt.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 614/2001</strong>, sobre protecció de la salut i la seguretat dels treballadors davant el risc elèctric.</p>
+      <p><strong>Art. 4</strong>: com a regla general, tot treball en una instal·lació elèctrica, o a prop d'ella, que comporti un risc elèctric s'ha de fer <strong>sense tensió</strong>. Les excepcions (treballs en tensió) estan molt limitades i només les poden fer treballadors <strong>qualificats</strong> seguint un procediment.</p>
+      <p><strong>Annex II</strong>: descriu com s'ha de deixar sense tensió una instal·lació, el procediment conegut com les <strong>"cinc regles d'or"</strong>. Les ha d'aplicar un treballador <strong>autoritzat</strong> (definicions a l'<strong>art. 2</strong>).</p>
+    </div>
+
+    <div class="scheme">
+      <div class="tit">Les cinc regles d'or per treballar sense tensió (annex II RD 614/2001)</div>
+      <div class="flow">
+        <div class="step"><b>1. Desconnectar</b>Obrir tots els circuits que alimenten la zona de treball.</div><span class="arrow">→</span>
+        <div class="step"><b>2. Bloquejar</b>Impedir que algú torni a connectar (candau, etiqueta, retirar el fusible).</div><span class="arrow">→</span>
+        <div class="step"><b>3. Verificar</b>Comprovar amb un aparell adequat que no hi ha tensió.</div><span class="arrow">→</span>
+        <div class="step"><b>4. Posar a terra i en curtcircuit</b>Per descarregar i protegir si apareix tensió accidentalment.</div><span class="arrow">→</span>
+        <div class="step"><b>5. Senyalitzar i protegir</b>Delimitar la zona i protegir dels elements propers que segueixen en tensió.</div>
+      </div>
+      <p class="loop-note">A l'hora de reposar la tensió es fa el camí invers, comprovant abans que tothom ha acabat i ha sortit de la zona.</p>
+    </div>
+
+    <p>Per a la feina diària d'un tècnic de microinformàtica, això es tradueix en uns hàbits molt concrets:</p>
+    <ul>
+      <li><strong>Desendollar sempre</strong> l'equip abans d'obrir-lo, no només apagar-lo. Els servidors amb <strong>doble font</strong> tenen dos cables: cal treure'ls tots dos.</li>
+      <li>Després de desendollar, prémer el botó d'engegada uns segons per descarregar l'energia residual de la placa.</li>
+      <li><strong>No obrir mai la font d'alimentació</strong> ni el monitor: els condensadors poden mantenir una càrrega perillosa durant força temps. Una font avariada es canvia sencera.</li>
+      <li>Tractar els <strong>SAI</strong> com una font de tensió: encara que el tallin de la xarxa, les bateries continuen donant 230 V a la sortida.</li>
+      <li>No manipular quadres elèctrics, regletes del rack (PDU) ni línies d'alimentació si no ets treballador autoritzat. Si cal, ho fa un electricista.</li>
+      <li>Revisar cables i regletes: no fer servir cables pelats ni encadenar regletes.</li>
+    </ul>
+
+    <h3>Descàrregues electrostàtiques (ESD)</h3>
+    <p>El cos acumula electricitat estàtica en caminar sobre moqueta o fregar la roba. Quan toquem un component, es descarrega. Per a la persona, normalment és només una petita sacsejada, tot i que l'ensurt pot fer que ens donem un cop o deixem caure una peça. Per al <strong>component</strong>, en canvi, pot ser fatal: una descàrrega que ni notem pot fer malbé un mòdul de memòria o una placa.</p>
+    <ul>
+      <li><strong>Polsera antiestàtica</strong> connectada a un punt de terra o al xassís de l'equip (desendollat). Incorpora una resistència d'alt valor que fa que la descàrrega sigui lenta i segura.</li>
+      <li><strong>Estora antiestàtica</strong> sobre la taula de treball i bosses antiestàtiques per guardar components.</li>
+      <li>Agafar els components per les vores, sense tocar contactes ni xips.</li>
+    </ul>
+
+    <div class="alert">
+      <div class="tit">⚠️ Atenció: la polsera antiestàtica no és un EPI contra el risc elèctric</div>
+      <p>La polsera protegeix el <strong>component</strong> de l'electricitat estàtica, <strong>no protegeix la persona</strong> d'un contacte amb 230 V. Al contrari: et connecta a terra, i si toques alguna cosa en tensió, el corrent pot passar per tu. Per això la polsera s'utilitza <strong>només amb l'equip desendollat</strong>. Contra el risc elèctric, la mesura és treballar sense tensió; els guants dielèctrics són per a electricistes que treballen en instal·lacions, no per obrir un PC.</p>
+    </div>
+
+    <h3>Talls amb xassissos i petites lesions</h3>
+    <p>Les xapes de les caixes, les tapes de les ranures, els dissipadors i els rails dels servidors tenen cantells afilats. Els talls a les mans i als dits són dels accidents més freqüents en el manteniment d'equips. També hi ha petites lesions per pinçament en tancar tapes o en encaixar servidors als rails.</p>
+    <ul>
+      <li>Fer servir l'<strong>eina adequada</strong> (tornavís de la mida correcta, alicates de punta), no forçar peces ni fer palanca amb objectes improvisats.</li>
+      <li>Treballar en una superfície estable, neta i ben il·luminada.</li>
+      <li><strong>Guants de protecció contra riscos mecànics</strong> (marcats segons la norma UNE-EN 388) quan es manipulen xapes o rails. Si s'han de tocar components, cal que siguin compatibles amb ESD.</li>
+      <li><strong>Ulleres de protecció</strong> si es fa servir aire comprimit per treure la pols: les partícules poden saltar als ulls. Fer-ho en un lloc ventilat i lluny de la cara.</li>
+    </ul>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Un tècnic canvia un disc d'un servidor que encara és calent i amb el ventilador girant. Treu la tapa d'una revolada i es fa un tall al palmell amb la vora de la xapa. Accident de treball. Amb l'equip apagat i desendollat, uns minuts d'espera i guants contra talls, s'hauria evitat. Que l'accident sembli "petit" no vol dir que no s'hagi de comunicar: és el tipus d'incident que alimenta la base de la piràmide de Bird.</p>
+    </div>
+
+    <h3>Manipulació de servidors i racks</h3>
+    <p>Un servidor de 2U pot pesar entre 15 i 30 kg; un sistema d'emmagatzematge o un SAI, bastant més. Són càrregues voluminoses, que s'han d'aixecar fins a una alçada concreta i encaixar als rails, sovint en un passadís estret.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 487/1997</strong>, sobre manipulació manual de càrregues. L'<strong>art. 3</strong> obliga l'empresari a evitar la manipulació manual, sobretot amb <strong>equips mecànics</strong>, i, si no és possible, a reduir-ne el risc. L'annex recull els factors que cal tenir en compte (pes, volum, postura, espai, freqüència...).</p>
+      <p>La <strong>guia tècnica de l'INSST</strong> fixa com a pes màxim recomanat <strong>25 kg</strong> en condicions ideals. Si es vol protegir la major part de la població (dones, joves o persones grans), el límit baixa a <strong>15 kg</strong>. En condicions especials, per a treballadors sans i entrenats i de manera ocasional, es pot arribar a 40 kg.</p>
+    </div>
+
+    <p>Per a un rack, la manipulació va lligada a l'<strong>estabilitat</strong>: un rack mal carregat pot bolcar i atrapar una persona.</p>
+
+    <div class="scheme">
+      <div class="tit">Com es carrega un rack</div>
+      <div class="rack" aria-label="Esquema d'un rack amb els equips més lleugers a dalt i els més pesats a baix">
+        <div style="background:#5b8f80">Patch panels i switchs <span>lleugers · a dalt</span></div>
+        <div style="background:#3f7d6b">Servidors 1U / 2U <span>pes mitjà</span></div>
+        <div style="background:#2c6a59">Servidors grans i emmagatzematge <span>pesats</span></div>
+        <div style="background:#16483b">SAI i bateries <span>el més pesat · a baix</span></div>
+      </div>
+      <div class="rack-legs"><span>▲ estabilitzador</span><span>ancorat / anivellat ▲</span></div>
+      <ul style="margin:12px 0 0">
+        <li>Abans de carregar: rack <strong>anivellat</strong> i <strong>ancorat</strong> al terra o amb els <strong>estabilitzadors</strong> (potes antibolcada) desplegats.</li>
+        <li>Es carrega <strong>de baix a dalt</strong> i es descarrega <strong>de dalt a baix</strong>.</li>
+        <li><strong>Només un equip extret alhora</strong> sobre els rails: amb dos o més fora, el centre de gravetat avança i el rack pot bolcar.</li>
+        <li>Per sobre de 25 kg o en posicions altes: <strong>entre dues persones</strong> o amb un <strong>elevador de servidors</strong>. Sense treure el pes del cos ni girar el tronc carregat.</li>
+        <li>Treure abans els components que es puguin desmuntar (fonts, discos) per reduir el pes.</li>
+      </ul>
+    </div>
+
+    <h3>Escales, falsos sostres i terra tècnic</h3>
+    <p>Per passar cablejat estructurat o instal·lar punts d'accés Wi-Fi cal treballar en alçada. Les caigudes des d'escales de mà són accidents freqüents i poden ser greus encara que l'alçada sigui petita.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 1215/1997</strong>, sobre equips de treball, <strong>annex II, apartat 4.2</strong> (escales de mà, afegit pel RD 2177/2004). Entre altres coses, estableix:</p>
+      <ul>
+        <li>Les escales simples s'han de col·locar formant un angle aproximat de <strong>75°</strong> amb l'horitzontal i, si s'utilitzen per accedir a un lloc elevat, han de sobresortir com a mínim <strong>1 metre</strong>.</li>
+        <li>Les escales de tisora han de tenir un element que n'impedeixi l'obertura.</li>
+        <li>Pujar, baixar i treballar sempre <strong>de cara</strong> a l'escala.</li>
+        <li>Els treballs a més de <strong>3,5 m</strong> d'alçada que requereixin moviments o esforços perillosos per a l'estabilitat només es poden fer amb un EPI anticaigudes o altres mesures alternatives.</li>
+        <li>Prohibit transportar càrregues que comprometin la seguretat, que l'escala la facin servir dues persones alhora i fer servir escales improvisades.</li>
+      </ul>
+    </div>
+
+    <ul>
+      <li><strong>Mai enfilar-se a cadires</strong>, i encara menys a cadires amb rodes, ni a taules o caixes.</li>
+      <li><strong>Mai trepitjar ni recolzar-se a les plaques d'un fals sostre</strong>: no estan pensades per aguantar pes. Si cal accedir a la cambra, es fa des de l'escala o amb una plataforma adequada.</li>
+      <li>En edificis antics, els falsos sostres i les canalitzacions poden contenir <strong>amiant</strong>. Si trobes plaques de fibrociment o materials sospitosos, atura't i avisa: aquests treballs estan regulats pel RD 396/2006 i només els poden fer empreses especialitzades.</li>
+      <li>Al CPD, les plaques de <strong>terra tècnic</strong> aixecades deixen un forat on es pot caure o ensopegar. S'aixequen amb la ventosa, s'aixequen només les imprescindibles, es senyalitza la zona i es tornen a col·locar en acabar.</li>
+    </ul>
+
+    <h3>Soroll i calor al CPD</h3>
+    <p>Centenars de ventiladors i els equips de climatització generen un soroll continu. A més, els CPD s'organitzen en <strong>passadissos freds</strong> (on entra l'aire fred als equips) i <strong>passadissos calents</strong> (on surt l'aire calent), i en aquests últims la temperatura pot ser molt alta.</p>
+
+    <div class="table-scroll">
+    <table>
+      <caption>Valors de soroll del RD 286/2006 (art. 5) i què cal fer (art. 7)</caption>
+      <thead><tr><th>Valor</th><th>Exposició diària (LAeq,d)</th><th>Pic</th><th>Què implica</th></tr></thead>
+      <tbody>
+        <tr><td>Inferior d'acció</td><td>80 dB(A)</td><td>135 dB(C)</td><td>L'empresa ha d'informar i formar, posar protectors auditius a disposició i oferir control de l'audició.</td></tr>
+        <tr><td>Superior d'acció</td><td>85 dB(A)</td><td>137 dB(C)</td><td>Programa de mesures per reduir el soroll, senyalització i <strong>ús obligatori</strong> de protectors auditius.</td></tr>
+        <tr><td>Límit</td><td>87 dB(A)</td><td>140 dB(C)</td><td>No es pot superar mai, tenint en compte l'atenuació dels protectors.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>El nivell de soroll d'un CPD depèn molt de la instal·lació: pot anar des de valors de fons d'una sala de màquines fins a valors propers o superiors a 80 dB(A) en alguns passadissos. Només una <strong>mesura</strong> feta pel servei de prevenció permet saber-ho. Encara que no s'arribi als valors d'acció, el soroll continu dificulta la comunicació (per exemple, entendre una alarma o una instrucció) i cansa.</p>
+    <ul>
+      <li>Limitar el temps de permanència a la sala; fer la feina de despatx (configuració, documentació) fora del CPD sempre que es pugui.</li>
+      <li>Fer servir protectors auditius quan pertoqui (taps o orelleres) i comprovar que permeten sentir les alarmes.</li>
+      <li><strong>Calor</strong>: el passadís calent no és un lloc per treballar-hi estona. Limitar el temps, fer pauses fora de la sala, beure aigua i vigilar símptomes (mareig, mal de cap, cansament excessiu). El RD 486/1997 (annex III) fixa les temperatures dels locals de treball, però una intervenció puntual al passadís calent s'ha de planificar com a exposició a calor.</li>
+    </ul>
+
+    <h3>Extinció d'incendis per gas i risc d'asfíxia</h3>
+    <p>Als CPD no s'hi pot llençar aigua. Per això sovint tenen sistemes automàtics d'<strong>extinció per gas</strong>, que inunden la sala en pocs segons. Són molt eficaços per protegir els equips, però comporten un risc per a les persones que hi hagi a dins.</p>
+
+    <div class="table-scroll">
+    <table>
+      <caption>Tipus d'agents d'extinció per gas habituals</caption>
+      <thead><tr><th>Tipus</th><th>Com apaga el foc</th><th>Risc per a les persones</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Gasos inerts</strong> (nitrogen, argó o mescles com l'IG-541 o l'IG-55)</td><td>Redueixen l'oxigen de la sala fins a un nivell en què el foc no es pot mantenir.</td><td>L'atmosfera queda amb poc oxigen (aproximadament entre el 10 i el 15 %, segons el disseny): es pot suportar un temps breu, però és perillosa i cal evacuar.</td></tr>
+        <tr><td><strong>Agents químics halocarbonats</strong> (p. ex. HFC-227ea)</td><td>Absorbeixen calor i interrompen la reacció química del foc.</td><td>Dissenyats per a espais ocupats a la concentració d'ús, però en contacte amb el foc es poden descompondre en productes tòxics i irritants.</td></tr>
+        <tr><td><strong>Diòxid de carboni (CO<sub>2</sub>)</strong></td><td>Desplaça l'oxigen.</td><td><strong>Letal</strong> a la concentració d'extinció. No s'hauria de fer servir en espais on hi treballen persones.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 513/2017</strong>, Reglament d'instal·lacions de protecció contra incendis (RIPCI): regula el disseny, la instal·lació i el manteniment d'aquests sistemes (que es fan seguint normes tècniques UNE). <strong>RD 485/1997</strong>: senyalització de seguretat, també dels senyals acústics i lluminosos d'alarma. <strong>Art. 20 LPRL</strong> i <strong>RD 393/2007</strong>: les mesures d'emergència del centre han d'incloure aquest risc.</p>
+    </div>
+
+    <div class="scheme">
+      <div class="tit">Què has de fer si salta l'alarma d'extinció per gas</div>
+      <div class="flow">
+        <div class="step"><b>1. Alarma de pre-descàrrega</b>Senyal acústic i lluminós: hi ha uns segons de retard abans que surti el gas.</div><span class="arrow">→</span>
+        <div class="step"><b>2. Sortir immediatament</b>Deixar el que estiguis fent, sense acabar res, i tancar la porta en sortir.</div><span class="arrow">→</span>
+        <div class="step"><b>3. Avisar</b>Comunicar-ho segons el pla d'emergència. Si saps que és una falsa alarma i hi ha polsador d'aturada, segueix el protocol del centre.</div><span class="arrow">→</span>
+        <div class="step"><b>4. No tornar a entrar</b>Fins que la sala s'hagi ventilat i ho autoritzi el responsable d'emergències.</div>
+      </div>
+    </div>
+
+    <ul>
+      <li>Abans d'entrar a un CPD amb extinció per gas, has de saber <strong>com sona l'alarma</strong>, on són les <strong>sortides</strong> i, si n'hi ha, on és el <strong>polsador d'aturada</strong>.</li>
+      <li>Mai bloquejar o desactivar el sistema "perquè no salti mentre treballem", ni treballar amb la porta tancada sense que algú de fora sàpiga que hi ets.</li>
+      <li>Si treballes al CPD d'un client, l'empresa titular t'ha d'informar dels riscos i de les mesures d'emergència del centre: és la <strong>coordinació d'activitats empresarials</strong> (art. 24 LPRL i <strong>art. 7 RD 171/2004</strong>).</li>
+      <li>Mai entrar a buscar un company dins d'una sala on s'ha descarregat el gas: hi ha risc d'asfíxia per a tu també. Primer avisar el 112 i els equips d'emergència (protegir, avisar, socórrer).</li>
+    </ul>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Durant una migració nocturna salta l'alarma de pre-descàrrega del CPD. Una tècnica pensa: "Segur que és el detector que s'ha disparat per la pols, acabo de connectar aquest cable i surto." Aquests segons poden ser els que la deixin dins quan surti el gas. La resposta correcta no depèn de si és una falsa alarma: <strong>es surt sempre</strong>, i després es comprova què ha passat.</p>
+    </div>
+
+    <details class="drop">
+      <summary>🎬 Recursos per a l'aula</summary>
+      <ul>
+        <li>Mostra fotos d'un rack ben carregat i d'un de mal carregat (equips pesats a dalt, cablejat penjant) i que el grup identifiqui els riscos.</li>
+        <li>Si l'institut o una empresa propera té CPD amb extinció per gas, mostra'n el senyal d'alarma i el polsador.</li>
+        <li>Porta una polsera antiestàtica i una estora per a la pràctica de l'A8.</li>
+      </ul>
+      <div class="res-links">
+        <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2001-11881" target="_blank" rel="noopener">RD 614/2001 (BOE)</a>
+        <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-8670" target="_blank" rel="noopener">RD 487/1997 (BOE)</a>
+        <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-17824" target="_blank" rel="noopener">RD 1215/1997 (BOE)</a>
+        <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2006-4414" target="_blank" rel="noopener">RD 286/2006 (BOE)</a>
+        <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2017-6606" target="_blank" rel="noopener">RD 513/2017 (BOE)</a>
+        <a href="https://www.insst.es/" target="_blank" rel="noopener">INSST (guies tècniques)</a>
+      </div>
+    </details>
+
+    <div class="resum">
+      <div class="tit">Resum 3.2</div>
+      <ul>
+        <li>Es treballa sempre sense tensió (art. 4 RD 614/2001): desendollar, no obrir mai fonts ni monitors, i tractar el SAI com una font de tensió. Les cinc regles d'or només les aplica personal autoritzat.</li>
+        <li>La polsera antiestàtica protegeix el component, no la persona, i només s'usa amb l'equip desendollat.</li>
+        <li>Talls: eina adequada, guants contra riscos mecànics i ulleres amb aire comprimit.</li>
+        <li>Càrregues (RD 487/1997): 25 kg com a referència; per sobre, entre dues persones o amb elevador. Rack ancorat, carregat de baix a dalt i amb un sol equip extret alhora.</li>
+        <li>Escales de mà (RD 1215/1997, annex II 4.2): 75°, de cara, una persona; mai cadires ni plaques de fals sostre.</li>
+        <li>CPD: soroll (valors d'acció a 80 i 85 dB(A), RD 286/2006) i calor als passadissos calents. Amb l'alarma d'extinció per gas, es surt sempre i no es torna a entrar fins que s'autoritzi.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- A17 -->
+  <div class="activity">
+    <span class="badge">A17</span>
+    <div class="body">
+      <h4>Cas pràctic: la instal·lació d'un rack al CPD d'un client</h4>
+      <p>Llegeix el cas i, a cada situació, tria la decisió correcta. Després prem «Corregeix» per veure la justificació. Les preguntes marcades com a <span class="crit">CRÍTICA</span> són les que, en un cas real, posarien en perill una persona.</p>
+      <div class="meta">
+        <span class="pill mat">Individual o en parelles</span>
+        <span class="pill mat">Autoavaluable</span>
+        <span class="pill mat">Posada en comú</span>
+        <button class="quiz-btn" data-toggle="a17Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a17Box" class="quiz" hidden data-kind="test">
+        <div class="example" style="margin-bottom:14px">
+          <div class="tit">El cas</div>
+          <p>L'empresa DataNet ha d'instal·lar al CPD d'un client un rack de 42U buit, quatre servidors de 2U de 28 kg cadascun i un SAI de 45 kg. Hi van en Pau, tècnic de sistemes amb experiència, i la Laia, que fa les pràctiques a l'empresa. El CPD té terra tècnic, sistema d'extinció per gas inert i un passadís calent on el termòmetre marca 38 °C. També cal passar uns cables de xarxa pel fals sostre del passadís que hi ha just davant de la sala.</p>
+        </div>
+        <form>
+          <div class="q" data-correct="b" data-just="Quan es treballa al centre d'una altra empresa, el titular ha d'informar dels riscos del centre i de les mesures d'emergència (art. 24 LPRL i art. 7 RD 171/2004). En un CPD amb extinció per gas, saber com és l'alarma i on són les sortides és imprescindible abans de començar.">
+            <p class="q-text">1. En arribar al CPD del client, què ha de fer primer en Pau?</p>
+            <label><input type="radio" name="r1" value="a"> Començar a desembalar per no perdre temps; les normes ja les sap d'altres CPD.</label>
+            <label><input type="radio" name="r1" value="b"> Demanar al responsable del client la informació sobre els riscos del CPD, el pla d'emergència i com funciona el sistema d'extinció per gas.</label>
+            <label><input type="radio" name="r1" value="c"> Desactivar el sistema d'extinció mentre treballen, per si de cas salta per la pols.</label>
+            <label><input type="radio" name="r1" value="d"> Trucar al servei de prevenció de DataNet perquè vingui a revisar el CPD.</label>
+          </div>
+          <div class="q" data-correct="c" data-just="Abans de carregar res, el rack ha d'estar anivellat i ancorat al terra o amb els estabilitzadors desplegats. Un rack buit és lleuger i, quan s'hi comencen a encaixar equips o a estirar-ne un sobre els rails, és quan pot bolcar.">
+            <p class="q-text">2. El rack és buit i encara no està fixat. Abans de començar a muntar-hi equips...</p>
+            <label><input type="radio" name="r2" value="a"> No cal fer res: un rack buit no pot bolcar.</label>
+            <label><input type="radio" name="r2" value="b"> Recolzar-lo a la paret perquè no es mogui.</label>
+            <label><input type="radio" name="r2" value="c"> Anivellar-lo i ancorar-lo al terra o desplegar els estabilitzadors antibolcada.</label>
+            <label><input type="radio" name="r2" value="d"> Posar-hi primer els servidors i, quan estigui ple, ancorar-lo.</label>
+          </div>
+          <div class="q" data-correct="a" data-just="Els equips més pesats van a la part de baix per mantenir el centre de gravetat baix i el rack estable. El rack es carrega de baix a dalt.">
+            <p class="q-text">3. On s'ha de col·locar el SAI de 45 kg?</p>
+            <label><input type="radio" name="r3" value="a"> A la part més baixa del rack.</label>
+            <label><input type="radio" name="r3" value="b"> A la part de dalt, perquè quedi lluny de la humitat del terra.</label>
+            <label><input type="radio" name="r3" value="c"> Al mig, per repartir el pes.</label>
+            <label><input type="radio" name="r3" value="d"> On hi hagi lloc, no té importància.</label>
+          </div>
+          <div class="q" data-correct="d" data-just="Cada servidor pesa 28 kg, per sobre dels 25 kg de referència de la guia tècnica del RD 487/1997, i s'ha d'aixecar fins a una alçada concreta. L'art. 3 del RD 487/1997 prioritza els mitjans mecànics; si no n'hi ha, entre dues persones. Treure prèviament fonts i discos també redueix el pes.">
+            <p class="q-text">4. Com han d'encaixar els servidors de 28 kg als rails?</p>
+            <label><input type="radio" name="r4" value="a"> En Pau sol, que té experiència, flexionant bé les cames.</label>
+            <label><input type="radio" name="r4" value="b"> La Laia sola, perquè així aprèn.</label>
+            <label><input type="radio" name="r4" value="c"> En Pau sol, però amb una faixa lumbar.</label>
+            <label><input type="radio" name="r4" value="d"> Amb un elevador de servidors o, si no n'hi ha, entre els dos, i havent tret abans les peces que es puguin desmuntar.</label>
+          </div>
+          <div class="q" data-correct="b" data-just="Amb més d'un equip extret sobre els rails, el centre de gravetat avança i el rack pot bolcar. La norma és clara: només un equip fora alhora.">
+            <p class="q-text">5. La Laia vol estirar dos servidors alhora sobre els rails per comparar com estan cablejats. Què li ha de dir en Pau?</p>
+            <label><input type="radio" name="r5" value="a"> Que d'acord, ja que el rack està ancorat.</label>
+            <label><input type="radio" name="r5" value="b"> Que no: només es treu un equip alhora sobre els rails, per evitar que el rack bolqui.</label>
+            <label><input type="radio" name="r5" value="c"> Que d'acord, però que hi posi un genoll al davant per aguantar-lo.</label>
+            <label><input type="radio" name="r5" value="d"> Que en tregui tres, així ho veurà més ràpid.</label>
+          </div>
+          <div class="q" data-correct="c" data-just="Connectar el SAI a la línia d'alimentació del quadre del CPD és un treball en una instal·lació elèctrica. L'ha de fer un treballador autoritzat o qualificat i, per regla general, sense tensió aplicant les cinc regles d'or (art. 4 i annex II RD 614/2001). La polsera antiestàtica no protegeix contra el risc elèctric.">
+            <p class="q-text">6. Cal connectar el SAI a una línia nova del quadre elèctric del CPD, que està en tensió. Què fan? <span class="crit">CRÍTICA</span></p>
+            <label><input type="radio" name="r6" value="a"> En Pau ho connecta amb compte, posant-se la polsera antiestàtica.</label>
+            <label><input type="radio" name="r6" value="b"> En Pau ho connecta ràpid sense tallar, perquè si tallen la tensió s'aturen els altres servidors del client.</label>
+            <label><input type="radio" name="r6" value="c"> Ho fa l'electricista autoritzat del client o de l'empresa, seguint el procediment de treball sense tensió.</label>
+            <label><input type="radio" name="r6" value="d"> Ho fa la Laia, mentre en Pau la vigila.</label>
+          </div>
+          <div class="q" data-correct="a" data-just="L'alarma de pre-descàrrega avisa que en pocs segons sortirà el gas. Es surt sempre, immediatament i sense acabar res, tancant la porta. No es torna a entrar fins que la sala s'hagi ventilat i ho autoritzi el responsable. Amagar-se sota el terra tècnic és un error greu: el gas també hi arriba.">
+            <p class="q-text">7. Mentre cargolen l'últim servidor, sona l'alarma de pre-descàrrega del sistema d'extinció per gas. Què fan? <span class="crit">CRÍTICA</span></p>
+            <label><input type="radio" name="r7" value="a"> Surten immediatament, tanquen la porta, avisen i no tornen a entrar fins que els autoritzin.</label>
+            <label><input type="radio" name="r7" value="b"> Acaben de cargolar el servidor, que només són uns segons, i surten.</label>
+            <label><input type="radio" name="r7" value="c"> Es queden dins, perquè segur que és una falsa alarma per la pols del desembalatge.</label>
+            <label><input type="radio" name="r7" value="d"> Aixequen una placa del terra tècnic i s'hi posen a sota, que és on hi ha més aire.</label>
+          </div>
+          <div class="q" data-correct="b" data-just="Les escales de mà han de ser adequades, de tisora amb element antiobertura si són d'aquest tipus, i s'han d'utilitzar de cara i per una sola persona (RD 1215/1997, annex II 4.2). Les cadires, i encara més les de rodes, no són mai un mitjà d'accés. I les plaques del fals sostre no aguanten pes.">
+            <p class="q-text">8. Per passar els cables pel fals sostre del passadís, en Pau vol pujar a la cadira de rodes del despatx del costat. Què és correcte?</p>
+            <label><input type="radio" name="r8" value="a"> Pot fer-ho si la Laia aguanta la cadira.</label>
+            <label><input type="radio" name="r8" value="b"> Ha de fer servir una escala de mà adequada (de tisora amb element antiobertura), de cara i sense recolzar-se a les plaques del fals sostre.</label>
+            <label><input type="radio" name="r8" value="c"> Pot recolzar-se a l'estructura del fals sostre per mantenir l'equilibri.</label>
+            <label><input type="radio" name="r8" value="d"> Pot fer-ho si bloqueja les rodes amb un llibre.</label>
+          </div>
+          <div class="q" data-correct="d" data-just="El passadís calent no és un lloc per estar-s'hi estona. Les mesures són organitzatives: fer dins només el que sigui imprescindible, limitar el temps, fer pauses fora, beure aigua i vigilar els símptomes de la calor.">
+            <p class="q-text">9. Han de connectar els cables al darrere dels servidors, al passadís calent (38 °C). Com ho organitzen?</p>
+            <label><input type="radio" name="r9" value="a"> Hi treballen d'una tirada fins que acabin, així surten abans.</label>
+            <label><input type="radio" name="r9" value="b"> Obren la porta del CPD perquè entri aire de fora.</label>
+            <label><input type="radio" name="r9" value="c"> No cal fer res especial: la calor no és un risc laboral.</label>
+            <label><input type="radio" name="r9" value="d"> Preparen el cablejat fora, hi entren el temps just, fan pauses fora del passadís i beuen aigua.</label>
+          </div>
+        </form>
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+          <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+        </div>
+        <p class="q-score" hidden></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- A8 -->
+  <div class="activity">
+    <span class="badge">A8</span>
+    <div class="body">
+      <h4>Taller: checklist de seguretat abans de manipular un servidor</h4>
+      <p>Abans d'obrir una caixa de servidor, cal fer una verificació de seguretat. Marca <strong>només</strong> les accions que faries, correctament, en cada fase. <strong>Compte</strong>: hi ha algunes accions incorrectes barrejades que no s'han de marcar. Després prem «Comprova la checklist».</p>
+      <p>Si a l'aula hi ha una caixa o un servidor, feu la pràctica real seguint aquesta checklist: un company llegeix els passos en veu alta i el formador observa i valida que es fan en l'ordre correcte.</p>
+      <div class="meta">
+        <span class="pill mat">En parelles</span>
+        <span class="pill mat">Autoavaluable + observació del formador</span>
+        <span class="pill mat">Caixa o servidor, polsera antiestàtica, guants</span>
+        <button class="quiz-btn" data-toggle="a8Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a8Box" class="quiz" hidden data-kind="checklist">
+        <form>
+          <p class="ck-phase">Abans de començar</p>
+          <div class="ck" data-ok="1" data-crit data-just="Correcte i imprescindible. Primer s'apaga l'equip de manera ordenada i després es talla l'alimentació.">
+            <label><input type="checkbox"><span class="ck-text">Apago el servidor des del sistema operatiu i després amb l'interruptor de la font.</span></label>
+          </div>
+          <div class="ck" data-ok="1" data-crit data-just="Correcte i imprescindible. Treballar sense tensió vol dir desendollar, no només apagar. Els servidors amb doble font tenen dos cables i cal treure'ls tots dos.">
+            <label><input type="checkbox"><span class="ck-text">Desendollo tots els cables d'alimentació, també el de la segona font si en té.</span></label>
+          </div>
+          <div class="ck" data-ok="0" data-crit data-just="Incorrecte. És un mite molt estès. Amb l'equip endollat hi ha tensió a la font i a la placa. Per descarregar l'estàtica es fa servir la polsera connectada a un punt de terra o al xassís de l'equip desendollat.">
+            <label><input type="checkbox"><span class="ck-text">Deixo el cable endollat perquè l'equip faci de presa de terra mentre treballo.</span></label>
+          </div>
+          <div class="ck" data-ok="1" data-just="Correcte. Amb l'equip desendollat, prémer el botó d'engegada uns segons ajuda a descarregar l'energia residual de la placa.">
+            <label><input type="checkbox"><span class="ck-text">Un cop desendollat, premo uns segons el botó d'engegada per descarregar l'energia residual.</span></label>
+          </div>
+          <div class="ck" data-ok="1" data-crit data-just="Correcte i imprescindible. Un SAI continua subministrant 230 V encara que no estigui connectat a la xarxa.">
+            <label><input type="checkbox"><span class="ck-text">Si el servidor està connectat a un SAI, comprovo que el SAI ja no l'alimenta.</span></label>
+          </div>
+          <div class="ck" data-ok="1" data-just="Correcte. Una superfície estable, neta i ben il·luminada redueix els talls, les caigudes de peces i les descàrregues electrostàtiques (amb estora antiestàtica si n'hi ha).">
+            <label><input type="checkbox"><span class="ck-text">Preparo una superfície estable, neta i ben il·luminada, amb estora antiestàtica si n'hi ha.</span></label>
+          </div>
+          <div class="ck" data-ok="1" data-just="Correcte. Si el servidor supera els 25 kg (guia tècnica del RD 487/1997) o és voluminós, s'ha de moure entre dues persones o amb ajuda mecànica.">
+            <label><input type="checkbox"><span class="ck-text">Valoro el pes: si supera els 25 kg o és voluminós, el moc entre dues persones o amb ajuda mecànica.</span></label>
+          </div>
+
+          <p class="ck-phase">Durant la manipulació</p>
+          <div class="ck" data-ok="1" data-just="Correcte. La polsera protegeix els components de les descàrregues electrostàtiques. Recorda que només s'utilitza amb l'equip desendollat i que no protegeix contra el risc elèctric.">
+            <label><input type="checkbox"><span class="ck-text">Em poso la polsera antiestàtica connectada a un punt de terra o al xassís de l'equip desendollat.</span></label>
+          </div>
+          <div class="ck" data-ok="1" data-just="Correcte. Les xapes i els rails tenen cantells afilats; els guants contra riscos mecànics (UNE-EN 388) eviten talls. Si cal tocar components, han de ser compatibles amb ESD.">
+            <label><input type="checkbox"><span class="ck-text">Faig servir guants contra talls quan manipulo xapes, tapes o rails.</span></label>
+          </div>
+          <div class="ck" data-ok="0" data-crit data-just="Incorrecte i perillós. Els condensadors de la font poden mantenir una càrrega perillosa encara que l'equip estigui desendollat. Una font no s'obre: si està avariada, es canvia sencera.">
+            <label><input type="checkbox"><span class="ck-text">Obro la font d'alimentació per netejar-ne la pols de dins.</span></label>
+          </div>
+          <div class="ck" data-ok="1" data-just="Correcte. L'eina de la mida adequada evita relliscades i talls. Forçar peces o fer palanca amb objectes improvisats és una causa habitual d'accidents.">
+            <label><input type="checkbox"><span class="ck-text">Faig servir l'eina adequada i no forço ni faig palanca amb objectes improvisats.</span></label>
+          </div>
+          <div class="ck" data-ok="0" data-just="Incorrecte. L'aire comprimit projecta pols i partícules. S'ha de fer servir amb ulleres de protecció, lluny de la cara i en un lloc ventilat.">
+            <label><input type="checkbox"><span class="ck-text">Bufo la pols amb aire comprimit a prop de la cara, sense ulleres, que és més ràpid.</span></label>
+          </div>
+          <div class="ck" data-ok="1" data-just="Correcte. Ulleres de protecció i ventilació són les mesures adequades quan es fa servir aire comprimit. Recorda llegir l'etiqueta de l'esprai (activitat A7): sovint és inflamable.">
+            <label><input type="checkbox"><span class="ck-text">Si faig servir aire comprimit, porto ulleres de protecció i ho faig en un lloc ventilat.</span></label>
+          </div>
+
+          <p class="ck-phase">En acabar</p>
+          <div class="ck" data-ok="1" data-just="Correcte. Un cargol o una eina oblidats dins poden provocar un curtcircuit en tornar a connectar.">
+            <label><input type="checkbox"><span class="ck-text">Comprovo que no queden eines ni cargols dins i tanco el xassís abans de connectar res.</span></label>
+          </div>
+          <div class="ck" data-ok="1" data-just="Correcte. L'alimentació és el darrer que es connecta, quan l'equip ja està tancat i a lloc.">
+            <label><input type="checkbox"><span class="ck-text">Connecto l'alimentació en últim lloc.</span></label>
+          </div>
+          <div class="ck" data-ok="1" data-just="Correcte. Cables recollits i zona endreçada eviten ensopegades i caigudes, per a tu i per als companys.">
+            <label><input type="checkbox"><span class="ck-text">Deixo la zona endreçada i els cables recollits, sense risc d'ensopegada.</span></label>
+          </div>
+        </form>
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn primary do-check" type="button">Comprova la checklist</button>
+          <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+        </div>
+        <div class="tool-out" hidden></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOSSARI -->
+  <section id="glossari">
+    <span class="unit-no" style="background:var(--muted);color:#fff">📖</span>
+    <h2>Glossari de la part 1</h2>
+    <div class="card glossary">
+      <dl>
+        <dt>Pantalla de visualització de dades (PVD)</dt><dd>Pantalla alfanumèrica o gràfica, sigui quin sigui el procediment de visualització utilitzat (art. 2 RD 488/1997).</dd>
+        <dt>Usuari de PVD</dt><dd>Treballador que fa servir la pantalla de manera habitual i durant una part rellevant de la seva feina; segons la guia tècnica, més de 4 h diàries o 20 h setmanals.</dd>
+        <dt>Guia tècnica</dt><dd>Document de l'INSST que interpreta un reial decret i en concreta l'aplicació. No és obligatòria, però és el criteri tècnic de referència.</dd>
+        <dt>Fatiga visual</dt><dd>Conjunt de molèsties oculars (sequedat, coïssor, visió borrosa, mal de cap) per l'esforç visual continuat; normalment és reversible amb el descans.</dd>
+        <dt>Enlluernament</dt><dd>Molèstia o pèrdua de visió causada per una font de llum intensa en el camp visual, com una finestra darrere la pantalla.</dd>
+        <dt>Trastorn musculoesquelètic (TME)</dt><dd>Lesió de músculs, tendons, nervis o articulacions per postures mantingudes, moviments repetitius o esforços.</dd>
+        <dt>Pausa</dt><dd>Interrupció del treball amb pantalla o canvi d'activitat per reduir la càrrega visual i postural (art. 3 RD 488/1997).</dd>
+        <dt>Treball sense tensió</dt><dd>Treball en una instal·lació elèctrica després d'haver-la deixat sense tensió amb el procediment de l'annex II del RD 614/2001.</dd>
+        <dt>Cinc regles d'or</dt><dd>Desconnectar, bloquejar, verificar l'absència de tensió, posar a terra i en curtcircuit, i senyalitzar i protegir la zona.</dd>
+        <dt>Treballador autoritzat / qualificat</dt><dd>Treballador amb la formació i l'autorització de l'empresa per fer determinats treballs amb risc elèctric (art. 2 RD 614/2001).</dd>
+        <dt>Descàrrega electrostàtica (ESD)</dt><dd>Descàrrega sobtada de l'electricitat estàtica acumulada, que pot fer malbé els components electrònics.</dd>
+        <dt>Polsera antiestàtica</dt><dd>Element que connecta la persona a terra per protegir els components de l'ESD. No protegeix contra el risc elèctric i només s'usa amb l'equip desendollat.</dd>
+        <dt>SAI</dt><dd>Sistema d'alimentació ininterrompuda: equip amb bateries que continua subministrant tensió encara que es talli la xarxa.</dd>
+        <dt>Estabilitzador antibolcada</dt><dd>Peu o suport que impedeix que un rack bolqui en extreure'n equips.</dd>
+        <dt>Manipulació manual de càrregues</dt><dd>Operació de transport o subjecció d'una càrrega per una o diverses persones (RD 487/1997). Pes de referència: 25 kg en condicions ideals.</dd>
+        <dt>Terra tècnic</dt><dd>Terra elevat de plaques desmuntables sota el qual passen cables i aire condicionat, habitual als CPD.</dd>
+        <dt>Passadís fred / calent</dt><dd>Organització del CPD on l'aire fred entra pel davant dels equips i l'aire calent surt pel darrere.</dd>
+        <dt>Extinció per gas</dt><dd>Sistema automàtic que apaga el foc inundant la sala amb un gas inert, un agent químic o CO<sub>2</sub>; pot causar asfíxia.</dd>
+        <dt>Alarma de pre-descàrrega</dt><dd>Senyal acústic i lluminós que avisa uns segons abans que es descarregui el gas d'extinció: cal sortir immediatament.</dd>
+        <dt>Coordinació d'activitats empresarials</dt><dd>Cooperació i intercanvi d'informació entre empreses que coincideixen en un mateix centre de treball (art. 24 LPRL, RD 171/2004).</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- RECURSOS -->
+  <section>
+    <h2 style="font-size:1.1rem">Recursos per aprofundir</h2>
+    <div class="res-links">
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-8671" target="_blank" rel="noopener">RD 488/1997 (BOE)</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-8669" target="_blank" rel="noopener">RD 486/1997 (BOE)</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2001-11881" target="_blank" rel="noopener">RD 614/2001 (BOE)</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-8670" target="_blank" rel="noopener">RD 487/1997 (BOE)</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-17824" target="_blank" rel="noopener">RD 1215/1997 (BOE)</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2006-4414" target="_blank" rel="noopener">RD 286/2006 (BOE)</a>
+      <a href="https://www.insst.es/" target="_blank" rel="noopener">INSST</a>
+      <a href="https://osha.europa.eu/ca" target="_blank" rel="noopener">EU-OSHA</a>
+    </div>
+  </section>
+
+  <!-- PROVA M3.1 (al final de la primera part: unitats 3.1 i 3.2) -->
+  <section id="prova1">
+    <div class="exam-box">
+      <div class="tit">📝 Prova M3.1</div>
+      <p style="margin:0">Test de 20 preguntes amb 4 opcions de resposta cadascuna, sobre els continguts de les unitats 3.1 i 3.2. Cada encert val 0,5 punts i els errors no resten.</p>
+      <ul>
+        <li>Cal un mínim de <strong>5/10</strong> (10 encerts) per ser APTE en aquesta prova.</li>
+        <li>Les notes de les proves no es compensen entre si: cal l'APTE a la prova M3.1 i a la prova M3.2.</li>
+      </ul>
+    </div>
+  </section>
+  <div class="pager">
+    <a href="m3.html">← Mòdul 3</a>
+    <a href="m3.2.html">Part 2: psicosocials, fora de l'oficina i cas →</a>
+  </div>
+
+</main>
+
+<footer>
+  <span>Mòdul 3 · Part 1 · Riscos específics del sector TIC · Curs bàsic de PRL, sector informàtica</span>
+  <button class="theme-btn" id="themeBtn" type="button">🌓 Canvia el tema</button>
+</footer>
+
+<script>
+  // Mostrar / amagar cada activitat
+  document.querySelectorAll('[data-toggle]').forEach(function(btn){
+    var box = document.getElementById(btn.getAttribute('data-toggle'));
+    btn.addEventListener('click', function(){
+      var open = !box.hidden;
+      box.hidden = open;
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.textContent = open ? 'Mostra l\'activitat' : 'Amaga l\'activitat';
+    });
+  });
+
+  // Test: corregeix (verd/vermell + justificació) i reinicia
+  document.querySelectorAll('[data-kind="test"]').forEach(function(root){
+    var form = root.querySelector('form');
+    var scoreEl = root.querySelector('.q-score');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var qs = form.querySelectorAll('.q'), answered = 0, correct = 0, critKo = 0;
+      qs.forEach(function(q){
+        var name = q.querySelector('input').name;
+        var chosen = form.querySelector('input[name="' + name + '"]:checked');
+        var right = q.getAttribute('data-correct');
+        var isCrit = !!q.querySelector('.crit');
+        q.classList.remove('ok','ko');
+        q.classList.add('done');
+        q.querySelectorAll('label').forEach(function(l){
+          l.classList.remove('sel','right');
+          if (l.querySelector('input').value === right) l.classList.add('right');
+        });
+        if (q.hasAttribute('data-just')){
+          var j = q.querySelector('.q-just');
+          if (!j){ j = document.createElement('p'); j.className = 'q-just'; q.appendChild(j); }
+          j.innerHTML = q.getAttribute('data-just');
+          j.hidden = false;
+        }
+        if (chosen){
+          answered++;
+          chosen.closest('label').classList.add('sel');
+          if (chosen.value === right){ correct++; q.classList.add('ok'); }
+          else { q.classList.add('ko'); if (isCrit) critKo++; }
+        } else if (isCrit){ critKo++; }
+      });
+      scoreEl.hidden = false;
+      var txt = answered < qs.length
+        ? 'Has respost ' + answered + ' de ' + qs.length + ' preguntes. Es mostren les respostes correctes en verd i la justificació.'
+        : 'Resultat: ' + correct + ' de ' + qs.length + ' correctes.';
+      if (form.querySelector('.crit')){
+        txt += critKo
+          ? ' ⚠️ Has fallat o deixat en blanc ' + critKo + ' pregunta' + (critKo === 1 ? '' : 'es') + ' crítica' + (critKo === 1 ? '' : 'es') + ': repassa-la' + (critKo === 1 ? '' : 'es') + ', perquè en un cas real hi hauria una persona en perill.'
+          : ' ✅ Totes les preguntes crítiques són correctes.';
+      }
+      scoreEl.textContent = txt;
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      form.reset();
+      form.querySelectorAll('label').forEach(function(l){ l.classList.remove('sel','right'); });
+      form.querySelectorAll('.q').forEach(function(q){ q.classList.remove('ok','ko','done'); });
+      form.querySelectorAll('.q-just').forEach(function(p){ p.hidden = true; });
+      scoreEl.hidden = true;
+      scoreEl.textContent = '';
+    });
+  });
+
+  // Resposta oberta: mostra l'exemple model i reinicia
+  document.querySelectorAll('[data-kind="open"]').forEach(function(root){
+    var note = root.querySelector('.q-score');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      root.querySelectorAll('.fq').forEach(function(fq){
+        var ta = fq.querySelector('textarea');
+        var m = fq.querySelector('.fq-model');
+        m.innerHTML = '<strong>Exemple proposat:</strong> ' + ta.getAttribute('data-model');
+        m.hidden = false;
+      });
+      if (note) note.hidden = false;
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      root.querySelectorAll('textarea').forEach(function(ta){ ta.value = ''; });
+      root.querySelectorAll('.fq-model').forEach(function(m){ m.hidden = true; m.innerHTML = ''; });
+      if (note) note.hidden = true;
+    });
+  });
+
+  // Autoavaluació Sí / No amb missatge orientatiu (A16)
+  document.querySelectorAll('[data-kind="autoeval"]').forEach(function(root){
+    var form = root.querySelector('form');
+    var out = root.querySelector('.tool-out');
+    var items = form.querySelectorAll('.aq');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var si = 0, no = 0, empty = 0, tips = [];
+      items.forEach(function(it){
+        it.classList.remove('is-si','is-no');
+        var ch = it.querySelector('input:checked');
+        if (!ch){ empty++; return; }
+        if (ch.value === 'na') return;
+        if (ch.value === 'si'){ si++; it.classList.add('is-si'); }
+        else {
+          no++; it.classList.add('is-no');
+          tips.push('<li><strong>' + it.getAttribute('data-area') + ':</strong> ' + it.getAttribute('data-tip') + '</li>');
+        }
+      });
+      out.hidden = false;
+      if (si + no === 0){
+        out.innerHTML = 'Respon almenys una pregunta per poder fer l\'avaluació.';
+        return;
+      }
+      var verdict;
+      if (no === 0){
+        verdict = '<p class="verdict"><span class="tag-ok">✅ Lloc ben condicionat.</span></p><p style="margin:0">No has detectat cap deficiència. Mantén els bons hàbits: pauses, postura i revisió periòdica de la vista.</p>';
+      } else if (no <= 3){
+        verdict = '<p class="verdict"><span class="tag-warn">🟡 Millores puntuals.</span></p><p style="margin:0">El lloc és correcte en general, però hi ha ' + no + ' aspecte' + (no === 1 ? '' : 's') + ' a millorar. La majoria es poden corregir tu mateix en pocs minuts.</p>';
+      } else if (no <= 7){
+        verdict = '<p class="verdict"><span class="tag-warn">🟠 Cal revisar el lloc.</span></p><p style="margin:0">Hi ha ' + no + ' deficiències. Corregeix les que depenen de tu i comunica la resta al teu responsable o al delegat de prevenció (art. 29 LPRL).</p>';
+      } else {
+        verdict = '<p class="verdict"><span class="tag-no">🔴 Lloc amb moltes deficiències.</span></p><p style="margin:0">Hi ha ' + no + ' deficiències. Comunica-ho al responsable de PRL o al delegat de prevenció: segurament cal revisar l\'avaluació d\'aquest lloc (art. 3 RD 488/1997).</p>';
+      }
+      out.innerHTML = verdict +
+        (tips.length ? '<p style="margin:10px 0 0"><strong>Què pots millorar:</strong></p><ul>' + tips.join('') + '</ul>' : '') +
+        (empty ? '<p style="margin:8px 0 0;color:var(--muted)">Has deixat ' + empty + ' pregunta' + (empty === 1 ? '' : 'es') + ' sense respondre.</p>' : '') +
+        '<p style="margin:8px 0 0;color:var(--muted)">Resultat orientatiu: ' + si + ' sí, ' + no + ' no. No substitueix l\'avaluació de riscos del lloc, que l\'ha de fer el servei de prevenció.</p>';
+      out.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      form.reset();
+      items.forEach(function(it){ it.classList.remove('is-si','is-no'); });
+      out.hidden = true;
+      out.innerHTML = '';
+    });
+  });
+
+  // Checklist amb accions correctes, trampes i ítems crítics (A8)
+  document.querySelectorAll('[data-kind="checklist"]').forEach(function(root){
+    var form = root.querySelector('form');
+    var out = root.querySelector('.tool-out');
+    var items = form.querySelectorAll('.ck');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var good = 0, missing = [], traps = [], critFail = [];
+      items.forEach(function(it){
+        var cb = it.querySelector('input');
+        var shouldCheck = it.getAttribute('data-ok') === '1';
+        var crit = it.hasAttribute('data-crit');
+        var text = it.querySelector('.ck-text').textContent;
+        it.classList.remove('ck-ok','ck-ko','ck-miss');
+        if (shouldCheck === cb.checked){
+          good++; it.classList.add('ck-ok');
+        } else if (shouldCheck){
+          it.classList.add('ck-miss'); missing.push(text);
+          if (crit) critFail.push('No has marcat: ' + text);
+        } else {
+          it.classList.add('ck-ko'); traps.push(text);
+          if (crit) critFail.push('Has marcat una acció perillosa: ' + text);
+        }
+        var j = it.querySelector('.q-just');
+        if (!j){ j = document.createElement('p'); j.className = 'q-just'; it.appendChild(j); }
+        j.innerHTML = it.getAttribute('data-just');
+        j.hidden = false;
+      });
+      var verdict;
+      if (critFail.length){
+        verdict = '<p class="verdict"><span class="tag-no">⛔ No és segur començar.</span></p><p style="margin:0">Hi ha errors en passos crítics, que en un cas real podrien causar un contacte elèctric:</p><ul><li>' + critFail.join('</li><li>') + '</li></ul>';
+      } else if (missing.length || traps.length){
+        verdict = '<p class="verdict"><span class="tag-warn">⚠️ Gairebé.</span></p><p style="margin:0">Els passos crítics són correctes, però ' +
+          (missing.length ? 'has oblidat ' + missing.length + ' pas' + (missing.length === 1 ? '' : 'sos') : '') +
+          (missing.length && traps.length ? ' i ' : '') +
+          (traps.length ? 'has marcat ' + traps.length + ' acció' + (traps.length === 1 ? '' : 'ns') + ' incorrecta' + (traps.length === 1 ? '' : 'es') : '') +
+          '. Revisa els ítems en groc (oblidats) i en vermell (incorrectes).</p>';
+      } else {
+        verdict = '<p class="verdict"><span class="tag-ok">✅ Checklist correcta.</span></p><p style="margin:0">Has identificat tots els passos segurs i has descartat totes les accions incorrectes. Ja pots fer la pràctica amb el servidor.</p>';
+      }
+      out.hidden = false;
+      out.innerHTML = verdict + '<p style="margin:8px 0 0;color:var(--muted)">Ítems ben resolts: ' + good + ' de ' + items.length + '. Verd: correcte; groc: t\'has oblidat de marcar-lo; vermell: no s\'havia de marcar.</p>';
+      out.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      form.reset();
+      items.forEach(function(it){ it.classList.remove('ck-ok','ck-ko','ck-miss'); });
+      form.querySelectorAll('.q-just').forEach(function(p){ p.hidden = true; });
+      out.hidden = true;
+      out.innerHTML = '';
+    });
+  });
+
+  // Votació de casos amb resposta raonada (A23)
+  document.querySelectorAll('[data-kind="vote"]').forEach(function(root){
+    root.querySelectorAll('.vote-block').forEach(function(block){
+      var result = block.querySelector('.vote-result');
+      block.querySelectorAll('[data-vote]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          block.querySelectorAll('[data-vote]').forEach(function(b){ b.classList.remove('primary'); });
+          btn.classList.add('primary');
+          var tpl = block.querySelector('template[data-for="' + btn.getAttribute('data-vote') + '"]');
+          result.innerHTML = tpl ? tpl.innerHTML : '';
+          result.hidden = false;
+        });
+      });
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      root.querySelectorAll('[data-vote]').forEach(function(b){ b.classList.remove('primary'); });
+      root.querySelectorAll('.vote-result').forEach(function(r){ r.hidden = true; r.innerHTML = ''; });
+    });
+  });
+
+  // Identificació de riscos amb distractors (cas 3.5, part 1)
+  document.querySelectorAll('[data-kind="risks"]').forEach(function(root){
+    var form = root.querySelector('form');
+    var out = root.querySelector('.tool-out');
+    var items = form.querySelectorAll('.ck');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var total = 0, found = 0, wrong = 0;
+      items.forEach(function(it){
+        var cb = it.querySelector('input');
+        var real = it.getAttribute('data-ok') === '1';
+        it.classList.remove('ck-ok','ck-ko','ck-miss');
+        if (real) total++;
+        if (real && cb.checked){ found++; it.classList.add('ck-ok'); }
+        else if (real){ it.classList.add('ck-miss'); }
+        else if (cb.checked){ wrong++; it.classList.add('ck-ko'); }
+        else { it.classList.add('ck-ok'); }
+        var j = it.querySelector('.q-just');
+        if (!j){ j = document.createElement('p'); j.className = 'q-just'; it.appendChild(j); }
+        j.innerHTML = it.getAttribute('data-just');
+        j.hidden = false;
+      });
+      var verdict;
+      if (found === total && !wrong){
+        verdict = '<p class="verdict"><span class="tag-ok">✅ Molt bé.</span></p><p style="margin:0">Has detectat els ' + total + ' riscos del lloc i no n\'has marcat cap que no hi sigui.</p>';
+      } else if (found >= total - 2 && wrong <= 1){
+        verdict = '<p class="verdict"><span class="tag-warn">🟡 Gairebé.</span></p><p style="margin:0">Has detectat ' + found + ' de ' + total + ' riscos' + (wrong ? ' i n\'has marcat ' + wrong + ' que no es dedueix de la descripció' : '') + '. Revisa els ítems en groc i en vermell.</p>';
+      } else {
+        verdict = '<p class="verdict"><span class="tag-no">🔴 Cal repassar-ho.</span></p><p style="margin:0">Has detectat ' + found + ' de ' + total + ' riscos' + (wrong ? ' i n\'has marcat ' + wrong + ' que no hi són' : '') + '. Torna a llegir la descripció punt per punt: cada punt amaga almenys un risc.</p>';
+      }
+      out.hidden = false;
+      out.innerHTML = verdict + '<p style="margin:8px 0 0;color:var(--muted)">Verd: correcte; groc: risc real que no has marcat; vermell: has marcat un risc que no es dedueix de la descripció.</p>';
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      form.reset();
+      items.forEach(function(it){ it.classList.remove('ck-ok','ck-ko','ck-miss'); });
+      form.querySelectorAll('.q-just').forEach(function(p){ p.hidden = true; });
+      out.hidden = true;
+      out.innerHTML = '';
+    });
+  });
+
+  // Aparellar amb desplegables (cas 3.5, part 2)
+  document.querySelectorAll('[data-kind="match"]').forEach(function(root){
+    var form = root.querySelector('form');
+    var scoreEl = root.querySelector('.q-score');
+    var sels = form.querySelectorAll('select');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var good = 0, empty = 0;
+      sels.forEach(function(sel){
+        sel.classList.remove('ok','ko');
+        if (!sel.value){ empty++; sel.classList.add('ko'); return; }
+        if (sel.value === sel.getAttribute('data-correct')){ good++; sel.classList.add('ok'); }
+        else { sel.classList.add('ko'); }
+      });
+      form.querySelectorAll('.mrow').forEach(function(row){
+        var j = row.querySelector('.q-just');
+        if (!j){ j = document.createElement('p'); j.className = 'q-just'; row.appendChild(j); }
+        j.innerHTML = row.getAttribute('data-just');
+        j.hidden = false;
+      });
+      scoreEl.hidden = false;
+      scoreEl.textContent = 'Resultat: ' + good + ' de ' + sels.length + ' correctes' +
+        (empty ? ' (' + empty + ' sense resposta)' : '') + '. Verd: correcte; vermell: revisa-ho. ' + (root.getAttribute('data-note') || '');
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      form.reset();
+      sels.forEach(function(sel){ sel.classList.remove('ok','ko'); });
+      form.querySelectorAll('.q-just').forEach(function(p){ p.hidden = true; });
+      scoreEl.hidden = true;
+      scoreEl.textContent = '';
+    });
+  });
+
+  // Tema clar / fosc (comparteix preferència amb la resta de mòduls)
+  var root = document.documentElement;
+  try { var t = localStorage.getItem('prl-theme'); if (t) root.setAttribute('data-theme', t); } catch(e){}
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme') ||
+      (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('prl-theme', next); } catch(e){}
+  });
+</script>
+</body>
+</html>

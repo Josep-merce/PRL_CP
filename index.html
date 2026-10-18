@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Curs bàsic de PRL · Sector informàtica</title>
+<meta name="description" content="Curs bàsic de prevenció de riscos laborals aplicat al sector de la informàtica: mòduls, calendari i avaluació.">
+<style>
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5;
+    --text:#1b2330; --muted:#5a6577; --line:#dde2ea;
+    --accent:#e0661b; --accent-soft:#fdeee4;
+    --m1:#2f6fd1; --m2:#c2410c; --m3:#0f8a6a; --m4:#caa005;
+    --danger:#b91c1c; --danger-soft:#fdecec;
+    --radius:14px; --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+      --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+      --accent:#f08a46; --accent-soft:#2b1d14;
+      --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+      --danger:#f87171; --danger-soft:#2c1717;
+      --shadow:none;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+    --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+    --accent:#f08a46; --accent-soft:#2b1d14;
+    --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+    --danger:#f87171; --danger-soft:#2c1717;
+    --shadow:none;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;}
+  a{color:var(--accent)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+
+  /* Capçalera */
+  header.hero{background:linear-gradient(135deg,#1b2330 0%,#2a3a52 100%);color:#fff;padding:56px 0 48px}
+  .hero .tag{display:inline-block;background:var(--accent);color:#fff;font-weight:600;font-size:.8rem;
+    letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+  .hero h1{font-size:clamp(1.8rem,4.5vw,2.8rem);line-height:1.15;margin:14px 0 10px}
+  .hero p{max-width:680px;color:#cfd8e6;margin:0}
+  .hero .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .hero .chips span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+    padding:5px 12px;border-radius:999px;font-size:.88rem}
+
+  /* Navegació */
+  nav.top{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--line)}
+  nav.top .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  nav.top a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:.92rem;
+    padding:14px 12px;border-bottom:3px solid transparent}
+  nav.top a:hover{color:var(--text);border-bottom-color:var(--accent)}
+
+  section{padding:48px 0 8px}
+  h2{font-size:1.55rem;margin:0 0 6px}
+  .lead{color:var(--muted);margin:0 0 24px}
+
+  /* Targetes de mòdul */
+  .grid{display:grid;gap:20px;grid-template-columns:repeat(2,1fr)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;box-shadow:var(--shadow)}
+  .mod{display:flex;flex-direction:column;border-top:5px solid var(--c);text-decoration:none;color:inherit;transition:transform .15s,border-color .15s}
+  .mod:hover{transform:translateY(-2px);border-color:var(--c)}
+  .mod .go{margin-top:auto;padding-top:14px;font-weight:700;font-size:.9rem;color:var(--c)}
+  .mod .code{font-weight:800;color:var(--c);font-size:.85rem;letter-spacing:.05em}
+  .mod h3{margin:4px 0 8px;font-size:1.08rem;line-height:1.3}
+  .mod p{margin:0;color:var(--muted);font-size:.93rem}
+
+  footer{margin-top:56px;padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+  .theme-btn{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;
+    padding:6px 10px;cursor:pointer;font:inherit;font-size:.85rem}
+
+  @media (max-width:560px){
+    header.hero{padding:40px 0 34px}
+    .grid{grid-template-columns:1fr}
+  }
+  @media print{
+    nav.top,.theme-btn{display:none}
+    header.hero{background:none;color:#000}
+    .hero p,.hero .chips span{color:#000}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="tag">Formació en PRL</span>
+    <h1>Curs bàsic de Prevenció de Riscos Laborals<br>aplicat al sector de la informàtica</h1>
+    <p>Aprèn a identificar els riscos del teu lloc de treball, aplicar mesures preventives senzilles i actuar correctament davant d'una emergència.</p>
+    <div class="chips">
+      <span>📍 Presencial</span>
+      <span>📚 4 mòduls</span>
+      <span>✅ Qualificació: APTE / NO APTE</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- MÒDULS -->
+  <section id="moduls">
+    <h2>Mòduls del curs</h2>
+    <p class="lead">El curs segueix el programa oficial de l'especialitat FCOS02 i hi afegeix un desenvolupament específic per al sector TIC.</p>
+    <div class="grid">
+      <a class="card mod" href="m1.html" style="--c:var(--m1)">
+        <div class="code">MÒDUL 1</div>
+        <h3>Seguretat i salut en el treball</h3>
+        <p>Conceptes bàsics, riscos i danys derivats del treball, i marc jurídic de la prevenció.</p>
+        <span class="go">Accedeix al mòdul →</span>
+      </a>
+      <a class="card mod" href="m2.html" style="--c:var(--m2)">
+        <div class="code">MÒDUL 2</div>
+        <h3>Riscos generals i la seva prevenció</h3>
+        <p>Condicions de seguretat, medi ambient de treball, càrrega de treball, EPI, emergències i primers auxilis.</p>
+        <span class="go">Accedeix al mòdul →</span>
+      </a>
+      <a class="card mod" href="m3.html" style="--c:var(--m3)">
+        <div class="code">MÒDUL 3</div>
+        <h3>Riscos específics del sector TIC</h3>
+        <p>Pantalles de visualització, muntatge i manteniment, CPD, riscos psicosocials i treball fora de l'oficina.</p>
+        <span class="go">Accedeix al mòdul →</span>
+      </a>
+      <a class="card mod" href="m4.html" style="--c:var(--m4)">
+        <div class="code">MÒDUL 4</div>
+        <h3>Elements bàsics de gestió de la prevenció</h3>
+        <p>Pla de prevenció, modalitats d'organització preventiva, participació i organismes de referència.</p>
+        <span class="go">Accedeix al mòdul →</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center">
+    <span>Curs bàsic de Prevenció de Riscos Laborals · Sector informàtica · Basat en el programa FCOS02 del SEPE</span>
+    <button class="theme-btn" id="themeBtn" type="button">🌓 Canvia el tema</button>
+  </div>
+</footer>
+
+<script>
+  // Tema clar/fosc
+  var root = document.documentElement;
+  try { var t = localStorage.getItem('prl-theme'); if (t) root.setAttribute('data-theme', t); } catch(e){}
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme') ||
+      (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('prl-theme', next); } catch(e){}
+  });
+</script>
+</body>
+</html>

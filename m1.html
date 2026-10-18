@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mòdul 1 · Seguretat i salut en el treball</title>
+<meta name="description" content="Mòdul 1 del curs bàsic de PRL: conceptes bàsics, riscos i danys derivats del treball, i marc jurídic de la prevenció.">
+<style>
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5;
+    --text:#1b2330; --muted:#5a6577; --line:#dde2ea;
+    --accent:#e0661b; --accent-soft:#fdeee4;
+    --m1:#2f6fd1; --m2:#c2410c; --m3:#0f8a6a; --m4:#caa005;
+    --danger:#b91c1c; --danger-soft:#fdecec;
+    --law:#1d4ed8; --law-soft:#eaf1fd;
+    --radius:14px; --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.06);
+    --c:var(--m1);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+      --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+      --accent:#f08a46; --accent-soft:#2b1d14;
+      --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+      --danger:#f87171; --danger-soft:#2c1717;
+      --law:#7aa6f5; --law-soft:#182435;
+      --shadow:none;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+    --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+    --accent:#f08a46; --accent-soft:#2b1d14;
+    --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+    --danger:#f87171; --danger-soft:#2c1717;
+    --law:#7aa6f5; --law-soft:#182435;
+    --shadow:none;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;}
+  a{color:var(--accent)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px}
+
+  header.hero{background:linear-gradient(135deg,#1b2330 0%,#2a3a52 100%);color:#fff;padding:40px 0 34px}
+  .hero .back{display:inline-flex;align-items:center;gap:6px;color:#cfd8e6;text-decoration:none;font-size:.9rem;font-weight:600}
+  .hero .back:hover{color:#fff}
+  .hero .tag{display:inline-block;background:var(--c);color:#fff;font-weight:800;font-size:.8rem;
+    letter-spacing:.06em;padding:4px 10px;border-radius:999px;margin-top:16px}
+  .hero h1{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.2;margin:12px 0 8px}
+  .hero p{max-width:640px;color:#cfd8e6;margin:0}
+
+  nav.top{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--line)}
+  nav.top .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  nav.top a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:.9rem;
+    padding:13px 10px;border-bottom:3px solid transparent}
+  nav.top a:hover{color:var(--text);border-bottom-color:var(--c)}
+
+  main{padding-bottom:40px}
+  section{padding:40px 0 4px;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:0}
+  .unit-no{display:inline-block;background:var(--c);color:#fff;font-weight:800;border-radius:8px;
+    padding:3px 9px;font-size:.82rem;margin-bottom:10px}
+  h2{font-size:1.4rem;margin:0 0 4px}
+  h3{font-size:1.1rem;margin:28px 0 8px}
+  .lead{color:var(--muted);margin:4px 0 20px}
+  p{margin:0 0 14px}
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin-bottom:6px}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  .objectius{border-left:5px solid var(--c)}
+  .objectius h3{margin-top:0;font-size:1rem}
+  .objectius ul{margin-bottom:0}
+
+  .law{background:var(--law-soft);border:1px solid var(--law);border-left-width:5px;
+    border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .law .tit{font-weight:800;color:var(--law);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .law p{margin:0;font-size:.95rem}
+  .law p+p{margin-top:8px}
+
+  .example{background:var(--accent-soft);border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .example .tit{font-weight:800;color:var(--accent);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .example p{margin:0}
+
+  table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:.93rem}
+  table caption{text-align:left;font-weight:700;margin-bottom:8px;color:var(--text)}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:var(--surface-2);font-weight:700}
+
+  .activity{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin:0 0 16px;display:flex;gap:14px;align-items:flex-start}
+  .activity .badge{flex:0 0 auto;background:var(--accent);color:#fff;font-weight:800;border-radius:10px;
+    padding:5px 10px;font-size:.82rem}
+  .activity .body h4{margin:0 0 4px;font-size:1rem}
+  .activity .body p{margin:0 0 6px}
+  .activity .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .pill{font-size:.8rem;padding:3px 10px;border-radius:8px;background:var(--surface-2);color:var(--text)}
+  .pill.mat{background:var(--surface-2)}
+
+  .glossary dl{margin:0}
+  .glossary dt{font-weight:700;margin-top:10px}
+  .glossary dt:first-child{margin-top:0}
+  .glossary dd{margin:2px 0 0;color:var(--muted)}
+
+  .resum{background:var(--surface-2);border-radius:var(--radius);padding:16px 18px;margin:0 0 18px}
+  .resum .tit{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:8px}
+  .resum ul{margin:0}
+
+  .scheme{background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin:0 0 18px;font-size:.93rem}
+  .scheme .tit{font-weight:700;margin-bottom:10px}
+  .pyramid{display:flex;flex-direction:column;align-items:center;gap:2px;margin:10px 0}
+  .pyramid div{color:#fff;font-size:.82rem;font-weight:700;padding:7px 10px;border-radius:6px;text-align:center}
+
+  .exam-box{background:var(--danger-soft);border:1px solid var(--danger);border-left-width:5px;
+    border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+  .exam-box .tit{color:var(--danger);font-weight:800;margin-bottom:6px}
+
+  .quiz-btn{background:var(--surface-2);border:1px solid var(--line);color:var(--text);border-radius:8px;
+    padding:7px 14px;cursor:pointer;font:inherit;font-size:.86rem;font-weight:600}
+  .quiz-btn:hover{border-color:var(--c)}
+  .quiz-btn.primary{background:var(--c);border-color:var(--c);color:#fff}
+  .quiz{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
+  .q{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .q:last-of-type{border-bottom:0;margin-bottom:0;padding-bottom:0}
+  .q-text{font-weight:700;margin:0 0 8px}
+  .q label{display:block;background:var(--surface-2);border-radius:8px;padding:8px 12px;margin-bottom:6px;
+    cursor:pointer;font-size:.93rem}
+  .q label:hover{background:var(--line)}
+  .q input{margin-right:8px}
+  .q.ok label.sel{background:#d1f5e3;outline:2px solid var(--m3)}
+  .q.ko label.sel{background:var(--danger-soft);outline:2px solid var(--danger)}
+  .q.ok label.right,.q.ko label.right{background:#d1f5e3;outline:2px solid var(--m3)}
+  .q-score{font-weight:700;margin-top:14px}
+  .q-just{margin:8px 0 0;padding:8px 12px;background:var(--surface-2);border-radius:8px;
+    font-size:.88rem;color:var(--muted)}
+
+  .fq{margin-bottom:16px}
+  .fq-label{display:block;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .fq textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+    color:var(--text);padding:9px 12px;font:inherit;font-size:.93rem;resize:vertical}
+  .fq textarea:focus{outline:2px solid var(--c);border-color:var(--c)}
+  .fq-model{margin:8px 0 0;padding:8px 12px;background:var(--accent-soft);border-radius:8px;
+    font-size:.9rem;color:var(--text)}
+  .fq-model strong{color:var(--accent)}
+
+  .res-links{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
+  .res-links a{font-size:.88rem;background:var(--surface-2);color:var(--text);text-decoration:none;
+    padding:6px 12px;border-radius:999px}
+  .res-links a:hover{color:var(--c)}
+
+  footer{margin-top:20px;padding:24px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem;
+    display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+  .theme-btn{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;
+    padding:6px 10px;cursor:pointer;font:inherit;font-size:.85rem}
+
+  @media print{
+    nav.top,.theme-btn{display:none}
+    header.hero{background:none;color:#000}
+    .hero p,.hero .back{color:#000}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a class="back" href="index.html">← Tornar als mòduls</a>
+    <div class="tag">MÒDUL 1</div>
+    <h1>Seguretat i salut en el treball</h1>
+    <p>Conceptes bàsics, riscos i danys derivats del treball, i marc jurídic de la prevenció.</p>
+  </div>
+</header>
+
+<nav class="top" aria-label="Unitats del mòdul">
+  <div class="wrap">
+    <a href="#objectius">Objectius</a>
+    <a href="#u1">1.1 Conceptes bàsics</a>
+    <a href="#u2">1.2 Riscos i danys</a>
+    <a href="#u3">1.3 Marc jurídic</a>
+    <a href="#glossari">Glossari</a>
+    <a href="#prova">Prova</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- OBJECTIUS -->
+  <section id="objectius">
+    <div class="card objectius">
+      <h3>Objectius del mòdul</h3>
+      <ul>
+        <li>Diferenciar els conceptes bàsics de treball, salut i risc laboral.</li>
+        <li>Identificar els diferents tipus de riscos i de danys derivats del treball.</li>
+        <li>Conèixer el marc jurídic bàsic de la prevenció de riscos laborals i els drets i deures que se'n deriven.</li>
+        <li>Valorar la importància d'actualitzar-se davant els canvis normatius i tecnològics del sector.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- UNITAT 1.1 -->
+  <section id="u1">
+    <span class="unit-no">1.1</span>
+    <h2>Conceptes bàsics</h2>
+    <p class="lead">El punt de partida: què entenem per treball i per salut, i la terminologia que la Llei de prevenció fa servir per parlar-ne.</p>
+
+    <h3>Treball i salut</h3>
+    <p>El <strong>treball</strong> és tota activitat que transforma o produeix béns o serveis i que, com a contrapartida, satisfà necessitats de la persona que el realitza. No és només una font d'ingressos: també pot ser font de satisfacció personal, de relacions socials i de desenvolupament, però igualment pot generar danys a la salut si no es fa en condicions adequades.</p>
+    <p>L'<strong>Organització Mundial de la Salut (OMS)</strong> defineix la salut com <em>"l'estat de benestar físic, mental i social complet, i no merament l'absència de malaltia o d'afecció"</em>. Aquesta definició és clau en PRL perquè amplia la mirada: no n'hi ha prou amb evitar accidents físics, també cal prevenir el desgast psicològic i els problemes derivats de les relacions al lloc de treball.</p>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Un tècnic que passa el dia instal·lant cablejat en condicions ergonòmiques correctes i sense pressió de terminis té una bona salut laboral física i mental. Un company que fa les mateixes tasques amb postures forçades i sota pressió constant de tiquets, encara que no pateixi cap accident, ja no compleix aquesta definició de salut.</p>
+    </div>
+
+    <h3>Termes clau de l'article 4 de la Llei 31/1995 (LPRL)</h3>
+    <p>L'article 4 de la LPRL defineix els termes que fem servir constantment en prevenció. Val la pena fixar-se en la diferència entre "risc" (una possibilitat) i "dany" (un fet consumat).</p>
+
+    <table>
+      <caption>Termes de l'art. 4 LPRL, amb un exemple del sector TIC</caption>
+      <thead><tr><th>Terme</th><th>Definició</th><th>Exemple TIC</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Risc laboral</strong></td><td>Possibilitat que un treballador pateixi un dany derivat del treball.</td><td>Possibilitat de caure d'una escala en instal·lar un punt d'accés al sostre.</td></tr>
+        <tr><td><strong>Dany derivat del treball</strong></td><td>Malalties, patologies o lesions causades o agreujades per les condicions de treball.</td><td>Una lumbàlgia per carregar repetidament caixes de servidors.</td></tr>
+        <tr><td><strong>Risc greu i imminent</strong></td><td>Risc que probablement es materialitzarà en un futur immediat i pot suposar un dany greu.</td><td>Un armari elèctric obert i amb cables pelats al costat d'un lloc de treball.</td></tr>
+        <tr><td><strong>Equip de treball</strong></td><td>Qualsevol màquina, aparell, instrument o instal·lació utilitzat en el treball.</td><td>Un servidor, una crimpadora de xarxa, una escala de mà.</td></tr>
+        <tr><td><strong>Condició de treball</strong></td><td>Qualsevol característica del treball que pugui tenir una influència significativa en la generació de riscos.</td><td>La il·luminació d'un CPD, el nivell de soroll, el ritme d'incidències a resoldre.</td></tr>
+        <tr><td><strong>Equip de protecció individual (EPI)</strong></td><td>Equip destinat a ser portat pel treballador per protegir-lo d'un o diversos riscos.</td><td>Guants dielèctrics, polsera antiestàtica, ulleres de protecció en treballs de tall.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="resum">
+      <div class="tit">Resum 1.1</div>
+      <ul>
+        <li>Treball i salut van més enllà de l'absència d'accidents: inclouen el benestar físic, mental i social.</li>
+        <li>L'art. 4 LPRL fixa el vocabulari comú de la prevenció: risc, dany, risc greu i imminent, equip de treball, condició de treball i EPI.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ACTIVITAT A0 i A1 -->
+  <div class="activity">
+    <span class="badge">A0</span>
+    <div class="body" style="width:100%">
+      <h4>Test diagnòstic</h4>
+      <p>Qüestionari inicial per conèixer el punt de partida del grup. No puntua per a la qualificació final.</p>
+      <div class="meta">
+        <span class="pill mat">Individual</span>
+        <button class="quiz-btn" id="a0Toggle" type="button" aria-expanded="false">Mostra el test</button>
+      </div>
+
+      <div id="a0Quiz" class="quiz" hidden>
+        <form id="a0Form">
+          <div class="q" data-correct="b">
+            <p class="q-text">1. Segons l'OMS, la salut és...</p>
+            <label><input type="radio" name="q1" value="a"> Simplement l'absència de malaltia.</label>
+            <label><input type="radio" name="q1" value="b"> Un estat de benestar físic, mental i social complet.</label>
+            <label><input type="radio" name="q1" value="c"> La capacitat de treballar sense baixes.</label>
+          </div>
+          <div class="q" data-correct="c">
+            <p class="q-text">2. Un tècnic es talla la mà obrint un xassís de servidor. Això és...</p>
+            <label><input type="radio" name="q2" value="a"> Una malaltia professional.</label>
+            <label><input type="radio" name="q2" value="b"> Un risc laboral.</label>
+            <label><input type="radio" name="q2" value="c"> Un accident de treball.</label>
+          </div>
+          <div class="q" data-correct="a">
+            <p class="q-text">3. L'accident que es produeix en el trajecte habitual de casa a la feina es diu...</p>
+            <label><input type="radio" name="q3" value="a"> Accident <em>in itinere</em>.</label>
+            <label><input type="radio" name="q3" value="b"> Accident greu i imminent.</label>
+            <label><input type="radio" name="q3" value="c"> Malaltia professional.</label>
+          </div>
+          <div class="q" data-correct="b">
+            <p class="q-text">4. Uns guants dielèctrics per manipular quadres elèctrics són un exemple de...</p>
+            <label><input type="radio" name="q4" value="a"> Condició de treball.</label>
+            <label><input type="radio" name="q4" value="b"> Equip de protecció individual (EPI).</label>
+            <label><input type="radio" name="q4" value="c"> Equip de treball.</label>
+          </div>
+          <div class="q" data-correct="a">
+            <p class="q-text">5. Davant un risc greu i imminent, l'article 21 de la LPRL diu que el treballador...</p>
+            <label><input type="radio" name="q5" value="a"> Pot interrompre la seva activitat i, si cal, abandonar el lloc de treball.</label>
+            <label><input type="radio" name="q5" value="b"> Ha d'acabar la tasca abans de poder parar.</label>
+            <label><input type="radio" name="q5" value="c"> Només pot parar si ho autoritza per escrit un superior.</label>
+          </div>
+          <div class="q" data-correct="c">
+            <p class="q-text">6. La jerarquia de l'article 15 LPRL diu que, abans que l'EPI, cal prioritzar...</p>
+            <label><input type="radio" name="q6" value="a"> Informar el treballador del risc i prou.</label>
+            <label><input type="radio" name="q6" value="b"> Contractar una assegurança.</label>
+            <label><input type="radio" name="q6" value="c"> Eliminar el risc o aplicar protecció col·lectiva.</label>
+          </div>
+        </form>
+
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn primary" id="a0Check" type="button">Corregeix</button>
+          <button class="quiz-btn" id="a0Reset" type="button">🔄 Esborra i torna a fer</button>
+        </div>
+        <p id="a0Score" class="q-score" hidden></p>
+      </div>
+    </div>
+  </div>
+  <div class="activity">
+    <span class="badge">A1</span>
+    <div class="body" style="width:100%">
+      <h4>Un exemple TIC per a cada terme</h4>
+      <p>A partir de la fitxa A1, cada alumne proposa el seu propi exemple del sector informàtic per a cadascun dels termes de l'art. 4 LPRL (diferent dels de la taula anterior). Per exemple, per al terme <strong>"equip de treball"</strong> es podria escriure: <em>"Un commutador de xarxa (switch) que el tècnic manipula per connectar i configurar els equips de l'oficina."</em></p>
+      <div class="meta">
+        <span class="pill mat">Individual</span>
+        <span class="pill mat">Es corregeix en grup</span>
+        <button class="quiz-btn" id="a1Toggle" type="button" aria-expanded="false">Mostra la fitxa</button>
+      </div>
+
+      <div id="a1Quiz" class="quiz" hidden>
+        <form id="a1Form">
+          <div class="fq">
+            <label class="fq-label" for="a1-1">Risc laboral — el teu exemple TIC:</label>
+            <textarea id="a1-1" data-model="Possibilitat de caure des d'una escala en passar cablejat per un fals sostre." rows="2" placeholder="Escriu aquí el teu exemple..."></textarea>
+            <p class="fq-model" hidden></p>
+          </div>
+          <div class="fq">
+            <label class="fq-label" for="a1-2">Dany derivat del treball — el teu exemple TIC:</label>
+            <textarea id="a1-2" data-model="Una tendinitis al canell per l'ús intensiu i continuat del ratolí sense pauses." rows="2" placeholder="Escriu aquí el teu exemple..."></textarea>
+            <p class="fq-model" hidden></p>
+          </div>
+          <div class="fq">
+            <label class="fq-label" for="a1-3">Risc greu i imminent — el teu exemple TIC:</label>
+            <textarea id="a1-3" data-model="Un rack elèctric amb cables pelats i visiblement exposats al costat del lloc de treball." rows="2" placeholder="Escriu aquí el teu exemple..."></textarea>
+            <p class="fq-model" hidden></p>
+          </div>
+          <div class="fq">
+            <label class="fq-label" for="a1-4">Equip de treball — el teu exemple TIC:</label>
+            <textarea id="a1-4" data-model="Un commutador de xarxa (switch) que el tècnic manipula per connectar i configurar els equips de l'oficina." rows="2" placeholder="Escriu aquí el teu exemple..."></textarea>
+            <p class="fq-model" hidden></p>
+          </div>
+          <div class="fq">
+            <label class="fq-label" for="a1-5">Condició de treball — el teu exemple TIC:</label>
+            <textarea id="a1-5" data-model="El nivell de soroll i la temperatura constants d'un centre de processament de dades (CPD)." rows="2" placeholder="Escriu aquí el teu exemple..."></textarea>
+            <p class="fq-model" hidden></p>
+          </div>
+          <div class="fq">
+            <label class="fq-label" for="a1-6">EPI — el teu exemple TIC:</label>
+            <textarea id="a1-6" data-model="Una polsera antiestàtica per evitar descàrregues en manipular components electrònics sensibles." rows="2" placeholder="Escriu aquí el teu exemple..."></textarea>
+            <p class="fq-model" hidden></p>
+          </div>
+        </form>
+
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn primary" id="a1Check" type="button">Corregeix</button>
+          <button class="quiz-btn" id="a1Reset" type="button">🔄 Esborra i torna a fer</button>
+        </div>
+        <p id="a1Note" class="q-score" hidden>Compara la teva resposta amb l'exemple proposat: no cal que coincideixi, n'hi ha prou que identifiqui correctament el terme.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNITAT 1.2 -->
+  <section id="u2">
+    <span class="unit-no">1.2</span>
+    <h2>Riscos i danys derivats del treball</h2>
+    <p class="lead">Com es classifiquen els danys a la salut i per què distingir-los correctament té conseqüències legals i econòmiques reals.</p>
+
+    <h3>Factors de risc</h3>
+    <p>Un <strong>factor de risc</strong> és qualsevol element present a les condicions de treball que pot provocar una disminució de la salut del treballador. Es classifiquen habitualment en factors relacionats amb les condicions de seguretat, el medi ambient de treball, la càrrega de treball i l'organització (aquests dos últims es treballen amb detall al Mòdul 2).</p>
+
+    <h3>Accident de treball</h3>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 156 de la Llei General de la Seguretat Social (LGSS)</strong> defineix l'accident de treball com <em>"tota lesió corporal que el treballador sofreixi amb ocasió o per conseqüència del treball que executi per compte d'altri"</em>.</p>
+      <p>S'hi inclou l'<strong>accident <em>in itinere</em></strong>: el que es produeix en el trajecte habitual entre el domicili i el lloc de treball (i a la inversa), sense desviacions injustificades. La llei també estableix una <strong>presumpció d'accident de treball</strong> per a les lesions que es produeixen durant el temps i al lloc de treball, llevat que es demostri el contrari.</p>
+    </div>
+
+    <h3>Malaltia professional</h3>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 157 LGSS</strong> i <strong>RD 1299/2006</strong>: una malaltia professional és la contreta a conseqüència del treball en les activitats especificades en un quadre oficial, i provocada per l'acció dels elements o substàncies que s'hi indiquen per a cada malaltia.</p>
+      <p>A diferència de l'accident de treball, la malaltia professional ha de figurar en aquest quadre tancat per ser reconeguda com a tal; si no hi figura, es pot tramitar com una altra contingència.</p>
+    </div>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Un tècnic que es fa un tall a la mà obrint un xassís de servidor pateix un <strong>accident de treball</strong>. Un tècnic que, després d'anys treballant amb vibració d'eines elèctriques, desenvolupa una lesió reconeguda al quadre oficial, podria tenir una <strong>malaltia professional</strong>. Un dolor lumbar ocasional sense relació clara amb cap quadre oficial es classificaria com a <strong>altre dany derivat del treball</strong>, sense la consideració legal de les dues categories anteriors.</p>
+    </div>
+
+    <h3>Altres danys i repercussions</h3>
+    <p>No tots els danys a la salut encaixen en les dues categories legals anteriors: hi ha <strong>altres danys derivats del treball</strong> (fatiga, estrès, insatisfacció) que, encara que no tinguin la consideració legal d'accident o malaltia professional, també són conseqüència de les condicions de treball i s'han de prevenir igualment.</p>
+    <p>Més enllà del dany a la persona, els accidents tenen repercussions econòmiques i organitzatives: costos assistencials, indemnitzacions, pèrdua de producció, danys a equips, substitució de personal i, sovint, afectació a la imatge de l'empresa.</p>
+
+    <div class="scheme">
+      <div class="tit">Piràmide de Bird</div>
+      <p>Per cada accident greu hi ha moltes situacions prèvies que no han arribat a fer mal, però que n'avisaven. La piràmide de Bird il·lustra aquesta proporció:</p>
+      <div class="pyramid">
+        <div style="background:var(--danger);width:140px">1 accident greu</div>
+        <div style="background:#d97706;width:200px">10 accidents lleus</div>
+        <div style="background:#2563eb;width:280px">30 danys materials</div>
+        <div style="background:#475569;width:380px">600 incidents sense dany (quasi accidents)</div>
+      </div>
+      <p style="margin-top:10px">La conclusió pràctica: investigar i corregir els incidents sense dany i els quasi accidents és la manera més eficaç de reduir els accidents greus.</p>
+    </div>
+
+    <div class="scheme">
+      <div class="tit">Iceberg de costos de l'accident</div>
+      <p>Els costos d'un accident no es limiten al que cobreix l'assegurança. Es parla de costos <strong>assegurats</strong> (visibles: assistència mèdica, indemnitzacions) i costos <strong>no assegurats</strong> (ocults: temps de producció perdut, formació de substituts, danys a equips, investigació, afectació del clima laboral), que solen ser molt més grans que els visibles.</p>
+    </div>
+
+    <div class="resum">
+      <div class="tit">Resum 1.2</div>
+      <ul>
+        <li>Cal distingir sempre entre accident de treball, malaltia professional i altres danys derivats del treball.</li>
+        <li>L'accident <em>in itinere</em> i la presumpció d'accident de treball són dues particularitats legals importants.</li>
+        <li>La piràmide de Bird i l'iceberg de costos mostren per què prevenir els incidents menors és clau i per què els accidents surten cars més enllà del que es veu.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="activity">
+    <span class="badge">A2</span>
+    <div class="body" style="width:100%">
+      <h4>Classificar 10 casos</h4>
+      <p>A partir de 10 situacions reals del sector TIC, cal classificar cada cas com a <strong>accident de treball (AT)</strong>, <strong>malaltia professional (MP)</strong> o <strong>altre dany derivat del treball</strong>.</p>
+      <div class="meta">
+        <span class="pill mat">Individual o en parelles</span>
+        <button class="quiz-btn" id="a2Toggle" type="button" aria-expanded="false">Mostra els casos</button>
+      </div>
+
+      <div id="a2Quiz" class="quiz" hidden>
+        <form id="a2Form">
+          <div class="q" data-correct="at" data-just="És un accident de treball: lesió corporal patida amb ocasió del treball (art. 156 LGSS).">
+            <p class="q-text">1. Un tècnic es talla la mà obrint un xassís de servidor.</p>
+            <label><input type="radio" name="c1" value="at"> Accident de treball</label>
+            <label><input type="radio" name="c1" value="mp"> Malaltia professional</label>
+            <label><input type="radio" name="c1" value="altre"> Altre dany</label>
+          </div>
+          <div class="q" data-correct="at" data-just="És un accident <em>in itinere</em>: es produeix en el trajecte habitual entre la feina i el domicili.">
+            <p class="q-text">2. En sortir de la feina, cap al cotxe, es torça el peu al pàrquing de l'empresa.</p>
+            <label><input type="radio" name="c2" value="at"> Accident de treball</label>
+            <label><input type="radio" name="c2" value="mp"> Malaltia professional</label>
+            <label><input type="radio" name="c2" value="altre"> Altre dany</label>
+          </div>
+          <div class="q" data-correct="mp" data-just="És una malaltia professional: sordesa progressiva per exposició crònica al soroll, recollida al quadre oficial (RD 1299/2006).">
+            <p class="q-text">3. Un tècnic de CPD desenvolupa una sordesa progressiva per exposició continuada al soroll dels servidors, reconeguda al quadre oficial.</p>
+            <label><input type="radio" name="c3" value="at"> Accident de treball</label>
+            <label><input type="radio" name="c3" value="mp"> Malaltia professional</label>
+            <label><input type="radio" name="c3" value="altre"> Altre dany</label>
+          </div>
+          <div class="q" data-correct="altre" data-just="És un altre dany derivat del treball: no té la consideració legal d'accident ni figura al quadre de malalties professionals.">
+            <p class="q-text">4. Un tècnic de suport pateix estrès i insatisfacció per la sobrecàrrega constant de tiquets.</p>
+            <label><input type="radio" name="c4" value="at"> Accident de treball</label>
+            <label><input type="radio" name="c4" value="mp"> Malaltia professional</label>
+            <label><input type="radio" name="c4" value="altre"> Altre dany</label>
+          </div>
+          <div class="q" data-correct="at" data-just="És un accident de treball: lesió corporal sobtada (electrocució) patida per conseqüència del treball.">
+            <p class="q-text">5. Un electricista de xarxes rep una descàrrega en manipular un quadre elèctric sense haver tallat la tensió.</p>
+            <label><input type="radio" name="c5" value="at"> Accident de treball</label>
+            <label><input type="radio" name="c5" value="mp"> Malaltia professional</label>
+            <label><input type="radio" name="c5" value="altre"> Altre dany</label>
+          </div>
+          <div class="q" data-correct="mp" data-just="És una malaltia professional: síndrome del túnel carpià per moviments repetitius, inclosa al quadre oficial.">
+            <p class="q-text">6. Una programadora desenvolupa la síndrome del túnel carpià per l'ús repetitiu del ratolí, inclosa al quadre de malalties professionals.</p>
+            <label><input type="radio" name="c6" value="at"> Accident de treball</label>
+            <label><input type="radio" name="c6" value="mp"> Malaltia professional</label>
+            <label><input type="radio" name="c6" value="altre"> Altre dany</label>
+          </div>
+          <div class="q" data-correct="at" data-just="És un accident de treball: es produeix durant un desplaçament fet per raó de la feina (en missió).">
+            <p class="q-text">7. Un tècnic té un accident de cotxe quan es desplaça a instal·lar un servidor a les oficines d'un client.</p>
+            <label><input type="radio" name="c7" value="at"> Accident de treball</label>
+            <label><input type="radio" name="c7" value="mp"> Malaltia professional</label>
+            <label><input type="radio" name="c7" value="altre"> Altre dany</label>
+          </div>
+          <div class="q" data-correct="altre" data-just="És un altre dany derivat del treball: fatiga i mal de cap sense reconeixement legal com a malaltia professional.">
+            <p class="q-text">8. Un dissenyador pateix fatiga visual i mal de cap per passar moltes hores davant la pantalla sense pauses.</p>
+            <label><input type="radio" name="c8" value="at"> Accident de treball</label>
+            <label><input type="radio" name="c8" value="mp"> Malaltia professional</label>
+            <label><input type="radio" name="c8" value="altre"> Altre dany</label>
+          </div>
+          <div class="q" data-correct="at" data-just="És un accident de treball: lesió sobtada (caiguda) patida amb ocasió del treball.">
+            <p class="q-text">9. Un tècnic cau des d'una escala de mà mentre instal·la un punt d'accés Wi-Fi al sostre.</p>
+            <label><input type="radio" name="c9" value="at"> Accident de treball</label>
+            <label><input type="radio" name="c9" value="mp"> Malaltia professional</label>
+            <label><input type="radio" name="c9" value="altre"> Altre dany</label>
+          </div>
+          <div class="q" data-correct="mp" data-just="És una malaltia professional: dermatitis per contacte repetit amb un producte químic, inclosa al quadre oficial.">
+            <p class="q-text">10. Un tècnic de manteniment desenvolupa una dermatitis a les mans pel contacte repetit amb un producte de neteja d'equips, inclosa al quadre de malalties professionals.</p>
+            <label><input type="radio" name="c10" value="at"> Accident de treball</label>
+            <label><input type="radio" name="c10" value="mp"> Malaltia professional</label>
+            <label><input type="radio" name="c10" value="altre"> Altre dany</label>
+          </div>
+        </form>
+
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn primary" id="a2Check" type="button">Corregeix</button>
+          <button class="quiz-btn" id="a2Reset" type="button">🔄 Esborra i torna a fer</button>
+        </div>
+        <p id="a2Score" class="q-score" hidden></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNITAT 1.3 -->
+  <section id="u3">
+    <span class="unit-no">1.3</span>
+    <h2>Marc jurídic de la prevenció</h2>
+    <p class="lead">D'on surten les obligacions de l'empresa i els drets del treballador en matèria de prevenció, i què passa quan no es compleixen.</p>
+
+    <h3>La piràmide normativa</h3>
+    <p>La normativa de PRL s'organitza jeràrquicament: a dalt hi ha les directives europees, que es transposen a lleis estatals, que es despleguen en reials decrets i, finalment, en guies tècniques i normes no vinculants (com les NTP de l'INSST) que ajuden a interpretar-la.</p>
+
+    <div class="scheme">
+      <div class="tit">De la Unió Europea a l'empresa</div>
+      <div class="pyramid">
+        <div style="background:#1e3a8a;width:220px">Directives de la UE</div>
+        <div style="background:#1d4ed8;width:260px">Llei 31/1995 (LPRL)</div>
+        <div style="background:#2563eb;width:300px">Reials decrets (RD 39/1997...)</div>
+        <div style="background:#60a5fa;width:340px">Guies tècniques i NTP (INSST)</div>
+      </div>
+    </div>
+
+    <div class="law">
+      <div class="tit">Normativa europea</div>
+      <p>La <strong>Directiva 89/391/CEE</strong>, coneguda com la "directiva marc" de seguretat i salut en el treball, estableix els principis generals de prevenció que després recullen les legislacions nacionals, com la Llei 31/1995. Al costat de les <strong>directives de SST</strong> (que regulen com s'ha de treballar) hi ha les <strong>directives de producte</strong> (que regulen com han de ser dissenyats els equips i màquines que s'utilitzen, com el marcatge CE).</p>
+    </div>
+
+    <h3>Articles clau de la Llei 31/1995 (LPRL)</h3>
+    <table>
+      <caption>Articles de referència de la LPRL</caption>
+      <thead><tr><th>Article</th><th>Contingut</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Art. 14</strong></td><td>Dret dels treballadors a una protecció eficaç i deure empresarial de garantir-la; és l'article "pòrtic" de la Llei.</td></tr>
+        <tr><td><strong>Art. 15</strong></td><td>Principis de l'acció preventiva: la jerarquia que cal seguir sempre (vegeu més avall).</td></tr>
+        <tr><td><strong>Art. 18</strong></td><td>Dret dels treballadors a ser informats sobre els riscos del seu lloc de treball.</td></tr>
+        <tr><td><strong>Art. 19</strong></td><td>Dret i deure de rebre formació teòrica i pràctica suficient i adequada en matèria de prevenció.</td></tr>
+        <tr><td><strong>Art. 21</strong></td><td>Dret del treballador a interrompre la seva activitat i, si cal, abandonar el lloc de treball en cas de risc greu i imminent.</td></tr>
+        <tr><td><strong>Art. 22</strong></td><td>Vigilància periòdica de l'estat de salut dels treballadors en funció dels riscos del lloc.</td></tr>
+        <tr><td><strong>Art. 29</strong></td><td>Obligacions dels treballadors en matèria de prevenció: utilitzar correctament els mitjans i equips, no posar en risc la seva seguretat ni la d'altres persones.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 39/1997</strong>, Reglament dels Serveis de Prevenció, desplega la LPRL i, al seu <strong>annex IV</strong>, fixa els continguts mínims de la formació de nivell bàsic en PRL, que és precisament la que cobreix aquest curs.</p>
+    </div>
+
+    <h3>Responsabilitats i sancions</h3>
+    <p>L'incompliment de la normativa de prevenció pot comportar diferents tipus de responsabilitat, que no s'excloen entre si: es pot donar més d'un tipus alhora pel mateix fet.</p>
+    <table>
+      <caption>Tipus de responsabilitat davant un incompliment en PRL</caption>
+      <thead><tr><th>Tipus</th><th>En què consisteix</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Administrativa</strong></td><td>Sancions econòmiques imposades per la Inspecció de Treball, regulades per la LISOS (Llei d'infraccions i sancions en l'ordre social).</td></tr>
+        <tr><td><strong>Civil</strong></td><td>Indemnització pels danys i perjudicis causats a la persona treballadora.</td></tr>
+        <tr><td><strong>Penal</strong></td><td>Quan la infracció suposa un delicte contra la seguretat i salut dels treballadors (p. ex. posar en perill greu la seva vida o integritat).</td></tr>
+        <tr><td><strong>Recàrrec de prestacions</strong></td><td>Augment de les prestacions de la Seguretat Social a càrrec de l'empresari quan l'accident es deu a manca de mesures de prevenció.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="example">
+      <div class="tit">Exemple TIC — jerarquia de l'art. 15</div>
+      <p>Davant el risc de descàrrega elèctrica en manipular un servidor: primer s'intenta <strong>eliminar</strong> el risc (treballar sempre sense tensió); si no és possible del tot, s'<strong>avalua</strong> el que resta; es <strong>combat a l'origen</strong> (bona instal·lació elèctrica, connexió a terra); es prioritza la <strong>protecció col·lectiva</strong> (diferencial, senyalització de l'armari elèctric) abans que la <strong>individual</strong> (guants dielèctrics com a última barrera, no com a única mesura).</p>
+    </div>
+
+    <div class="resum">
+      <div class="tit">Resum 1.3</div>
+      <ul>
+        <li>La normativa de PRL baixa de les directives europees a la LPRL i d'aquí als reials decrets i guies tècniques.</li>
+        <li>Els articles 14, 15, 18, 19, 21, 22 i 29 de la LPRL fixen els drets i deures bàsics de treballadors i empresa.</li>
+        <li>El RD 39/1997 i el seu annex IV són la base legal d'aquest mateix curs.</li>
+        <li>Un incompliment pot generar responsabilitat administrativa, civil, penal i un recàrrec de prestacions, de manera acumulativa.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="activity">
+    <span class="badge">A3</span>
+    <div class="body" style="width:100%">
+      <h4>Exploració normativa: la Llei 31/1995 i el RD 39/1997</h4>
+      <p>Localitza al Butlletí Oficial de l'Estat els textos de la Llei 31/1995 i el RD 39/1997, i respon un petit qüestionari sobre com estan estructurats. Activitat per fer a casa.</p>
+      <div class="meta">
+        <span class="pill mat">Individual</span>
+        <span class="pill mat">Fora de l'aula</span>
+        <button class="quiz-btn" id="a3Toggle" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+
+      <div id="a3Quiz" class="quiz" hidden>
+        <div class="res-links" style="margin-bottom:14px">
+          <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1995-24292" target="_blank" rel="noopener">Llei 31/1995 (BOE)</a>
+          <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-1853" target="_blank" rel="noopener">RD 39/1997 (BOE)</a>
+        </div>
+        <form id="a3Form">
+          <div class="q" data-correct="b" data-just="La LPRL s'organitza en títols, i dins seu en capítols i articles (el Capítol III és el que regula els drets i deures).">
+            <p class="q-text">1. Dins de la Llei 31/1995, els articles 14 a 29 (drets i deures bàsics) es troben en...</p>
+            <label><input type="radio" name="n1" value="a"> Un annex final.</label>
+            <label><input type="radio" name="n1" value="b"> Un capítol dins del cos de la Llei.</label>
+            <label><input type="radio" name="n1" value="c"> Una disposició transitòria.</label>
+          </div>
+          <div class="q" data-correct="c" data-just="El RD 39/1997 inclou diversos annexos tècnics; l'annex IV és el que fixa els continguts de la formació de nivell bàsic.">
+            <p class="q-text">2. Els continguts mínims de la formació de nivell bàsic en PRL (com aquest curs) estan fixats a...</p>
+            <label><input type="radio" name="n2" value="a"> L'article 1 del RD 39/1997.</label>
+            <label><input type="radio" name="n2" value="b"> El preàmbul de la Llei 31/1995.</label>
+            <label><input type="radio" name="n2" value="c"> Un annex del RD 39/1997 (annex IV).</label>
+          </div>
+          <div class="q" data-correct="a" data-just="El BOE permet consultar la versió consolidada, amb totes les modificacions incorporades fins a la data actual.">
+            <p class="q-text">3. Al cercador del BOE, la versió "consolidada" d'una llei és la que...</p>
+            <label><input type="radio" name="n3" value="a"> Incorpora totes les modificacions fetes fins avui.</label>
+            <label><input type="radio" name="n3" value="b"> Només mostra el text original de l'any de publicació.</label>
+            <label><input type="radio" name="n3" value="c"> És un resum no oficial fet per tercers.</label>
+          </div>
+        </form>
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn primary" id="a3Check" type="button">Corregeix</button>
+          <button class="quiz-btn" id="a3Reset" type="button">🔄 Esborra i torna a fer</button>
+        </div>
+        <p id="a3Score" class="q-score" hidden></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="activity">
+    <span class="badge">A4</span>
+    <div class="body" style="width:100%">
+      <h4>Cas pràctic: la migració del cap de setmana</h4>
+      <p>Un responsable demana a l'equip tècnic continuar treballant en una migració de servidors malgrat detectar un risc greu i imminent. Es debat si el treballador pot interrompre l'activitat i quin article de la LPRL ho empara.</p>
+      <div class="meta">
+        <span class="pill mat">Debat en grup</span>
+        <button class="quiz-btn" id="a4Toggle" type="button" aria-expanded="false">Mostra el cas</button>
+      </div>
+
+      <div id="a4Quiz" class="quiz" hidden>
+        <div class="example" style="margin-bottom:14px">
+          <div class="tit">El cas</div>
+          <p>És dissabte a la nit. Mentre migra uns servidors, l'equip detecta que l'armari elèctric del rack té cables pelats i visiblement exposats, molt a prop d'on han de seguir treballant. El responsable de projecte diu: <em>"Ja ho mirarem dilluns, ara toca acabar la migració."</em></p>
+        </div>
+        <p class="q-text">Vota: creus que el tècnic pot aturar la feina ara mateix?</p>
+        <div class="meta" id="a4Vote">
+          <button class="quiz-btn" data-vote="si" type="button">✅ Sí, pot aturar-se</button>
+          <button class="quiz-btn" data-vote="no" type="button">⛔ No, ha d'acabar primer</button>
+        </div>
+        <div id="a4Result" class="q-just" hidden style="margin-top:14px"></div>
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn" id="a4Reset" type="button">🔄 Torna a votar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOSSARI -->
+  <section id="glossari">
+    <span class="unit-no" style="background:var(--muted)">📖</span>
+    <h2>Glossari del mòdul</h2>
+    <div class="card glossary">
+      <dl>
+        <dt>Risc laboral</dt><dd>Possibilitat que un treballador pateixi un dany derivat del treball.</dd>
+        <dt>Dany derivat del treball</dt><dd>Malalties, patologies o lesions causades o agreujades per les condicions de treball.</dd>
+        <dt>Risc greu i imminent</dt><dd>Risc que probablement es materialitzarà en un futur immediat i pot suposar un dany greu per a la salut.</dd>
+        <dt>Equip de treball</dt><dd>Qualsevol màquina, aparell, instrument o instal·lació utilitzat en el treball.</dd>
+        <dt>Condició de treball</dt><dd>Qualsevol característica del treball que pugui influir significativament en la generació de riscos.</dd>
+        <dt>EPI</dt><dd>Equip de protecció individual: qualsevol equip destinat a ser portat pel treballador per protegir-lo d'un risc.</dd>
+        <dt>Accident de treball</dt><dd>Lesió corporal que el treballador sofreix amb ocasió o per conseqüència del treball (art. 156 LGSS).</dd>
+        <dt>Malaltia professional</dt><dd>Malaltia contreta a conseqüència del treball en activitats i per agents recollits en un quadre oficial (art. 157 LGSS, RD 1299/2006).</dd>
+        <dt>Jerarquia preventiva (art. 15 LPRL)</dt><dd>Ordre en què s'han d'aplicar les mesures de prevenció: eliminar, avaluar el que no es pot evitar, combatre a l'origen i protegir col·lectivament abans que individualment.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- RECURSOS -->
+  <section>
+    <h2 style="font-size:1.1rem">Recursos per aprofundir</h2>
+    <div class="res-links">
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1995-24292" target="_blank" rel="noopener">Llei 31/1995 (BOE)</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-1853" target="_blank" rel="noopener">RD 39/1997 (BOE)</a>
+      <a href="https://www.insst.es/" target="_blank" rel="noopener">INSST</a>
+    </div>
+  </section>
+
+  <!-- PROVA -->
+  <section id="prova">
+    <div class="exam-box">
+      <div class="tit">📝 Prova M1</div>
+      <p style="margin:0">Test de 20 preguntes amb 4 opcions de resposta cadascuna, sobre els continguts de les unitats 1.1, 1.2 i 1.3. Cada encert val 0,5 punts i els errors no resten. Cal un mínim de 5/10 per ser APTE en aquesta prova.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Mòdul 1 · Seguretat i salut en el treball · Curs bàsic de PRL, sector informàtica</span>
+  <button class="theme-btn" id="themeBtn" type="button">🌓 Canvia el tema</button>
+</footer>
+
+<script>
+  // Test diagnòstic A0: mostrar/amagar, corregir i reiniciar
+  (function(){
+    var toggle = document.getElementById('a0Toggle');
+    var quiz = document.getElementById('a0Quiz');
+    var form = document.getElementById('a0Form');
+    var checkBtn = document.getElementById('a0Check');
+    var resetBtn = document.getElementById('a0Reset');
+    var scoreEl = document.getElementById('a0Score');
+
+    toggle.addEventListener('click', function(){
+      var open = !quiz.hidden;
+      quiz.hidden = open;
+      toggle.setAttribute('aria-expanded', String(!open));
+      toggle.textContent = open ? 'Mostra el test' : 'Amaga el test';
+    });
+
+    checkBtn.addEventListener('click', function(){
+      var questions = form.querySelectorAll('.q');
+      var answered = 0, correct = 0;
+      questions.forEach(function(q){
+        var name = q.querySelector('input').name;
+        var chosen = form.querySelector('input[name="' + name + '"]:checked');
+        var labels = q.querySelectorAll('label');
+        labels.forEach(function(l){ l.classList.remove('sel','right'); });
+        q.classList.remove('ok','ko');
+        var rightVal = q.getAttribute('data-correct');
+        labels.forEach(function(l){
+          var val = l.querySelector('input').value;
+          if (val === rightVal) l.classList.add('right');
+        });
+        if (chosen){
+          answered++;
+          var chosenLabel = chosen.closest('label');
+          chosenLabel.classList.add('sel');
+          if (chosen.value === rightVal){ correct++; q.classList.add('ok'); }
+          else { q.classList.add('ko'); }
+        }
+      });
+      scoreEl.hidden = false;
+      if (answered < questions.length){
+        scoreEl.textContent = 'Has respost ' + answered + ' de ' + questions.length + ' preguntes. Es mostren les respostes correctes en verd.';
+      } else {
+        scoreEl.textContent = 'Resultat: ' + correct + ' de ' + questions.length + ' correctes. Record: aquest test és diagnòstic i no puntua.';
+      }
+    });
+
+    resetBtn.addEventListener('click', function(){
+      form.reset();
+      form.querySelectorAll('label').forEach(function(l){ l.classList.remove('sel','right'); });
+      form.querySelectorAll('.q').forEach(function(q){ q.classList.remove('ok','ko'); });
+      scoreEl.hidden = true;
+      scoreEl.textContent = '';
+    });
+  })();
+
+  // Fitxa A1: mostrar/amagar, corregir (mostra l'exemple model) i reiniciar
+  (function(){
+    var toggle = document.getElementById('a1Toggle');
+    var quiz = document.getElementById('a1Quiz');
+    var form = document.getElementById('a1Form');
+    var checkBtn = document.getElementById('a1Check');
+    var resetBtn = document.getElementById('a1Reset');
+    var note = document.getElementById('a1Note');
+
+    toggle.addEventListener('click', function(){
+      var open = !quiz.hidden;
+      quiz.hidden = open;
+      toggle.setAttribute('aria-expanded', String(!open));
+      toggle.textContent = open ? 'Mostra la fitxa' : 'Amaga la fitxa';
+    });
+
+    checkBtn.addEventListener('click', function(){
+      form.querySelectorAll('.fq').forEach(function(fq){
+        var ta = fq.querySelector('textarea');
+        var modelP = fq.querySelector('.fq-model');
+        modelP.innerHTML = '<strong>Exemple proposat:</strong> ' + ta.getAttribute('data-model');
+        modelP.hidden = false;
+      });
+      note.hidden = false;
+    });
+
+    resetBtn.addEventListener('click', function(){
+      form.querySelectorAll('textarea').forEach(function(ta){ ta.value = ''; });
+      form.querySelectorAll('.fq-model').forEach(function(p){ p.hidden = true; p.innerHTML=''; });
+      note.hidden = true;
+    });
+  })();
+
+  // Activitat A2: mostrar/amagar, corregir amb justificació i reiniciar
+  (function(){
+    var toggle = document.getElementById('a2Toggle');
+    var quiz = document.getElementById('a2Quiz');
+    var form = document.getElementById('a2Form');
+    var checkBtn = document.getElementById('a2Check');
+    var resetBtn = document.getElementById('a2Reset');
+    var scoreEl = document.getElementById('a2Score');
+
+    toggle.addEventListener('click', function(){
+      var open = !quiz.hidden;
+      quiz.hidden = open;
+      toggle.setAttribute('aria-expanded', String(!open));
+      toggle.textContent = open ? 'Mostra els casos' : 'Amaga els casos';
+    });
+
+    checkBtn.addEventListener('click', function(){
+      var questions = form.querySelectorAll('.q');
+      var answered = 0, correct = 0;
+      questions.forEach(function(q){
+        var name = q.querySelector('input').name;
+        var chosen = form.querySelector('input[name="' + name + '"]:checked');
+        var labels = q.querySelectorAll('label');
+        labels.forEach(function(l){ l.classList.remove('sel','right'); });
+        q.classList.remove('ok','ko');
+        var rightVal = q.getAttribute('data-correct');
+        labels.forEach(function(l){
+          var val = l.querySelector('input').value;
+          if (val === rightVal) l.classList.add('right');
+        });
+        var just = q.querySelector('.q-just');
+        if (!just){
+          just = document.createElement('p');
+          just.className = 'q-just';
+          q.appendChild(just);
+        }
+        just.innerHTML = q.getAttribute('data-just');
+        just.hidden = false;
+        if (chosen){
+          answered++;
+          var chosenLabel = chosen.closest('label');
+          chosenLabel.classList.add('sel');
+          if (chosen.value === rightVal){ correct++; q.classList.add('ok'); }
+          else { q.classList.add('ko'); }
+        }
+      });
+      scoreEl.hidden = false;
+      if (answered < questions.length){
+        scoreEl.textContent = 'Has respost ' + answered + ' de ' + questions.length + ' casos. Es mostren les respostes correctes i la justificació de cadascun.';
+      } else {
+        scoreEl.textContent = 'Resultat: ' + correct + ' de ' + questions.length + ' correctes.';
+      }
+    });
+
+    resetBtn.addEventListener('click', function(){
+      form.reset();
+      form.querySelectorAll('label').forEach(function(l){ l.classList.remove('sel','right'); });
+      form.querySelectorAll('.q').forEach(function(q){ q.classList.remove('ok','ko'); });
+      form.querySelectorAll('.q-just').forEach(function(p){ p.hidden = true; });
+      scoreEl.hidden = true;
+      scoreEl.textContent = '';
+    });
+  })();
+
+  // Activitat A3: mostrar/amagar, corregir i reiniciar
+  (function(){
+    var toggle = document.getElementById('a3Toggle');
+    var quiz = document.getElementById('a3Quiz');
+    var form = document.getElementById('a3Form');
+    var checkBtn = document.getElementById('a3Check');
+    var resetBtn = document.getElementById('a3Reset');
+    var scoreEl = document.getElementById('a3Score');
+
+    toggle.addEventListener('click', function(){
+      var open = !quiz.hidden;
+      quiz.hidden = open;
+      toggle.setAttribute('aria-expanded', String(!open));
+      toggle.textContent = open ? 'Mostra l\'activitat' : 'Amaga l\'activitat';
+    });
+
+    checkBtn.addEventListener('click', function(){
+      var questions = form.querySelectorAll('.q');
+      var answered = 0, correct = 0;
+      questions.forEach(function(q){
+        var name = q.querySelector('input').name;
+        var chosen = form.querySelector('input[name="' + name + '"]:checked');
+        var labels = q.querySelectorAll('label');
+        labels.forEach(function(l){ l.classList.remove('sel','right'); });
+        q.classList.remove('ok','ko');
+        var rightVal = q.getAttribute('data-correct');
+        labels.forEach(function(l){
+          var val = l.querySelector('input').value;
+          if (val === rightVal) l.classList.add('right');
+        });
+        var just = q.querySelector('.q-just');
+        if (!just){
+          just = document.createElement('p');
+          just.className = 'q-just';
+          q.appendChild(just);
+        }
+        just.innerHTML = q.getAttribute('data-just');
+        just.hidden = false;
+        if (chosen){
+          answered++;
+          chosen.closest('label').classList.add('sel');
+          if (chosen.value === rightVal){ correct++; q.classList.add('ok'); }
+          else { q.classList.add('ko'); }
+        }
+      });
+      scoreEl.hidden = false;
+      scoreEl.textContent = answered < questions.length
+        ? 'Has respost ' + answered + ' de ' + questions.length + ' preguntes.'
+        : 'Resultat: ' + correct + ' de ' + questions.length + ' correctes.';
+    });
+
+    resetBtn.addEventListener('click', function(){
+      form.reset();
+      form.querySelectorAll('label').forEach(function(l){ l.classList.remove('sel','right'); });
+      form.querySelectorAll('.q').forEach(function(q){ q.classList.remove('ok','ko'); });
+      form.querySelectorAll('.q-just').forEach(function(p){ p.hidden = true; });
+      scoreEl.hidden = true;
+      scoreEl.textContent = '';
+    });
+  })();
+
+  // Activitat A4: mostrar/amagar i votació interactiva
+  (function(){
+    var toggle = document.getElementById('a4Toggle');
+    var quiz = document.getElementById('a4Quiz');
+    var voteWrap = document.getElementById('a4Vote');
+    var result = document.getElementById('a4Result');
+    var resetBtn = document.getElementById('a4Reset');
+
+    toggle.addEventListener('click', function(){
+      var open = !quiz.hidden;
+      quiz.hidden = open;
+      toggle.setAttribute('aria-expanded', String(!open));
+      toggle.textContent = open ? 'Mostra el cas' : 'Amaga el cas';
+    });
+
+    voteWrap.querySelectorAll('button').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        voteWrap.querySelectorAll('button').forEach(function(b){ b.classList.remove('primary'); });
+        btn.classList.add('primary');
+        result.hidden = false;
+        if (btn.getAttribute('data-vote') === 'si'){
+          result.innerHTML = '<strong>Correcte.</strong> L\'art. 21 de la LPRL dona al treballador el dret a interrompre la seva activitat i, si cal, abandonar el lloc de treball quan consideri que hi ha un risc greu i imminent per a la seva vida o salut. No cal esperar l\'autorització del responsable per protegir-se.';
+        } else {
+          result.innerHTML = '<strong>Revisem-ho.</strong> L\'art. 21 de la LPRL dona al treballador el dret a interrompre la seva activitat i, si cal, abandonar el lloc de treball quan consideri que hi ha un risc greu i imminent. "Ja ho mirarem dilluns" no és una resposta vàlida davant d\'aquest tipus de risc.';
+        }
+      });
+    });
+
+    resetBtn.addEventListener('click', function(){
+      voteWrap.querySelectorAll('button').forEach(function(b){ b.classList.remove('primary'); });
+      result.hidden = true;
+      result.innerHTML = '';
+    });
+  })();
+
+  var root = document.documentElement;
+  try { var t = localStorage.getItem('prl-theme'); if (t) root.setAttribute('data-theme', t); } catch(e){}
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme') ||
+      (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('prl-theme', next); } catch(e){}
+  });
+</script>
+</body>
+</html>

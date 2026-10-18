@@ -1,0 +1,1516 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mòdul 2 · Riscos generals i la seva prevenció</title>
+<meta name="description" content="Mòdul 2 del curs bàsic de PRL: condicions de seguretat, medi ambient de treball, càrrega de treball, avaluació i protecció, emergències i primers auxilis.">
+<style>
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5;
+    --text:#1b2330; --muted:#5a6577; --line:#dde2ea;
+    --accent:#e0661b; --accent-soft:#fdeee4;
+    --m1:#2f6fd1; --m2:#c2410c; --m3:#0f8a6a; --m4:#caa005;
+    --danger:#b91c1c; --danger-soft:#fdecec;
+    --law:#1d4ed8; --law-soft:#eaf1fd;
+    --ok-soft:#d1f5e3;
+    --radius:14px; --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.06);
+    --c:var(--m2);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+      --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+      --accent:#f08a46; --accent-soft:#2b1d14;
+      --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+      --danger:#f87171; --danger-soft:#2c1717;
+      --law:#7aa6f5; --law-soft:#182435;
+      --ok-soft:#133227;
+      --shadow:none;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+    --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+    --accent:#f08a46; --accent-soft:#2b1d14;
+    --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+    --danger:#f87171; --danger-soft:#2c1717;
+    --law:#7aa6f5; --law-soft:#182435;
+    --ok-soft:#133227;
+    --shadow:none;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;}
+  a{color:var(--accent)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px}
+
+  header.hero{background:linear-gradient(135deg,#1b2330 0%,#2a3a52 100%);color:#fff;padding:40px 0 34px}
+  .hero .back{display:inline-flex;align-items:center;gap:6px;color:#cfd8e6;text-decoration:none;font-size:.9rem;font-weight:600}
+  .hero .back:hover{color:#fff}
+  .hero .tag{display:inline-block;background:var(--c);color:#fff;font-weight:800;font-size:.8rem;
+    letter-spacing:.06em;padding:4px 10px;border-radius:999px;margin-top:16px}
+  .hero h1{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.2;margin:12px 0 8px}
+  .hero p{max-width:640px;color:#cfd8e6;margin:0}
+
+  nav.top{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--line)}
+  nav.top .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  nav.top a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:.9rem;
+    padding:13px 10px;border-bottom:3px solid transparent}
+  nav.top a:hover{color:var(--text);border-bottom-color:var(--c)}
+
+  main{padding-bottom:40px}
+  section{padding:40px 0 4px;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:0}
+  .unit-no{display:inline-block;background:var(--c);color:#fff;font-weight:800;border-radius:8px;
+    padding:3px 9px;font-size:.82rem;margin-bottom:10px}
+  h2{font-size:1.4rem;margin:0 0 4px}
+  h3{font-size:1.1rem;margin:28px 0 8px}
+  .lead{color:var(--muted);margin:4px 0 20px}
+  p{margin:0 0 14px}
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin-bottom:6px}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  .objectius{border-left:5px solid var(--c)}
+  .objectius h3{margin-top:0;font-size:1rem}
+  .objectius ul{margin-bottom:0}
+
+  .law{background:var(--law-soft);border:1px solid var(--law);border-left-width:5px;
+    border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .law .tit{font-weight:800;color:var(--law);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .law p{margin:0;font-size:.95rem}
+  .law p+p{margin-top:8px}
+
+  .example{background:var(--accent-soft);border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .example .tit{font-weight:800;color:var(--accent);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .example p{margin:0}
+  .example p+p{margin-top:8px}
+
+  table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:.93rem}
+  table caption{text-align:left;font-weight:700;margin-bottom:8px;color:var(--text)}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:var(--surface-2);font-weight:700}
+  .table-scroll{overflow-x:auto;margin:0 0 18px}
+  .table-scroll table{margin:0}
+
+  .activity{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin:0 0 16px;display:flex;gap:14px;align-items:flex-start}
+  .activity .badge{flex:0 0 auto;background:var(--accent);color:#fff;font-weight:800;border-radius:10px;
+    padding:5px 10px;font-size:.82rem}
+  .activity .body{width:100%;min-width:0}
+  .activity .body h4{margin:0 0 4px;font-size:1rem}
+  .activity .body p{margin:0 0 6px}
+  .activity .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .pill{font-size:.8rem;padding:3px 10px;border-radius:8px;background:var(--surface-2);color:var(--text)}
+  .pill.mat{background:var(--surface-2)}
+  .pill.crit{background:var(--danger);color:#fff;font-weight:700}
+
+  .glossary dl{margin:0}
+  .glossary dt{font-weight:700;margin-top:10px}
+  .glossary dt:first-child{margin-top:0}
+  .glossary dd{margin:2px 0 0;color:var(--muted)}
+
+  .resum{background:var(--surface-2);border-radius:var(--radius);padding:16px 18px;margin:0 0 18px}
+  .resum .tit{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:8px}
+  .resum ul{margin:0}
+
+  .scheme{background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin:0 0 18px;font-size:.93rem}
+  .scheme .tit{font-weight:700;margin-bottom:10px}
+  .pyramid{display:flex;flex-direction:column;align-items:center;gap:2px;margin:10px 0}
+  .pyramid div{color:#fff;font-size:.82rem;font-weight:700;padding:7px 10px;border-radius:6px;text-align:center;max-width:100%}
+
+  /* Esquemes de flux (PAS, cadena de socors, seqüències) */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px;margin:10px 0}
+  .flow .step{flex:1 1 120px;background:var(--c);color:#fff;border-radius:10px;padding:10px 12px;font-size:.85rem}
+  .flow .step b{display:block;font-size:.95rem;margin-bottom:2px}
+  .flow .arrow{align-self:center;color:var(--muted);font-weight:800}
+
+  /* Triangle del foc */
+  .fire{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:10px 0}
+  .fire div{border-radius:10px;padding:10px 12px;font-size:.86rem;color:#fff}
+  .fire b{display:block}
+
+  /* Matriu de riscos INSST */
+  .risk td.r{font-weight:700;text-align:center;color:#1b2330}
+  .r-tri{background:#d1f5e3}.r-tol{background:#e6f4c8}.r-mod{background:#fdf1c4}
+  .r-imp{background:#fddcc4}.r-int{background:#f9c7c7}
+
+  /* Etiqueta CLP de l'activitat A7 */
+  .label-clp{border:3px solid #b91c1c;border-radius:10px;background:#fff;color:#1b2330;padding:14px 16px;margin:0 0 14px;font-size:.88rem}
+  .label-clp .name{font-weight:800;font-size:1rem}
+  .label-clp .picto{display:flex;gap:10px;margin:8px 0}
+  .label-clp .picto span{width:58px;height:58px;border:3px solid #b91c1c;transform:rotate(45deg);
+    display:flex;align-items:center;justify-content:center;background:#fff;margin:8px}
+  .label-clp .picto span i{transform:rotate(-45deg);font-style:normal;font-size:1.5rem}
+  .label-clp .word{font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+
+  /* Bloc obligatori */
+  .oblig{background:var(--danger-soft);border:2px solid var(--danger);border-radius:var(--radius);
+    padding:12px 16px;margin:0 0 18px;display:flex;gap:12px;align-items:center}
+  .oblig .pill.crit{flex:0 0 auto}
+  .oblig p{margin:0;font-size:.93rem}
+
+  .exam-box{background:var(--danger-soft);border:1px solid var(--danger);border-left-width:5px;
+    border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+  .exam-box .tit{color:var(--danger);font-weight:800;margin-bottom:6px}
+  .exam-box ul{margin:8px 0 0}
+
+  .quiz-btn{background:var(--surface-2);border:1px solid var(--line);color:var(--text);border-radius:8px;
+    padding:7px 14px;cursor:pointer;font:inherit;font-size:.86rem;font-weight:600}
+  .quiz-btn:hover{border-color:var(--c)}
+  .quiz-btn.primary{background:var(--c);border-color:var(--c);color:#fff}
+  .quiz{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
+  .sub{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)}
+  .sub:first-child{margin-top:0;padding-top:0;border-top:0}
+  .sub-tit{font-weight:800;margin:0 0 10px}
+  .q{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .q:last-of-type{border-bottom:0;margin-bottom:0;padding-bottom:0}
+  .q-text{font-weight:700;margin:0 0 8px}
+  .q label{display:block;background:var(--surface-2);border-radius:8px;padding:8px 12px;margin-bottom:6px;
+    cursor:pointer;font-size:.93rem}
+  .q label:hover{background:var(--line)}
+  .q input{margin-right:8px}
+  .q.ok label.sel{background:var(--ok-soft);outline:2px solid var(--m3)}
+  .q.ko label.sel{background:var(--danger-soft);outline:2px solid var(--danger)}
+  .q.done label.right{background:var(--ok-soft);outline:2px solid var(--m3)}
+  .q-score{font-weight:700;margin-top:14px}
+  .q-just{margin:8px 0 0;padding:8px 12px;background:var(--surface-2);border-radius:8px;
+    font-size:.88rem;color:var(--muted)}
+
+  .fq{margin-bottom:16px}
+  .fq-label{display:block;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .fq textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+    color:var(--text);padding:9px 12px;font:inherit;font-size:.93rem;resize:vertical}
+  .fq textarea:focus{outline:2px solid var(--c);border-color:var(--c)}
+  .fq-model{margin:8px 0 0;padding:8px 12px;background:var(--accent-soft);border-radius:8px;
+    font-size:.9rem;color:var(--text)}
+  .fq-model strong{color:var(--accent)}
+
+  /* Llistes de verificació */
+  .chk label{display:flex;gap:10px;align-items:flex-start;background:var(--surface-2);border-radius:8px;
+    padding:8px 12px;margin-bottom:6px;cursor:pointer;font-size:.93rem}
+  .chk label:hover{background:var(--line)}
+  .chk input{margin-top:5px;flex:0 0 auto}
+  .chk label.crit-item{border-left:4px solid var(--danger)}
+  .chk label.ok{background:var(--ok-soft);outline:2px solid var(--m3)}
+  .chk label.ko{background:var(--danger-soft);outline:2px solid var(--danger)}
+  .chk .note{display:block;font-size:.85rem;color:var(--muted);margin-top:2px}
+
+  .vote-case{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .vote-case:last-of-type{border-bottom:0}
+
+  .res-links{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
+  .res-links a{font-size:.88rem;background:var(--surface-2);color:var(--text);text-decoration:none;
+    padding:6px 12px;border-radius:999px}
+  .res-links a:hover{color:var(--c)}
+
+  footer{margin-top:20px;padding:24px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem;
+    display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+  .theme-btn{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;
+    padding:6px 10px;cursor:pointer;font:inherit;font-size:.85rem}
+
+  @media print{
+    nav.top,.theme-btn{display:none}
+    header.hero{background:none;color:#000}
+    .hero p,.hero .back{color:#000}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a class="back" href="index.html">← Tornar als mòduls</a>
+    <div class="tag">MÒDUL 2</div>
+    <h1>Riscos generals i la seva prevenció</h1>
+    <p>Condicions de seguretat, medi ambient de treball, càrrega de treball, avaluació i protecció, emergències i primers auxilis.</p>
+  </div>
+</header>
+
+<nav class="top" aria-label="Unitats del mòdul">
+  <div class="wrap">
+    <a href="#objectius">Objectius</a>
+    <a href="#u1">2.1 Seguretat</a>
+    <a href="#u2">2.2 Medi ambient</a>
+    <a href="#u3">2.3 Càrrega de treball</a>
+    <a href="#u4">2.4 Avaluació i protecció</a>
+    <a href="#u5">2.5 Emergències</a>
+    <a href="#u6">2.6 Primers auxilis</a>
+    <a href="#glossari">Glossari</a>
+    <a href="#prova">Prova</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- OBJECTIUS -->
+  <section id="objectius">
+    <div class="card objectius">
+      <h3>Objectius del mòdul</h3>
+      <ul>
+        <li>Identificar els riscos lligats a les condicions de seguretat, al medi ambient de treball i a la càrrega de treball.</li>
+        <li>Fer una avaluació elemental dels riscos d'un lloc de treball i proposar mesures de protecció col·lectiva i individual.</li>
+        <li>Conèixer els objectius i els procediments de la vigilància de la salut.</li>
+        <li>Actuar correctament en una emergència i en una evacuació, seguint els protocols del centre.</li>
+        <li>Aplicar les actuacions bàsiques de primers auxilis: PAS, avaluació primària, posició lateral de seguretat i control d'hemorràgies.</li>
+        <li>Cooperar amb els equips de treball per reduir incidents i accidents.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- UNITAT 2.1 -->
+  <section id="u1">
+    <span class="unit-no">2.1</span>
+    <h2>Condicions de seguretat</h2>
+    <p class="lead">Els riscos que provenen de l'espai, les eines, les màquines i la instal·lació elèctrica: els que solen causar accidents de treball.</p>
+
+    <h3>Llocs i superfícies de treball</h3>
+    <p>Moltes lesions a les oficines i als departaments d'informàtica no venen de res sofisticat: són <strong>caigudes al mateix nivell</strong> (ensopegar amb un cable, un calaix obert, una caixa al passadís) i <strong>caigudes a diferent nivell</strong> (des d'una escala de mà o per una rajola aixecada d'un fals terra tècnic). L'ordre i la neteja són la primera mesura preventiva.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 486/1997</strong>, de llocs de treball: fixa les condicions dels espais (superfícies, passadissos, escales, portes, vies d'evacuació). L'<strong>annex II</strong> regula l'ordre, la neteja i el manteniment: les zones de pas i les sortides s'han de mantenir lliures d'obstacles.</p>
+      <p>L'ús de les <strong>escales de mà</strong> el regula el <strong>RD 1215/1997</strong>, d'equips de treball, modificat pel <strong>RD 2177/2004</strong>.</p>
+    </div>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>En una aula o una oficina amb molts equips, els cables d'alimentació i de xarxa travessen sovint el pas. Mesura correcta: <strong>canaletes, passacables al terra o columnes de servei</strong>, i fer arribar els cables per sota de les taules. Al CPD, cada rajola del fals terra que s'aixeca per passar cablejat s'ha de tornar a col·locar o senyalitzar abans de marxar.</p>
+    </div>
+
+    <h3>Eines i màquines</h3>
+    <p>Les <strong>eines manuals</strong> (tornavisos, cúters, tisores, crimpadores, alicates) causen talls i punxades sobretot quan s'utilitzen per a una funció que no és la seva o en mal estat. Les <strong>eines elèctriques</strong> (trepant per fixar racks o suports) afegeixen el risc elèctric i de projecció de partícules. Les <strong>màquines</strong> de l'oficina (destructores de paper, plastificadores, grans impressores) tenen parts mòbils o calentes.</p>
+    <ul>
+      <li>Fer servir cada eina per a la seva funció i guardar-la en bon estat.</li>
+      <li>Tallar sempre en direcció contrària al cos i retirar la fulla del cúter després d'usar-lo.</li>
+      <li>No anul·lar mai les proteccions ni els dispositius de seguretat de les màquines.</li>
+      <li>Comprovar que l'equip té el <strong>marcatge CE</strong> i llegir el manual d'instruccions.</li>
+    </ul>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 1215/1997</strong>, d'equips de treball: l'empresari ha de posar a disposició dels treballadors equips adequats i segurs, mantenir-los i formar-ne els usuaris. Els equips nous han de complir les directives de producte (marcatge CE).</p>
+    </div>
+
+    <h3>Electricitat</h3>
+    <p>El risc elèctric és el més rellevant del sector TIC. Es parla de <strong>contacte directe</strong> quan es toca una part que normalment té tensió (un born, un cable pelat) i de <strong>contacte indirecte</strong> quan es toca una part que s'ha posat en tensió per una avaria (la carcassa metàl·lica d'un servidor amb un defecte d'aïllament). Els efectes depenen de la intensitat, el temps de contacte i el recorregut del corrent pel cos: des d'una rampa fins a cremades, fibril·lació ventricular i la mort.</p>
+
+    <table>
+      <caption>Proteccions elèctriques habituals</caption>
+      <thead><tr><th>Element</th><th>Per a què serveix</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Interruptor diferencial</strong></td><td>Talla el corrent quan detecta una fuita a terra: protegeix les <strong>persones</strong> davant contactes indirectes.</td></tr>
+        <tr><td><strong>Magnetotèrmic</strong></td><td>Protegeix la <strong>instal·lació</strong> de sobrecàrregues i curtcircuits. No està pensat per protegir les persones.</td></tr>
+        <tr><td><strong>Presa de terra</strong></td><td>Desvia a terra el corrent d'un defecte perquè actuï el diferencial.</td></tr>
+        <tr><td><strong>Doble aïllament</strong></td><td>Equips amb el símbol de dos quadrats: no necessiten presa de terra.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 614/2001</strong>, sobre protecció davant el risc elèctric. L'<strong>annex II</strong> estableix el procediment per treballar sense tensió, conegut com les <strong>"cinc regles d'or"</strong>. Determinats treballs només els poden fer treballadors <strong>autoritzats</strong> o <strong>qualificats</strong>.</p>
+      <p>Les instal·lacions de baixa tensió han de complir el <strong>Reglament electrotècnic per a baixa tensió (RD 842/2002)</strong>.</p>
+    </div>
+
+    <div class="scheme">
+      <div class="tit">Les cinc regles d'or per treballar sense tensió (RD 614/2001, annex II)</div>
+      <div class="flow">
+        <div class="step"><b>1. Desconnectar</b>totes les fonts de tensió</div><span class="arrow">→</span>
+        <div class="step"><b>2. Bloquejar</b>per evitar la reconnexió i senyalitzar-ho</div><span class="arrow">→</span>
+        <div class="step"><b>3. Verificar</b>l'absència de tensió</div><span class="arrow">→</span>
+        <div class="step"><b>4. Posar a terra</b>i en curtcircuit</div><span class="arrow">→</span>
+        <div class="step"><b>5. Delimitar</b>i senyalitzar la zona</div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Abans d'obrir una font d'alimentació o de canviar un component dins d'un servidor: apagar l'equip, <strong>desendollar-lo</strong> (no n'hi ha prou amb el botó d'engegada) i, si té doble font, desendollar les dues. Recorda que un SAI segueix donant tensió encara que el quadre estigui tallat. I no encadenar regletes ("lladres") ni connectar més aparells dels que admeten: és una causa clàssica d'escalfament i incendi.</p>
+    </div>
+
+    <h3>Incendis</h3>
+    <p>Perquè hi hagi foc calen tres elements alhora: <strong>combustible</strong>, <strong>comburent</strong> (l'oxigen de l'aire) i <strong>energia d'activació</strong> (calor, una espurna). Un cop iniciat, el foc es manté per una <strong>reacció en cadena</strong>: per això es parla també del tetraedre del foc. Apagar un foc vol dir eliminar un d'aquests elements.</p>
+
+    <div class="scheme">
+      <div class="tit">Triangle (tetraedre) del foc i com s'apaga</div>
+      <div class="fire">
+        <div style="background:#92400e"><b>Combustible</b>Paper, cartró, plàstics de carcasses, cables → s'apaga per <em>eliminació</em> (retirar-lo).</div>
+        <div style="background:#1d4ed8"><b>Comburent (oxigen)</b>L'aire → s'apaga per <em>sufocació</em> (tapar, CO<sub>2</sub>).</div>
+        <div style="background:#b91c1c"><b>Energia d'activació</b>Calor, espurnes, sobrecàrregues → s'apaga per <em>refredament</em> (aigua).</div>
+        <div style="background:#475569"><b>Reacció en cadena</b>Manté el foc viu → s'apaga per <em>inhibició</em> (pols química).</div>
+      </div>
+    </div>
+
+    <div class="table-scroll">
+    <table>
+      <caption>Classes de foc i agent extintor adequat</caption>
+      <thead><tr><th>Classe</th><th>Què crema</th><th>Exemple TIC</th><th>Agent adequat</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A</strong></td><td>Sòlids que fan brasa</td><td>Paper, cartrons d'embalatge, mobiliari</td><td>Aigua polvoritzada, escuma, pols ABC</td></tr>
+        <tr><td><strong>B</strong></td><td>Líquids o sòlids que es fonen</td><td>Alcohol isopropílic, dissolvents, gasoil del grup electrogen</td><td>Escuma, pols ABC, CO<sub>2</sub> (mai aigua a raig)</td></tr>
+        <tr><td><strong>C</strong></td><td>Gasos</td><td>Butà, gas natural de la calefacció</td><td>Pols ABC i, sobretot, tallar el subministrament</td></tr>
+        <tr><td><strong>D</strong></td><td>Metalls</td><td>Poc habitual en TIC (magnesi, sodi)</td><td>Pols específica per a metalls</td></tr>
+        <tr><td><strong>F</strong></td><td>Olis i greixos de cuina</td><td>La paella de l'office</td><td>Extintor de classe F o tapar el recipient</td></tr>
+        <tr><td><strong>Elèctric*</strong></td><td>Equips amb tensió</td><td>Servidor, quadre, SAI</td><td><strong>CO<sub>2</sub></strong> (no conductor i sense residus); mai aigua ni escuma</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:.88rem;color:var(--muted)">* El foc en equips amb tensió no és una classe pròpia de la norma UNE-EN 2, però l'extintor indica si es pot fer servir en presència de tensió.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 513/2017</strong>, Reglament d'instal·lacions de protecció contra incendis (RIPCI): fixa com han de ser els extintors, les boques d'incendi equipades (BIE) i els detectors, i el seu manteniment. El <strong>Codi Tècnic de l'Edificació (DB-SI)</strong> estableix on s'han de col·locar. La senyalització dels equips contra incendis (color vermell) la regula el <strong>RD 485/1997</strong>.</p>
+    </div>
+
+    <div class="scheme">
+      <div class="tit">Com fer servir un extintor portàtil</div>
+      <div class="flow">
+        <div class="step"><b>1. Despenjar</b>i portar-lo dret fins al foc</div><span class="arrow">→</span>
+        <div class="step"><b>2. Treure el passador</b>i fer una descàrrega de prova</div><span class="arrow">→</span>
+        <div class="step"><b>3. Posar-se</b>d'esquena a la sortida, amb el vent o el corrent d'aire a favor</div><span class="arrow">→</span>
+        <div class="step"><b>4. Apuntar a la base</b>de les flames i escombrar d'un costat a l'altre</div>
+      </div>
+      <p style="margin:8px 0 0">Un extintor només serveix per a un <strong>conat</strong> (un foc petit i incipient). Si el foc no s'apaga en pocs segons o el fum omple l'espai, cal sortir i tancar la porta.</p>
+    </div>
+
+    <h3>Emmagatzematge, manipulació i transport</h3>
+    <p>Als magatzems de material informàtic hi ha risc de caiguda d'objectes, de bolcada de prestatgeries i de cops. Mesures bàsiques: <strong>prestatgeries ancorades</strong> a la paret i sense sobrecàrrega, el material pesant a baix i el lleuger a dalt, no enfilar-se als prestatges, i fer servir <strong>carretons o transpalets</strong> per moure servidors, SAI o bateries.</p>
+
+    <h3>Treballs de manteniment</h3>
+    <p>El manteniment pot ser <strong>preventiu</strong> (programat, abans que falli) o <strong>correctiu</strong> (quan ja ha fallat, sovint amb pressa i més risc). Els accidents greus en manteniment solen venir d'equips que es posen en marxa o en tensió mentre algú hi treballa: per això es fa servir la <strong>consignació</strong> (bloquejar i etiquetar la font d'energia). Quan hi intervenen empreses externes (climatització, electricitat del CPD), cal coordinar-se.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 171/2004</strong>, de coordinació d'activitats empresarials: quan treballadors de diverses empreses coincideixen en un mateix centre, s'han d'informar mútuament dels riscos i coordinar les mesures preventives.</p>
+    </div>
+
+    <div class="resum">
+      <div class="tit">Resum 2.1</div>
+      <ul>
+        <li>L'ordre i la neteja (cables recollits, passos lliures) eviten la majoria de caigudes.</li>
+        <li>Eines adequades, en bon estat i amb les proteccions posades; equips amb marcatge CE.</li>
+        <li>Treballar sense tensió seguint les cinc regles d'or; el diferencial protegeix les persones.</li>
+        <li>Conèixer les classes de foc: en equips amb tensió, CO<sub>2</sub> i mai aigua. Un extintor és només per a conats.</li>
+        <li>Emmagatzemar amb criteri i bloquejar les fonts d'energia abans de fer manteniment.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- A6 -->
+  <div class="activity">
+    <span class="badge">A6</span>
+    <div class="body">
+      <h4>Quin extintor faries servir?</h4>
+      <p>Per a cadascun dels 6 escenaris, tria l'actuació o l'agent extintor adequat. Tingues a mà la taula de classes de foc.</p>
+      <div class="meta">
+        <span class="pill mat">Individual</span>
+        <span class="pill mat">Autoavaluable</span>
+        <button class="quiz-btn" data-toggle="a6Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a6Box" class="quiz" hidden data-kind="test">
+        <form>
+          <div class="q" data-correct="b" data-just="Foc en un equip amb tensió: el CO<sub>2</sub> no condueix l'electricitat ni deixa residus. L'aigua i l'escuma són conductores. Si es pot fer sense risc, cal tallar la tensió.">
+            <p class="q-text">1. Surt fum i flama d'un servidor del rack, que encara té tensió.</p>
+            <label><input type="radio" name="e1" value="a"> Aigua a raig.</label>
+            <label><input type="radio" name="e1" value="b"> Extintor de CO<sub>2</sub>.</label>
+            <label><input type="radio" name="e1" value="c"> Extintor d'escuma.</label>
+          </div>
+          <div class="q" data-correct="b" data-just="Són sòlids que fan brasa (classe A). El CO<sub>2</sub> és poc eficaç perquè no refreda les brases i el foc es pot revifar.">
+            <p class="q-text">2. S'han encès uns cartrons d'embalatge acumulats al magatzem del departament.</p>
+            <label><input type="radio" name="e2" value="a"> Extintor de CO<sub>2</sub>.</label>
+            <label><input type="radio" name="e2" value="b"> Aigua polvoritzada o pols ABC.</label>
+            <label><input type="radio" name="e2" value="c"> Extintor de classe D.</label>
+          </div>
+          <div class="q" data-correct="b" data-just="Líquid inflamable (classe B): escuma o pols. L'aigua a raig escampa el líquid encès i estén el foc.">
+            <p class="q-text">3. S'encén l'alcohol isopropílic vessat a la taula de reparacions (no hi ha cap equip endollat a prop).</p>
+            <label><input type="radio" name="e3" value="a"> Aigua a raig.</label>
+            <label><input type="radio" name="e3" value="b"> Escuma o pols ABC.</label>
+            <label><input type="radio" name="e3" value="c"> Bufar fort o ventar-lo amb una carpeta.</label>
+          </div>
+          <div class="q" data-correct="b" data-just="Oli de cuina (classe F). Mai aigua: provoca una explosió de vapor que projecta oli encès. Es tapa el recipient o es fa servir un extintor de classe F, i s'apaga el foc de cuina.">
+            <p class="q-text">4. A l'office, s'encén l'oli d'una paella.</p>
+            <label><input type="radio" name="e4" value="a"> Tirar-hi un got d'aigua.</label>
+            <label><input type="radio" name="e4" value="b"> Tapar la paella (o extintor de classe F) i apagar el foc de cuina.</label>
+            <label><input type="radio" name="e4" value="c"> Treure la paella corrent cap a la pica.</label>
+          </div>
+          <div class="q" data-correct="b" data-just="Els sistemes d'extinció per gas redueixen l'oxigen o el desplacen: hi ha risc d'asfíxia. Quan sona el preavís, cal sortir immediatament i no tornar a entrar fins que ho autoritzin.">
+            <p class="q-text">5. Sona el preavís d'extinció automàtica per gas del CPD i comença el compte enrere.</p>
+            <label><input type="radio" name="e5" value="a"> Entrar a veure què crema abans que es dispari.</label>
+            <label><input type="radio" name="e5" value="b"> Sortir immediatament del CPD i tancar la porta.</label>
+            <label><input type="radio" name="e5" value="c"> Quedar-se dins amb la porta tancada perquè el gas no s'escapi.</label>
+          </div>
+          <div class="q" data-correct="b" data-just="Ja no és un conat: l'extintor portàtil no és suficient. Cal avisar, activar l'alarma, tancar portes (sense clau) per confinar el foc i evacuar. Obrir finestres aporta oxigen.">
+            <p class="q-text">6. Un foc a la sala de reunions ja crema les cortines i el fum comença a omplir el passadís.</p>
+            <label><input type="radio" name="e6" value="a"> Intentar apagar-lo amb dos extintors alhora.</label>
+            <label><input type="radio" name="e6" value="b"> Activar l'alarma, tancar la porta i evacuar.</label>
+            <label><input type="radio" name="e6" value="c"> Obrir les finestres per treure el fum.</label>
+          </div>
+        </form>
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+          <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+        </div>
+        <p class="q-score" hidden></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNITAT 2.2 -->
+  <section id="u2">
+    <span class="unit-no">2.2</span>
+    <h2>Medi ambient de treball</h2>
+    <p class="lead">Els contaminants i les condicions de l'entorn que, sense provocar un accident sobtat, poden fer mal a la salut amb el temps: és el camp de la higiene industrial.</p>
+
+    <h3>Agents químics</h3>
+    <p>Un agent químic pot entrar a l'organisme per <strong>inhalació</strong> (la via principal), per la <strong>pell</strong>, per la <strong>boca</strong> (menjar o fumar amb les mans brutes) o per una <strong>ferida</strong>. Al sector TIC n'hi ha més dels que sembla:</p>
+    <ul>
+      <li>Netejadors de contactes i alcohol isopropílic; esprais d'"aire comprimit", que solen contenir gasos inflamables.</li>
+      <li>Pols de tòner en canviar cartutxos o netejar impressores làser.</li>
+      <li>Fums de soldadura amb estany i el seu flux.</li>
+      <li>Bateries de plom-àcid dels SAI: contenen àcid sulfúric i, en carregar-se, poden alliberar hidrogen (inflamable).</li>
+    </ul>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 374/2001</strong>, sobre protecció davant els agents químics. El <strong>Reglament (CE) 1272/2008 (CLP)</strong> regula la classificació, l'etiquetatge i els pictogrames. El <strong>Reglament (CE) 1907/2006 (REACH)</strong>, art. 31, obliga el proveïdor a lliurar la <strong>fitxa de dades de seguretat (FDS)</strong>, amb 16 seccions.</p>
+    </div>
+
+    <div class="table-scroll">
+    <table>
+      <caption>Pictogrames de perill CLP (rombe vermell amb fons blanc)</caption>
+      <thead><tr><th>Pictograma</th><th>Significat</th><th>Exemple</th></tr></thead>
+      <tbody>
+        <tr><td>Bomba que explota</td><td>Explosiu</td><td>Rar en TIC</td></tr>
+        <tr><td>Flama</td><td>Inflamable</td><td>Esprai netejador, alcohol isopropílic</td></tr>
+        <tr><td>Flama sobre un cercle</td><td>Comburent</td><td>Alguns oxidants</td></tr>
+        <tr><td>Bombona de gas</td><td>Gas a pressió</td><td>Bombones de gas d'extinció</td></tr>
+        <tr><td>Corrosió (líquid sobre mà i superfície)</td><td>Corrosiu</td><td>Àcid de bateries</td></tr>
+        <tr><td>Calavera</td><td>Toxicitat aguda</td><td>Pocs productes d'ús en TIC</td></tr>
+        <tr><td>Signe d'exclamació</td><td>Irritant, nociu, somnolència</td><td>Molts netejadors</td></tr>
+        <tr><td>Silueta amb estrella al pit</td><td>Perill greu per a la salut (cancerigen, sensibilitzant respiratori...)</td><td>Alguns dissolvents</td></tr>
+        <tr><td>Arbre i peix</td><td>Perillós per al medi ambient</td><td>Piles i alguns líquids</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Agents físics</h3>
+    <p>Són formes d'energia que poden danyar la salut: <strong>soroll</strong>, <strong>vibracions</strong>, condicions <strong>termohigromètriques</strong> (temperatura i humitat), <strong>il·luminació</strong> i <strong>radiacions</strong>.</p>
+
+    <table>
+      <caption>Soroll: valors de referència (exposició diària, 8 h)</caption>
+      <thead><tr><th>Nivell</th><th>Què implica</th></tr></thead>
+      <tbody>
+        <tr><td><strong>80 dB(A)</strong> · valor inferior d'acció</td><td>L'empresa ha de posar protectors auditius a disposició i informar i formar.</td></tr>
+        <tr><td><strong>85 dB(A)</strong> · valor superior d'acció</td><td>L'ús de protectors és obligatori i cal un programa de mesures tècniques i organitzatives.</td></tr>
+        <tr><td><strong>87 dB(A)</strong> · valor límit</td><td>No es pot superar, tenint en compte l'atenuació dels protectors.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 286/2006</strong>, sobre soroll (valors de la taula). <strong>RD 1311/2005</strong>, sobre vibracions. <strong>RD 486/1997</strong>: l'<strong>annex III</strong> fixa la temperatura dels treballs sedentaris propis d'oficines entre <strong>17 i 27 °C</strong> i una humitat del 30 al 70 %; l'<strong>annex IV</strong> fixa la il·luminació mínima segons l'exigència visual (500 lux per a exigències visuals altes).</p>
+    </div>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Al passadís calent d'un CPD hi pot haver temperatures altes i un soroll de ventiladors considerable: cal mesurar-lo, limitar el temps de permanència i fer les tasques llargues (documentació, configuració) fora de la sala.</p>
+      <p><strong>Fibra òptica:</strong> el làser dels transceptors és sovint invisible. Mai no s'ha de mirar directament l'extrem d'una fibra o d'un connector, encara que sembli apagat: pot causar lesions oculars.</p>
+    </div>
+
+    <h3>Agents biològics</h3>
+    <p>Són microorganismes (bacteris, virus, fongs, paràsits) que poden causar infeccions, al·lèrgies o intoxicacions. Es classifiquen en <strong>4 grups</strong> segons el risc d'infecció, del grup 1 (poc probable que causin malaltia) al grup 4 (malaltia greu sense tractament eficaç).</p>
+    <p>En informàtica l'exposició és baixa, però existeix: brutícia acumulada en equips i teclats compartits, intervencions en falsos sostres o sales tècniques amb excrements d'aus o rosegadors, o torres de refrigeració on pot proliferar la legionel·la (que ha de mantenir personal especialitzat).</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 664/1997</strong>, sobre protecció davant els agents biològics: defineix els 4 grups de risc i les mesures d'higiene i protecció.</p>
+    </div>
+
+    <div class="resum">
+      <div class="tit">Resum 2.2</div>
+      <ul>
+        <li>Els agents químics entren sobretot per inhalació: llegir l'etiqueta CLP i la FDS abans d'usar un producte.</li>
+        <li>Soroll: 80, 85 i 87 dB(A) són els tres valors de referència.</li>
+        <li>A les oficines, temperatura entre 17 i 27 °C i il·luminació adequada a la tasca.</li>
+        <li>Mai mirar l'extrem d'una fibra òptica. Higiene i guants davant la brutícia i els agents biològics.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- A7 -->
+  <div class="activity">
+    <span class="badge">A7</span>
+    <div class="body">
+      <h4>Llegir l'etiqueta d'un producte de neteja d'equips</h4>
+      <p>Analitza l'etiqueta d'aquest esprai i respon. A l'aula, fes el mateix amb l'envàs real del netejador que tingueu.</p>
+      <div class="meta">
+        <span class="pill mat">Individual o en parelles</span>
+        <span class="pill mat">Autoavaluable</span>
+        <button class="quiz-btn" data-toggle="a7Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a7Box" class="quiz" hidden data-kind="test">
+        <div class="label-clp" aria-label="Etiqueta d'exemple">
+          <div class="name">CLEAN-CONTACT · Esprai netejador de contactes electrònics</div>
+          <div class="picto"><span><i>🔥</i></span><span><i>❗</i></span></div>
+          <div class="word">Perill</div>
+          <p style="margin:6px 0 0">H222 Aerosol extremadament inflamable. H229 Recipient a pressió: pot rebentar si s'escalfa. H336 Pot provocar somnolència o vertigen.</p>
+          <p style="margin:6px 0 0">P210 Mantenir allunyat de la calor, de superfícies calentes, d'espurnes i de flames. No fumar. P211 No vaporitzar sobre una flama o una altra font d'ignició. P251 No perforar ni cremar, ni tan sols després d'usar-lo. P271 Utilitzar només a l'aire lliure o en un lloc ben ventilat.</p>
+        </div>
+        <form>
+          <div class="q" data-correct="a" data-just="El pictograma de la flama vol dir inflamable; la frase H222 ho confirma.">
+            <p class="q-text">1. El pictograma de la flama indica que el producte és...</p>
+            <label><input type="radio" name="l1" value="a"> Inflamable.</label>
+            <label><input type="radio" name="l1" value="b"> Corrosiu.</label>
+            <label><input type="radio" name="l1" value="c"> Tòxic per al medi ambient.</label>
+          </div>
+          <div class="q" data-correct="c" data-just="&quot;Perill&quot; s'utilitza per a les categories més greus; &quot;Atenció&quot;, per a les menys greus.">
+            <p class="q-text">2. La paraula d'advertiment "Perill"...</p>
+            <label><input type="radio" name="l2" value="a"> És un text comercial sense valor legal.</label>
+            <label><input type="radio" name="l2" value="b"> Vol dir el mateix que "Atenció".</label>
+            <label><input type="radio" name="l2" value="c"> Indica les categories de perill més greus.</label>
+          </div>
+          <div class="q" data-correct="b" data-just="Les frases P210, P211 i P271 demanen evitar fonts d'ignició i treballar ventilat. Un equip apagat i desendollat evita espurnes i escalfament.">
+            <p class="q-text">3. Abans de fer servir l'esprai per netejar una placa d'un servidor, cal...</p>
+            <label><input type="radio" name="l3" value="a"> Fer-ho amb l'equip engegat perquè s'assequi abans.</label>
+            <label><input type="radio" name="l3" value="b"> Apagar i desendollar l'equip, allunyar fonts d'ignició i ventilar.</label>
+            <label><input type="radio" name="l3" value="c"> Escalfar l'esprai perquè surti amb més pressió.</label>
+          </div>
+          <div class="q" data-correct="a" data-just="H336 indica un efecte per inhalació (somnolència o vertigen): per això cal ventilar (P271).">
+            <p class="q-text">4. La frase H336 avisa que...</p>
+            <label><input type="radio" name="l4" value="a"> Inhalar-lo pot provocar somnolència o vertigen.</label>
+            <label><input type="radio" name="l4" value="b"> Pot causar cremades greus a la pell.</label>
+            <label><input type="radio" name="l4" value="c"> És perjudicial per als organismes aquàtics.</label>
+          </div>
+          <div class="q" data-correct="c" data-just="La FDS (16 seccions) recull tota la informació: perills, primers auxilis, mesures contra incendis, manipulació, EPI... El proveïdor l'ha de facilitar.">
+            <p class="q-text">5. On trobaràs la informació completa sobre manipulació, EPI i primers auxilis?</p>
+            <label><input type="radio" name="l5" value="a"> A la factura de compra.</label>
+            <label><input type="radio" name="l5" value="b"> Al web publicitari del fabricant.</label>
+            <label><input type="radio" name="l5" value="c"> A la fitxa de dades de seguretat (FDS).</label>
+          </div>
+        </form>
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+          <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+        </div>
+        <p class="q-score" hidden></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNITAT 2.3 -->
+  <section id="u3">
+    <span class="unit-no">2.3</span>
+    <h2>Càrrega de treball i factors psicosocials</h2>
+    <p class="lead">L'esforç físic i mental que demana la feina, i com l'organització del treball pot afectar la salut: és el camp de l'ergonomia i la psicosociologia.</p>
+
+    <h3>Càrrega física</h3>
+    <p>La <strong>càrrega física</strong> és el conjunt d'exigències físiques a què està sotmès el treballador: <strong>esforços</strong>, <strong>postures</strong> de treball, <strong>manipulació de càrregues</strong> i <strong>moviments repetitius</strong>. La conseqüència més habitual són els <strong>trastorns musculoesquelètics</strong>: lumbàlgies, contractures, tendinitis, síndrome del túnel carpià.</p>
+    <p>Les postures davant la pantalla (PVD) les treballarem amb detall al Mòdul 3.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 487/1997</strong>, sobre manipulació manual de càrregues: s'aplica a les càrregues de més de 3 kg. Segons la seva <strong>guia tècnica (INSST)</strong>, el pes màxim recomanat en condicions ideals és de <strong>25 kg</strong>; si es vol protegir la majoria de la població (dones, joves, persones grans), <strong>15 kg</strong>.</p>
+    </div>
+
+    <div class="scheme">
+      <div class="tit">Tècnica per aixecar una càrrega</div>
+      <div class="flow">
+        <div class="step"><b>1. Planificar</b>Pes, recorregut i lloc de destí. Si pesa massa: ajuda o carretó.</div><span class="arrow">→</span>
+        <div class="step"><b>2. Peus separats</b>Un lleugerament avançat, a prop de la càrrega.</div><span class="arrow">→</span>
+        <div class="step"><b>3. Doblegar genolls</b>Esquena recta, no corbada.</div><span class="arrow">→</span>
+        <div class="step"><b>4. Agafar ferm</b>Amb tota la mà, la càrrega enganxada al cos.</div><span class="arrow">→</span>
+        <div class="step"><b>5. Aixecar amb les cames</b>Sense girar el tronc: girar amb els peus.</div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Un servidor de 2U pot pesar més de 20 kg i s'ha d'encaixar a l'alçada de les espatlles o per sobre: és una manipulació amb risc clar. Mesures: <strong>muntar-lo entre dues persones</strong>, treure prèviament les fonts i els discos per alleugerir-lo, fer servir un elevador de servidors si n'hi ha, i ocupar primer les posicions baixes del rack amb els equips més pesants (SAI, bateries).</p>
+    </div>
+
+    <h3>Càrrega mental, fatiga i insatisfacció</h3>
+    <p>La <strong>càrrega mental</strong> depèn de la quantitat i la complexitat de la informació que cal processar i del temps disponible per fer-ho. Quan les exigències superen les capacitats de manera mantinguda apareix la <strong>fatiga</strong>: física (cansament muscular) o mental (dificultat de concentració, errors, irritabilitat). La fatiga es recupera amb pauses i descans; si no es recupera, esdevé crònica.</p>
+    <p>La <strong>insatisfacció laboral</strong> sorgeix quan la feina no respon a les expectatives de la persona: tasques monòtones, poca autonomia, manca de reconeixement, mala comunicació o inseguretat contractual.</p>
+
+    <table>
+      <caption>Factors psicosocials i exemples del sector TIC</caption>
+      <thead><tr><th>Factor</th><th>Exemple TIC</th></tr></thead>
+      <tbody>
+        <tr><td>Ritme i pressió de temps</td><td>Cua de tiquets que no s'acaba mai, SLA molt ajustats.</td></tr>
+        <tr><td>Temps de treball</td><td>Guàrdies, intervencions de nit o de cap de setmana.</td></tr>
+        <tr><td>Autonomia</td><td>No poder decidir l'ordre de les tasques ni com fer-les.</td></tr>
+        <tr><td>Rol</td><td>Instruccions contradictòries de diferents responsables.</td></tr>
+        <tr><td>Relacions i suport</td><td>Tècnic que treballa sol sense ningú a qui consultar.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Assetjament laboral (<em>mobbing</em>)</h3>
+    <p>L'<strong>assetjament psicològic</strong> és una exposició a conductes hostils o humiliants (aïllar, ridiculitzar, desacreditar, buidar de tasques o donar-ne d'impossibles) que es repeteixen de manera <strong>sistemàtica</strong> i durant un <strong>temps prolongat</strong>. Un conflicte puntual, una discussió o una exigència de feina raonable <strong>no</strong> són assetjament, tot i que s'han de gestionar.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p>El <strong>Codi Penal, art. 173.1</strong>, castiga qui, en l'àmbit d'una relació laboral i aprofitant-se d'una relació de superioritat, faci de manera reiterada actes hostils o humiliants greus contra una altra persona. A més, les empreses han de disposar de <strong>protocols</strong> de prevenció i actuació davant l'assetjament.</p>
+    </div>
+
+    <div class="resum">
+      <div class="tit">Resum 2.3</div>
+      <ul>
+        <li>Càrrega física: postures, esforços, càrregues i moviments repetitius → trastorns musculoesquelètics.</li>
+        <li>Càrregues: 25 kg com a màxim en condicions ideals (15 kg per protegir la majoria); aixecar amb les cames i sense girar.</li>
+        <li>La càrrega mental i la fatiga es prevenen organitzant bé la feina i amb pauses.</li>
+        <li>El mobbing és sistemàtic i prolongat; un conflicte puntual no ho és.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- A9 -->
+  <div class="activity">
+    <span class="badge">A9</span>
+    <div class="body">
+      <h4>Mini-debat: és assetjament laboral?</h4>
+      <p>Llegeix els dos casos, vota i compara amb la resposta raonada. Després, proposa mesures per al cas que ho sigui.</p>
+      <div class="meta">
+        <span class="pill mat">Debat en grup</span>
+        <button class="quiz-btn" data-toggle="a9Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a9Box" class="quiz" hidden>
+        <div class="sub" data-kind="vote">
+          <div class="vote-case" data-right="si" data-exp="Hi ha conductes hostils (aïllament, crítica pública, buidatge de tasques, encàrrecs impossibles) repetides de manera sistemàtica durant mesos. Encaixa amb la definició d'assetjament psicològic: cal activar el protocol de l'empresa.">
+            <div class="example" style="margin-bottom:10px"><div class="tit">Cas 1</div><p>La Marta és administradora de sistemes. Des de fa vuit mesos el seu cap li ha retirat els projectes importants, no la convoca a les reunions de l'equip, la critica davant dels companys i li assigna tiquets impossibles de resoldre en el termini. Molts companys han deixat de parlar-li.</p></div>
+            <div class="meta">
+              <button class="quiz-btn" data-vote="si" type="button">✅ Sí, és mobbing</button>
+              <button class="quiz-btn" data-vote="no" type="button">⛔ No ho és</button>
+            </div>
+            <div class="q-just vote-res" hidden></div>
+          </div>
+          <div class="vote-case" data-right="no" data-exp="És un conflicte puntual que es resol: no hi ha repetició sistemàtica ni durada. No és mobbing, encara que convé gestionar bé els conflictes perquè no s'enquistin.">
+            <div class="example" style="margin-bottom:10px"><div class="tit">Cas 2</div><p>En Pau i la Laia, desenvolupadors, discuteixen fort un divendres per un desplegament fallit i es retreuen errors davant de l'equip. Dilluns ho parlen, es demanen disculpes i continuen treballant junts amb normalitat.</p></div>
+            <div class="meta">
+              <button class="quiz-btn" data-vote="si" type="button">✅ Sí, és mobbing</button>
+              <button class="quiz-btn" data-vote="no" type="button">⛔ No ho és</button>
+            </div>
+            <div class="q-just vote-res" hidden></div>
+          </div>
+          <div class="meta"><button class="quiz-btn do-reset" type="button">🔄 Torna a votar</button></div>
+        </div>
+        <div class="sub" data-kind="open">
+          <p class="sub-tit">Proposa mesures per al cas 1</p>
+          <form>
+            <div class="fq">
+              <label class="fq-label" for="a9-1">Què hauria de fer la Marta?</label>
+              <textarea id="a9-1" rows="2" placeholder="Escriu la teva proposta..." data-model="Anotar els fets amb dates i testimonis, comunicar-ho pel canal previst al protocol d'assetjament (o al delegat de prevenció / recursos humans) i, si li afecta la salut, anar al metge o al servei de vigilància de la salut."></textarea>
+              <p class="fq-model" hidden></p>
+            </div>
+            <div class="fq">
+              <label class="fq-label" for="a9-2">Què hauria de fer l'empresa?</label>
+              <textarea id="a9-2" rows="2" placeholder="Escriu la teva proposta..." data-model="Activar el protocol: investigar amb confidencialitat, adoptar mesures cautelars (p. ex. canviar la dependència jeràrquica), oferir suport a la víctima, sancionar si es confirma i revisar l'avaluació de riscos psicosocials."></textarea>
+              <p class="fq-model" hidden></p>
+            </div>
+          </form>
+          <div class="meta" style="margin-top:14px">
+            <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+            <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+          </div>
+          <p class="q-score" hidden>Compara la teva proposta amb el model: n'hi ha prou que inclogui comunicar-ho pel canal adequat i que l'empresa investigui i actuï.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNITAT 2.4 -->
+  <section id="u4">
+    <span class="unit-no">2.4</span>
+    <h2>Avaluació, protecció i vigilància de la salut</h2>
+    <p class="lead">Com es mesura la importància d'un risc, en quin ordre s'apliquen les mesures i com es fa el seguiment de la salut dels treballadors.</p>
+
+    <h3>Avaluació elemental de riscos</h3>
+    <p>Avaluar un risc vol dir estimar-ne la magnitud per decidir si cal actuar i amb quina urgència. És obligatòria per a tots els llocs de treball que tinguin riscos que no s'hagin pogut evitar.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 16 LPRL</strong>: obligació d'avaluar els riscos i de planificar l'acció preventiva. <strong>RD 39/1997, art. 3 a 7</strong>: contingut i procediment de l'avaluació.</p>
+    </div>
+
+    <p>El <strong>mètode general de l'INSST</strong> combina dos factors: la <strong>probabilitat</strong> que es produeixi el dany (baixa, mitjana, alta) i les <strong>conseqüències</strong> (lleugerament nociu, nociu, extremadament nociu).</p>
+
+    <div class="scheme">
+      <div class="tit">Matriu de valoració del risc (mètode INSST)</div>
+      <div class="table-scroll">
+      <table class="risk">
+        <thead><tr><th>Probabilitat ↓ / Conseqüències →</th><th>Lleugerament nociu</th><th>Nociu</th><th>Extremadament nociu</th></tr></thead>
+        <tbody>
+          <tr><th>Baixa</th><td class="r r-tri">Trivial</td><td class="r r-tol">Tolerable</td><td class="r r-mod">Moderat</td></tr>
+          <tr><th>Mitjana</th><td class="r r-tol">Tolerable</td><td class="r r-mod">Moderat</td><td class="r r-imp">Important</td></tr>
+          <tr><th>Alta</th><td class="r r-mod">Moderat</td><td class="r r-imp">Important</td><td class="r r-int">Intolerable</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <table>
+      <caption>Què cal fer segons el resultat</caption>
+      <thead><tr><th>Risc</th><th>Acció</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Trivial</strong></td><td>No cal cap acció específica.</td></tr>
+        <tr><td><strong>Tolerable</strong></td><td>No calen mesures noves, però s'han de mantenir les existents i comprovar-ne l'eficàcia.</td></tr>
+        <tr><td><strong>Moderat</strong></td><td>Cal reduir el risc amb mesures planificades en un termini determinat.</td></tr>
+        <tr><td><strong>Important</strong></td><td>No s'ha de començar la feina fins que es redueixi el risc; si ja s'està fent, cal actuar amb urgència.</td></tr>
+        <tr><td><strong>Intolerable</strong></td><td>No s'ha de començar ni continuar la feina fins que es redueixi el risc. Si no és possible, s'ha de prohibir.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Cables de xarxa que travessen el pas d'una aula: és força probable que algú hi ensopegui (probabilitat <strong>mitjana</strong>) i la caiguda pot provocar un esquinç o una contusió (<strong>nociu</strong>) → risc <strong>moderat</strong>. Mesura: canaletes al terra en un termini curt i, mentrestant, senyalitzar i fixar els cables.</p>
+    </div>
+
+    <h3>La jerarquia de mesures (art. 15 LPRL)</h3>
+    <p>Un cop avaluat el risc, les mesures no es trien a l'atzar. L'<strong>art. 15 LPRL</strong> estableix els principis de l'acció preventiva, entre els quals: evitar els riscos, avaluar els que no es puguin evitar, combatre'ls a l'origen, adaptar el treball a la persona, substituir el que és perillós pel que ho és menys i <strong>anteposar la protecció col·lectiva a la individual</strong>.</p>
+
+    <div class="scheme">
+      <div class="tit">Ordre de prioritat de les mesures</div>
+      <div class="pyramid">
+        <div style="background:#15803d;width:380px">1. Eliminar el risc (o substituir-lo)</div>
+        <div style="background:#4d7c0f;width:330px">2. Combatre'l a l'origen</div>
+        <div style="background:#ca8a04;width:280px">3. Protecció col·lectiva</div>
+        <div style="background:#c2410c;width:230px">4. Mesures organitzatives</div>
+        <div style="background:#b91c1c;width:180px">5. EPI (última barrera)</div>
+      </div>
+      <p style="margin-top:10px">L'EPI no redueix el risc a l'origen: només protegeix qui el porta, i només si el porta bé. Per això és l'últim recurs, no la primera opció.</p>
+    </div>
+
+    <table>
+      <caption>Protecció col·lectiva i individual: exemples TIC</caption>
+      <thead><tr><th>Risc</th><th>Protecció col·lectiva</th><th>Protecció individual (EPI)</th></tr></thead>
+      <tbody>
+        <tr><td>Contacte elèctric</td><td>Diferencial, presa de terra, armari tancat i senyalitzat</td><td>Guants dielèctrics (treballs autoritzats)</td></tr>
+        <tr><td>Soroll al CPD</td><td>Equips més silenciosos, aïllament, portes tancades</td><td>Protectors auditius</td></tr>
+        <tr><td>Caiguda a diferent nivell</td><td>Plataforma amb baranes en lloc d'escala de mà</td><td>Arnès (en treballs en altura)</td></tr>
+        <tr><td>Projecció de partícules en foradar</td><td>Aspiració localitzada, mampara</td><td>Ulleres de protecció</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Equips de protecció individual (EPI)</h3>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 773/1997</strong>, sobre utilització d'EPI. L'<strong>art. 2</strong> defineix l'EPI com l'equip que el treballador porta per protegir-se d'un o diversos riscos; no ho són, per exemple, la roba de treball corrent i els uniformes. L'<strong>art. 4</strong> diu que s'han d'utilitzar quan els riscos no es puguin evitar o limitar prou amb protecció col·lectiva o amb mesures d'organització. L'<strong>art. 10</strong> fixa les obligacions del treballador: utilitzar-los i cuidar-los, guardar-los després de l'ús i informar de qualsevol defecte.</p>
+      <p>El disseny dels EPI el regula el <strong>Reglament (UE) 2016/425</strong>: han de portar el <strong>marcatge CE</strong> i es classifiquen en categories I, II i III segons la gravetat del risc.</p>
+    </div>
+    <ul>
+      <li>L'empresa els ha de proporcionar <strong>gratuïtament</strong> i reposar-los quan calgui.</li>
+      <li>Han de ser adequats al risc, ajustar-se a la persona i ser, en principi, d'ús personal.</li>
+      <li>El treballador ha de rebre informació i formació sobre com fer-los servir.</li>
+    </ul>
+
+    <h3>Vigilància de la salut</h3>
+    <p>La vigilància de la salut serveix per <strong>detectar precoçment</strong> els danys derivats del treball, <strong>comprovar si les mesures preventives funcionen</strong> i identificar els treballadors <strong>especialment sensibles</strong> a determinats riscos (art. 25 LPRL). Es fa amb reconeixements mèdics específics segons els riscos del lloc (per exemple, el protocol per a usuaris de PVD) i els fa personal sanitari amb competència tècnica.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 22 LPRL</strong>: la vigilància és, amb caràcter general, <strong>voluntària</strong> per al treballador. Hi ha excepcions en què és obligatòria: quan és imprescindible per avaluar l'efecte de les condicions de treball sobre la salut, quan l'estat de salut del treballador pot suposar un perill per a ell o per a altres, o quan ho estableix una disposició legal. Els resultats són <strong>confidencials</strong> i no es poden fer servir per discriminar el treballador; l'empresa només rep les conclusions sobre l'aptitud.</p>
+    </div>
+
+    <div class="resum">
+      <div class="tit">Resum 2.4</div>
+      <ul>
+        <li>Mètode INSST: probabilitat × conseqüències → trivial, tolerable, moderat, important, intolerable.</li>
+        <li>Jerarquia de l'art. 15: eliminar, combatre a l'origen, protecció col·lectiva abans que individual.</li>
+        <li>L'EPI (RD 773/1997) és l'última barrera: gratuït, adequat, amb marcatge CE i ben utilitzat.</li>
+        <li>Vigilància de la salut (art. 22 LPRL): voluntària amb excepcions i sempre confidencial.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- A11 -->
+  <div class="activity">
+    <span class="badge">A11</span>
+    <div class="body">
+      <h4>Seleccionar l'EPI adequat</h4>
+      <p>Amb el mostrari d'EPI de l'aula al davant, tria la protecció adequada per a cada situació.</p>
+      <div class="meta">
+        <span class="pill mat">Individual</span>
+        <span class="pill mat">Autoavaluable</span>
+        <button class="quiz-btn" data-toggle="a11Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a11Box" class="quiz" hidden data-kind="test">
+        <form>
+          <div class="q" data-correct="b" data-just="Per a vores tallants cal guant de protecció contra riscos mecànics (norma EN 388). El guant de làtex d'un sol ús protegeix d'agents biològics o químics lleus, no de talls.">
+            <p class="q-text">1. Desmuntar un xassís antic amb vores metàl·liques tallants.</p>
+            <label><input type="radio" name="p1" value="a"> Guants de làtex d'un sol ús.</label>
+            <label><input type="radio" name="p1" value="b"> Guants de protecció contra riscos mecànics.</label>
+            <label><input type="radio" name="p1" value="c"> No cal cap protecció si es va amb compte.</label>
+          </div>
+          <div class="q" data-correct="a" data-just="Foradar i treballar en un fals sostre projecta partícules i pols cap als ulls: ulleres de protecció (i mascareta si hi ha molta pols).">
+            <p class="q-text">2. Foradar un fals sostre per passar cablejat de xarxa.</p>
+            <label><input type="radio" name="p2" value="a"> Ulleres de protecció.</label>
+            <label><input type="radio" name="p2" value="b"> Protectors auditius.</label>
+            <label><input type="radio" name="p2" value="c"> Polsera antiestàtica.</label>
+          </div>
+          <div class="q" data-correct="c" data-just="Si cau un servidor o un SAI al peu, la puntera protegeix. També és recomanable portar-lo entre dues persones o amb carretó (mesura prioritària).">
+            <p class="q-text">3. Transportar servidors i bateries de SAI pel CPD.</p>
+            <label><input type="radio" name="p3" value="a"> Casc de protecció.</label>
+            <label><input type="radio" name="p3" value="b"> Sabatilles esportives còmodes.</label>
+            <label><input type="radio" name="p3" value="c"> Calçat de seguretat amb puntera.</label>
+          </div>
+          <div class="q" data-correct="b" data-just="Per sobre de 85 dB(A) l'ús de protectors auditius és obligatori (RD 286/2006), a més de les mesures tècniques per reduir el soroll.">
+            <p class="q-text">4. Treballar una bona estona al CPD, on s'han mesurat 86 dB(A).</p>
+            <label><input type="radio" name="p4" value="a"> No cal res: el soroll dels servidors no fa mal.</label>
+            <label><input type="radio" name="p4" value="b"> Protectors auditius, d'ús obligatori.</label>
+            <label><input type="radio" name="p4" value="c"> Ulleres de protecció.</label>
+          </div>
+          <div class="q" data-correct="b" data-just="La polsera antiestàtica protegeix sobretot els components electrònics de les descàrregues electrostàtiques. No és un EPI en el sentit del RD 773/1997, que protegeix la persona.">
+            <p class="q-text">5. La polsera antiestàtica que es fa servir per canviar mòduls de memòria...</p>
+            <label><input type="radio" name="p5" value="a"> És un EPI que protegeix de les descàrregues elèctriques.</label>
+            <label><input type="radio" name="p5" value="b"> Protegeix principalment els components, no és un EPI.</label>
+            <label><input type="radio" name="p5" value="c"> Permet treballar amb l'equip endollat.</label>
+          </div>
+          <div class="q" data-correct="a" data-just="Jerarquia de l'art. 15 LPRL: primer eliminar el risc o aplicar protecció col·lectiva; l'EPI és l'última barrera (art. 4 RD 773/1997).">
+            <p class="q-text">6. Abans de triar un EPI, què s'ha de fer?</p>
+            <label><input type="radio" name="p6" value="a"> Comprovar si el risc es pot eliminar o reduir amb protecció col·lectiva.</label>
+            <label><input type="radio" name="p6" value="b"> Comprar el més barat del catàleg.</label>
+            <label><input type="radio" name="p6" value="c"> Demanar al treballador que porti el seu.</label>
+          </div>
+        </form>
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+          <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+        </div>
+        <p class="q-score" hidden></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNITAT 2.5 -->
+  <section id="u5">
+    <span class="unit-no">2.5</span>
+    <h2>Emergències i evacuació</h2>
+    <p class="lead">Què fer quan alguna cosa va malament de debò: com s'organitza un centre per respondre-hi i què s'espera de cada persona.</p>
+
+    <p>Una <strong>emergència</strong> és qualsevol situació no desitjada que pot posar en perill les persones, els béns o el medi ambient i que exigeix una actuació ràpida. Els <strong>tipus d'accidents greus</strong> més habituals en un edifici d'oficines o un centre educatiu són: incendi, explosió, fuita de gas o de productes químics, inundació, avís de bomba, accident amb diversos ferits o fenòmens naturals.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 20 LPRL</strong>: l'empresari ha d'analitzar les possibles situacions d'emergència i adoptar mesures de primers auxilis, lluita contra incendis i evacuació, designar-ne el personal encarregat i organitzar les relacions amb els serveis externs.</p>
+      <p><strong>RD 393/2007</strong>, Norma Bàsica d'Autoprotecció: determina quines activitats han de tenir un <strong>pla d'autoprotecció</strong> i què ha de contenir. A Catalunya, el <strong>Decret 30/2015</strong> estableix el catàleg d'activitats obligades a adoptar mesures d'autoprotecció.</p>
+    </div>
+
+    <h3>Classificació de les emergències</h3>
+    <table>
+      <caption>Segons la gravetat</caption>
+      <thead><tr><th>Tipus</th><th>Què és</th><th>Exemple</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Conat d'emergència</strong></td><td>Es pot controlar ràpidament amb els mitjans del lloc i el personal present.</td><td>Paperera que s'encén i s'apaga amb un extintor.</td></tr>
+        <tr><td><strong>Emergència parcial</strong></td><td>Cal l'equip d'emergència del centre; afecta una zona i pot comportar evacuar-la.</td><td>Fum en una planta: s'evacua aquella planta.</td></tr>
+        <tr><td><strong>Emergència general</strong></td><td>Calen tots els equips i l'ajuda exterior (bombers, SEM); sol comportar l'evacuació total.</td><td>Incendi que s'estén per l'edifici.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Organització de l'emergència</h3>
+    <table>
+      <caption>Equips d'emergència habituals</caption>
+      <thead><tr><th>Equip</th><th>Funció</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cap d'emergència</strong></td><td>Dirigeix l'actuació i decideix si cal evacuar i demanar ajuda exterior.</td></tr>
+        <tr><td><strong>Cap d'intervenció</strong></td><td>Coordina els equips al lloc del sinistre.</td></tr>
+        <tr><td><strong>Equip d'alarma i evacuació (EAE)</strong></td><td>Dona l'alarma, guia l'evacuació, revisa que no quedi ningú i compta les persones al punt de trobada.</td></tr>
+        <tr><td><strong>Equip de primera intervenció (EPI*)</strong></td><td>Intenta controlar el conat amb extintors.</td></tr>
+        <tr><td><strong>Equip de segona intervenció (ESI)</strong></td><td>Actua quan la primera intervenció no és suficient (BIE, suport als bombers).</td></tr>
+        <tr><td><strong>Equip de primers auxilis (EPA)</strong></td><td>Atén els ferits fins que arriben els serveis sanitaris.</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.88rem;color:var(--muted)">* No confondre l'equip de primera intervenció amb l'equip de protecció individual: comparteixen sigla.</p>
+
+    <div class="scheme">
+      <div class="tit">Seqüència d'actuació</div>
+      <div class="flow">
+        <div class="step"><b>Detecció</b>Algú veu el fum o salta el detector</div><span class="arrow">→</span>
+        <div class="step"><b>Alerta i alarma</b>Polsador, avís al cap d'emergència</div><span class="arrow">→</span>
+        <div class="step"><b>Intervenció</b>Controlar el conat si és segur</div><span class="arrow">→</span>
+        <div class="step"><b>Evacuació</b>Sortida ordenada fins al punt de trobada</div><span class="arrow">→</span>
+        <div class="step"><b>Suport</b>Rebre i informar els serveis externs</div>
+      </div>
+    </div>
+
+    <h3>Informació de suport i normes d'evacuació</h3>
+    <p>La informació per actuar en una emergència ha d'estar visible: <strong>plànols "Vostè és aquí"</strong> amb els recorreguts d'evacuació, <strong>senyalització</strong> de sortides (verda) i d'equips contra incendis (vermella) segons el <strong>RD 485/1997</strong>, <strong>enllumenat d'emergència</strong> i consignes escrites.</p>
+    <ul>
+      <li>Deixar la feina en lloc segur (guardar el treball si és immediat, no recollir objectes personals).</li>
+      <li>Seguir les instruccions de l'equip d'evacuació, sense córrer ni cridar.</li>
+      <li><strong>No fer servir mai l'ascensor.</strong></li>
+      <li>Tancar portes en sortir, sense clau. Si hi ha fum, desplaçar-se ajupit.</li>
+      <li>Abans d'obrir una porta, tocar-la amb el dors de la mà: si és calenta, no obrir-la.</li>
+      <li>Anar al <strong>punt de trobada</strong> i no tornar a entrar fins que ho autoritzin.</li>
+    </ul>
+
+    <h3>Simulacres</h3>
+    <p>Els simulacres serveixen per comprovar que el pla funciona, que la gent coneix les sortides i que els equips saben què han de fer. La Norma Bàsica d'Autoprotecció preveu fer-ne <strong>almenys un a l'any</strong>, i després de cada simulacre s'ha d'analitzar què ha fallat i corregir-ho.</p>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Durant un simulacre, un tècnic és dins del CPD amb auriculars i no sent l'alarma. Lliçó apresa: el CPD ha de tenir senyal d'alarma lluminós a més de l'acústic, i l'equip d'evacuació ha de revisar explícitament les sales tècniques.</p>
+    </div>
+
+    <div class="resum">
+      <div class="tit">Resum 2.5</div>
+      <ul>
+        <li>Art. 20 LPRL i RD 393/2007: les empreses han de preparar-se per a les emergències.</li>
+        <li>Conat → emergència parcial → emergència general, segons la gravetat.</li>
+        <li>Cada equip té una funció; tothom ha de conèixer el recorregut d'evacuació i el punt de trobada.</li>
+        <li>Mai l'ascensor; portes tancades; no tornar a entrar. Simulacres com a mínim un cop l'any.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- A12 -->
+  <div class="activity">
+    <span class="badge">A12</span>
+    <div class="body">
+      <h4>Analitzar el plànol d'evacuació de l'institut</h4>
+      <p>Localitza al plànol "Vostè és aquí" més proper a la teva aula cadascun dels elements de la llista i marca'l. Després, respon les preguntes.</p>
+      <div class="meta">
+        <span class="pill mat">En parelles</span>
+        <span class="pill mat">Llista de verificació + test</span>
+        <button class="quiz-btn" data-toggle="a12Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a12Box" class="quiz" hidden>
+        <div class="sub chk" data-kind="check">
+          <p class="sub-tit">Elements que he trobat al plànol</p>
+          <label><input type="checkbox"> <span>El punt "Vostè és aquí" i l'orientació del plànol</span></label>
+          <label><input type="checkbox"> <span>El recorregut d'evacuació principal des de la meva aula</span></label>
+          <label><input type="checkbox"> <span>Un recorregut alternatiu</span></label>
+          <label><input type="checkbox"> <span>Les sortides de la planta i les sortides d'emergència de l'edifici</span></label>
+          <label><input type="checkbox"> <span>L'extintor més proper (i quin tipus és, si s'indica)</span></label>
+          <label><input type="checkbox"> <span>Les boques d'incendi equipades (BIE)</span></label>
+          <label><input type="checkbox"> <span>Els polsadors d'alarma</span></label>
+          <label><input type="checkbox"> <span>El punt de trobada exterior</span></label>
+          <p class="q-score" data-live></p>
+          <div class="meta"><button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button></div>
+        </div>
+        <div class="sub" data-kind="test">
+          <p class="sub-tit">Comprova que saps com evacuar</p>
+          <form>
+            <div class="q" data-correct="c" data-just="L'ascensor es pot aturar per un tall de corrent o portar-te a una planta amb fum. Sempre per l'escala.">
+              <p class="q-text">1. La teva aula és al segon pis i sona l'alarma d'evacuació.</p>
+              <label><input type="radio" name="v1" value="a"> Agafes l'ascensor per anar més de pressa.</label>
+              <label><input type="radio" name="v1" value="b"> Esperes a veure si és un simulacre.</label>
+              <label><input type="radio" name="v1" value="c"> Baixes per l'escala seguint el recorregut senyalitzat.</label>
+            </div>
+            <div class="q" data-correct="a" data-just="Una porta calenta indica foc a l'altre costat. Cal buscar el recorregut alternatiu.">
+              <p class="q-text">2. Arribes a una porta del recorregut i en tocar-la amb el dors de la mà nota que és calenta.</p>
+              <label><input type="radio" name="v2" value="a"> No l'obres i busques el recorregut alternatiu.</label>
+              <label><input type="radio" name="v2" value="b"> L'obres de cop per passar ràpid.</label>
+              <label><input type="radio" name="v2" value="c"> T'hi quedes al davant esperant.</label>
+            </div>
+            <div class="q" data-correct="b" data-just="Al punt de trobada es fa el recompte. Si algú torna a entrar, els equips no saben qui falta i es posa en perill.">
+              <p class="q-text">3. Ja ets al punt de trobada i t'adones que t'has deixat el mòbil a l'aula.</p>
+              <label><input type="radio" name="v3" value="a"> Tornes a buscar-lo ràpidament.</label>
+              <label><input type="radio" name="v3" value="b"> Et quedes al punt de trobada fins que autoritzin l'entrada.</label>
+              <label><input type="radio" name="v3" value="c"> Demanes a un company que hi vagi.</label>
+            </div>
+          </form>
+          <div class="meta" style="margin-top:14px">
+            <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+            <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+          </div>
+          <p class="q-score" hidden></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNITAT 2.6 -->
+  <section id="u6">
+    <span class="unit-no">2.6</span>
+    <h2>Primers auxilis</h2>
+    <p class="lead">Les primeres actuacions davant d'una persona accidentada, fins que arriben els serveis sanitaris. Fer el que cal i, sobretot, no empitjorar la situació.</p>
+
+    <div class="oblig">
+      <span class="pill crit">⚠ BLOC OBLIGATORI</span>
+      <p>Aquest bloc és d'obligada impartició en la formació de nivell bàsic (RD 39/1997). A la Prova M2 hi ha <strong>2 preguntes crítiques</strong> de primers auxilis que cal encertar per obtenir l'APTE.</p>
+    </div>
+
+    <h3>Consells generals</h3>
+    <ul>
+      <li>Mantenir la calma i actuar amb rapidesa, però sense precipitació.</li>
+      <li>Fer-se una idea global de la situació abans d'actuar (quants ferits, quins perills).</li>
+      <li><strong>No moure el ferit</strong> si no és imprescindible (perill imminent com foc o explosió).</li>
+      <li>No donar-li menjar, beure ni medicaments.</li>
+      <li>Tranquil·litzar-lo i mantenir-lo abrigat.</li>
+      <li>Fer només allò que se sap fer: millor no fer res que fer-ho malament.</li>
+    </ul>
+
+    <h3>Activació del sistema d'emergències: PAS</h3>
+    <div class="scheme">
+      <div class="tit">La conducta PAS (sempre en aquest ordre)</div>
+      <div class="flow">
+        <div class="step" style="background:#b91c1c"><b>P · Protegir</b>Primer, assegurar el lloc per a tu i per al ferit (tallar el corrent, senyalitzar, apartar el perill).</div><span class="arrow">→</span>
+        <div class="step" style="background:#c2410c"><b>A · Avisar</b>Trucar al 112 o activar el sistema intern d'emergències.</div><span class="arrow">→</span>
+        <div class="step" style="background:#15803d"><b>S · Socórrer</b>Fer l'avaluació primària i aplicar els primers auxilis.</div>
+      </div>
+      <p style="margin:8px 0 0"><strong>Protegir abans de socórrer:</strong> si el socorrista també resulta ferit, ja hi ha dues víctimes i ningú per ajudar.</p>
+    </div>
+
+    <table>
+      <caption>Què cal dir quan es truca al 112</caption>
+      <thead><tr><th>Informació</th><th>Exemple</th></tr></thead>
+      <tbody>
+        <tr><td>Qui truca i des de quin telèfon</td><td>"Soc en Joan, tècnic de l'institut, truco del 6XX..."</td></tr>
+        <tr><td>On és exactament</td><td>Adreça, edifici, planta, sala i per on s'hi accedeix.</td></tr>
+        <tr><td>Què ha passat</td><td>"Un company ha rebut una descàrrega elèctrica al CPD."</td></tr>
+        <tr><td>Quantes víctimes i en quin estat</td><td>Si són conscients, si respiren, si sagnen.</td></tr>
+        <tr><td>Què s'ha fet fins ara</td><td>"Hem tallat el corrent i respira."</td></tr>
+      </tbody>
+    </table>
+    <p>No penjar fins que l'operador ho indiqui i, si és possible, enviar algú a esperar l'ambulància a l'entrada.</p>
+
+    <h3>La cadena de socors</h3>
+    <div class="scheme">
+      <div class="tit">Eslabons de la cadena</div>
+      <div class="flow">
+        <div class="step"><b>Testimonis</b>Detecten l'accident i protegeixen.</div><span class="arrow">→</span>
+        <div class="step"><b>Alertant</b>Truca al 112.</div><span class="arrow">→</span>
+        <div class="step"><b>Socorrista</b>Fa els primers auxilis.</div><span class="arrow">→</span>
+        <div class="step"><b>Serveis d'emergència</b>Atenció sanitària i trasllat.</div><span class="arrow">→</span>
+        <div class="step"><b>Hospital</b>Tractament definitiu.</div>
+      </div>
+      <p style="margin:8px 0 0">La cadena és tan forta com el seu eslabó més feble: si ningú truca o el socorrista actua malament, tota l'atenció posterior arriba tard o en pitjors condicions.</p>
+    </div>
+
+    <h3>Avaluació primària</h3>
+    <p>Té per objectiu detectar les situacions que posen en perill la vida immediatament: la pèrdua de consciència i l'aturada respiratòria.</p>
+    <div class="scheme">
+      <div class="tit">Seqüència de l'avaluació primària</div>
+      <div class="flow">
+        <div class="step"><b>1. Consciència</b>Parlar-li fort i tocar-li suaument les espatlles. Respon?</div><span class="arrow">→</span>
+        <div class="step"><b>2. Via aèria</b>Si no respon: obrir-la inclinant el cap enrere i elevant el mentó.</div><span class="arrow">→</span>
+        <div class="step"><b>3. Respiració</b>Mirar, escoltar i sentir durant 10 s. Respira normalment?</div>
+      </div>
+      <div class="table-scroll">
+      <table style="margin-top:10px">
+        <thead><tr><th>Resultat</th><th>Actuació</th></tr></thead>
+        <tbody>
+          <tr><td>Conscient</td><td>Deixar-lo en la posició en què està, preguntar què li passa i vigilar-lo. Avisar si cal.</td></tr>
+          <tr><td>Inconscient però respira</td><td><strong>Posició lateral de seguretat (PLS)</strong>, excepte si hi ha sospita de lesió de columna. Trucar al 112 i vigilar la respiració.</td></tr>
+          <tr><td>Inconscient i no respira normalment</td><td>Trucar al 112, demanar un desfibril·lador (DEA) i començar la reanimació: 30 compressions toràciques i 2 ventilacions, a un ritme de 100–120 compressions per minut.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="exam-box">
+      <div class="tit">⚠ Sospita de lesió medul·lar: NO MOURE</div>
+      <p style="margin:0">Si l'accidentat ha caigut des d'una alçada, ha rebut un cop fort al cap o a l'esquena, o es queixa de dolor al coll o no sent o no pot moure les extremitats, <strong>no s'ha de moure ni posar en PLS</strong>. Cal mantenir-lo immòbil en la posició en què es troba (cap, coll i tronc alineats), trucar al 112 i vigilar-lo. Moure'l podria provocar una paràlisi permanent. Només es mou si hi ha un perill imminent (foc, explosió).</p>
+    </div>
+
+    <h3>Posició lateral de seguretat (PLS)</h3>
+    <p>Manté la via aèria oberta i permet que el vòmit o la saliva surtin per la boca en lloc d'anar als pulmons. S'aplica a persones <strong>inconscients que respiren</strong> i <strong>sense sospita de lesió medul·lar</strong>. Els passos es practiquen a l'activitat A14.</p>
+
+    <h3>Hemorràgies</h3>
+    <table>
+      <caption>Tipus d'hemorràgia i actuació</caption>
+      <thead><tr><th>Tipus</th><th>Actuació</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Externa</strong> (la sang surt per una ferida)</td><td>Posar-se guants. <strong>Compressió directa</strong> i ferma sobre la ferida amb gases o un apòsit net. Si s'amaren, afegir-ne més a sobre <strong>sense retirar les primeres</strong>. Embenar sense tallar la circulació. El torniquet és només per a hemorràgies greus d'una extremitat que no s'aturen amb compressió, i per part de persones formades (anotant l'hora).</td></tr>
+        <tr><td><strong>Interna</strong> (no es veu la sang)</td><td>Sospitar-la davant de signes de xoc: pell pàl·lida i freda, suor, pols ràpid i feble, set, mareig. Trucar al 112, estirar el ferit, abrigar-lo i no donar-li res per boca.</td></tr>
+        <tr><td><strong>Exterioritzada</strong>: pel nas (epistaxi)</td><td>Asseure'l amb el cap lleugerament <strong>endavant</strong> (no enrere) i prémer l'ala del nas durant uns 10 minuts.</td></tr>
+        <tr><td><strong>Exterioritzada</strong>: per l'orella després d'un cop</td><td>No taponar-la. Pot indicar una fractura de crani: trucar al 112 i no moure'l.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Un tècnic es fa un tall profund al palmell amb la vora d'un xassís. El company es posa guants de la farmaciola, li fa compressió directa amb unes gases, en posa més a sobre quan les primeres s'amaren, i li embena la mà. Com que sagna molt, avisa el 112. Després, es registra l'accident i es revisa per què el xassís no es manipulava amb guants de protecció mecànica.</p>
+    </div>
+
+    <h3>La farmaciola</h3>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>RD 486/1997, annex VI</strong>: tot lloc de treball ha de disposar, com a mínim, d'una farmaciola portàtil amb <strong>desinfectants i antisèptics autoritzats, gases estèrils, cotó hidròfil, bena, esparadrap, apòsits adhesius, tisores, pinces i guants d'un sol ús</strong>. S'ha de revisar periòdicament i reposar el material de seguida que caduqui o s'utilitzi.</p>
+    </div>
+    <p>La farmaciola ha d'estar senyalitzada, en un lloc accessible i a càrrec d'una persona responsable. <strong>No hi ha d'haver medicaments</strong>: només els pot prescriure o administrar personal sanitari.</p>
+
+    <div class="resum">
+      <div class="tit">Resum 2.6</div>
+      <ul>
+        <li>PAS: Protegir, Avisar (112), Socórrer. <strong>Protegir sempre abans de socórrer.</strong></li>
+        <li>Avaluació primària: consciència, via aèria, respiració. Inconscient que respira → PLS; no respira → RCP i DEA.</li>
+        <li><strong>Sospita de lesió medul·lar: no moure l'accidentat.</strong></li>
+        <li>Hemorràgia externa: guants i compressió directa, sense retirar les primeres gases.</li>
+        <li>Farmaciola amb el contingut mínim del RD 486/1997, revisada i sense medicaments.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- A13 -->
+  <div class="activity">
+    <span class="badge">A13</span>
+    <div class="body">
+      <h4>Rol-play: PAS i trucada al 112</h4>
+      <p>Decidiu què fer en cada moment del cas. Després, fes la trucada simulada al 112 mentre un company fa d'operador i marca la llista.</p>
+      <div class="meta">
+        <span class="pill mat">En grups de 3</span>
+        <span class="pill crit">⚠ Inclou actuacions crítiques</span>
+        <button class="quiz-btn" data-toggle="a13Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a13Box" class="quiz" hidden>
+        <div class="sub" data-kind="vote">
+          <div class="example" style="margin-bottom:14px"><div class="tit">El cas</div><p>Entres al CPD i trobes en Marc estirat a terra, immòbil, amb la mà encara sobre un cable pelat d'una regleta del rack.</p></div>
+          <div class="vote-case" data-right="b" data-exp="<strong>Protegir abans de socórrer.</strong> Si el toques mentre està en contacte amb el corrent, tu també quedaràs electrocutat. Primer cal tallar el corrent al quadre (o, si no és possible, separar-lo amb un objecte aïllant i sec, com un pal de fusta o plàstic).">
+            <p class="q-text">Moment 1. Què fas primer?</p>
+            <div class="meta">
+              <button class="quiz-btn" data-vote="a" type="button">Agafar-lo pel braç per separar-lo</button>
+              <button class="quiz-btn" data-vote="b" type="button">Tallar el corrent abans de tocar-lo</button>
+              <button class="quiz-btn" data-vote="c" type="button">Començar la reanimació de seguida</button>
+            </div>
+            <div class="q-just vote-res" hidden></div>
+          </div>
+          <div class="vote-case" data-right="a" data-exp="Ja és segur: ara toca <strong>Avisar</strong>. Truca al 112 (o fes que algú truqui) i després fes l'avaluació primària. Mai no el deixis sol per anar a buscar algú si pots trucar.">
+            <p class="q-text">Moment 2. El corrent ja està tallat. I ara?</p>
+            <div class="meta">
+              <button class="quiz-btn" data-vote="a" type="button">Trucar al 112 i fer l'avaluació primària</button>
+              <button class="quiz-btn" data-vote="b" type="button">Donar-li aigua perquè es recuperi</button>
+              <button class="quiz-btn" data-vote="c" type="button">Anar a buscar el cap a l'altra planta</button>
+            </div>
+            <div class="q-just vote-res" hidden></div>
+          </div>
+          <div class="vote-case" data-right="b" data-exp="<strong>No moure'l.</strong> La caiguda des de l'escala i el fet que no senti les cames fan sospitar una lesió medul·lar. Posar-lo en PLS el podria deixar paralitzat. Cal mantenir-lo immòbil, amb cap, coll i tronc alineats, i esperar els serveis d'emergència.">
+            <p class="q-text">Moment 3 (variant). En Marc va caure des de l'escala, és conscient, es queixa del coll i diu que no sent les cames. Un company el vol posar en PLS.</p>
+            <div class="meta">
+              <button class="quiz-btn" data-vote="a" type="button">D'acord, la PLS és el més segur</button>
+              <button class="quiz-btn" data-vote="b" type="button">No moure'l i mantenir-lo immòbil fins que arribi el 112</button>
+              <button class="quiz-btn" data-vote="c" type="button">Ajudar-lo a aixecar-se</button>
+            </div>
+            <div class="q-just vote-res" hidden></div>
+          </div>
+          <div class="meta"><button class="quiz-btn do-reset" type="button">🔄 Torna a votar</button></div>
+        </div>
+        <div class="sub chk" data-kind="check">
+          <p class="sub-tit">Trucada simulada al 112 (marca el que l'alertant ha dit)</p>
+          <label><input type="checkbox"> <span>S'ha identificat i ha donat un telèfon de contacte</span></label>
+          <label><input type="checkbox"> <span>Ha indicat el lloc exacte: adreça, edifici, planta, sala i accés</span></label>
+          <label><input type="checkbox"> <span>Ha explicat què ha passat</span></label>
+          <label><input type="checkbox"> <span>Ha dit quantes víctimes hi ha</span></label>
+          <label><input type="checkbox"> <span>Ha descrit l'estat: si respon, si respira, si sagna</span></label>
+          <label><input type="checkbox"> <span>Ha explicat què s'ha fet (corrent tallat, etc.)</span></label>
+          <label><input type="checkbox"> <span>No ha penjat fins que l'operador ho ha indicat</span></label>
+          <label><input type="checkbox"> <span>Ha enviat algú a esperar l'ambulància a l'entrada</span></label>
+          <p class="q-score" data-live></p>
+          <div class="meta"><button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A14 -->
+  <div class="activity">
+    <span class="badge">A14</span>
+    <div class="body">
+      <h4>Pràctica de PLS i compressió d'una hemorràgia</h4>
+      <p>Pràctica per parelles sobre les màrfegues. El company o el formador marca cada pas fet correctament. Els passos amb vora vermella són crítics.</p>
+      <div class="meta">
+        <span class="pill mat">En parelles</span>
+        <span class="pill mat">La valida el formador</span>
+        <span class="pill crit">⚠ Pràctica obligatòria</span>
+        <button class="quiz-btn" data-toggle="a14Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a14Box" class="quiz" hidden>
+        <div class="sub chk" data-kind="check">
+          <p class="sub-tit">Posició lateral de seguretat</p>
+          <label class="crit-item"><input type="checkbox"> <span>Comprova que respira i que no hi ha sospita de lesió de columna<span class="note">Si hi ha sospita, no es fa la PLS.</span></span></label>
+          <label><input type="checkbox"> <span>Li treu les ulleres i els objectes voluminosos de les butxaques</span></label>
+          <label><input type="checkbox"> <span>Agenollat al costat, col·loca el braç més proper en angle recte, amb el palmell amunt</span></label>
+          <label><input type="checkbox"> <span>Creua l'altre braç sobre el pit i li posa el dors de la mà contra la galta més propera</span></label>
+          <label><input type="checkbox"> <span>Doblega la cama més allunyada, amb el peu recolzat a terra</span></label>
+          <label><input type="checkbox"> <span>Estira del genoll per girar-lo cap a si, de costat</span></label>
+          <label><input type="checkbox"> <span>Ajusta la cama de dalt perquè maluc i genoll quedin en angle recte</span></label>
+          <label class="crit-item"><input type="checkbox"> <span>Inclina el cap enrere per mantenir la via aèria oberta</span></label>
+          <label><input type="checkbox"> <span>Comprova la respiració periòdicament fins que arriba l'ajuda</span></label>
+          <p class="q-score" data-live></p>
+          <div class="meta"><button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button></div>
+        </div>
+        <div class="sub chk" data-kind="check">
+          <p class="sub-tit">Compressió d'una hemorràgia externa</p>
+          <label class="crit-item"><input type="checkbox"> <span>Es posa guants d'un sol ús abans de tocar la ferida</span></label>
+          <label class="crit-item"><input type="checkbox"> <span>Fa compressió directa i ferma amb gases o un apòsit sobre la ferida</span></label>
+          <label><input type="checkbox"> <span>Manté la pressió sense aixecar les gases per mirar</span></label>
+          <label class="crit-item"><input type="checkbox"> <span>Si les gases s'amaren, n'afegeix més a sobre sense retirar les primeres</span></label>
+          <label><input type="checkbox"> <span>Fa un embenat compressiu que no talla la circulació</span></label>
+          <label><input type="checkbox"> <span>Avisa el 112 si l'hemorràgia és abundant i vigila signes de xoc</span></label>
+          <p class="q-score" data-live></p>
+          <div class="meta"><button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A15 -->
+  <div class="activity">
+    <span class="badge">A15</span>
+    <div class="body">
+      <h4>Revisar la farmaciola</h4>
+      <p>Primer, marca només el que <strong>ha de contenir</strong> la farmaciola segons el RD 486/1997 i corregeix. Després, revisa la farmaciola real de l'aula amb la segona llista.</p>
+      <div class="meta">
+        <span class="pill mat">En grup</span>
+        <span class="pill mat">Autoavaluable + revisió real</span>
+        <button class="quiz-btn" data-toggle="a15Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a15Box" class="quiz" hidden>
+        <div class="sub chk" data-kind="checkquiz">
+          <p class="sub-tit">Què hi ha d'haver a la farmaciola?</p>
+          <label data-should="1"><input type="checkbox"> <span>Desinfectants i antisèptics autoritzats</span></label>
+          <label data-should="1"><input type="checkbox"> <span>Gases estèrils</span></label>
+          <label data-should="0" data-why="No: els medicaments només els pot prescriure o administrar personal sanitari."><input type="checkbox"> <span>Analgèsics i antiinflamatoris (paracetamol, ibuprofèn...)</span></label>
+          <label data-should="1"><input type="checkbox"> <span>Cotó hidròfil</span></label>
+          <label data-should="1"><input type="checkbox"> <span>Bena i esparadrap</span></label>
+          <label data-should="0" data-why="No: els termòmetres de mercuri estan retirats per la seva toxicitat."><input type="checkbox"> <span>Termòmetre de mercuri</span></label>
+          <label data-should="1"><input type="checkbox"> <span>Apòsits adhesius</span></label>
+          <label data-should="1"><input type="checkbox"> <span>Tisores i pinces</span></label>
+          <label data-should="0" data-why="No: les cremes i pomades són medicaments o productes que no formen part del contingut mínim."><input type="checkbox"> <span>Pomades antibiòtiques i cremes per a cremades</span></label>
+          <label data-should="1"><input type="checkbox"> <span>Guants d'un sol ús</span></label>
+          <p class="q-score" hidden></p>
+          <div class="meta" style="margin-top:8px">
+            <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+            <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+          </div>
+        </div>
+        <div class="sub chk" data-kind="check">
+          <p class="sub-tit">Revisió de la farmaciola real de l'aula</p>
+          <label><input type="checkbox"> <span>Està senyalitzada (senyal verd amb creu blanca) i és accessible</span></label>
+          <label><input type="checkbox"> <span>Hi ha tot el contingut mínim</span></label>
+          <label><input type="checkbox"> <span>Cap producte no està caducat</span></label>
+          <label><input type="checkbox"> <span>Els envasos estèrils estan tancats i en bon estat</span></label>
+          <label><input type="checkbox"> <span>No hi ha medicaments</span></label>
+          <label><input type="checkbox"> <span>Hi ha una persona responsable i un registre de revisions</span></label>
+          <p class="q-score" data-live></p>
+          <div class="meta"><button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOSSARI -->
+  <section id="glossari">
+    <span class="unit-no" style="background:var(--muted)">📖</span>
+    <h2>Glossari del mòdul</h2>
+    <div class="card glossary">
+      <dl>
+        <dt>Contacte elèctric directe / indirecte</dt><dd>Contacte amb una part que normalment té tensió / amb una part que s'ha posat en tensió per una avaria.</dd>
+        <dt>Cinc regles d'or</dt><dd>Procediment per treballar sense tensió (RD 614/2001): desconnectar, bloquejar, verificar, posar a terra i senyalitzar.</dd>
+        <dt>Interruptor diferencial</dt><dd>Dispositiu que talla el corrent quan detecta una fuita a terra; protegeix les persones.</dd>
+        <dt>Triangle del foc</dt><dd>Combustible, comburent i energia d'activació; amb la reacció en cadena, forma el tetraedre del foc.</dd>
+        <dt>Conat d'emergència</dt><dd>Situació que es controla ràpidament amb els mitjans i el personal del lloc.</dd>
+        <dt>Agent químic, físic i biològic</dt><dd>Substàncies, formes d'energia i microorganismes presents a l'entorn de treball que poden danyar la salut.</dd>
+        <dt>FDS</dt><dd>Fitxa de dades de seguretat: document de 16 seccions amb tota la informació de seguretat d'un producte químic.</dd>
+        <dt>Pictograma CLP</dt><dd>Rombe vermell amb fons blanc que indica el tipus de perill d'un producte químic.</dd>
+        <dt>Càrrega física / mental</dt><dd>Exigències físiques / de tractament d'informació que la feina imposa a la persona.</dd>
+        <dt>Fatiga</dt><dd>Disminució de la capacitat física o mental després d'un esforç; es recupera amb descans.</dd>
+        <dt>Assetjament laboral (mobbing)</dt><dd>Conductes hostils o humiliants repetides de manera sistemàtica i prolongada contra una persona.</dd>
+        <dt>Avaluació de riscos</dt><dd>Estimació de la magnitud dels riscos per decidir si cal actuar i amb quina prioritat.</dd>
+        <dt>Protecció col·lectiva</dt><dd>Mesura que protegeix diverses persones alhora i actua sobre el risc (diferencial, barana, aïllament acústic).</dd>
+        <dt>EPI</dt><dd>Equip de protecció individual: el porta el treballador per protegir-se d'un risc; és l'última barrera.</dd>
+        <dt>Vigilància de la salut</dt><dd>Control periòdic de l'estat de salut en funció dels riscos del lloc; voluntari amb excepcions i confidencial.</dd>
+        <dt>Pla d'autoprotecció</dt><dd>Document que preveu com prevenir i respondre a les emergències d'un centre (RD 393/2007).</dd>
+        <dt>PAS</dt><dd>Protegir, Avisar, Socórrer: ordre d'actuació davant d'un accident.</dd>
+        <dt>Avaluació primària</dt><dd>Comprovació de la consciència, la via aèria i la respiració de l'accidentat.</dd>
+        <dt>PLS</dt><dd>Posició lateral de seguretat: per a persones inconscients que respiren i sense sospita de lesió medul·lar.</dd>
+        <dt>Hemorràgia</dt><dd>Sortida de sang dels vasos sanguinis; pot ser externa, interna o exterioritzada.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- RECURSOS -->
+  <section>
+    <h2 style="font-size:1.1rem">Recursos per aprofundir</h2>
+    <div class="res-links">
+      <a href="https://www.insst.es/" target="_blank" rel="noopener">INSST</a>
+      <a href="https://treball.gencat.cat/ca/ambits/seguretat_salut_laboral/" target="_blank" rel="noopener">Seguretat i salut laboral (Generalitat)</a>
+      <a href="https://osha.europa.eu/ca" target="_blank" rel="noopener">EU-OSHA</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-8669" target="_blank" rel="noopener">RD 486/1997 (BOE)</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-12735" target="_blank" rel="noopener">RD 773/1997 (BOE)</a>
+    </div>
+  </section>
+
+  <!-- PROVA -->
+  <section id="prova">
+    <div class="exam-box">
+      <div class="tit">📝 Prova M2</div>
+      <p style="margin:0">Test de 20 preguntes amb 4 opcions de resposta cadascuna, sobre els continguts de les unitats 2.1 a 2.6. Cada encert val 0,5 punts i els errors no resten.</p>
+      <ul>
+        <li>Cal un mínim de <strong>5/10</strong> per ser APTE en aquesta prova.</li>
+        <li>A més, cal encertar les <strong>2 preguntes crítiques de primers auxilis</strong>: protegir abans de socórrer, i no moure un accidentat amb sospita de lesió medul·lar.</li>
+        <li>Un error en qualsevol d'aquestes dues preguntes implica <strong>NO APTE</strong>, encara que la nota global sigui igual o superior a 5.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Mòdul 2 · Riscos generals i la seva prevenció · Curs bàsic de PRL, sector informàtica</span>
+  <button class="theme-btn" id="themeBtn" type="button">🌓 Canvia el tema</button>
+</footer>
+
+<script>
+  // Mostrar / amagar cada activitat
+  document.querySelectorAll('[data-toggle]').forEach(function(btn){
+    var box = document.getElementById(btn.getAttribute('data-toggle'));
+    btn.addEventListener('click', function(){
+      var open = !box.hidden;
+      box.hidden = open;
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.textContent = open ? 'Mostra l\'activitat' : 'Amaga l\'activitat';
+    });
+  });
+
+  // Test: corregeix (verd/vermell + justificació) i reinicia
+  document.querySelectorAll('[data-kind="test"]').forEach(function(root){
+    var form = root.querySelector('form');
+    var scoreEl = root.querySelector('.q-score');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var qs = form.querySelectorAll('.q'), answered = 0, correct = 0;
+      qs.forEach(function(q){
+        var name = q.querySelector('input').name;
+        var chosen = form.querySelector('input[name="' + name + '"]:checked');
+        var right = q.getAttribute('data-correct');
+        q.classList.remove('ok','ko');
+        q.classList.add('done');
+        q.querySelectorAll('label').forEach(function(l){
+          l.classList.remove('sel','right');
+          if (l.querySelector('input').value === right) l.classList.add('right');
+        });
+        if (q.hasAttribute('data-just')){
+          var j = q.querySelector('.q-just');
+          if (!j){ j = document.createElement('p'); j.className = 'q-just'; q.appendChild(j); }
+          j.innerHTML = q.getAttribute('data-just');
+          j.hidden = false;
+        }
+        if (chosen){
+          answered++;
+          chosen.closest('label').classList.add('sel');
+          if (chosen.value === right){ correct++; q.classList.add('ok'); }
+          else { q.classList.add('ko'); }
+        }
+      });
+      scoreEl.hidden = false;
+      scoreEl.textContent = answered < qs.length
+        ? 'Has respost ' + answered + ' de ' + qs.length + ' preguntes. Es mostren les respostes correctes en verd i la justificació.'
+        : 'Resultat: ' + correct + ' de ' + qs.length + ' correctes.';
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      form.reset();
+      form.querySelectorAll('label').forEach(function(l){ l.classList.remove('sel','right'); });
+      form.querySelectorAll('.q').forEach(function(q){ q.classList.remove('ok','ko','done'); });
+      form.querySelectorAll('.q-just').forEach(function(p){ p.hidden = true; });
+      scoreEl.hidden = true;
+      scoreEl.textContent = '';
+    });
+  });
+
+  // Resposta oberta: mostra l'exemple model i reinicia
+  document.querySelectorAll('[data-kind="open"]').forEach(function(root){
+    var note = root.querySelector('.q-score');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      root.querySelectorAll('.fq').forEach(function(fq){
+        var ta = fq.querySelector('textarea');
+        var m = fq.querySelector('.fq-model');
+        m.innerHTML = '<strong>Exemple proposat:</strong> ' + ta.getAttribute('data-model');
+        m.hidden = false;
+      });
+      if (note) note.hidden = false;
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      root.querySelectorAll('textarea').forEach(function(ta){ ta.value = ''; });
+      root.querySelectorAll('.fq-model').forEach(function(m){ m.hidden = true; m.innerHTML = ''; });
+      if (note) note.hidden = true;
+    });
+  });
+
+  // Votació de casos amb resposta raonada
+  document.querySelectorAll('[data-kind="vote"]').forEach(function(root){
+    root.querySelectorAll('.vote-case').forEach(function(c){
+      var res = c.querySelector('.vote-res');
+      c.querySelectorAll('[data-vote]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          c.querySelectorAll('[data-vote]').forEach(function(b){ b.classList.remove('primary'); });
+          btn.classList.add('primary');
+          var ok = btn.getAttribute('data-vote') === c.getAttribute('data-right');
+          res.innerHTML = (ok ? '<strong>Correcte.</strong> ' : '<strong>Revisem-ho.</strong> ') + c.getAttribute('data-exp');
+          res.hidden = false;
+        });
+      });
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      root.querySelectorAll('[data-vote]').forEach(function(b){ b.classList.remove('primary'); });
+      root.querySelectorAll('.vote-res').forEach(function(r){ r.hidden = true; r.innerHTML = ''; });
+    });
+  });
+
+  // Llista de verificació amb comptador
+  document.querySelectorAll('[data-kind="check"]').forEach(function(root){
+    var boxes = root.querySelectorAll('input[type="checkbox"]');
+    var live = root.querySelector('[data-live]');
+    function update(){
+      var n = 0; boxes.forEach(function(b){ if (b.checked) n++; });
+      live.textContent = 'Completat: ' + n + ' de ' + boxes.length + (n === boxes.length ? ' ✅' : '');
+    }
+    boxes.forEach(function(b){ b.addEventListener('change', update); });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      boxes.forEach(function(b){ b.checked = false; });
+      update();
+    });
+    update();
+  });
+
+  // Llista amb correcció (què ha d'haver-hi i què no)
+  document.querySelectorAll('[data-kind="checkquiz"]').forEach(function(root){
+    var scoreEl = root.querySelector('.q-score');
+    var labels = root.querySelectorAll('label[data-should]');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var good = 0;
+      labels.forEach(function(l){
+        var checked = l.querySelector('input').checked;
+        var should = l.getAttribute('data-should') === '1';
+        l.classList.remove('ok','ko');
+        var ok = checked === should;
+        l.classList.add(ok ? 'ok' : 'ko');
+        if (ok) good++;
+        var why = l.getAttribute('data-why');
+        var n = l.querySelector('.note');
+        if (why && !n){ n = document.createElement('span'); n.className = 'note'; l.querySelector('span').appendChild(n); }
+        if (n){ n.textContent = why; n.hidden = false; }
+      });
+      scoreEl.hidden = false;
+      scoreEl.textContent = 'Resultat: ' + good + ' de ' + labels.length + ' elements ben classificats. Verd: correcte; vermell: revisa-ho.';
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      labels.forEach(function(l){
+        l.querySelector('input').checked = false;
+        l.classList.remove('ok','ko');
+        var n = l.querySelector('.note'); if (n) n.hidden = true;
+      });
+      scoreEl.hidden = true;
+      scoreEl.textContent = '';
+    });
+  });
+
+  // Tema clar / fosc (comparteix preferència amb la resta de mòduls)
+  var root = document.documentElement;
+  try { var t = localStorage.getItem('prl-theme'); if (t) root.setAttribute('data-theme', t); } catch(e){}
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme') ||
+      (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('prl-theme', next); } catch(e){}
+  });
+</script>
+</body>
+</html>

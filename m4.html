@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mòdul 4 · Elements bàsics de gestió de la prevenció</title>
+<meta name="description" content="Mòdul 4 del curs bàsic de PRL: gestió de la prevenció a l'empresa, modalitats preventives, participació dels treballadors i organismes públics de referència.">
+<style>
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5;
+    --text:#1b2330; --muted:#5a6577; --line:#dde2ea;
+    --accent:#e0661b; --accent-soft:#fdeee4;
+    --m1:#2f6fd1; --m2:#c2410c; --m3:#0f8a6a; --m4:#caa005;
+    --danger:#b91c1c; --danger-soft:#fdecec;
+    --law:#1d4ed8; --law-soft:#eaf1fd;
+    --ok-soft:#d1f5e3;
+    --radius:14px; --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.06);
+    --c:var(--m4);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+      --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+      --accent:#f08a46; --accent-soft:#2b1d14;
+      --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+      --danger:#f87171; --danger-soft:#2c1717;
+      --law:#7aa6f5; --law-soft:#182435;
+      --ok-soft:#133227;
+      --shadow:none;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+    --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+    --accent:#f08a46; --accent-soft:#2b1d14;
+    --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+    --danger:#f87171; --danger-soft:#2c1717;
+    --law:#7aa6f5; --law-soft:#182435;
+    --ok-soft:#133227;
+    --shadow:none;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;}
+  a{color:var(--accent)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px}
+
+  header.hero{background:linear-gradient(135deg,#1b2330 0%,#2a3a52 100%);color:#fff;padding:40px 0 34px}
+  .hero .back{display:inline-flex;align-items:center;gap:6px;color:#cfd8e6;text-decoration:none;font-size:.9rem;font-weight:600}
+  .hero .back:hover{color:#fff}
+  .hero .tag{display:inline-block;background:var(--c);color:#1b2330;font-weight:800;font-size:.8rem;
+    letter-spacing:.06em;padding:4px 10px;border-radius:999px;margin-top:16px}
+  .hero h1{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.2;margin:12px 0 8px}
+  .hero p{max-width:640px;color:#cfd8e6;margin:0}
+
+  nav.top{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--line)}
+  nav.top .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  nav.top a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:.9rem;
+    padding:13px 10px;border-bottom:3px solid transparent}
+  nav.top a:hover{color:var(--text);border-bottom-color:var(--c)}
+
+  main{padding-bottom:40px}
+  section{padding:40px 0 4px;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:0}
+  .unit-no{display:inline-block;background:var(--c);color:#1b2330;font-weight:800;border-radius:8px;
+    padding:3px 9px;font-size:.82rem;margin-bottom:10px}
+  h2{font-size:1.4rem;margin:0 0 4px}
+  h3{font-size:1.1rem;margin:28px 0 8px}
+  .lead{color:var(--muted);margin:4px 0 20px}
+  p{margin:0 0 14px}
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin-bottom:6px}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  .objectius{border-left:5px solid var(--c)}
+  .objectius h3{margin-top:0;font-size:1rem}
+  .objectius ul{margin-bottom:0}
+
+  .law{background:var(--law-soft);border:1px solid var(--law);border-left-width:5px;
+    border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .law .tit{font-weight:800;color:var(--law);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .law p{margin:0;font-size:.95rem}
+  .law p+p{margin-top:8px}
+
+  .example{background:var(--accent-soft);border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .example .tit{font-weight:800;color:var(--accent);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .example p{margin:0}
+  .example p+p{margin-top:8px}
+
+  table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:.93rem}
+  table caption{text-align:left;font-weight:700;margin-bottom:8px;color:var(--text)}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:var(--surface-2);font-weight:700}
+  .table-scroll{overflow-x:auto;margin:0 0 18px}
+  .table-scroll table{margin:0}
+
+  .activity{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin:0 0 16px;display:flex;gap:14px;align-items:flex-start}
+  .activity .badge{flex:0 0 auto;background:var(--accent);color:#fff;font-weight:800;border-radius:10px;
+    padding:5px 10px;font-size:.82rem}
+  .activity .body{width:100%;min-width:0}
+  .activity .body h4{margin:0 0 4px;font-size:1rem}
+  .activity .body p{margin:0 0 6px}
+  .activity .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .pill{font-size:.8rem;padding:3px 10px;border-radius:8px;background:var(--surface-2);color:var(--text)}
+  .pill.mat{background:var(--surface-2)}
+
+  .glossary dl{margin:0}
+  .glossary dt{font-weight:700;margin-top:10px}
+  .glossary dt:first-child{margin-top:0}
+  .glossary dd{margin:2px 0 0;color:var(--muted)}
+
+  .resum{background:var(--surface-2);border-radius:var(--radius);padding:16px 18px;margin:0 0 18px}
+  .resum .tit{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:8px}
+  .resum ul{margin:0}
+
+  .scheme{background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin:0 0 18px;font-size:.93rem}
+  .scheme .tit{font-weight:700;margin-bottom:10px}
+  .pyramid{display:flex;flex-direction:column;align-items:center;gap:2px;margin:10px 0}
+  .pyramid div{color:#fff;font-size:.82rem;font-weight:700;padding:7px 10px;border-radius:6px;text-align:center;max-width:100%}
+
+  /* Esquemes de flux */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px;margin:10px 0}
+  .flow .step{flex:1 1 120px;background:#8a6d00;color:#fff;border-radius:10px;padding:10px 12px;font-size:.85rem}
+  .flow .step b{display:block;font-size:.95rem;margin-bottom:2px}
+  .flow .arrow{align-self:center;color:var(--muted);font-weight:800}
+  .loop-note{margin:8px 0 0;font-size:.88rem;color:var(--muted)}
+
+  /* Cicle de gestió */
+  .cycle{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+  .cycle div{border-radius:10px;padding:10px 12px;font-size:.85rem;color:#fff;position:relative}
+  .cycle b{display:block;font-size:.95rem}
+  .cycle .n{position:absolute;top:8px;right:10px;font-weight:800;opacity:.7}
+  @media (max-width:600px){ .cycle{grid-template-columns:1fr 1fr} }
+
+  /* Eina orientativa i desplegables */
+  .tool{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0 12px}
+  .tool label{display:block;font-weight:700;font-size:.88rem;margin-bottom:4px}
+  select,.tool input{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+    color:var(--text);padding:8px 10px;font:inherit;font-size:.9rem}
+  select:focus,.tool input:focus{outline:2px solid var(--c);border-color:var(--c)}
+  .tool-out{background:var(--surface-2);border-radius:8px;padding:12px 14px;font-size:.92rem}
+  .tool-out ul{margin:6px 0 0}
+  .tag-ok{color:#15803d;font-weight:800}
+  .tag-no{color:var(--danger);font-weight:800}
+  .tag-must{color:var(--law);font-weight:800}
+
+  /* Exercici d'aparellar (A20) */
+  .mrow{display:grid;grid-template-columns:minmax(150px,1.2fr) 110px minmax(180px,2fr);gap:8px;align-items:center;
+    background:var(--surface-2);border-radius:8px;padding:10px 12px;margin-bottom:8px}
+  .mrow .ph{font-weight:700;font-size:.93rem}
+  .mrow .ph small{display:block;font-weight:400;color:var(--muted);font-size:.82rem}
+  .mrow select.ok{outline:2px solid var(--m3);background:var(--ok-soft)}
+  .mrow select.ko{outline:2px solid var(--danger);background:var(--danger-soft)}
+  .mrow .q-just{grid-column:1/-1;margin:2px 0 0}
+  .mhead{display:grid;grid-template-columns:minmax(150px,1.2fr) 110px minmax(180px,2fr);gap:8px;
+    font-size:.8rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:0 12px 4px}
+  @media (max-width:600px){
+    .mrow,.mhead{grid-template-columns:1fr}
+    .mhead span+span{display:none}
+  }
+
+  details.drop{background:var(--surface-2);border-radius:var(--radius);padding:10px 14px;margin:0 0 14px}
+  details.drop summary{cursor:pointer;font-weight:700}
+  details.drop .res-links{margin:10px 0 2px}
+
+  .exam-box{background:var(--danger-soft);border:1px solid var(--danger);border-left-width:5px;
+    border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+  .exam-box .tit{color:var(--danger);font-weight:800;margin-bottom:6px}
+  .exam-box ul{margin:8px 0 0}
+
+  .quiz-btn{background:var(--surface-2);border:1px solid var(--line);color:var(--text);border-radius:8px;
+    padding:7px 14px;cursor:pointer;font:inherit;font-size:.86rem;font-weight:600}
+  .quiz-btn:hover{border-color:var(--c)}
+  .quiz-btn.primary{background:var(--c);border-color:var(--c);color:#1b2330}
+  .quiz{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
+  .sub{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)}
+  .sub:first-child{margin-top:0;padding-top:0;border-top:0}
+  .sub-tit{font-weight:800;margin:0 0 10px}
+  .q{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .q:last-of-type{border-bottom:0;margin-bottom:0;padding-bottom:0}
+  .q-text{font-weight:700;margin:0 0 8px}
+  .q label{display:block;background:var(--surface-2);border-radius:8px;padding:8px 12px;margin-bottom:6px;
+    cursor:pointer;font-size:.93rem}
+  .q label:hover{background:var(--line)}
+  .q input{margin-right:8px}
+  .q.ok label.sel{background:var(--ok-soft);outline:2px solid var(--m3)}
+  .q.ko label.sel{background:var(--danger-soft);outline:2px solid var(--danger)}
+  .q.done label.right{background:var(--ok-soft);outline:2px solid var(--m3)}
+  .q-score{font-weight:700;margin-top:14px}
+  .q-just{margin:8px 0 0;padding:8px 12px;background:var(--surface-2);border-radius:8px;
+    font-size:.88rem;color:var(--muted)}
+  .mrow .q-just{background:var(--surface)}
+
+  .fq{margin-bottom:16px}
+  .fq-label{display:block;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .fq textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+    color:var(--text);padding:9px 12px;font:inherit;font-size:.93rem;resize:vertical}
+  .fq textarea:focus{outline:2px solid var(--c);border-color:var(--c)}
+  .fq-model{margin:8px 0 0;padding:8px 12px;background:var(--accent-soft);border-radius:8px;
+    font-size:.9rem;color:var(--text)}
+  .fq-model strong{color:var(--accent)}
+
+  .res-links{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
+  .res-links a{font-size:.88rem;background:var(--surface-2);color:var(--text);text-decoration:none;
+    padding:6px 12px;border-radius:999px}
+  details.drop .res-links a{background:var(--surface)}
+  .res-links a:hover{color:var(--accent)}
+
+  footer{margin-top:20px;padding:24px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem;
+    display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+  .theme-btn{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;
+    padding:6px 10px;cursor:pointer;font:inherit;font-size:.85rem}
+
+  @media print{
+    nav.top,.theme-btn{display:none}
+    header.hero{background:none;color:#000}
+    .hero p,.hero .back{color:#000}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a class="back" href="index.html">← Tornar als mòduls</a>
+    <div class="tag">MÒDUL 4</div>
+    <h1>Elements bàsics de gestió de la prevenció</h1>
+    <p>Com s'organitza la prevenció dins de l'empresa, qui hi participa i quins organismes públics ens hi poden ajudar.</p>
+  </div>
+</header>
+
+<nav class="top" aria-label="Unitats del mòdul">
+  <div class="wrap">
+    <a href="#objectius">Objectius</a>
+    <a href="#u1">4.1 Gestió de la PRL</a>
+    <a href="#u2">4.2 Modalitats i participació</a>
+    <a href="#u3">4.3 Organismes</a>
+    <a href="#glossari">Glossari</a>
+    <a href="#prova">Prova</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- OBJECTIUS -->
+  <section id="objectius">
+    <div class="card objectius">
+      <h3>Objectius del mòdul</h3>
+      <ul>
+        <li>Identificar els elements de la gestió de la prevenció a l'empresa (pla de prevenció, avaluació, planificació, control d'eficàcia, informació i formació, vigilància de la salut, emergències i documentació).</li>
+        <li>Distingir les modalitats d'organització preventiva i reconèixer quina pot adoptar una empresa segons la seva mida i activitat.</li>
+        <li>Conèixer els canals de participació dels treballadors: delegats de prevenció i Comitè de Seguretat i Salut.</li>
+        <li>Identificar els organismes públics de referència en seguretat i salut en el treball i els recursos que ofereixen.</li>
+        <li>Valorar l'organització del treball, la responsabilitat, la comunicació i la formació contínua com a eines per promoure conductes segures.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- UNITAT 4.1 -->
+  <section id="u1">
+    <span class="unit-no">4.1</span>
+    <h2>Gestió de la prevenció de riscos laborals</h2>
+    <p class="lead">La prevenció no és un dossier que es guarda en un calaix: és una manera d'organitzar la feina que ha d'arribar a tots els nivells de l'empresa, des de la direcció fins al tècnic que instal·la un rack.</p>
+
+    <h3>La prevenció integrada i el pla de prevenció</h3>
+    <p>La Llei de prevenció demana que la prevenció estigui <strong>integrada</strong> en el sistema general de gestió de l'empresa. Això vol dir que qui decideix comprar un equip, organitzar un torn de guàrdies o acceptar un projecte amb un termini ajustat també ha de tenir en compte la seguretat i la salut. L'eina que ho fa possible és el <strong>pla de prevenció</strong>.</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 16.1 LPRL</strong>: la prevenció s'ha d'integrar en el sistema de gestió de l'empresa, en el conjunt de les seves activitats i en tots els nivells jeràrquics, mitjançant la implantació i l'aplicació d'un <strong>pla de prevenció de riscos laborals</strong>.</p>
+      <p><strong>Art. 2 RD 39/1997</strong>: el pla ha d'incloure l'estructura organitzativa, les responsabilitats, les funcions, les pràctiques, els procediments, els processos i els recursos necessaris per fer l'acció preventiva. Ha d'estar aprovat per la direcció, assumit per tota l'estructura i conegut pels treballadors.</p>
+      <p>Les empreses petites amb activitats sense riscos especials poden fer aquests documents de manera <strong>simplificada</strong> (art. 16.2 bis LPRL i art. 2.4 RD 39/1997). Abans d'aplicar-ho a un cas concret, comprova'n les condicions a la versió consolidada del BOE.</p>
+    </div>
+
+    <div class="scheme">
+      <div class="tit">El cicle de gestió de la PRL</div>
+      <div class="cycle">
+        <div style="background:#8a6d00"><span class="n">1</span><b>Pla de prevenció</b>Organització, responsabilitats i procediments.</div>
+        <div style="background:#1d4ed8"><span class="n">2</span><b>Avaluació de riscos</b>Quins riscos hi ha i quina importància tenen.</div>
+        <div style="background:#0f766e"><span class="n">3</span><b>Planificació</b>Quines mesures, qui, quan i amb quins recursos.</div>
+        <div style="background:#15803d"><span class="n">4</span><b>Execució</b>Aplicar les mesures, informar, formar, vigilar la salut.</div>
+        <div style="background:#c2410c"><span class="n">5</span><b>Control d'eficàcia</b>Comprovar que les mesures funcionen.</div>
+        <div style="background:#475569"><span class="n">6</span><b>Revisió i millora</b>Actualitzar l'avaluació i el pla.</div>
+      </div>
+      <p class="loop-note">↺ El cicle no s'acaba mai: la revisió torna a alimentar l'avaluació. És la mateixa lògica de millora contínua de les normes de gestió (planificar, fer, verificar, actuar).</p>
+    </div>
+
+    <h3>Avaluació de riscos</h3>
+    <p>Ja l'hem treballada al Mòdul 2 (mètode de l'INSST de probabilitat × conseqüències). Des del punt de vista de la gestió, el que importa és <strong>quan</strong> s'ha de fer: una avaluació inicial de tots els llocs de treball i una <strong>revisió</strong> cada vegada que hi ha canvis.</p>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 16.2.a LPRL</strong> i <strong>arts. 4 a 6 RD 39/1997</strong>: l'avaluació inicial s'ha de tornar a fer per als llocs afectats quan s'escullen nous equips de treball, s'introdueixen noves tecnologies o es modifica el condicionament dels llocs, quan canvien les condicions de treball, quan s'incorpora un treballador especialment sensible i quan es detecten danys a la salut o s'aprecia que les mesures són insuficients.</p>
+    </div>
+
+    <h3>Planificació de l'acció preventiva</h3>
+    <p>L'avaluació diu <em>què</em> passa; la planificació diu <em>què farem</em>. Si l'avaluació detecta riscos, l'empresa ha de planificar les mesures per eliminar-los o reduir-los, prioritzant-les segons la seva magnitud.</p>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 16.2.b LPRL</strong> i <strong>arts. 8 i 9 RD 39/1997</strong>: per a cada activitat preventiva cal indicar el <strong>termini</strong>, els <strong>responsables</strong> i els <strong>recursos humans i materials</strong> necessaris. L'empresari s'ha d'assegurar que s'executa efectivament, fent-ne un seguiment continu.</p>
+    </div>
+
+    <div class="table-scroll">
+    <table>
+      <caption>Exemple de planificació en una empresa de suport informàtic</caption>
+      <thead><tr><th>Risc detectat</th><th>Valoració</th><th>Mesura</th><th>Responsable</th><th>Termini</th><th>Recursos</th></tr></thead>
+      <tbody>
+        <tr><td>Caiguda per cables al pas de l'oficina</td><td>Moderat</td><td>Instal·lar canaletes al terra</td><td>Cap de serveis generals</td><td>1 mes</td><td>Canaletes, personal de manteniment</td></tr>
+        <tr><td>Contacte elèctric en manipular servidors</td><td>Important</td><td>Procediment escrit de treball sense tensió i formació específica</td><td>Responsable de sistemes + SPA</td><td>Immediat</td><td>Sessió formativa, procediment</td></tr>
+        <tr><td>Fatiga visual en llocs amb PVD</td><td>Tolerable</td><td>Revisar la il·luminació i recordar les pauses</td><td>Responsable de PRL</td><td>3 mesos</td><td>Luxòmetre, fitxa informativa</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Control d'eficàcia</h3>
+    <p>Planificar no és suficient: cal comprovar que les mesures s'han aplicat i que funcionen. Les eines habituals són les <strong>inspeccions de seguretat</strong> periòdiques (passejar pel CPD o per l'oficina amb una llista de comprovació), el <strong>seguiment dels terminis</strong> de la planificació i la <strong>investigació d'accidents i incidents</strong>.</p>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 16.3 LPRL</strong>: quan s'ha produït un dany a la salut dels treballadors, o quan la vigilància de la salut mostra indicis que les mesures són insuficients, l'empresari ha de fer una <strong>investigació</strong> per detectar-ne les causes.</p>
+      <p><strong>Capítol V del RD 39/1997</strong>: les empreses que no concerten tota l'activitat preventiva amb un servei de prevenció aliè han de sotmetre el seu sistema de prevenció a una <strong>auditoria</strong> externa periòdica.</p>
+    </div>
+
+    <h3>Informació i formació dels treballadors</h3>
+    <p>Un treballador que no coneix els riscos del seu lloc difícilment podrà protegir-se'n. Per això la Llei regula per separat el dret a ser <strong>informat</strong> i el dret a ser <strong>format</strong>.</p>
+    <table>
+      <caption>Diferència entre informació i formació</caption>
+      <thead><tr><th></th><th>Informació (art. 18 LPRL)</th><th>Formació (art. 19 LPRL)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Què és</strong></td><td>Donar a conèixer els riscos, les mesures de prevenció i protecció i les mesures d'emergència.</td><td>Ensenyar, de manera teòrica i pràctica, a treballar de manera segura en el lloc concret.</td></tr>
+        <tr><td><strong>Quan</strong></td><td>Sempre que hi hagi riscos que afectin el treballador; si hi ha representants, a través d'ells (excepte els riscos del lloc concret).</td><td>En contractar, quan canvien les funcions i quan s'introdueixen noves tecnologies o canvis en els equips. S'ha de repetir periòdicament si cal.</td></tr>
+        <tr><td><strong>Com</strong></td><td>Fitxes, cartells, sessions, intranet.</td><td>Dins de la jornada (o descomptant-ne el temps) i <strong>sense cap cost</strong> per al treballador.</td></tr>
+      </tbody>
+    </table>
+    <p>L'art. 18 també reconeix el dret dels treballadors a ser <strong>consultats</strong> i a <strong>participar</strong> en les qüestions de prevenció, que veurem a la unitat 4.2.</p>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Una empresa contracta una tècnica de microinformàtica. Abans que comenci a desmuntar equips, li lliura la fitxa de riscos del lloc (informació) i li fa una sessió pràctica sobre treball sense tensió, manipulació de càrregues i ús de la polsera antiestàtica (formació). Sis mesos després passa a fer guàrdies al CPD: com que canvien les funcions, li correspon una nova formació sobre els riscos del CPD i el sistema d'extinció per gas.</p>
+    </div>
+
+    <h3>Vigilància de la salut i emergències</h3>
+    <p>Dos elements que ja coneixes del Mòdul 2 i que també formen part de la gestió:</p>
+    <ul>
+      <li><strong>Vigilància de la salut (art. 22 LPRL)</strong>: periòdica, en funció dels riscos, voluntària amb excepcions i confidencial. L'empresa ha de garantir-la i planificar-la; l'han de fer professionals sanitaris d'un servei de prevenció.</li>
+      <li><strong>Emergències (art. 20 LPRL)</strong>: analitzar les situacions possibles, designar i formar el personal dels equips d'emergència, comprovar periòdicament el funcionament de les mesures (simulacres) i organitzar la relació amb els serveis externs.</li>
+    </ul>
+
+    <h3>Documentació</h3>
+    <p>La gestió s'ha de poder demostrar: si un inspector de treball visita l'empresa, li demanarà els documents que ho acrediten.</p>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 23 LPRL</strong>: l'empresari ha d'elaborar i conservar a disposició de l'autoritat laboral la documentació següent.</p>
+    </div>
+    <table>
+      <caption>Documentació obligatòria (art. 23.1 LPRL)</caption>
+      <thead><tr><th>Document</th><th>Exemple TIC</th></tr></thead>
+      <tbody>
+        <tr><td>Pla de prevenció de riscos laborals</td><td>Document que diu qui és responsable de la PRL a cada departament (sistemes, desenvolupament, suport).</td></tr>
+        <tr><td>Avaluació de riscos, amb el resultat dels controls periòdics</td><td>Avaluació de cada lloc: programador, tècnic de camp, operador de CPD; mesures de soroll al CPD.</td></tr>
+        <tr><td>Planificació de l'activitat preventiva, incloses les mesures i, si escau, el material de protecció</td><td>Quadre de mesures com el de més amunt; registre de lliurament d'EPI.</td></tr>
+        <tr><td>Pràctica dels controls de l'estat de salut i les conclusions</td><td>Certificats d'aptitud dels reconeixements mèdics (mai l'historial mèdic, que és confidencial).</td></tr>
+        <tr><td>Relació d'accidents de treball i malalties professionals que han causat una incapacitat laboral superior a un dia de treball</td><td>Registre d'accidents: el tècnic que es va tallar amb un xassís i va estar tres dies de baixa.</td></tr>
+      </tbody>
+    </table>
+    <p>A més, l'empresari ha de notificar per escrit a l'autoritat laboral els danys a la salut dels treballadors que s'hagin produït amb motiu del treball (art. 23.3 LPRL).</p>
+
+    <div class="resum">
+      <div class="tit">Resum 4.1</div>
+      <ul>
+        <li>La prevenció s'integra en la gestió de l'empresa mitjançant el pla de prevenció (art. 16 LPRL i art. 2 RD 39/1997).</li>
+        <li>Cicle: pla → avaluació → planificació → execució → control d'eficàcia → revisió, i torna a començar.</li>
+        <li>La planificació fixa per a cada mesura termini, responsable i recursos; el control d'eficàcia comprova que funciona i s'investiguen els danys.</li>
+        <li>Informació (art. 18) i formació (art. 19): la formació es fa en contractar i quan hi ha canvis, dins la jornada i sense cost.</li>
+        <li>L'art. 23 LPRL fixa la documentació que cal conservar a disposició de l'autoritat laboral.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- A20 -->
+  <div class="activity">
+    <span class="badge">A20</span>
+    <div class="body">
+      <h4>Ordenar el cicle de gestió i associar-hi els documents</h4>
+      <p>Les fases del cicle estan desordenades. Per a cadascuna, tria la seva <strong>posició</strong> al cicle (1 a 6) i el <strong>document o registre</strong> que la deixa per escrit. Després, corregeix.</p>
+      <div class="meta">
+        <span class="pill mat">Individual o en parelles</span>
+        <span class="pill mat">Autoavaluable</span>
+        <button class="quiz-btn" data-toggle="a20Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a20Box" class="quiz" hidden data-kind="match">
+        <div class="mhead"><span>Fase</span><span>Posició</span><span>Document associat</span></div>
+        <form>
+          <div class="mrow" data-just="La planificació és la tercera fase: després d'avaluar, es decideixen les mesures i es recull cada una amb termini, responsable i recursos (art. 16.2.b LPRL, arts. 8 i 9 RD 39/1997).">
+            <div class="ph">Planificació de l'acció preventiva<small>Decidir les mesures i prioritzar-les</small></div>
+            <select data-correct="3" aria-label="Posició de la planificació"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+            <select data-correct="c" aria-label="Document de la planificació"><option value="">— Tria un document —</option><option value="a">Document del pla de prevenció</option><option value="b">Informe d'avaluació de riscos</option><option value="c">Quadre de mesures amb termini, responsable i recursos</option><option value="d">Registres de formació, informació i lliurament d'EPI</option><option value="e">Informes d'inspeccions i d'investigació d'accidents</option><option value="f">Avaluació actualitzada i pla revisat</option></select>
+          </div>
+          <div class="mrow" data-just="El control d'eficàcia (cinquena fase) comprova que les mesures s'han aplicat i funcionen: inspeccions de seguretat, seguiment i investigació d'accidents (art. 16.3 LPRL).">
+            <div class="ph">Control d'eficàcia<small>Comprovar que les mesures funcionen</small></div>
+            <select data-correct="5" aria-label="Posició del control d'eficàcia"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+            <select data-correct="e" aria-label="Document del control d'eficàcia"><option value="">— Tria un document —</option><option value="a">Document del pla de prevenció</option><option value="b">Informe d'avaluació de riscos</option><option value="c">Quadre de mesures amb termini, responsable i recursos</option><option value="d">Registres de formació, informació i lliurament d'EPI</option><option value="e">Informes d'inspeccions i d'investigació d'accidents</option><option value="f">Avaluació actualitzada i pla revisat</option></select>
+          </div>
+          <div class="mrow" data-just="El pla de prevenció és el punt de partida: estableix l'organització, les responsabilitats i els procediments per integrar la prevenció (art. 16.1 LPRL, art. 2 RD 39/1997).">
+            <div class="ph">Pla de prevenció<small>Organitzar la prevenció a l'empresa</small></div>
+            <select data-correct="1" aria-label="Posició del pla de prevenció"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+            <select data-correct="a" aria-label="Document del pla de prevenció"><option value="">— Tria un document —</option><option value="a">Document del pla de prevenció</option><option value="b">Informe d'avaluació de riscos</option><option value="c">Quadre de mesures amb termini, responsable i recursos</option><option value="d">Registres de formació, informació i lliurament d'EPI</option><option value="e">Informes d'inspeccions i d'investigació d'accidents</option><option value="f">Avaluació actualitzada i pla revisat</option></select>
+          </div>
+          <div class="mrow" data-just="L'execució (quarta fase) és posar en pràctica el que s'ha planificat: aplicar mesures, informar, formar i lliurar EPI. Els registres (signatures de formació, lliurament d'EPI) en són la prova.">
+            <div class="ph">Execució de les mesures<small>Aplicar, informar i formar</small></div>
+            <select data-correct="4" aria-label="Posició de l'execució"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+            <select data-correct="d" aria-label="Document de l'execució"><option value="">— Tria un document —</option><option value="a">Document del pla de prevenció</option><option value="b">Informe d'avaluació de riscos</option><option value="c">Quadre de mesures amb termini, responsable i recursos</option><option value="d">Registres de formació, informació i lliurament d'EPI</option><option value="e">Informes d'inspeccions i d'investigació d'accidents</option><option value="f">Avaluació actualitzada i pla revisat</option></select>
+          </div>
+          <div class="mrow" data-just="La revisió (sisena fase) tanca el cicle: amb el que s'ha après del control, s'actualitzen l'avaluació i el pla, i el cicle torna a començar (arts. 4 a 6 RD 39/1997).">
+            <div class="ph">Revisió i millora<small>Actualitzar i tornar a començar</small></div>
+            <select data-correct="6" aria-label="Posició de la revisió"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+            <select data-correct="f" aria-label="Document de la revisió"><option value="">— Tria un document —</option><option value="a">Document del pla de prevenció</option><option value="b">Informe d'avaluació de riscos</option><option value="c">Quadre de mesures amb termini, responsable i recursos</option><option value="d">Registres de formació, informació i lliurament d'EPI</option><option value="e">Informes d'inspeccions i d'investigació d'accidents</option><option value="f">Avaluació actualitzada i pla revisat</option></select>
+          </div>
+          <div class="mrow" data-just="L'avaluació (segona fase) identifica i valora els riscos de cada lloc. Sense avaluació no es pot planificar (art. 16.2.a LPRL).">
+            <div class="ph">Avaluació de riscos<small>Identificar i valorar els riscos</small></div>
+            <select data-correct="2" aria-label="Posició de l'avaluació"><option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+            <select data-correct="b" aria-label="Document de l'avaluació"><option value="">— Tria un document —</option><option value="a">Document del pla de prevenció</option><option value="b">Informe d'avaluació de riscos</option><option value="c">Quadre de mesures amb termini, responsable i recursos</option><option value="d">Registres de formació, informació i lliurament d'EPI</option><option value="e">Informes d'inspeccions i d'investigació d'accidents</option><option value="f">Avaluació actualitzada i pla revisat</option></select>
+          </div>
+        </form>
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+          <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+        </div>
+        <p class="q-score" hidden></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNITAT 4.2 -->
+  <section id="u2">
+    <span class="unit-no">4.2</span>
+    <h2>Modalitats preventives i participació dels treballadors</h2>
+    <p class="lead">Qui s'encarrega, a la pràctica, de fer tota aquesta gestió? Depèn sobretot de la mida de l'empresa i del tipus d'activitat. I, en tots els casos, els treballadors hi tenen veu.</p>
+
+    <h3>Les modalitats d'organització preventiva</h3>
+    <p>L'empresari és sempre el responsable de la prevenció, però pot organitzar els recursos per fer-la de maneres diferents. Les activitats preventives es divideixen en quatre especialitats: <strong>seguretat en el treball</strong>, <strong>higiene industrial</strong>, <strong>ergonomia i psicosociologia aplicada</strong> i <strong>medicina del treball</strong> (vigilància de la salut).</p>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Arts. 30 a 32 LPRL</strong> i <strong>art. 10 RD 39/1997</strong>: l'empresari ha d'organitzar els recursos per a les activitats preventives d'alguna d'aquestes maneres: assumint-les personalment, designant un o més treballadors, constituint un servei de prevenció propi o recorrent a un servei de prevenció aliè. Es poden combinar: l'activitat que no cobreix una modalitat s'ha de concertar amb una altra.</p>
+      <p>Requisits de cada modalitat: <strong>art. 11</strong> (assumpció per l'empresari), <strong>arts. 12 i 13</strong> (treballadors designats), <strong>arts. 14 i 15</strong> (servei propi), <strong>arts. 16 a 20</strong> (servei aliè) i <strong>art. 21</strong> (servei mancomunat) del RD 39/1997.</p>
+    </div>
+
+    <div class="table-scroll">
+    <table>
+      <caption>Comparativa de les modalitats preventives</caption>
+      <thead><tr><th>Modalitat</th><th>Quan es pot (o s'ha de) fer servir</th><th>Qui fa la prevenció</th><th>Exemple TIC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Assumpció personal per l'empresari</strong><br><small>Art. 11 RD 39/1997</small></td>
+          <td>Empresa de fins a <strong>10 treballadors</strong>, o fins a <strong>25</strong> si té un <strong>únic centre</strong> de treball; sense activitats de l'annex I; l'empresari treballa habitualment al centre i té la capacitat necessària.</td>
+          <td>El mateix empresari. <strong>La vigilància de la salut no la pot assumir</strong>: sempre s'ha de concertar.</td>
+          <td>Botiga-taller de reparació d'ordinadors amb 6 persones on el propietari treballa cada dia.</td>
+        </tr>
+        <tr>
+          <td><strong>Treballadors designats</strong><br><small>Arts. 12 i 13 RD 39/1997</small></td>
+          <td>Qualsevol empresa que no estigui obligada a tenir servei propi, si té treballadors amb la formació adequada a les funcions.</td>
+          <td>Un o més treballadors de la plantilla, amb temps i mitjans per fer-ho.</td>
+          <td>Integrador de 120 persones amb dos tècnics de sistemes formats en PRL de nivell intermedi.</td>
+        </tr>
+        <tr>
+          <td><strong>Servei de prevenció propi (SPP)</strong><br><small>Arts. 14 i 15 RD 39/1997</small></td>
+          <td><strong>Obligatori</strong> per a empreses de més de <strong>500 treballadors</strong>; de <strong>250 a 500</strong> si fan activitats de l'annex I; o si ho decideix l'autoritat laboral. Voluntari en la resta.</td>
+          <td>Una unitat organitzativa específica i amb dedicació exclusiva, amb almenys dues especialitats; la resta es concerten.</td>
+          <td>Consultora tecnològica amb 1.200 treballadors.</td>
+        </tr>
+        <tr>
+          <td><strong>Servei de prevenció aliè (SPA)</strong><br><small>Arts. 16 a 20 RD 39/1997</small></td>
+          <td>Quan les altres modalitats no són suficients o l'empresa ho prefereix. És la més habitual a les pimes.</td>
+          <td>Una entitat externa especialitzada, <strong>acreditada per l'autoritat laboral</strong>, amb qui l'empresa signa un concert.</td>
+          <td>Software house de 40 persones sense ningú format en PRL.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Hi ha una cinquena possibilitat, el <strong>servei de prevenció mancomunat</strong> (art. 21 RD 39/1997): el poden constituir diverses empreses que comparteixen un mateix centre, edifici o àrea geogràfica limitada, o que pertanyen a un mateix sector o grup empresarial. Per exemple, les empreses d'un parc tecnològic.</p>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Una start-up de 4 persones, amb una sola oficina. El fundador hi treballa cada dia i ha fet un curs de nivell bàsic: pot <strong>assumir personalment</strong> la prevenció, però la vigilància de la salut l'ha de concertar amb un servei de prevenció. L'INSST té el portal gratuït <strong>Prevención10.es</strong>, pensat precisament per ajudar les microempreses a fer-ho.</p>
+      <p>Si la mateixa start-up creix fins a 30 persones, ja no pot fer servir aquesta modalitat (supera el límit de 25 treballadors) i haurà de designar treballadors o concertar un servei de prevenció aliè.</p>
+    </div>
+
+    <div class="scheme">
+      <div class="tit">🧭 Eina orientativa: quina modalitat pot triar aquesta empresa?</div>
+      <p style="margin:0 0 8px">Introdueix les dades d'una empresa i prem «Comprova». És una ajuda per entendre la relació entre mida i modalitat, no substitueix l'anàlisi del cas concret.</p>
+      <div class="tool" id="toolForm">
+        <div><label for="tN">Nombre de treballadors</label><input id="tN" type="number" min="1" value="8"></div>
+        <div><label for="tC">Centres de treball</label><select id="tC"><option value="1">Un únic centre</option><option value="2">Més d'un centre</option></select></div>
+        <div><label for="tA">Activitats de l'annex I del RD 39/1997?</label><select id="tA"><option value="no">No (habitual en TIC)</option><option value="si">Sí</option></select></div>
+        <div><label for="tE">L'empresari treballa al centre i té formació en PRL?</label><select id="tE"><option value="si">Sí</option><option value="no">No</option></select></div>
+        <div><label for="tD">Hi ha treballadors amb formació en PRL?</label><select id="tD"><option value="no">No</option><option value="si">Sí</option></select></div>
+      </div>
+      <div class="meta" style="margin-bottom:10px">
+        <button class="quiz-btn primary" id="toolBtn" type="button">Comprova</button>
+      </div>
+      <div class="tool-out" id="toolOut" hidden></div>
+    </div>
+
+    <h3>La participació dels treballadors</h3>
+    <p>La prevenció no la fa només l'empresa: els treballadors tenen dret a ser <strong>consultats</strong> abans de les decisions que afecten la seva seguretat (art. 33 LPRL) i a <strong>participar</strong>-hi a través dels seus representants.</p>
+
+    <h3>Delegats de prevenció</h3>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 35 LPRL</strong>: els delegats de prevenció són els representants dels treballadors amb funcions específiques en matèria de prevenció. Els designen els representants del personal, d'entre ells mateixos, segons l'escala de la taula.</p>
+      <p><strong>Art. 36 LPRL</strong> (competències): col·laborar amb la direcció en la millora de l'acció preventiva, promoure la cooperació dels treballadors, ser consultats, vigilar el compliment de la normativa, acompanyar els tècnics i els inspectors en les visites i accedir a la informació necessària. <strong>Art. 37 LPRL</strong> (garanties): el temps dedicat es considera de treball efectiu, l'empresari els ha de proporcionar la formació necessària i han de guardar sigil professional.</p>
+    </div>
+
+    <table>
+      <caption>Nombre de delegats de prevenció (art. 35.2 LPRL)</caption>
+      <thead><tr><th>Treballadors de l'empresa</th><th>Delegats de prevenció</th></tr></thead>
+      <tbody>
+        <tr><td>Fins a 30</td><td>El delegat de personal</td></tr>
+        <tr><td>De 31 a 49</td><td>1 (elegit per i entre els delegats de personal)</td></tr>
+        <tr><td>De 50 a 100</td><td>2</td></tr>
+        <tr><td>De 101 a 500</td><td>3</td></tr>
+        <tr><td>De 501 a 1.000</td><td>4</td></tr>
+        <tr><td>De 1.001 a 2.000</td><td>5</td></tr>
+        <tr><td>De 2.001 a 3.000</td><td>6</td></tr>
+        <tr><td>De 3.001 a 4.000</td><td>7</td></tr>
+        <tr><td>De 4.001 en endavant</td><td>8</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Comitè de Seguretat i Salut (CSS)</h3>
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p><strong>Art. 38 LPRL</strong>: el Comitè de Seguretat i Salut és l'òrgan <strong>paritari</strong> i col·legiat de participació, destinat a la consulta regular i periòdica de les actuacions de l'empresa en prevenció. S'ha de constituir en totes les empreses o centres de treball amb <strong>50 o més treballadors</strong>. El formen els delegats de prevenció i l'empresari o els seus representants, en nombre igual. Es reuneix <strong>trimestralment</strong> i sempre que ho demani alguna de les parts. Les seves competències són a l'<strong>art. 39 LPRL</strong>.</p>
+    </div>
+
+    <div class="scheme">
+      <div class="tit">Qui participa en la prevenció d'una empresa TIC de 80 treballadors</div>
+      <div class="flow">
+        <div class="step"><b>Treballadors</b>Comuniquen riscos i incidents, compleixen l'art. 29.</div><span class="arrow">→</span>
+        <div class="step"><b>2 delegats de prevenció</b>Escala de l'art. 35: de 50 a 100 treballadors.</div><span class="arrow">→</span>
+        <div class="step"><b>Comitè de Seguretat i Salut</b>Obligatori (50 o més): 2 delegats + 2 representants de l'empresa.</div><span class="arrow">→</span>
+        <div class="step"><b>Direcció</b>Decideix i aplica les mesures amb el servei de prevenció.</div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Diversos programadors es queixen al delegat de prevenció que les cadires noves no es poden regular. El delegat ho porta a la reunió trimestral del CSS, on es proposa revisar l'avaluació dels llocs amb PVD i incloure els requisits ergonòmics en el procediment de compres. Si l'empresa no actués davant un risc greu i imminent, els delegats podrien acordar per majoria la paralització de l'activitat afectada (art. 21.3 LPRL).</p>
+    </div>
+
+    <div class="resum">
+      <div class="tit">Resum 4.2</div>
+      <ul>
+        <li>Quatre modalitats: assumpció per l'empresari (fins a 10, o 25 en un únic centre), treballadors designats, servei propi (obligatori a partir de 500, o de 250 amb activitats de l'annex I) i servei aliè acreditat. També hi ha el servei mancomunat.</li>
+        <li>L'empresari mai no pot assumir la vigilància de la salut.</li>
+        <li>Delegats de prevenció (art. 35): el nombre depèn de la plantilla; tenen competències (art. 36) i garanties (art. 37).</li>
+        <li>Comitè de Seguretat i Salut (art. 38): paritari, obligatori a partir de 50 treballadors, es reuneix cada trimestre.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- A21 -->
+  <div class="activity">
+    <span class="badge">A21</span>
+    <div class="body">
+      <h4>Quina modalitat preventiva correspon a cada empresa?</h4>
+      <p>Per a cadascuna de les 5 empreses TIC, tria la modalitat preventiva més adequada (o obligatòria) segons les dades del cas. Fes servir la taula comparativa.</p>
+      <div class="meta">
+        <span class="pill mat">Individual o en parelles</span>
+        <span class="pill mat">Autoavaluable</span>
+        <button class="quiz-btn" data-toggle="a21Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a21Box" class="quiz" hidden data-kind="test">
+        <form>
+          <div class="q" data-correct="a" data-just="Té menys de 10 treballadors, un sol centre, cap activitat de l'annex I, i el propietari hi treballa habitualment i té formació: pot assumir personalment la prevenció (art. 11 RD 39/1997). La vigilància de la salut, però, l'ha de concertar amb un servei de prevenció.">
+            <p class="q-text">1. Taller de reparació d'ordinadors amb 6 treballadors i un sol local. El propietari hi treballa cada dia i ha fet el curs de nivell bàsic de PRL.</p>
+            <label><input type="radio" name="m1" value="a"> Assumpció personal per l'empresari</label>
+            <label><input type="radio" name="m1" value="b"> Treballadors designats</label>
+            <label><input type="radio" name="m1" value="c"> Servei de prevenció propi</label>
+            <label><input type="radio" name="m1" value="d"> Servei de prevenció aliè</label>
+          </div>
+          <div class="q" data-correct="d" data-just="Amb més d'un centre, l'empresari només podria assumir la prevenció fins a 10 treballadors (el límit de 25 és només per a un únic centre). Com que ningú de la plantilla té formació en PRL, tampoc no pot designar treballadors: ha de concertar un servei de prevenció aliè.">
+            <p class="q-text">2. Empresa de desenvolupament web amb 18 treballadors repartits en dues oficines (Barcelona i Lleida). Cap treballador té formació en PRL.</p>
+            <label><input type="radio" name="m2" value="a"> Assumpció personal per l'empresari</label>
+            <label><input type="radio" name="m2" value="b"> Treballadors designats</label>
+            <label><input type="radio" name="m2" value="c"> Servei de prevenció propi</label>
+            <label><input type="radio" name="m2" value="d"> Servei de prevenció aliè</label>
+          </div>
+          <div class="q" data-correct="b" data-just="No està obligada a tenir servei propi (menys de 250 treballadors) i té personal amb la formació adequada a qui pot dedicar temps i mitjans: pot designar-los (arts. 12 i 13 RD 39/1997). Les especialitats que no cobreixin, com la vigilància de la salut, s'han de concertar amb un SPA.">
+            <p class="q-text">3. Integrador de sistemes amb 120 treballadors. Dos tècnics de sistemes tenen formació en PRL de nivell intermedi i l'empresa els vol dedicar part de la jornada a la prevenció.</p>
+            <label><input type="radio" name="m3" value="a"> Assumpció personal per l'empresari</label>
+            <label><input type="radio" name="m3" value="b"> Treballadors designats</label>
+            <label><input type="radio" name="m3" value="c"> Servei de prevenció propi</label>
+            <label><input type="radio" name="m3" value="d"> Servei de prevenció aliè</label>
+          </div>
+          <div class="q" data-correct="c" data-just="Amb més de 500 treballadors, el servei de prevenció propi és obligatori (art. 14.a RD 39/1997). Ha d'assumir com a mínim dues especialitats i concertar la resta.">
+            <p class="q-text">4. Consultora tecnològica amb 1.200 treballadors en diverses ciutats.</p>
+            <label><input type="radio" name="m4" value="a"> Assumpció personal per l'empresari</label>
+            <label><input type="radio" name="m4" value="b"> Treballadors designats</label>
+            <label><input type="radio" name="m4" value="c"> Servei de prevenció propi</label>
+            <label><input type="radio" name="m4" value="d"> Servei de prevenció aliè</label>
+          </div>
+          <div class="q" data-correct="d" data-just="Per mida podria assumir-la personalment, però un dels requisits és tenir la capacitat necessària (art. 11 RD 39/1997). Sense formació, i sense ningú més a qui designar, l'opció és concertar un servei de prevenció aliè.">
+            <p class="q-text">5. Start-up de 3 persones amb una sola oficina. El fundador hi treballa cada dia, però no té cap formació en PRL ni la vol fer.</p>
+            <label><input type="radio" name="m5" value="a"> Assumpció personal per l'empresari</label>
+            <label><input type="radio" name="m5" value="b"> Treballadors designats</label>
+            <label><input type="radio" name="m5" value="c"> Servei de prevenció propi</label>
+            <label><input type="radio" name="m5" value="d"> Servei de prevenció aliè</label>
+          </div>
+        </form>
+        <div class="meta" style="margin-top:14px">
+          <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+          <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+        </div>
+        <p class="q-score" hidden></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNITAT 4.3 -->
+  <section id="u3">
+    <span class="unit-no">4.3</span>
+    <h2>Organismes públics de referència</h2>
+    <p class="lead">Fora de l'empresa hi ha organismes internacionals, europeus, estatals i autonòmics que fan normes, vigilen que es compleixin, investiguen i publiquen recursos gratuïts. Saber a qui adreçar-se estalvia molta feina.</p>
+
+    <div class="scheme">
+      <div class="tit">Nivells d'organismes, del més general al més proper</div>
+      <div class="pyramid">
+        <div style="background:#1e3a8a;width:220px">Internacional: OIT</div>
+        <div style="background:#1d4ed8;width:270px">Unió Europea: EU-OSHA</div>
+        <div style="background:#8a6d00;width:330px">Estat: INSST, ITSS, CNSST, Fundació</div>
+        <div style="background:#0f766e;width:380px">Catalunya: ICSSL, Inspecció de Treball de Catalunya</div>
+      </div>
+    </div>
+
+    <div class="table-scroll">
+    <table>
+      <caption>Organismes i la seva funció principal</caption>
+      <thead><tr><th>Organisme</th><th>Àmbit</th><th>Què fa</th><th>Recurs útil</th></tr></thead>
+      <tbody>
+        <tr><td><strong>OIT</strong> · Organització Internacional del Treball</td><td>Mundial (agència de l'ONU, seu a Ginebra)</td><td>Organisme <strong>tripartit</strong> (governs, empresaris i treballadors) que aprova convenis i recomanacions internacionals. Des del 2022 la seguretat i salut en el treball és un principi fonamental del treball.</td><td>Conveni 155 sobre seguretat i salut dels treballadors (1981).</td></tr>
+        <tr><td><strong>EU-OSHA</strong> · Agència Europea per a la Seguretat i la Salut en el Treball</td><td>Unió Europea (seu a Bilbao)</td><td>Recull i difon informació, fa estudis i organitza les campanyes europees «Llocs de treball saludables».</td><td>Eina OiRA d'avaluació de riscos en línia; enquesta europea ESENER.</td></tr>
+        <tr><td><strong>INSST</strong> · Institut Nacional de Seguretat i Salut en el Treball</td><td>Estat</td><td>Òrgan científic i tècnic de l'Administració General de l'Estat: estudis, assessorament, formació i elaboració de criteris tècnics (art. 8 LPRL).</td><td>Notes tècniques de prevenció (NTP), guies tècniques dels reials decrets, portal Prevención10.es.</td></tr>
+        <tr><td><strong>ITSS</strong> · Inspecció de Treball i Seguretat Social</td><td>Estat (a Catalunya, Inspecció de Treball de Catalunya)</td><td>Vigila el compliment de la normativa, assessora, investiga accidents greus, fa requeriments, proposa sancions i pot <strong>paralitzar</strong> treballs amb risc greu i imminent (arts. 9, 43 i 44 LPRL).</td><td>Bústia de lluita contra el frau laboral (comunicació anònima d'incompliments, també de PRL).</td></tr>
+        <tr><td><strong>Administracions sanitàries</strong></td><td>Estat i comunitats autònomes</td><td>Aspectes sanitaris de la prevenció: criteris de vigilància de la salut i control de l'activitat sanitària dels serveis de prevenció (art. 10 LPRL).</td><td>Protocols de vigilància sanitària específica (p. ex. per a PVD).</td></tr>
+        <tr><td><strong>CNSST</strong> · Comissió Nacional de Seguretat i Salut en el Treball</td><td>Estat</td><td>Òrgan col·legiat <strong>assessor</strong> de les administracions en polítiques de prevenció, amb representants de l'Estat, les comunitats autònomes i les organitzacions empresarials i sindicals (art. 13 LPRL).</td><td>Acords i documents dels grups de treball.</td></tr>
+        <tr><td><strong>Fundació Estatal per a la PRL</strong></td><td>Estat</td><td>Fundació del sector públic, adscrita a la CNSST, que promou la millora de les condicions de seguretat i salut, especialment a les <strong>petites empreses</strong> (disposició addicional cinquena LPRL).</td><td>Accions d'informació, assistència tècnica i formació, sovint a través de patronals i sindicats.</td></tr>
+        <tr><td><strong>ICSSL</strong> · Institut Català de Seguretat i Salut Laboral</td><td>Catalunya</td><td>Organisme tècnic de la Generalitat: assessorament, formació, materials divulgatius, seguiment de les empreses amb més sinistralitat i estadístiques.</td><td>Materials i guies en català; formació per a delegats de prevenció.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="law">
+      <div class="tit">Normativa</div>
+      <p>La LPRL dedica el <strong>capítol II</strong> (arts. 5 a 13) a la política en matèria de prevenció i a les funcions de les administracions públiques: <strong>art. 8</strong> (INSST), <strong>art. 9</strong> (Inspecció de Treball), <strong>art. 10</strong> (administracions sanitàries), <strong>art. 13</strong> (Comissió Nacional de SST). La Fundació la crea la <strong>disposició addicional cinquena</strong>. Els noms i les adscripcions d'aquests organismes han canviat diverses vegades (l'INSST abans es deia INSHT): comprova la denominació actual als seus webs.</p>
+    </div>
+
+    <div class="scheme">
+      <div class="tit">Si detectes un risc que no es resol, a qui t'adreces?</div>
+      <div class="flow">
+        <div class="step"><b>1. Responsable directe</b>Comunica el risc al teu cap o al responsable de PRL (art. 29 LPRL).</div><span class="arrow">→</span>
+        <div class="step"><b>2. Delegat de prevenció</b>Si no s'actua, el delegat el pot portar al CSS o a la direcció.</div><span class="arrow">→</span>
+        <div class="step"><b>3. Inspecció de Treball</b>Si persisteix l'incompliment, es pot presentar una denúncia o una comunicació a la bústia.</div>
+      </div>
+      <p class="loop-note">Davant d'un risc greu i imminent no cal seguir aquesta escala: s'atura l'activitat (art. 21 LPRL) i, si cal, es truca al 112.</p>
+    </div>
+
+    <div class="example">
+      <div class="tit">Exemple TIC</div>
+      <p>Un tècnic vol preparar una sessió per al seu equip sobre les pauses en el treball amb pantalles. Al web de l'<strong>INSST</strong> troba la guia tècnica del RD 488/1997; a l'<strong>EU-OSHA</strong>, materials de la campanya europea sobre trastorns musculoesquelètics; i a l'<strong>ICSSL</strong>, un cartell en català per penjar a l'oficina. Tot és gratuït i oficial.</p>
+    </div>
+
+    <div class="resum">
+      <div class="tit">Resum 4.3</div>
+      <ul>
+        <li>OIT (mundial, tripartida, convenis) i EU-OSHA (europea, Bilbao, campanyes i eina OiRA).</li>
+        <li>INSST: òrgan científic i tècnic estatal (NTP i guies tècniques). ITSS: vigila, sanciona i pot paralitzar treballs.</li>
+        <li>CNSST: òrgan assessor amb administracions, patronals i sindicats. Fundació Estatal: promoció de la PRL a les pimes.</li>
+        <li>A Catalunya, l'ICSSL ofereix assessorament, formació i materials en català.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- A22 -->
+  <div class="activity">
+    <span class="badge">A22</span>
+    <div class="body">
+      <h4>Webquest: un recurs útil a cada web oficial</h4>
+      <p>Obre els webs oficials del desplegable, troba a cadascun un recurs útil per al sector TIC i anota'l. Després, comprova amb el qüestionari si saps on trobar cada cosa.</p>
+      <div class="meta">
+        <span class="pill mat">Individual</span>
+        <span class="pill mat">PC amb Internet</span>
+        <button class="quiz-btn" data-toggle="a22Box" type="button" aria-expanded="false">Mostra l'activitat</button>
+      </div>
+      <div id="a22Box" class="quiz" hidden>
+        <details class="drop">
+          <summary>🔗 Webs oficials (desplega)</summary>
+          <div class="res-links">
+            <a href="https://www.ilo.org/es" target="_blank" rel="noopener">OIT</a>
+            <a href="https://osha.europa.eu/ca" target="_blank" rel="noopener">EU-OSHA</a>
+            <a href="https://www.insst.es/" target="_blank" rel="noopener">INSST</a>
+            <a href="https://www.mites.gob.es/itss/" target="_blank" rel="noopener">Inspecció de Treball (ITSS)</a>
+            <a href="https://www.insst.es/cnsst/fundacion-estatal-prl" target="_blank" rel="noopener">CNSST i Fundació Estatal</a>
+            <a href="https://treball.gencat.cat/ca/ambits/seguretat_salut_laboral/" target="_blank" rel="noopener">ICSSL (Generalitat)</a>
+          </div>
+        </details>
+
+        <div class="sub" data-kind="open">
+          <p class="sub-tit">Part 1. El recurs que he trobat</p>
+          <form>
+            <div class="fq">
+              <label class="fq-label" for="a22-1">INSST — recurs i per a què em serveix:</label>
+              <textarea id="a22-1" rows="2" placeholder="Escriu el nom del recurs i per a què el faries servir..." data-model="La guia tècnica del RD 488/1997 sobre pantalles de visualització, per revisar si el meu lloc compleix (cadira, pantalla, il·luminació, pauses). També valdria una NTP sobre treball amb PVD."></textarea>
+              <p class="fq-model" hidden></p>
+            </div>
+            <div class="fq">
+              <label class="fq-label" for="a22-2">EU-OSHA — recurs i per a què em serveix:</label>
+              <textarea id="a22-2" rows="2" placeholder="Escriu el nom del recurs i per a què el faries servir..." data-model="Els materials de la campanya «Llocs de treball saludables» vigent, o l'eina OiRA per fer una avaluació de riscos guiada en una petita empresa."></textarea>
+              <p class="fq-model" hidden></p>
+            </div>
+            <div class="fq">
+              <label class="fq-label" for="a22-3">OIT — recurs i per a què em serveix:</label>
+              <textarea id="a22-3" rows="2" placeholder="Escriu el nom del recurs i per a què el faries servir..." data-model="El Conveni 155 sobre seguretat i salut dels treballadors, per entendre d'on venen els principis que després recull la LPRL."></textarea>
+              <p class="fq-model" hidden></p>
+            </div>
+            <div class="fq">
+              <label class="fq-label" for="a22-4">Inspecció de Treball — recurs i per a què em serveix:</label>
+              <textarea id="a22-4" rows="2" placeholder="Escriu el nom del recurs i per a què el faries servir..." data-model="La bústia de lluita contra el frau laboral o el procediment de denúncia, per comunicar un incompliment de PRL que l'empresa no resol."></textarea>
+              <p class="fq-model" hidden></p>
+            </div>
+            <div class="fq">
+              <label class="fq-label" for="a22-5">ICSSL — recurs i per a què em serveix:</label>
+              <textarea id="a22-5" rows="2" placeholder="Escriu el nom del recurs i per a què el faries servir..." data-model="Materials divulgatius en català (fullets, cartells) o l'oferta de formació en seguretat i salut laboral de la Generalitat."></textarea>
+              <p class="fq-model" hidden></p>
+            </div>
+          </form>
+          <div class="meta" style="margin-top:14px">
+            <button class="quiz-btn primary do-check" type="button">Mostra exemples</button>
+            <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+          </div>
+          <p class="q-score" hidden>Compara la teva resposta amb l'exemple: no cal que coincideixi, n'hi ha prou que el recurs sigui real, del web correcte i útil per a la teva feina.</p>
+        </div>
+
+        <div class="sub" data-kind="test">
+          <p class="sub-tit">Part 2. On ho trobaries?</p>
+          <form>
+            <div class="q" data-correct="b" data-just="Les NTP (notes tècniques de prevenció) i les guies tècniques dels reials decrets les elabora l'INSST, l'òrgan científic i tècnic estatal.">
+              <p class="q-text">1. Vols una nota tècnica de prevenció (NTP) sobre el disseny d'un lloc de treball amb pantalles.</p>
+              <label><input type="radio" name="w1" value="a"> OIT</label>
+              <label><input type="radio" name="w1" value="b"> INSST</label>
+              <label><input type="radio" name="w1" value="c"> Inspecció de Treball</label>
+            </div>
+            <div class="q" data-correct="a" data-just="L'EU-OSHA desenvolupa l'eina OiRA (Online interactive Risk Assessment), pensada per ajudar les petites empreses a fer l'avaluació de riscos.">
+              <p class="q-text">2. Busques una eina gratuïta en línia, d'àmbit europeu, que guiï una petita empresa per fer l'avaluació de riscos.</p>
+              <label><input type="radio" name="w2" value="a"> EU-OSHA (eina OiRA)</label>
+              <label><input type="radio" name="w2" value="b"> Comissió Nacional de SST</label>
+              <label><input type="radio" name="w2" value="c"> ICSSL</label>
+            </div>
+            <div class="q" data-correct="c" data-just="Els convenis internacionals del treball, com el 155 sobre seguretat i salut, els aprova l'OIT.">
+              <p class="q-text">3. Vols llegir el conveni internacional sobre seguretat i salut dels treballadors.</p>
+              <label><input type="radio" name="w3" value="a"> INSST</label>
+              <label><input type="radio" name="w3" value="b"> EU-OSHA</label>
+              <label><input type="radio" name="w3" value="c"> OIT</label>
+            </div>
+            <div class="q" data-correct="a" data-just="La Inspecció de Treball vigila el compliment de la normativa. A Catalunya les competències en PRL les exerceix la Inspecció de Treball de Catalunya, però la bústia estatal també recull comunicacions sobre prevenció.">
+              <p class="q-text">4. Vols comunicar de manera anònima que la teva empresa no fa l'avaluació de riscos.</p>
+              <label><input type="radio" name="w4" value="a"> Inspecció de Treball</label>
+              <label><input type="radio" name="w4" value="b"> OIT</label>
+              <label><input type="radio" name="w4" value="c"> Fundació Estatal per a la PRL</label>
+            </div>
+            <div class="q" data-correct="b" data-just="L'ICSSL és l'organisme tècnic de la Generalitat de Catalunya en seguretat i salut laboral: elabora materials en català i ofereix formació i assessorament.">
+              <p class="q-text">5. Necessites materials divulgatius en català i formació per a delegats de prevenció a Catalunya.</p>
+              <label><input type="radio" name="w5" value="a"> EU-OSHA</label>
+              <label><input type="radio" name="w5" value="b"> ICSSL</label>
+              <label><input type="radio" name="w5" value="c"> OIT</label>
+            </div>
+            <div class="q" data-correct="c" data-just="La CNSST és l'òrgan col·legiat assessor on participen l'Administració General de l'Estat, les comunitats autònomes i les organitzacions empresarials i sindicals (art. 13 LPRL).">
+              <p class="q-text">6. Quin és l'òrgan assessor on es reuneixen l'Estat, les comunitats autònomes, les patronals i els sindicats per parlar de polítiques de prevenció?</p>
+              <label><input type="radio" name="w6" value="a"> Inspecció de Treball</label>
+              <label><input type="radio" name="w6" value="b"> INSST</label>
+              <label><input type="radio" name="w6" value="c"> Comissió Nacional de SST</label>
+            </div>
+          </form>
+          <div class="meta" style="margin-top:14px">
+            <button class="quiz-btn primary do-check" type="button">Corregeix</button>
+            <button class="quiz-btn do-reset" type="button">🔄 Esborra i torna a fer</button>
+          </div>
+          <p class="q-score" hidden></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOSSARI -->
+  <section id="glossari">
+    <span class="unit-no" style="background:var(--muted);color:#fff">📖</span>
+    <h2>Glossari del mòdul</h2>
+    <div class="card glossary">
+      <dl>
+        <dt>Prevenció integrada</dt><dd>Incorporació de la prevenció a totes les activitats, decisions i nivells jeràrquics de l'empresa.</dd>
+        <dt>Pla de prevenció</dt><dd>Document i eina que estableix l'organització, les responsabilitats, els procediments i els recursos per fer la prevenció (art. 16 LPRL, art. 2 RD 39/1997).</dd>
+        <dt>Planificació de l'acció preventiva</dt><dd>Programació de les mesures derivades de l'avaluació, amb termini, responsable i recursos per a cadascuna.</dd>
+        <dt>Control d'eficàcia</dt><dd>Seguiment per comprovar que les mesures s'apliquen i funcionen: inspeccions, seguiment de terminis i investigació d'accidents.</dd>
+        <dt>Investigació d'accidents</dt><dd>Anàlisi de les causes d'un dany a la salut per evitar que es repeteixi (art. 16.3 LPRL).</dd>
+        <dt>Auditoria</dt><dd>Avaluació externa i periòdica del sistema de prevenció, obligatòria per a les empreses que no ho concerten tot amb un servei aliè.</dd>
+        <dt>Modalitat preventiva</dt><dd>Manera com l'empresa organitza els recursos per fer la prevenció.</dd>
+        <dt>Treballador designat</dt><dd>Treballador de la plantilla, amb formació adequada, a qui l'empresari encarrega activitats preventives.</dd>
+        <dt>Servei de prevenció propi (SPP)</dt><dd>Unitat organitzativa específica de l'empresa dedicada a la prevenció; obligatòria a partir de 500 treballadors.</dd>
+        <dt>Servei de prevenció aliè (SPA)</dt><dd>Entitat externa especialitzada i acreditada per l'autoritat laboral que l'empresa contracta mitjançant un concert.</dd>
+        <dt>Servei de prevenció mancomunat</dt><dd>Servei compartit per diverses empreses d'un mateix centre, àrea, sector o grup.</dd>
+        <dt>Delegat de prevenció</dt><dd>Representant dels treballadors amb funcions específiques en prevenció (art. 35 LPRL).</dd>
+        <dt>Comitè de Seguretat i Salut (CSS)</dt><dd>Òrgan paritari de participació, obligatori en empreses o centres de 50 o més treballadors (art. 38 LPRL).</dd>
+        <dt>OIT</dt><dd>Organització Internacional del Treball: agència tripartida de l'ONU que aprova convenis internacionals.</dd>
+        <dt>EU-OSHA</dt><dd>Agència Europea per a la Seguretat i la Salut en el Treball, amb seu a Bilbao.</dd>
+        <dt>INSST</dt><dd>Institut Nacional de Seguretat i Salut en el Treball: òrgan científic i tècnic estatal (NTP, guies tècniques).</dd>
+        <dt>ITSS</dt><dd>Inspecció de Treball i Seguretat Social: vigila el compliment de la normativa i pot proposar sancions i paralitzar treballs.</dd>
+        <dt>CNSST</dt><dd>Comissió Nacional de Seguretat i Salut en el Treball: òrgan col·legiat assessor de les administracions públiques.</dd>
+        <dt>ICSSL</dt><dd>Institut Català de Seguretat i Salut Laboral: organisme tècnic de la Generalitat de Catalunya.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- RECURSOS -->
+  <section>
+    <h2 style="font-size:1.1rem">Recursos per aprofundir</h2>
+    <div class="res-links">
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1995-24292" target="_blank" rel="noopener">Llei 31/1995 (BOE)</a>
+      <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1997-1853" target="_blank" rel="noopener">RD 39/1997 (BOE)</a>
+      <a href="https://www.insst.es/" target="_blank" rel="noopener">INSST</a>
+      <a href="https://www.prevencion10.es/" target="_blank" rel="noopener">Prevención10.es</a>
+      <a href="https://osha.europa.eu/ca" target="_blank" rel="noopener">EU-OSHA</a>
+      <a href="https://treball.gencat.cat/ca/ambits/seguretat_salut_laboral/" target="_blank" rel="noopener">Seguretat i salut laboral (Generalitat)</a>
+    </div>
+  </section>
+
+  <!-- PROVA -->
+  <section id="prova">
+    <div class="exam-box">
+      <div class="tit">📝 Prova M4</div>
+      <p style="margin:0">Test de 20 preguntes amb 4 opcions de resposta cadascuna, sobre els continguts de les unitats 4.1, 4.2 i 4.3. Cada encert val 0,5 punts i els errors no resten.</p>
+      <ul>
+        <li>Cal un mínim de <strong>5/10</strong> (10 encerts) per ser APTE en aquesta prova.</li>
+        <li>Les notes de les proves no es compensen entre si: cal l'APTE a cadascuna.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Mòdul 4 · Elements bàsics de gestió de la prevenció · Curs bàsic de PRL, sector informàtica</span>
+  <button class="theme-btn" id="themeBtn" type="button">🌓 Canvia el tema</button>
+</footer>
+
+<script>
+  // Mostrar / amagar cada activitat
+  document.querySelectorAll('[data-toggle]').forEach(function(btn){
+    var box = document.getElementById(btn.getAttribute('data-toggle'));
+    btn.addEventListener('click', function(){
+      var open = !box.hidden;
+      box.hidden = open;
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.textContent = open ? 'Mostra l\'activitat' : 'Amaga l\'activitat';
+    });
+  });
+
+  // Test: corregeix (verd/vermell + justificació) i reinicia
+  document.querySelectorAll('[data-kind="test"]').forEach(function(root){
+    var form = root.querySelector('form');
+    var scoreEl = root.querySelector('.q-score');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var qs = form.querySelectorAll('.q'), answered = 0, correct = 0;
+      qs.forEach(function(q){
+        var name = q.querySelector('input').name;
+        var chosen = form.querySelector('input[name="' + name + '"]:checked');
+        var right = q.getAttribute('data-correct');
+        q.classList.remove('ok','ko');
+        q.classList.add('done');
+        q.querySelectorAll('label').forEach(function(l){
+          l.classList.remove('sel','right');
+          if (l.querySelector('input').value === right) l.classList.add('right');
+        });
+        if (q.hasAttribute('data-just')){
+          var j = q.querySelector('.q-just');
+          if (!j){ j = document.createElement('p'); j.className = 'q-just'; q.appendChild(j); }
+          j.innerHTML = q.getAttribute('data-just');
+          j.hidden = false;
+        }
+        if (chosen){
+          answered++;
+          chosen.closest('label').classList.add('sel');
+          if (chosen.value === right){ correct++; q.classList.add('ok'); }
+          else { q.classList.add('ko'); }
+        }
+      });
+      scoreEl.hidden = false;
+      scoreEl.textContent = answered < qs.length
+        ? 'Has respost ' + answered + ' de ' + qs.length + ' preguntes. Es mostren les respostes correctes en verd i la justificació.'
+        : 'Resultat: ' + correct + ' de ' + qs.length + ' correctes.';
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      form.reset();
+      form.querySelectorAll('label').forEach(function(l){ l.classList.remove('sel','right'); });
+      form.querySelectorAll('.q').forEach(function(q){ q.classList.remove('ok','ko','done'); });
+      form.querySelectorAll('.q-just').forEach(function(p){ p.hidden = true; });
+      scoreEl.hidden = true;
+      scoreEl.textContent = '';
+    });
+  });
+
+  // Aparellar / ordenar amb desplegables (A20)
+  document.querySelectorAll('[data-kind="match"]').forEach(function(root){
+    var form = root.querySelector('form');
+    var scoreEl = root.querySelector('.q-score');
+    var sels = form.querySelectorAll('select');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      var good = 0, empty = 0;
+      sels.forEach(function(s){
+        s.classList.remove('ok','ko');
+        if (!s.value){ empty++; s.classList.add('ko'); return; }
+        if (s.value === s.getAttribute('data-correct')){ good++; s.classList.add('ok'); }
+        else { s.classList.add('ko'); }
+      });
+      form.querySelectorAll('.mrow').forEach(function(row){
+        var j = row.querySelector('.q-just');
+        if (!j){ j = document.createElement('p'); j.className = 'q-just'; row.appendChild(j); }
+        j.innerHTML = row.getAttribute('data-just');
+        j.hidden = false;
+      });
+      scoreEl.hidden = false;
+      scoreEl.textContent = 'Resultat: ' + good + ' de ' + sels.length + ' correctes' +
+        (empty ? ' (' + empty + ' sense resposta)' : '') + '. Verd: correcte; vermell: revisa-ho. Ordre correcte: pla → avaluació → planificació → execució → control → revisió.';
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      form.reset();
+      sels.forEach(function(s){ s.classList.remove('ok','ko'); });
+      form.querySelectorAll('.q-just').forEach(function(p){ p.hidden = true; });
+      scoreEl.hidden = true;
+      scoreEl.textContent = '';
+    });
+  });
+
+  // Resposta oberta: mostra l'exemple model i reinicia
+  document.querySelectorAll('[data-kind="open"]').forEach(function(root){
+    var note = root.querySelector('.q-score');
+    root.querySelector('.do-check').addEventListener('click', function(){
+      root.querySelectorAll('.fq').forEach(function(fq){
+        var ta = fq.querySelector('textarea');
+        var m = fq.querySelector('.fq-model');
+        m.innerHTML = '<strong>Exemple proposat:</strong> ' + ta.getAttribute('data-model');
+        m.hidden = false;
+      });
+      if (note) note.hidden = false;
+    });
+    root.querySelector('.do-reset').addEventListener('click', function(){
+      root.querySelectorAll('textarea').forEach(function(ta){ ta.value = ''; });
+      root.querySelectorAll('.fq-model').forEach(function(m){ m.hidden = true; m.innerHTML = ''; });
+      if (note) note.hidden = true;
+    });
+  });
+
+  // Eina orientativa de modalitats preventives
+  (function(){
+    var btn = document.getElementById('toolBtn');
+    var out = document.getElementById('toolOut');
+    btn.addEventListener('click', function(){
+      var n = parseInt(document.getElementById('tN').value, 10);
+      var unCentre = document.getElementById('tC').value === '1';
+      var annex = document.getElementById('tA').value === 'si';
+      var emp = document.getElementById('tE').value === 'si';
+      var desig = document.getElementById('tD').value === 'si';
+      out.hidden = false;
+      if (!n || n < 1){ out.innerHTML = 'Introdueix un nombre de treballadors vàlid.'; return; }
+      var items = [];
+      if (n > 500){
+        items.push('<span class="tag-must">OBLIGATORI</span> Servei de prevenció propi: més de 500 treballadors (art. 14.a RD 39/1997). Les especialitats que no assumeixi s\'han de concertar.');
+      } else if (n >= 250 && annex){
+        items.push('<span class="tag-must">OBLIGATORI</span> Servei de prevenció propi: de 250 a 500 treballadors amb activitats de l\'annex I (art. 14.b RD 39/1997).');
+      } else {
+        var limit = unCentre ? 25 : 10;
+        if (annex){
+          items.push('<span class="tag-no">NO</span> Assumpció per l\'empresari: no es permet amb activitats de l\'annex I.');
+        } else if (n > limit){
+          items.push('<span class="tag-no">NO</span> Assumpció per l\'empresari: supera el límit de ' + limit + ' treballadors' + (unCentre ? ' per a un únic centre.' : ' (amb més d\'un centre el límit és 10).'));
+        } else if (!emp){
+          items.push('<span class="tag-no">NO</span> Assumpció per l\'empresari: cal que treballi habitualment al centre i tingui la capacitat necessària.');
+        } else {
+          items.push('<span class="tag-ok">SÍ</span> Assumpció personal per l\'empresari (art. 11 RD 39/1997), excepte la vigilància de la salut.');
+        }
+        items.push(desig
+          ? '<span class="tag-ok">SÍ</span> Treballadors designats, si se\'ls dona temps i mitjans (arts. 12 i 13 RD 39/1997).'
+          : '<span class="tag-no">NO, de moment</span> Treballadors designats: caldria que algun treballador tingués la formació adequada.');
+        items.push('<span class="tag-ok">SÍ</span> Servei de prevenció aliè acreditat: sempre possible (arts. 16 a 20 RD 39/1997).');
+        items.push('<span class="tag-ok">SÍ</span> Servei de prevenció propi, de manera voluntària.');
+      }
+      out.innerHTML = '<strong>Empresa de ' + n + ' treballador' + (n === 1 ? '' : 's') + ':</strong><ul><li>' + items.join('</li><li>') +
+        '</li></ul><p style="margin:8px 0 0;color:var(--muted)">Recorda: la vigilància de la salut sempre l\'ha de fer un servei de prevenció amb medicina del treball, i el que no cobreixi la modalitat triada s\'ha de concertar amb un servei aliè.</p>';
+    });
+  })();
+
+  // Tema clar / fosc (comparteix preferència amb la resta de mòduls)
+  var root = document.documentElement;
+  try { var t = localStorage.getItem('prl-theme'); if (t) root.setAttribute('data-theme', t); } catch(e){}
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme') ||
+      (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('prl-theme', next); } catch(e){}
+  });
+</script>
+</body>
+</html>

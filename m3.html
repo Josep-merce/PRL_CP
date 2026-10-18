@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mòdul 3 · Riscos específics del sector TIC</title>
+<meta name="description" content="Mòdul 3 del curs bàsic de PRL: riscos específics del sector informàtic, en dues parts.">
+<style>
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5;
+    --text:#1b2330; --muted:#5a6577; --line:#dde2ea;
+    --accent:#e0661b; --accent-soft:#fdeee4;
+    --m1:#2f6fd1; --m2:#c2410c; --m3:#0f8a6a; --m4:#caa005;
+    --danger:#b91c1c; --danger-soft:#fdecec;
+    --warn:#b45309; --warn-soft:#fef3c7;
+    --law:#1d4ed8; --law-soft:#eaf1fd;
+    --ok-soft:#d1f5e3;
+    --radius:14px; --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.06);
+    --c:var(--m3); --on-c:#ffffff; --c-deep:#0b6e55;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+      --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+      --accent:#f08a46; --accent-soft:#2b1d14;
+      --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+      --danger:#f87171; --danger-soft:#2c1717;
+      --warn:#fbbf24; --warn-soft:#2b2410;
+      --law:#7aa6f5; --law-soft:#182435;
+      --ok-soft:#133227;
+      --on-c:#0f141b; --c-deep:#0f7a5e;
+      --shadow:none;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+    --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+    --accent:#f08a46; --accent-soft:#2b1d14;
+    --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+    --danger:#f87171; --danger-soft:#2c1717;
+    --warn:#fbbf24; --warn-soft:#2b2410;
+    --law:#7aa6f5; --law-soft:#182435;
+    --ok-soft:#133227;
+    --on-c:#0f141b; --c-deep:#0f7a5e;
+    --shadow:none;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;}
+  a{color:var(--accent)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px}
+
+  header.hero{background:linear-gradient(135deg,#1b2330 0%,#2a3a52 100%);color:#fff;padding:40px 0 34px}
+  .hero .back{display:inline-flex;align-items:center;gap:6px;color:#cfd8e6;text-decoration:none;font-size:.9rem;font-weight:600}
+  .hero .back:hover{color:#fff}
+  .hero .tag{display:inline-block;background:var(--c);color:var(--on-c);font-weight:800;font-size:.8rem;
+    letter-spacing:.06em;padding:4px 10px;border-radius:999px;margin-top:16px}
+  .hero h1{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.2;margin:12px 0 8px}
+  .hero p{max-width:640px;color:#cfd8e6;margin:0}
+
+  nav.top{position:sticky;top:0;z-index:10;background:var(--surface);border-bottom:1px solid var(--line)}
+  nav.top .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  nav.top a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:.9rem;
+    padding:13px 10px;border-bottom:3px solid transparent}
+  nav.top a:hover{color:var(--text);border-bottom-color:var(--c)}
+
+  main{padding-bottom:40px}
+  section{padding:40px 0 4px;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:0}
+  .unit-no{display:inline-block;background:var(--c);color:var(--on-c);font-weight:800;border-radius:8px;
+    padding:3px 9px;font-size:.82rem;margin-bottom:10px}
+  h2{font-size:1.4rem;margin:0 0 4px}
+  h3{font-size:1.1rem;margin:28px 0 8px}
+  .lead{color:var(--muted);margin:4px 0 20px}
+  p{margin:0 0 14px}
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin-bottom:6px}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;box-shadow:var(--shadow);margin:0 0 18px}
+
+  .objectius{border-left:5px solid var(--c)}
+  .objectius h3{margin-top:0;font-size:1rem}
+  .objectius ul{margin-bottom:0}
+  .objectius .note{margin:12px 0 0;font-size:.88rem;color:var(--muted)}
+
+  .law{background:var(--law-soft);border:1px solid var(--law);border-left-width:5px;
+    border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .law .tit{font-weight:800;color:var(--law);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .law p{margin:0;font-size:.95rem}
+  .law p+p{margin-top:8px}
+  .law ul{margin:6px 0 0;font-size:.95rem}
+
+  .example{background:var(--accent-soft);border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .example .tit{font-weight:800;color:var(--accent);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .example p{margin:0}
+  .example p+p{margin-top:8px}
+
+  .alert{background:var(--danger-soft);border:1px solid var(--danger);border-left-width:5px;
+    border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .alert .tit{font-weight:800;color:var(--danger);font-size:.82rem;letter-spacing:.04em;
+    text-transform:uppercase;margin-bottom:6px}
+  .alert p{margin:0;font-size:.95rem}
+  .alert p+p{margin-top:8px}
+
+  table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:.93rem}
+  table caption{text-align:left;font-weight:700;margin-bottom:8px;color:var(--text)}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:var(--surface-2);font-weight:700}
+  .table-scroll{overflow-x:auto;margin:0 0 18px}
+  .table-scroll table{margin:0}
+
+  .activity{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin:0 0 16px;display:flex;gap:14px;align-items:flex-start}
+  .activity .badge{flex:0 0 auto;background:var(--accent);color:#fff;font-weight:800;border-radius:10px;
+    padding:5px 10px;font-size:.82rem}
+  .activity .body{width:100%;min-width:0}
+  .activity .body h4{margin:0 0 4px;font-size:1rem}
+  .activity .body p{margin:0 0 6px}
+  .activity .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .pill{font-size:.8rem;padding:3px 10px;border-radius:8px;background:var(--surface-2);color:var(--text)}
+  .pill.mat{background:var(--surface-2)}
+
+  .glossary dl{margin:0}
+  .glossary dt{font-weight:700;margin-top:10px}
+  .glossary dt:first-child{margin-top:0}
+  .glossary dd{margin:2px 0 0;color:var(--muted)}
+
+  .resum{background:var(--surface-2);border-radius:var(--radius);padding:16px 18px;margin:0 0 18px}
+  .resum .tit{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:8px}
+  .resum ul{margin:0}
+
+  .scheme{background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin:0 0 18px;font-size:.93rem}
+  .scheme .tit{font-weight:700;margin-bottom:10px}
+  .pyramid{display:flex;flex-direction:column;align-items:center;gap:2px;margin:10px 0}
+  .pyramid div{color:#fff;font-size:.82rem;font-weight:700;padding:7px 10px;border-radius:6px;text-align:center;max-width:100%}
+
+  /* Esquemes de flux */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px;margin:10px 0}
+  .flow .step{flex:1 1 120px;background:var(--c-deep);color:#fff;border-radius:10px;padding:10px 12px;font-size:.85rem}
+  .flow .step b{display:block;font-size:.95rem;margin-bottom:2px}
+  .flow .arrow{align-self:center;color:var(--muted);font-weight:800}
+  .loop-note{margin:8px 0 0;font-size:.88rem;color:var(--muted)}
+
+  /* Esquema de postura (SVG) */
+  .posture svg{width:100%;height:auto;display:block}
+  .posture .ln{stroke:var(--text);stroke-width:3;stroke-linecap:round;fill:none}
+  .posture .fur{stroke:var(--muted);stroke-width:3;stroke-linecap:round;fill:none}
+  .posture .scr{fill:var(--c);stroke:none}
+  .posture .gaze{stroke:var(--c);stroke-width:2;stroke-dasharray:6 5;fill:none}
+  .posture .dim{stroke:var(--accent);stroke-width:2;fill:none}
+  .posture text{fill:var(--muted);font:12px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .posture text.hl{fill:var(--accent);font-weight:700}
+
+  /* Esquema de rack */
+  .rack{max-width:420px;margin:10px auto;border:3px solid var(--muted);border-radius:8px;padding:6px;display:flex;flex-direction:column;gap:4px}
+  .rack div{border-radius:5px;padding:8px 10px;font-size:.82rem;font-weight:700;color:#fff;display:flex;justify-content:space-between;gap:10px}
+  .rack div span{font-weight:400;opacity:.9}
+  .rack-legs{max-width:420px;margin:0 auto;display:flex;justify-content:space-between;padding:0 18px;color:var(--muted);font-size:.8rem;font-weight:700}
+
+  details.drop{background:var(--surface-2);border-radius:var(--radius);padding:10px 14px;margin:0 0 14px}
+  details.drop summary{cursor:pointer;font-weight:700}
+  details.drop .res-links{margin:10px 0 2px}
+  details.drop ul{margin:10px 0 2px}
+
+  .exam-box{background:var(--danger-soft);border:1px solid var(--danger);border-left-width:5px;
+    border-radius:var(--radius);padding:16px 20px;margin:0 0 18px}
+  .exam-box .tit{color:var(--danger);font-weight:800;margin-bottom:6px}
+  .exam-box ul{margin:8px 0 0}
+
+  .quiz-btn{background:var(--surface-2);border:1px solid var(--line);color:var(--text);border-radius:8px;
+    padding:7px 14px;cursor:pointer;font:inherit;font-size:.86rem;font-weight:600}
+  .quiz-btn:hover{border-color:var(--c)}
+  .quiz-btn.primary{background:var(--c);border-color:var(--c);color:var(--on-c)}
+  .quiz{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
+  .sub{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)}
+  .sub:first-child{margin-top:0;padding-top:0;border-top:0}
+  .sub-tit{font-weight:800;margin:0 0 10px}
+  .q{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .q:last-of-type{border-bottom:0;margin-bottom:0;padding-bottom:0}
+  .q-text{font-weight:700;margin:0 0 8px}
+  .q label{display:block;background:var(--surface-2);border-radius:8px;padding:8px 12px;margin-bottom:6px;
+    cursor:pointer;font-size:.93rem}
+  .q label:hover{background:var(--line)}
+  .q input{margin-right:8px}
+  .q.ok label.sel{background:var(--ok-soft);outline:2px solid var(--m3)}
+  .q.ko label.sel{background:var(--danger-soft);outline:2px solid var(--danger)}
+  .q.done label.right{background:var(--ok-soft);outline:2px solid var(--m3)}
+  .q-score{font-weight:700;margin-top:14px}
+  .q-just{margin:8px 0 0;padding:8px 12px;background:var(--surface-2);border-radius:8px;
+    font-size:.88rem;color:var(--muted)}
+  .crit{display:inline-block;background:var(--danger);color:#fff;font-size:.72rem;font-weight:800;
+    letter-spacing:.04em;border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:middle}
+
+  .fq{margin-bottom:16px}
+  .fq-label{display:block;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .fq textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+    color:var(--text);padding:9px 12px;font:inherit;font-size:.93rem;resize:vertical}
+  .fq textarea:focus{outline:2px solid var(--c);border-color:var(--c)}
+  .fq-model{margin:8px 0 0;padding:8px 12px;background:var(--accent-soft);border-radius:8px;
+    font-size:.9rem;color:var(--text)}
+  .fq-model strong{color:var(--accent)}
+
+  /* Sortida d'eines i autoavaluacions */
+  .tool-out{background:var(--surface-2);border-radius:8px;padding:12px 14px;font-size:.92rem;margin-top:14px}
+  .tool-out ul{margin:6px 0 0}
+  .tool-out .verdict{font-weight:800;font-size:1rem;margin:0 0 6px}
+  .tag-ok{color:#15803d;font-weight:800}
+  .tag-no{color:var(--danger);font-weight:800}
+  .tag-warn{color:var(--warn);font-weight:800}
+
+  /* Qüestionari d'autoavaluació PVD (A16) */
+  .aq-group{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--c);margin:16px 0 6px}
+  .aq-group:first-child{margin-top:0}
+  .aq{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--surface-2);
+    border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:.93rem}
+  .aq .opts{display:flex;gap:6px;flex-wrap:wrap}
+  .aq .opts label{display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--line);
+    border-radius:8px;padding:4px 10px;cursor:pointer;font-size:.86rem;font-weight:600;white-space:nowrap}
+  .aq .opts label:hover{border-color:var(--c)}
+  .aq.is-si{outline:2px solid var(--m3);background:var(--ok-soft)}
+  .aq.is-no{outline:2px solid var(--danger);background:var(--danger-soft)}
+  @media (max-width:600px){ .aq{grid-template-columns:1fr} }
+
+  /* Checklist (A8) */
+  .ck-phase{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--c);margin:16px 0 6px}
+  .ck-phase:first-child{margin-top:0}
+  .ck{background:var(--surface-2);border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:.93rem}
+  .ck > label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+  .ck input{margin-top:5px;flex:0 0 auto;width:17px;height:17px;accent-color:var(--c)}
+  .ck.ck-ok{outline:2px solid var(--m3);background:var(--ok-soft)}
+  .ck.ck-ko{outline:2px solid var(--danger);background:var(--danger-soft)}
+  .ck.ck-miss{outline:2px dashed var(--warn);background:var(--warn-soft)}
+  .ck .q-just{background:var(--surface)}
+
+  /* Exercici de valoració amb desplegables (cas 3.5) */
+  .mrow{display:grid;grid-template-columns:minmax(200px,2fr) 170px;gap:8px;align-items:center;
+    background:var(--surface-2);border-radius:8px;padding:10px 12px;margin-bottom:8px}
+  .mrow .ph{font-weight:700;font-size:.93rem}
+  .mrow .ph small{display:block;font-weight:400;color:var(--muted);font-size:.82rem}
+  .mrow select{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--surface);
+    color:var(--text);padding:8px 10px;font:inherit;font-size:.9rem}
+  .mrow select:focus{outline:2px solid var(--c);border-color:var(--c)}
+  .mrow select.ok{outline:2px solid var(--m3);background:var(--ok-soft)}
+  .mrow select.ko{outline:2px solid var(--danger);background:var(--danger-soft)}
+  .mrow .q-just{grid-column:1/-1;margin:2px 0 0;background:var(--surface)}
+  .mhead{display:grid;grid-template-columns:minmax(200px,2fr) 170px;gap:8px;
+    font-size:.8rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:0 12px 4px}
+  @media (max-width:600px){
+    .mrow,.mhead{grid-template-columns:1fr}
+    .mhead span+span{display:none}
+  }
+
+  /* Votació de casos (A23) */
+  .vote-block{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .vote-block:last-of-type{border-bottom:0}
+  .vote-block .quiz-btn{text-align:left}
+
+  .res-links{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
+  .res-links a{font-size:.88rem;background:var(--surface-2);color:var(--text);text-decoration:none;
+    padding:6px 12px;border-radius:999px}
+  details.drop .res-links a{background:var(--surface)}
+  .res-links a:hover{color:var(--accent)}
+
+  footer{margin-top:20px;padding:24px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem;
+    display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+  .theme-btn{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;
+    padding:6px 10px;cursor:pointer;font:inherit;font-size:.85rem}
+
+  @media print{
+    nav.top,.theme-btn{display:none}
+    header.hero{background:none;color:#000}
+    .hero p,.hero .back{color:#000}
+  }
+
+  /* Pàgina d'entrada del mòdul: targetes de les parts */
+  .parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:0 0 18px}
+  a.part-card{display:flex;flex-direction:column;text-decoration:none;color:var(--text);background:var(--surface);
+    border:1px solid var(--line);border-top:5px solid var(--c);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);
+    transition:transform .15s ease,border-color .15s ease}
+  a.part-card:hover{transform:translateY(-2px);border-color:var(--c)}
+  a.part-card .unit-no{align-self:flex-start}
+  a.part-card h3{margin:0 0 6px;font-size:1.15rem}
+  a.part-card p{color:var(--muted);margin:0 0 10px;font-size:.93rem}
+  a.part-card ul{margin:0 0 12px;font-size:.92rem}
+  a.part-card .go{margin-top:auto;font-weight:700;color:var(--c)}
+  .pager{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin:24px 0 0}
+  .pager a{text-decoration:none;font-weight:700;background:var(--surface);border:1px solid var(--line);
+    border-radius:10px;padding:10px 14px;color:var(--text)}
+  .pager a:hover{border-color:var(--c);color:var(--c)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a class="back" href="index.html">← Tornar als mòduls</a>
+    <div class="tag">MÒDUL 3</div>
+    <h1>Riscos específics del sector TIC</h1>
+    <p>Els riscos propis de la feina informàtica: el lloc amb pantalla, el muntatge i manteniment d'equips, el CPD, la càrrega psicosocial i el treball fora de l'oficina.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- OBJECTIUS (de tot el mòdul 3) -->
+  <section id="objectius">
+    <div class="card objectius">
+      <h3>Objectius del mòdul</h3>
+      <ul>
+        <li>Detectar els riscos propis dels llocs de treball del sector TIC: treball amb pantalles de visualització, muntatge i manteniment d'equips, centres de processament de dades (CPD), riscos psicosocials i treball fora de l'oficina.</li>
+        <li>Relacionar cada risc amb la normativa que l'afecta i amb els danys que pot causar (accident de treball, malaltia professional o altres danys).</li>
+        <li>Adoptar les mesures preventives adequades a cada situació, aplicant la jerarquia de l'art. 15 LPRL i prioritzant la protecció col·lectiva sobre la individual.</li>
+        <li>Seleccionar i utilitzar correctament els equips de protecció individual propis del sector (polsera antiestàtica, guants contra talls, protectors auditius...).</li>
+        <li>Valorar la necessitat de la prevenció en la feina diària i mostrar iniciativa per proposar millores en el propi lloc de treball.</li>
+      </ul>
+      <p class="note">El mòdul es treballa en dues parts, cadascuna amb la seva pàgina i la seva prova.</p>
+    </div>
+  </section>
+
+  <section id="parts">
+    <h2>Les dues parts del mòdul</h2>
+    <p class="lead">Tria la part que vols treballar.</p>
+    <div class="parts">
+      <a class="part-card" href="m3.1.html">
+        <span class="unit-no">PART 1</span>
+        <h3>PVD, muntatge i CPD</h3>
+        <p>Els riscos del lloc amb pantalla i de la feina tècnica amb equips.</p>
+        <ul>
+          <li>3.1 El lloc de treball amb PVD i l'ergonomia</li>
+          <li>3.2 Muntatge, manteniment d'equips i CPD</li>
+          <li>Activitats A16, A17 i A8</li>
+          <li>📝 Prova M3.1</li>
+        </ul>
+        <span class="go">Obre la part 1 →</span>
+      </a>
+      <a class="part-card" href="m3.2.html">
+        <span class="unit-no">PART 2</span>
+        <h3>Psicosocials, fora de l'oficina i cas</h3>
+        <p>L'organització de la feina, el treball fora de l'oficina i una avaluació completa.</p>
+        <ul>
+          <li>3.3 Riscos psicosocials TIC</li>
+          <li>3.4 Treball fora de l'oficina</li>
+          <li>3.5 Cas d'aplicació</li>
+          <li>Activitats A18, A23 i cas final · Glossari del mòdul</li>
+          <li>📝 Prova M3.2</li>
+        </ul>
+        <span class="go">Obre la part 2 →</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="avaluacio">
+    <div class="exam-box">
+      <div class="tit">📝 Avaluació del mòdul 3</div>
+      <p style="margin:0">El mòdul té dues proves de 20 preguntes amb 4 opcions de resposta: la <strong>prova M3.1</strong> (unitats 3.1 i 3.2) i la <strong>prova M3.2</strong> (unitats 3.3, 3.4 i 3.5). Cada encert val 0,5 punts i els errors no resten.</p>
+      <ul>
+        <li>Cal un mínim de <strong>5/10</strong> a cada prova per ser APTE.</li>
+        <li>Les notes no es compensen entre si: cal l'APTE a la prova M3.1 i a la prova M3.2.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Mòdul 3 · Riscos específics del sector TIC · Curs bàsic de PRL, sector informàtica</span>
+  <button class="theme-btn" id="themeBtn" type="button">🌓 Canvia el tema</button>
+</footer>
+
+<script>
+  // Tema clar / fosc (comparteix preferència amb la resta de mòduls)
+  var root = document.documentElement;
+  try { var t = localStorage.getItem('prl-theme'); if (t) root.setAttribute('data-theme', t); } catch(e){}
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme') ||
+      (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('prl-theme', next); } catch(e){}
+  });
+</script>
+</body>
+</html>
