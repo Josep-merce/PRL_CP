@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mòdul 1 · Activitats interactives</title>
+<meta name="description" content="Activitats interactives del Mòdul 1 del curs bàsic de PRL: conceptes bàsics, tipus de danys, drets i deures i normativa.">
+<style>
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5;
+    --text:#1b2330; --muted:#5a6577; --line:#dde2ea;
+    --accent:#e0661b; --accent-soft:#fdeee4;
+    --m1:#2f6fd1; --m2:#c2410c; --m3:#0f8a6a; --m4:#caa005;
+    --danger:#b91c1c; --danger-soft:#fdecec;
+    --law:#1d4ed8; --law-soft:#eaf1fd;
+    --radius:14px; --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.06);
+    --c:var(--m1);
+    /* Àlies que fan servir les activitats */
+    --paper:var(--surface); --ink:var(--text); --blue:var(--m1); --amber:var(--m4); --amber-2:var(--m2);
+    --acc:var(--c); --acc-soft:#e8f0fc; --acc-ink:#2459ad;
+    --ok:var(--m3); --ok-soft:#d1f5e3; --ok-line:#9fdcc4;
+    --ko:var(--danger); --ko-soft:var(--danger-soft); --ko-line:#f3b8b8;
+    --warn-soft:#fdf6dc; --warn-line:#ecd98f;
+    --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+      --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+      --accent:#f08a46; --accent-soft:#2b1d14;
+      --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+      --danger:#f87171; --danger-soft:#2c1717;
+      --law:#7aa6f5; --law-soft:#182435;
+      --shadow:none;
+      --acc-soft:#182435; --acc-ink:#8db4f5;
+      --ok-soft:#123228; --ok-line:#1f5c4a; --ko-line:#5c2626;
+      --warn-soft:#2a2410; --warn-line:#5a4c1a;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+    --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+    --accent:#f08a46; --accent-soft:#2b1d14;
+    --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+    --danger:#f87171; --danger-soft:#2c1717;
+    --law:#7aa6f5; --law-soft:#182435;
+    --shadow:none;
+    --acc-soft:#182435; --acc-ink:#8db4f5;
+    --ok-soft:#123228; --ok-line:#1f5c4a; --ko-line:#5c2626;
+    --warn-soft:#2a2410; --warn-line:#5a4c1a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 var(--font)}
+  h1,h2,h3,h4,p,ul,ol{margin:0}
+  a{color:var(--accent)}
+  button{font:inherit;color:inherit;cursor:pointer}
+  button:focus-visible,[tabindex]:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px}
+
+  /* Capçalera (igual que m1.html) */
+  header.hero{background:linear-gradient(135deg,#1b2330 0%,#2a3a52 100%);color:#fff;padding:40px 0 34px}
+  .hero .back{display:inline-flex;align-items:center;gap:6px;color:#cfd8e6;text-decoration:none;font-size:.9rem;font-weight:600}
+  .hero .back:hover{color:#fff}
+  .hero .tag{display:inline-block;background:var(--c);color:#fff;font-weight:800;font-size:.8rem;
+    letter-spacing:.06em;padding:4px 10px;border-radius:999px;margin-top:16px}
+  .hero h1{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.2;margin:12px 0 8px}
+  .hero p{max-width:640px;color:#cfd8e6;margin:0}
+
+  /* Barra de navegació i marcador */
+  nav.hud{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+  .hud-inner{display:flex;align-items:center;gap:12px;padding-top:8px;padding-bottom:8px}
+  .hud-nav{display:flex;gap:6px;overflow-x:auto;flex:1;scrollbar-width:none}
+  .hud-nav::-webkit-scrollbar{display:none}
+  .hud-nav a{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:2.1rem;height:2.1rem;padding:0 .5rem;border-radius:999px;
+    border:1px solid var(--line);background:var(--surface);color:var(--muted);text-decoration:none;font-size:.88rem;font-weight:700;transition:background .15s,border-color .15s,color .15s}
+  .hud-nav a:hover{border-color:var(--c);color:var(--text)}
+  .hud-nav a.done{background:var(--c);border-color:var(--c);color:#fff}
+  .score{flex:none;display:flex;align-items:center;gap:6px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--text)}
+  .score .star{width:22px;height:22px}
+  .score .pts{font-size:1.15rem}
+  .score small{color:var(--muted);font-weight:600}
+  .bump{animation:bump .5s ease}
+  @keyframes bump{40%{transform:scale(1.35)}}
+
+  main.wrap{padding-top:32px;padding-bottom:40px}
+
+  /* Targeta d'activitat */
+  .act{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:0 0 20px;overflow:hidden;
+    scroll-margin-top:4rem;box-shadow:var(--shadow)}
+  .act-head{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:16px 18px;border-bottom:1px solid var(--line)}
+  .act-num{flex:0 0 auto;background:var(--accent);color:#fff;font-weight:800;border-radius:10px;padding:5px 11px;font-size:.9rem;min-width:2.2rem;text-align:center}
+  .kicker{font-weight:800;color:var(--accent);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
+  .act-head h2{font-size:1.15rem;line-height:1.3;margin:2px 0 0}
+  .pill{font-size:.8rem;font-weight:600;padding:3px 10px;border-radius:8px;background:var(--surface-2);color:var(--text);white-space:nowrap}
+  .pill.won{background:var(--ok);color:#fff}
+  .act-body{padding:16px 18px 18px}
+  .howto{display:flex;gap:8px;align-items:flex-start;color:var(--muted);margin:0 0 16px;max-width:75ch}
+  .howto svg{flex:none;width:20px;height:20px;margin-top:3px}
+  @media (max-width:620px){.act-head{grid-template-columns:auto 1fr}.act-head .pill{grid-column:1/-1;justify-self:start}}
+
+  /* Botons (estil .quiz-btn de m1.html) */
+  .btn{display:inline-flex;align-items:center;gap:6px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);color:var(--text);
+    padding:7px 14px;font-weight:600;font-size:.9rem;transition:transform .08s,border-color .15s}
+  .btn:hover{border-color:var(--c)}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:var(--surface-2);color:var(--text)}
+  .btn.acc{background:var(--c);border-color:var(--c);color:#fff}
+  .btn[disabled]{opacity:.45;cursor:not-allowed}
+  .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+
+  /* Retroacció */
+  .fb{border-radius:8px;padding:10px 14px;margin-top:14px;border:1px solid var(--line);background:var(--surface-2);font-size:.93rem;animation:fade .25s ease}
+  .fb.ok{background:var(--ok-soft);border-color:var(--ok-line)}
+  .fb.ko{background:var(--ko-soft);border-color:var(--ko-line)}
+  .fb.mid{background:var(--warn-soft);border-color:var(--warn-line)}
+  .fb strong{display:block;margin-bottom:2px}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .result{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--radius);background:var(--surface-2);margin-top:14px}
+  .result .big{font-size:2rem;font-weight:800;color:var(--c);font-variant-numeric:tabular-nums}
+
+  /* Test */
+  .qmeta{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.9rem;margin-bottom:6px}
+  .bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:14px}
+  .bar i{display:block;height:100%;background:var(--c);transition:width .3s}
+  .q{font-size:1.05rem;font-weight:700;margin-bottom:12px;max-width:70ch}
+  .opts{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+  @media (max-width:700px){.opts{grid-template-columns:1fr}}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;background:var(--surface-2);border:2px solid transparent;border-radius:8px;padding:9px 12px;font-size:.93rem;transition:border-color .15s,background .15s,transform .1s}
+  .opt:hover:not([disabled]){border-color:var(--c);transform:translateY(-1px)}
+  .opt .l{flex:none;width:1.6rem;height:1.6rem;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#fff}
+  .opt:nth-child(1) .l{background:#2f6fd1}.opt:nth-child(2) .l{background:#c2410c}.opt:nth-child(3) .l{background:#0f8a6a}.opt:nth-child(4) .l{background:#7a4e9c}
+  .opt[disabled]{cursor:default}
+  .opt.right{border-color:var(--ok);background:var(--ok-soft)}
+  .opt.wrong{border-color:var(--ko);background:var(--ko-soft)}
+  .opt.dim{opacity:.55}
+
+  /* Mite o realitat */
+  .deck{display:flex;flex-direction:column;align-items:center}
+  .cardq{width:min(560px,100%);min-height:170px;border-radius:var(--radius);padding:24px 22px;background:linear-gradient(135deg,#1b2330 0%,#2a3a52 100%);color:#fff;display:flex;flex-direction:column;justify-content:center;
+    box-shadow:var(--shadow);position:relative;transition:transform .35s ease,opacity .35s ease}
+  .cardq .n{position:absolute;top:12px;right:16px;color:#cfd8e6;font-size:.85rem}
+  .cardq p{font-size:1.15rem;font-weight:600;line-height:1.4}
+  .cardq.out-l{transform:translateX(-120%) rotate(-12deg);opacity:0}
+  .cardq.out-r{transform:translateX(120%) rotate(12deg);opacity:0}
+  .tfbtns{display:flex;gap:12px;margin-top:14px;width:min(560px,100%)}
+  .tfbtns button{flex:1;border-radius:10px;padding:12px;font-weight:700;font-size:1.02rem;border:2px solid;background:var(--surface)}
+  .tfbtns .no{border-color:var(--ko);color:var(--ko)}
+  .tfbtns .yes{border-color:var(--ok);color:var(--ok)}
+  .tfbtns .no:hover{background:var(--ko-soft)} .tfbtns .yes:hover{background:var(--ok-soft)}
+  .deck .fb{width:min(560px,100%)}
+
+  /* Classificació */
+  .pool{display:flex;flex-wrap:wrap;gap:8px;padding:12px;border:2px dashed var(--line);border-radius:var(--radius);min-height:3.4rem;margin-bottom:14px;background:var(--surface-2)}
+  .pool:empty::before{content:"Tots els elements estan col·locats.";color:var(--muted);font-size:.9rem;align-self:center}
+  .chip{display:inline-flex;flex-direction:column;align-items:flex-start;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 11px;font-size:.92rem;line-height:1.35;text-align:left;
+    box-shadow:0 1px 2px rgba(16,24,40,.06);transition:transform .1s,box-shadow .15s,border-color .15s;touch-action:manipulation}
+  .chip:hover{border-color:var(--c)}
+  .chip.sel{border-color:var(--c);box-shadow:0 0 0 3px var(--acc-soft);transform:translateY(-2px)}
+  .chip.ok{border-color:var(--ok);background:var(--ok-soft)}
+  .chip.ko{border-color:var(--ko);background:var(--ko-soft)}
+  .chip .why{display:block;font-size:.82rem;color:var(--muted);margin-top:2px}
+  .chip.dragging{opacity:.4}
+  .bins{display:grid;grid-template-columns:repeat(var(--cols,3),1fr);gap:12px}
+  @media (max-width:820px){.bins{grid-template-columns:1fr}}
+  .bin{border:1px solid var(--line);border-radius:var(--radius);min-height:7rem;background:var(--surface);display:flex;flex-direction:column;transition:border-color .15s,background .15s;overflow:hidden}
+  .bin.hot{border-color:var(--c);background:var(--acc-soft)}
+  .bin.armed{cursor:pointer;border-style:dashed;border-color:var(--c)}
+  .bin h3{font-size:.95rem;font-weight:700;padding:9px 12px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;background:var(--surface-2)}
+  .bin h3 i{width:12px;height:12px;border-radius:3px;background:var(--c);flex:none}
+  .bin[style*="--c"] h3 i{background:var(--c)}
+  .bin h3 small{display:block;font-weight:400;color:var(--muted);font-size:.8rem}
+  .bin .drop{padding:10px;display:flex;flex-direction:column;gap:6px;flex:1}
+
+  /* Ordenar */
+  .olist{list-style:none;display:flex;flex-direction:column;gap:8px;padding:0;margin:0}
+  .oitem{display:grid;grid-template-columns:2.2rem 1fr auto;gap:10px;align-items:center;background:var(--surface-2);border:2px solid transparent;border-radius:10px;padding:8px 10px;font-size:.95rem;transition:border-color .15s,background .2s}
+  .oitem .idx{width:2rem;height:2rem;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .oitem .mv{display:flex;gap:4px}
+  .oitem .mv button{width:2.1rem;height:2.1rem;border-radius:8px;border:1px solid var(--line);background:var(--surface);display:flex;align-items:center;justify-content:center}
+  .oitem .mv button:hover{border-color:var(--c)}
+  .oitem .mv button[disabled]{opacity:.35;cursor:default}
+  .oitem.ok{border-color:var(--ok);background:var(--ok-soft)}
+  .oitem.ko{border-color:var(--ko);background:var(--ko-soft)}
+  .oitem.flash{animation:flash .35s}
+  @keyframes flash{50%{background:var(--acc-soft)}}
+
+  /* Troba l'error */
+  .hot-wrap{display:grid;grid-template-columns:1fr 260px;gap:14px;align-items:start}
+  @media (max-width:820px){.hot-wrap{grid-template-columns:1fr}}
+  .scene{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#eef1f5;cursor:crosshair}
+  .scene svg{display:block;width:100%;height:auto}
+  .scene .spot{cursor:crosshair}
+  .scene .spot .hit{fill:transparent}
+  .scene .ring{fill:none;stroke:#b91c1c;stroke-width:4;opacity:.95}
+  .scene .ring-pulse{fill:none;stroke:#b91c1c;stroke-width:3;transform-box:fill-box;transform-origin:center;animation:pulse 1.4s ease-out infinite}
+  @keyframes pulse{from{transform:scale(.8);opacity:.9}to{transform:scale(1.5);opacity:0}}
+  .scene .badge circle{fill:#b91c1c}
+  .scene .badge text{fill:#fff;font:700 15px var(--font)}
+  .scene .miss{fill:none;stroke:#5a6577;stroke-width:3;animation:missa .7s forwards;transform-box:fill-box;transform-origin:center}
+  @keyframes missa{to{opacity:0;transform:scale(1.6)}}
+  .scene .ghost{fill:rgba(185,28,28,.15);stroke:#b91c1c;stroke-dasharray:6 5;stroke-width:3}
+  .side{background:var(--surface-2);border-radius:var(--radius);padding:14px}
+  .counter{display:flex;align-items:baseline;gap:6px;font-weight:700}
+  .counter .big{font-size:2rem;color:var(--c);font-variant-numeric:tabular-nums}
+  .found{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:430px;overflow:auto}
+  .found li{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--ko);border-radius:8px;padding:8px 10px;font-size:.9rem;animation:fade .3s}
+  .found li b{display:block}
+  .found li span{color:var(--muted)}
+  .found li.missed{border-left-color:var(--muted)}
+
+  /* Escenari */
+  .story{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:start}
+  @media (max-width:620px){.story{grid-template-columns:1fr}.story .avatar{display:none}}
+  .avatar{width:110px;height:110px;border-radius:var(--radius);background:var(--surface-2);display:flex;align-items:center;justify-content:center}
+  .avatar svg{width:80px;height:80px}
+  .scene-text{font-size:1.02rem;max-width:68ch}
+  .scene-text .where{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--c);border-radius:999px;padding:3px 10px;margin-bottom:8px}
+  .choices{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .choice{text-align:left;border:2px solid transparent;border-radius:8px;padding:9px 12px;background:var(--surface-2);display:flex;gap:10px;align-items:center;font-size:.95rem;transition:border-color .15s,transform .1s}
+  .choice:hover:not([disabled]){border-color:var(--c);transform:translateX(3px)}
+  .choice .arrow{flex:none;width:1.6rem;height:1.6rem;border-radius:50%;background:var(--c);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+  .choice.best{border-color:var(--ok);background:var(--ok-soft)}
+  .choice.bad{border-color:var(--ko);background:var(--ko-soft)}
+  .choice.meh{border-color:var(--amber);background:var(--warn-soft)}
+  .path{display:flex;gap:4px;margin-bottom:12px}
+  .path i{width:26px;height:8px;border-radius:4px;background:var(--line)}
+  .path i.g{background:var(--ok)}.path i.y{background:var(--amber)}.path i.r{background:var(--ko)}
+
+  /* Matriu */
+  .mx-wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+  @media (max-width:820px){.mx-wrap{grid-template-columns:1fr}}
+  .case{background:var(--surface-2);border-radius:var(--radius);padding:16px}
+  .case h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
+  .seg{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
+  .seg button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 11px;font-size:.88rem;font-weight:600}
+  .seg button:hover:not([disabled]){border-color:var(--c)}
+  .seg button.on{border-color:var(--c);background:var(--c);color:#fff}
+  .lbl{font-size:.85rem;font-weight:700;color:var(--muted)}
+  .matrix{display:grid;grid-template-columns:auto repeat(3,1fr);gap:4px;font-size:.82rem}
+  .matrix div{border-radius:6px;padding:8px 5px;text-align:center;display:flex;align-items:center;justify-content:center;min-height:3rem;transition:transform .2s,box-shadow .2s}
+  .matrix .h{background:transparent;color:var(--muted);font-weight:700}
+  .matrix .c{color:#1b2330;font-weight:700}
+  .lv-T{background:#d1f5e3}.lv-TO{background:#e6f4c4}.lv-MO{background:#fbeab4}.lv-I{background:#f7c9a3}.lv-IN{background:#f0a3a3}
+  .matrix .c.pick{transform:scale(1.08);box-shadow:0 0 0 3px var(--text)}
+  .matrix .c.model{box-shadow:0 0 0 3px var(--ok) inset}
+  .level{margin-top:12px;padding:10px 14px;border-radius:8px;font-weight:700;color:#1b2330}
+  .level small{display:block;font-weight:400}
+
+  /* EPI */
+  .epi-task{background:var(--surface-2);border-radius:var(--radius);padding:16px;margin-bottom:14px}
+  .epi-task h3{font-size:1.05rem;font-weight:700}
+  .epi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+  .epi{border:2px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:9px 6px 8px;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:.82rem;font-weight:600;text-align:center;line-height:1.2;transition:border-color .15s,transform .1s,background .15s}
+  .epi svg{width:46px;height:46px}
+  .epi:hover:not([disabled]){transform:translateY(-2px);border-color:var(--c)}
+  .epi.on{border-color:var(--c);background:var(--acc-soft)}
+  .epi.ok{border-color:var(--ok);background:var(--ok-soft)}
+  .epi.ko{border-color:var(--ko);background:var(--ko-soft)}
+  .epi.miss{border-color:var(--ko);border-style:dashed}
+  .steps{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+  .steps i{width:30px;height:8px;border-radius:4px;background:var(--line)}
+  .steps i.cur{background:var(--c)} .steps i.g{background:var(--ok)} .steps i.r{background:var(--ko)}
+
+  /* Simulador PVD */
+  .pvd{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;align-items:start}
+  @media (max-width:820px){.pvd{grid-template-columns:1fr}}
+  .pvd-stage{position:sticky;top:4.2rem;border:1px solid var(--line);border-radius:var(--radius);background:#f4f5f6;overflow:hidden}
+  .pvd-stage svg{display:block;width:100%;height:auto}
+  .pvd-stage svg *{transition:all .35s ease}
+  .ctrl{margin-bottom:14px}
+  .ctrl .top-l{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .ctrl .state{font-size:.8rem;font-weight:700;border-radius:8px;padding:1px 9px}
+  .ctrl .state.g{background:var(--ok-soft);color:var(--ok)}
+  .ctrl .state.r{background:var(--ko-soft);color:var(--ko)}
+  .ctrl .tip{font-size:.85rem;color:var(--muted);margin-top:4px;min-height:1.2em}
+  .meter{height:12px;border-radius:6px;background:var(--line);overflow:hidden;margin:5px 0 16px}
+  .meter i{display:block;height:100%;background:linear-gradient(90deg,#b91c1c,#caa005,#0f8a6a);transition:width .4s}
+
+  /* Pregunta oberta */
+  textarea{width:100%;min-height:7rem;border:1px solid var(--line);border-radius:8px;padding:9px 12px;font:inherit;font-size:.93rem;resize:vertical;background:var(--surface);color:var(--text)}
+  textarea:focus{outline:2px solid var(--c);border-color:var(--c)}
+  .open-q{margin-bottom:16px}
+  .open-q label{display:block;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .model{background:var(--accent-soft);border-radius:var(--radius);padding:14px 18px;margin-top:14px;animation:fade .3s}
+  .model h4{font-size:.82rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+  .model ul{padding-left:22px}
+  .selfcheck{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .selfcheck label{display:flex;gap:6px;align-items:center;font-size:.9rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:5px 10px;cursor:pointer}
+
+  .note-box{display:flex;gap:10px;align-items:flex-start;background:var(--law-soft);border:1px solid var(--law);border-left-width:5px;border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;font-size:.95rem}
+  .note-box svg{flex:none;width:22px;height:22px}
+
+  /* Final */
+  .finale{text-align:center;background:linear-gradient(135deg,#1b2330 0%,#2a3a52 100%);color:#fff;border-radius:var(--radius);padding:32px 22px;margin-top:28px}
+  .finale h2{font-size:1.5rem}
+  .finale p{color:#cfd8e6;margin-top:6px}
+  .finale .big{font-size:3rem;font-weight:800;color:#f2c230;font-variant-numeric:tabular-nums}
+  .medal{width:84px;height:84px;margin:0 auto 8px;display:block}
+
+  footer{margin-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem}
+  footer .wrap{padding-top:24px;padding-bottom:24px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+  .theme-btn{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit;font-size:.85rem}
+  #confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+
+  /* Escape room */
+  .esc-intro{display:flex;gap:18px;align-items:center;background:var(--surface-2);border-radius:var(--radius);padding:16px 18px}
+  .esc-intro .esc-door{flex:none;width:96px}
+  .esc-story{max-width:68ch}
+  .esc-hint{color:var(--muted);font-size:.9rem;margin-top:6px}
+  .esc-locks{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .esc-lock{display:flex;flex-direction:column;align-items:center;gap:3px;width:3.4rem;padding:7px 3px;border-radius:10px;border:2px solid var(--line);background:var(--surface);color:var(--muted)}
+  .esc-lock svg{width:26px;height:31px}
+  .esc-lock .dg{font-weight:800;font-size:1.05rem;color:var(--muted);font-variant-numeric:tabular-nums}
+  .esc-lock.now{border-color:var(--c);color:var(--c)}
+  .esc-lock.open{border-color:var(--ok);background:var(--ok-soft);color:var(--ok);animation:pop .35s ease}
+  .esc-lock.open .dg{color:var(--ok)}
+  @keyframes pop{50%{transform:scale(1.15)}}
+  .esc-card{border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;background:var(--surface)}
+  .esc-card.shake{animation:shake .35s}
+  @keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+  .esc-name{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--c);margin-bottom:6px}
+  .esc-name svg{width:20px;height:24px;color:var(--c)}
+  .esc-card .esc-story{margin-bottom:10px;color:var(--muted)}
+  .esc-digit{display:inline-block;min-width:1.6rem;text-align:center;background:var(--ok);color:#fff;border-radius:6px;padding:0 6px;margin-left:3px}
+  .esc-final{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+  .esc-final .esc-door{flex:none;width:130px}
+  .esc-pad{flex:1;min-width:230px;max-width:320px}
+  .esc-disp{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.8rem;letter-spacing:.2em;text-align:center;background:#1b2330;color:#3fd07a;border-radius:10px;padding:8px;margin:10px 0}
+  .esc-disp.ok{background:var(--ok);color:#fff}
+  .esc-disp.ko{animation:shake .35s;color:#ff8a80}
+  .esc-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+  .esc-key{font-size:1.25rem;font-weight:700;padding:9px 0;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);transition:transform .08s,border-color .15s}
+  .esc-key:hover:not([disabled]){border-color:var(--c)}
+  .esc-key:active{transform:scale(.95)}
+  .esc-key.fn{color:var(--muted);font-size:1rem}
+  @media (max-width:560px){.esc-intro{flex-direction:column;align-items:flex-start}.esc-final .esc-door{width:90px}}
+
+  /* Sonòmetre */
+  .mt-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:18px;align-items:start}
+  .mt-gauge{width:100%;max-width:330px;display:block;margin:10px auto 0;background:#f4f5f6;border-radius:10px}
+  .mt-needle{transform-box:view-box;transform-origin:110px 108px;transition:transform 1.1s cubic-bezier(.3,1.4,.5,1)}
+  .mt-list{display:flex;flex-direction:column;gap:7px}
+  .mt-list .lbl{margin-bottom:3px}
+  .mchip{display:flex;gap:10px;align-items:flex-start;text-align:left;border:2px solid transparent;border-radius:8px;background:var(--surface-2);padding:8px 12px;font-size:.92rem;line-height:1.35;transition:border-color .15s,background .15s}
+  .mchip .bx{flex:none;width:1.15rem;height:1.15rem;border:2px solid var(--muted);border-radius:4px;margin-top:2px;position:relative}
+  .mchip.on{border-color:var(--c);background:var(--acc-soft)}
+  .mchip.on .bx,.mchip.ok .bx{background:var(--c);border-color:var(--c)}
+  .mchip.on .bx::after,.mchip.ok .bx::after{content:"";position:absolute;left:.28rem;top:.05rem;width:.3rem;height:.6rem;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .mchip.ok{border-color:var(--ok);background:var(--ok-soft)} .mchip.ok .bx{background:var(--ok);border-color:var(--ok)}
+  .mchip.ko{border-color:var(--ko);background:var(--ko-soft)}
+  .mchip.ko .bx{background:var(--ko);border-color:var(--ko)}
+  .mchip.miss{border-style:dashed;border-color:var(--ok)}
+  .mchip.dim{opacity:.5}
+  .mchip:hover:not([disabled]):not(.ro){border-color:var(--c)}
+  .mchip.ro{cursor:default;transition:opacity .2s,background .2s,border-color .2s}
+  .mt-free{margin-top:22px;padding-top:16px;border-top:1px dashed var(--line)}
+  .mt-free h3{font-size:1.05rem}
+  .mt-free input[type=range]{width:100%;margin-top:10px;accent-color:var(--c)}
+  @media (max-width:760px){.mt-wrap{grid-template-columns:1fr}}
+
+  @media print{
+    nav.hud,.theme-btn,#confetti{display:none}
+    header.hero{background:none;color:#000}
+    .hero p,.hero .back{color:#000}
+    .act{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <a class="back" href="m1.html">← Tornar al Mòdul 1</a>
+    <div class="tag">MÒDUL 1 · ACTIVITATS</div>
+    <h1>Seguretat i salut en el treball: activitats interactives</h1>
+    <p>Conceptes bàsics, tipus de danys, drets i deures i normativa, en format de joc. Cada activitat suma punts al marcador.</p>
+  </div>
+</header>
+<nav class="hud" aria-label="Activitats i puntuació">
+  <div class="wrap hud-inner">
+    <div class="hud-nav"></div>
+    <div class="score" aria-live="polite"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6Z" fill="#caa005"/></svg><span class="pts" id="pts">0</span><small id="ptsmax">/ 0</small><span class="sr">punts</span></div>
+  </div>
+</nav>
+<main class="wrap">
+  <div id="acts"></div>
+  <section id="finale" class="finale" hidden></section>
+</main>
+<footer>
+  <div class="wrap">
+    <span>Mòdul 1 · Seguretat i salut en el treball · Curs bàsic de PRL, sector informàtica</span>
+    <button class="theme-btn" id="themeBtn" type="button">🌓 Canvia el tema</button>
+  </div>
+</footer>
+<script>window.ACT_OFF = []; /* activitats desactivades (numeració de la guia del docent): ho gestiona activitats.sh */</script>
+<script>window.PAGE = {"activities": [{"id": "m1a1", "type": "classify", "title": "Del perill al dany", "how": "Classifica cada targeta: és la condició perillosa (factor de risc), la possibilitat que passi alguna cosa (risc) o el mal que pateix la persona (dany)? Toca una targeta i després la columna, o arrossega-la.", "bins": [{"id": "f", "label": "Factor de risc", "sub": "La condició perillosa"}, {"id": "r", "label": "Risc", "sub": "La possibilitat que passi"}, {"id": "d", "label": "Dany", "sub": "El mal que pateix la persona"}], "items": [{"t": "Cable de la impressora creuant el passadís", "b": "f", "e": "És la condició de treball perillosa."}, {"t": "Possibilitat d'ensopegar i caure", "b": "r", "e": "És la possibilitat que es produeixi un dany."}, {"t": "Esquinç de turmell", "b": "d", "e": "És la lesió que pateix la persona."}, {"t": "Soroll constant de les màquines del taller", "b": "f", "e": "Condició de l'ambient de treball."}, {"t": "Possibilitat de perdre oïda amb els anys", "b": "r", "e": "És una possibilitat, encara no ha passat."}, {"t": "Pèrdua d'audició diagnosticada pel metge", "b": "d", "e": "El dany ja s'ha produït."}, {"t": "Hores davant la pantalla sense cap pausa", "b": "f", "e": "Condició de l'organització del treball."}, {"t": "Possibilitat de patir fatiga visual", "b": "r", "e": "Encara no ha passat: és un risc."}, {"t": "Mal de cap i ulls irritats al final del dia", "b": "d", "e": "Són els efectes sobre la salut."}, {"t": "Un cap que humilia un treballador cada dia", "b": "f", "e": "Factor psicosocial de l'organització."}, {"t": "Possibilitat de patir estrès i ansietat", "b": "r", "e": "És la possibilitat de dany psicològic."}, {"t": "Baixa mèdica per ansietat", "b": "d", "e": "La salut ja s'ha vist afectada."}], "done": "La Llei 31/1995 defineix el risc laboral com la possibilitat que un treballador pateixi un dany derivat del treball."}, {"id": "m1a2", "type": "scenario", "title": "Investiga l'accident", "icon": "inspect", "max": 10, "how": "Ha passat un accident a l'empresa i t'han demanat que ajudis a investigar-lo. Tria la millor resposta en cada pas de la investigació.", "start": "n1", "nodes": {"n1": {"where": "Dimecres · 9:15", "text": "L'Arnau, tècnic de suport, s'ha enfilat a un tamboret amb rodes per agafar un switch de la prestatgeria de dalt. El tamboret ha lliscat, ha caigut i s'ha trencat el canell. Primer pas: quin tipus de dany és?", "c": [{"t": "Un accident de treball: és una lesió que ha patit fent la feina.", "q": "g", "to": "n2", "e": "Accident de treball: lesió que pateix el treballador amb motiu o en ocasió de la feina (RDL 8/2015, article 156)."}, {"t": "Una malaltia professional, perquè ha passat a la feina.", "q": "r", "to": "n2", "e": "La malaltia professional apareix a poc a poc per exposició a un agent i ha de constar al quadre oficial. Una caiguda és un accident."}, {"t": "No compta com a accident de treball perquè ha estat un descuit seu.", "q": "r", "to": "n2", "e": "Un descuit en la feina habitual no fa que deixi de ser un accident de treball."}]}, "n2": {"where": "Lloc de l'accident", "text": "Mires el lloc i apuntes els factors de risc, és a dir, les condicions que han fet possible l'accident. Quin és el més important?", "c": [{"t": "Fer servir un tamboret amb rodes per pujar: no és un mitjà adequat per treballar en alçada.", "q": "g", "to": "n3", "e": "És una condició de treball perillosa que es pot corregir."}, {"t": "L'Arnau anava amb presses.", "q": "y", "to": "n3", "e": "És un factor, però si només mires la persona, la condició perillosa continua allà per al següent."}, {"t": "Ha estat mala sort.", "q": "r", "to": "n3", "e": "Els accidents tenen causes. Si no les busques, es tornen a repetir."}]}, "n3": {"where": "Entrevistes", "text": "La Sílvia t'explica: «La setmana passada jo també m'hi vaig enfilar i vaig estar a punt de caure, però no em vaig fer res». Què era allò?", "c": [{"t": "Un incident: no va causar cap dany, però era un avís i s'hauria d'haver comunicat.", "q": "g", "to": "n4", "e": "Si aquell incident s'hagués comunicat i corregit, potser l'accident de l'Arnau no hauria passat."}, {"t": "Res important, perquè ningú no es va fer mal.", "q": "y", "to": "n4", "e": "Que no hi hagués ferits no vol dir que no fos important: era un avís."}, {"t": "Un accident de treball.", "q": "r", "to": "n4", "e": "No va causar cap lesió, per tant és un incident, no un accident."}]}, "n4": {"where": "Informe", "text": "L'Arnau estarà sis setmanes de baixa. Quines conseqüències té l'accident?", "c": [{"t": "Dolor i baixa per a l'Arnau, feina endarrerida, cost de substituir-lo i, si els riscos no estaven avaluats, possibles sancions per a l'empresa.", "q": "g", "to": "n5", "e": "Els accidents tenen costos humans, econòmics i de funcionament."}, {"t": "Només el dolor de l'Arnau.", "q": "y", "to": "n5", "e": "És la conseqüència més important, però no l'única: també n'hi ha per a l'empresa i la societat."}, {"t": "Cap: la mútua ho paga tot.", "q": "r", "to": "n5", "e": "Molts costos (temps perdut, substitucions, retards, clients) no els cobreix ningú."}]}, "n5": {"where": "Propostes", "text": "Quina proposta fas perquè no es torni a repetir?", "c": [{"t": "Una escala adequada a cada planta, posar el material d'ús freqüent a l'altura de les mans i comunicar sempre els incidents.", "q": "g", "to": "end", "e": "Actua sobre les causes de l'accident i sobre el fet que l'avís anterior no es va comunicar."}, {"t": "Un cartell que digui «Prohibit pujar a les cadires».", "q": "y", "to": "end", "e": "Ajuda, però si no hi ha escala, la gent continuarà enfilant-se on pugui."}, {"t": "Renyar l'Arnau perquè no ho torni a fer.", "q": "r", "to": "end", "e": "Buscar culpables no elimina les causes."}]}, "end": {"end": true, "icon": "inspect", "text": "Has acabat la investigació.", "moral": "Investigar un accident és buscar causes, no culpables. I els incidents són avisos: si es comuniquen i es corregeixen, l'accident no arriba."}}}, {"id": "m1a5", "type": "order", "title": "La cadena d'un accident", "how": "Ordena els fets de dalt a baix, des del primer fins a l'últim. Fes servir les fletxes.", "items": ["Hi ha un factor de risc: una caixa al mig del passadís.", "Ningú l'aparta ni ho comunica.", "Un company hi ensopega però no cau: és un incident.", "Tampoc no es comunica l'incident ni es corregeix la situació.", "La Laura hi ensopega carregant un monitor i cau: accident de treball.", "Dany: fractura de canell i baixa mèdica.", "Conseqüències: feina endarrerida, costos per a l'empresa i investigació de l'accident."], "e": "Els incidents són avisos. Si es comuniquen i es corregeixen, l'accident no arriba."}, {"id": "m1a6", "type": "scenario", "title": "Primer dia de pràctiques", "icon": "talk", "max": 8, "how": "Comences les pràctiques en una empresa d'informàtica. Tria què fas en cada situació i mira què passa.", "start": "n1", "nodes": {"n1": {"where": "Dilluns, 9:00", "text": "El teu tutor de l'empresa et diu: «Comença ja a muntar aquests equips. La informació de riscos ja te la donarem un altre dia».", "c": [{"t": "Abans de començar, pregunto amablement quins riscos té la tasca i quines normes he de seguir.", "q": "g", "to": "n2", "e": "Tens dret a rebre informació i formació sobre els riscos del teu lloc abans de començar."}, {"t": "Començo i em fixo en com ho fan els altres.", "q": "y", "to": "n2", "e": "Observar ajuda, però també pots copiar males pràctiques. Demana la informació."}, {"t": "Començo sense dir res: és el primer dia.", "q": "r", "to": "n2", "e": "No conèixer els riscos és la manera més fàcil de patir un accident."}]}, "n2": {"where": "Dilluns, 11:00", "text": "Has de portar una caixa amb un servidor molt pesat del magatzem a la sala del costat.", "c": [{"t": "Demano ajuda a un company o faig servir un carro.", "q": "g", "to": "n3", "e": "Bona decisió: redueixes l'esforç i el risc de lesió a l'esquena."}, {"t": "L'aixeco tot sol doblegant els genolls.", "q": "y", "to": "n3", "e": "La tècnica és bona, però amb un pes elevat cal ajuda o un mitjà mecànic."}, {"t": "L'arrossego per terra fins a la sala.", "q": "r", "to": "n3", "e": "Pots fer-te mal, fer caure algú i espatllar l'equip."}]}, "n3": {"where": "Dilluns, 13:00", "text": "Notes que la regleta de sota la taula s'escalfa i fa olor de cremat.", "c": [{"t": "La desconnecto si és segur fer-ho i aviso de seguida el responsable.", "q": "g", "to": "n4", "e": "Informar immediatament d'una situació de risc és un deure del treballador."}, {"t": "Ho comento al final del dia.", "q": "y", "to": "n4", "e": "Massa tard: un sobreescalfament pot acabar en incendi en pocs minuts."}, {"t": "No dic res: no és el meu equip.", "q": "r", "to": "n4", "e": "La seguretat és cosa de tothom. Si no avises, el risc continua."}]}, "n4": {"where": "Dimarts, 10:00", "text": "Al taller hi ha molt soroll. Un company et diu: «Els protectors auditius són per als novatos».", "c": [{"t": "Me'ls poso igualment: és la meva salut i és obligatori fer servir els EPI.", "q": "g", "to": "end", "e": "La pèrdua d'audició és lenta i no es recupera."}, {"t": "Me'ls poso només quan el cap mira.", "q": "y", "to": "end", "e": "Els EPI protegeixen quan els portes, no quan et veuen."}, {"t": "Me'ls trec per no quedar malament.", "q": "r", "to": "end", "e": "La pressió del grup no és una bona raó per posar en risc la teva salut."}]}, "end": {"end": true, "text": "Has acabat la primera setmana de pràctiques.", "moral": "Conèixer els riscos, treballar de manera segura i comunicar els problemes són part de la feina, també el primer dia."}}}, {"id": "m1a3", "type": "classify", "title": "Quin dret t'empara?", "cols": 3, "how": "En cada situació hi ha un dret de la persona treballadora en joc. Posa cada targeta a la columna del dret que l'empara.", "bins": [{"id": "p", "label": "Protecció eficaç", "sub": "Article 14", "color": "#1F5A8C"}, {"id": "i", "label": "Informació, consulta i participació", "sub": "Article 18", "color": "#2E7D4F"}, {"id": "f", "label": "Formació", "sub": "Article 19", "color": "#B5651D"}, {"id": "r", "label": "Risc greu i imminent", "sub": "Article 21", "color": "#B3261E"}, {"id": "v", "label": "Vigilància de la salut", "sub": "Article 22", "color": "#7A4E9C"}], "items": [{"t": "Et canvien de lloc de treball i ningú no t'explica quins riscos té la feina nova.", "b": "i", "e": "Tens dret a rebre informació dels riscos del teu lloc i de les mesures de protecció."}, {"t": "L'empresa vol canviar el torn de guàrdies i els treballadors volen donar-hi la seva opinió.", "b": "i", "e": "Els treballadors han de ser consultats sobre els canvis que afecten la seva seguretat i salut."}, {"t": "Fas propostes de millora als delegats de prevenció.", "b": "i", "e": "És el dret de participació."}, {"t": "Has de fer servir per primera vegada una plataforma elevadora i ningú no t'ensenya a fer-la servir.", "b": "f", "e": "Tens dret a formació pràctica i suficient quan entres a treballar i quan canvien les tasques o els equips."}, {"t": "La formació de prevenció es fa en hores de feina i no te la descompten del sou.", "b": "f", "e": "S'ha de fer dins la jornada o descomptar-ne el temps, i no et pot costar res."}, {"t": "Sents olor de cremat i veus fum al CPD, i surts de la sala sense esperar permís.", "b": "r", "e": "Davant d'un risc greu i imminent pots interrompre la feina i abandonar el lloc."}, {"t": "Hi ha una fuita de gas i el cap et diu que continuïs treballant; tu t'atures.", "b": "r", "e": "No et poden perjudicar per haver-te aturat davant d'un risc greu i imminent, llevat que hagis actuat de mala fe o amb negligència greu."}, {"t": "Vols saber si el soroll de la nau t'està afectant l'oïda i demanes una revisió mèdica.", "b": "v", "e": "L'empresa ha de garantir la vigilància periòdica de la salut en funció dels riscos."}, {"t": "El teu cap no pot veure els resultats del teu reconeixement mèdic.", "b": "v", "e": "Les dades són confidencials: l'empresa només en coneix les conclusions sobre l'aptitud per al lloc."}, {"t": "Demanes que t'arreglin la cadira trencada perquè et fa mal l'esquena.", "b": "p", "e": "L'empresa t'ha de protegir de manera eficaç dels riscos de la feina."}, {"t": "El cap et diu que el calçat de seguretat te l'has de pagar tu.", "b": "p", "e": "Les mesures de seguretat i salut no poden tenir cap cost per al treballador (article 14)."}], "done": "Tots aquests drets són a la Llei 31/1995. Recorda que també hi ha deures: els trobaràs a l'article 29."}, {"id": "m1a4", "type": "scenario", "title": "La màquina nova", "icon": "server", "max": 10, "how": "L'empresa ha comprat un elevador de servidors per al CPD i et toca a tu posar-lo en marxa. Tria què fas en cada moment.", "start": "n1", "nodes": {"n1": {"where": "Arriba l'elevador", "text": "Has de desembalar l'elevador i deixar-lo a punt. Què comproves abans de fer-lo servir?", "c": [{"t": "Que porti el marcatge CE i la declaració de conformitat, i que el manual d'instruccions estigui en una llengua que entengui.", "q": "g", "to": "n2", "e": "Les màquines que es venen a la Unió Europea han de complir la normativa europea de seguretat del producte."}, {"t": "Que funcioni: faig una prova amb un servidor.", "q": "y", "to": "n2", "e": "Provar-lo està bé, però abans cal comprovar que la màquina compleix els requisits i llegir les instruccions."}, {"t": "Res: si és nova, ja és segura.", "q": "r", "to": "n2", "e": "Que sigui nova no garanteix que compleixi la normativa ni que estigui ben muntada."}]}, "n2": {"where": "Al telèfon amb el proveïdor", "text": "El proveïdor et diu: «El marcatge CE és cosa europea; aquí a Espanya no compta». Què li respons?", "c": [{"t": "Que sí que compta: les directives europees s'incorporen a la llei espanyola. La directiva de màquines (2006/42/CE) es va incorporar amb el RD 1644/2008.", "q": "g", "to": "n3", "e": "És el mateix mecanisme que va fer servir la Llei 31/1995 per incorporar la directiva marc 89/391/CEE."}, {"t": "Que no n'estic segur i que ho consultaré amb el servei de prevenció.", "q": "y", "to": "n3", "e": "Consultar és una bona actitud, però convé saber que la normativa europea també ens obliga."}, {"t": "Que té raó: aquí només compten les lleis espanyoles.", "q": "r", "to": "n3", "e": "Les directives europees obliguen els estats, que les han d'incorporar a les seves lleis."}]}, "n3": {"where": "Al CPD", "text": "Qui ha de garantir que l'elevador es fa servir de manera segura a l'empresa?", "c": [{"t": "L'empresa: ha de proporcionar equips adequats i informar i formar qui els faci servir.", "q": "g", "to": "n4", "e": "Ho regula el RD 1215/1997, sobre l'ús d'equips de treball, que desenvolupa la Llei 31/1995."}, {"t": "El fabricant, que és qui l'ha fabricat.", "q": "y", "to": "n4", "e": "El fabricant respon que la màquina sigui segura quan la ven. L'ús a l'empresa és responsabilitat de l'empresa."}, {"t": "Cadascú, com millor sàpiga.", "q": "r", "to": "n4", "e": "Sense formació ni instruccions, és fàcil fer-lo servir malament."}]}, "n4": {"where": "A l'ordinador", "text": "Busques el RD 1215/1997 a internet i trobes un PDF de l'any 1997. Què fas?", "c": [{"t": "Consulto la versió consolidada al BOE, que inclou totes les modificacions.", "q": "g", "to": "n5", "e": "Aquest reial decret s'ha modificat després, per exemple amb el RD 2177/2004 sobre treballs temporals en alçada."}, {"t": "Faig servir el PDF i pregunto al servei de prevenció si hi ha hagut canvis.", "q": "y", "to": "n5", "e": "Preguntar és bo, però la versió consolidada del BOE ja et dona el text vigent."}, {"t": "Faig servir el PDF: les normes no canvien.", "q": "r", "to": "n5", "e": "Les normes es modifiquen. Un text antic pot tenir parts que ja no són vigents."}]}, "n5": {"where": "Notícies", "text": "Llegeixes que un reglament europeu nou de màquines, el Reglament (UE) 2023/1230, substituirà la directiva. Què vol dir per a tu?", "c": [{"t": "Que cal estar al dia: s'aplicarà a partir del 20 de gener de 2027, i l'empresa ho haurà de tenir en compte en les compres noves.", "q": "g", "to": "end", "e": "A diferència de les directives, els reglaments europeus s'apliquen directament a tots els estats, sense que s'hagin d'incorporar a cap llei nacional."}, {"t": "Res: ja ho mirarà l'empresa.", "q": "y", "to": "end", "e": "Conèixer els canvis de la normativa també forma part de la teva feina en prevenció."}, {"t": "Que les màquines que ja tenim queden prohibides.", "q": "r", "to": "end", "e": "El reglament afecta les màquines que es posen al mercat a partir d'aquella data, no prohibeix les que ja es fan servir."}]}, "end": {"end": true, "text": "L'elevador ja funciona i l'equip sap fer-lo servir.", "moral": "La normativa de prevenció té diversos nivells (directives i reglaments europeus, la Llei 31/1995 i els reials decrets que la desenvolupen) i canvia amb el temps. Consulta sempre la versió vigent al BOE o a l'INSST."}}}, {"id": "m1a7", "type": "escape", "title": "Escape room: surt de l'aula", "kicker": "Escape room", "how": "Us heu quedat tancats a l'aula de formació. Obre els cinc cadenats responent bé: cada un amaga un dígit. Amb els cinc dígits, obriràs la porta. Si encertes un cadenat a la primera, guanyes un punt.", "intro": "La porta de l'aula s'ha tancat i només s'obre amb un codi de cinc xifres. Per la sala hi ha cinc cadenats amb un repte de prevenció cada un. Comença a buscar!", "final": "Escriu el codi amb els dígits dels cadenats, en ordre d'esquerra a dreta.", "outro": "Domines els conceptes bàsics del mòdul: risc, dany, tipus d'accidents, factors de risc i normativa.", "locks": [{"name": "Cadenat de la pissarra", "story": "A la pissarra hi ha quatre situacions. Només una és la resposta.", "q": "Quina d'aquestes situacions és un incident?", "o": ["Cau una caixa del prestatge just quan no hi passa ningú", "Un tècnic es talla amb la xapa d'un rack", "Una treballadora té dolor d'esquena per la postura", "Un company es torça el turmell a l'escala"], "a": 0, "digit": 4, "hint": "Busca el fet que podia fer mal però no n'ha fet.", "e": "Un incident és un fet que podia causar un dany però no n'ha causat. Cal comunicar-lo igualment."}, {"name": "Cadenat del calaix", "story": "Dins el calaix hi ha un comunicat d'accident.", "q": "La Marta va amb cotxe a casa d'un client, en horari de feina, per resoldre una incidència, i té un accident. Què és?", "o": ["Un accident de treball (en missió)", "Un accident no laboral", "Una malaltia professional", "Un incident"], "a": 0, "digit": 7, "hint": "Estava fent una feina que li havia encarregat l'empresa.", "e": "Els desplaçaments per feina durant la jornada són accidents en missió, i compten com a accident de treball."}, {"name": "Cadenat de l'armari", "story": "A l'armari hi ha el certificat d'aquest curs.", "q": "On és el contingut mínim de la formació de nivell bàsic en prevenció, com la d'aquest curs?", "o": ["A l'annex IV del RD 39/1997", "A l'Estatut dels treballadors", "Al Codi penal", "A la Directiva 89/391/CEE"], "a": 0, "digit": 1, "hint": "És el Reglament dels Serveis de Prevenció.", "e": "L'annex IV del RD 39/1997 recull el programa del nivell bàsic, i l'article 35 del mateix reial decret en descriu les funcions."}, {"name": "Cadenat de la caixa forta", "story": "A la caixa forta hi ha l'horari de guàrdies de l'equip.", "q": "Quin d'aquests és un factor de risc lligat a l'organització del treball?", "o": ["Guàrdies de nit cada setmana sense prou descans", "Un terra relliscós", "El soroll dels ventiladors", "Un cable pelat"], "a": 0, "digit": 9, "hint": "Pensa en com s'organitza la feina, no en el lloc.", "e": "Horaris, ritmes, torns i pauses formen part de l'organització del treball."}, {"name": "Cadenat de la porta", "story": "Al costat del teclat hi ha un pòster de l'OMS.", "q": "Segons l'OMS, què és la salut?", "o": ["Un estat de complet benestar físic, mental i social", "No tenir cap malaltia", "Estar en forma", "No haver agafat mai la baixa"], "a": 0, "digit": 2, "hint": "No és només no estar malalt.", "e": "La salut no és només l'absència de malaltia: inclou el benestar físic, mental i social."}]}], "scenes": {}};</script>
+<script>
+(function(){
+"use strict";
+var P = window.PAGE;
+var state = {};
+var $ = function(s, r){ return (r||document).querySelector(s); };
+var h = function(tag, attrs, html){
+  var e = document.createElement(tag);
+  if(attrs) for(var k in attrs){
+    if(k === "class") e.className = attrs[k];
+    else if(k.slice(0,2) === "on") e.addEventListener(k.slice(2), attrs[k]);
+    else e.setAttribute(k, attrs[k]);
+  }
+  if(html != null) e.innerHTML = html;
+  return e;
+};
+function shuffle(a){ a = a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+var LETTERS = ["A","B","C","D","E","F"];
+
+/* ---------- Icones ---------- */
+var ICON = {
+  info:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5" stroke-linecap="round"/></svg>',
+  warn:'<svg viewBox="0 0 24 24"><path d="M12 2 23 21H1Z" fill="#C99A06"/><path d="M12 9v5" stroke="#1F2933" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17.3" r="1.2" fill="#1F2933"/></svg>',
+  up:'<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 15 6-6 6 6"/></svg>',
+  down:'<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg>',
+  star:'<svg class="star" viewBox="0 0 24 24"><path d="m12 2 3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.8 5.7 21.4l1.5-7.1L1.8 9.4 9 8.6Z" fill="#C99A06"/></svg>'
+};
+var EPI_ICON = {
+  casc:'<svg viewBox="0 0 48 48"><path d="M8 32a16 16 0 0 1 32 0Z" fill="#F2C230"/><rect x="5" y="31" width="38" height="5" rx="2.5" fill="#D9A400"/><path d="M24 16v15" stroke="#D9A400" stroke-width="3"/></svg>',
+  ulleres:'<svg viewBox="0 0 48 48"><path d="M5 20h38v8a7 7 0 0 1-7 7h-6l-3-5h-6l-3 5h-6a7 7 0 0 1-7-7Z" fill="#9FD3F0" stroke="#1F5A8C" stroke-width="2.5"/><path d="M5 20h38" stroke="#1F5A8C" stroke-width="3"/></svg>',
+  pantalla:'<svg viewBox="0 0 48 48"><rect x="10" y="6" width="28" height="7" rx="3" fill="#1F2933"/><path d="M9 13h30v20a8 8 0 0 1-8 8H17a8 8 0 0 1-8-8Z" fill="#BFE3F5" fill-opacity=".8" stroke="#1F5A8C" stroke-width="2.5"/></svg>',
+  guants:'<svg viewBox="0 0 48 48"><path d="M14 42V22l-3-8a2.5 2.5 0 0 1 4.6-1.8L18 18V8a2.5 2.5 0 0 1 5 0v10V6a2.5 2.5 0 0 1 5 0v12V8a2.5 2.5 0 0 1 5 0v14 0-8a2.5 2.5 0 0 1 5 0v16c0 7-4 12-10 12Z" fill="#C98A3D" stroke="#7A4A12" stroke-width="2"/></svg>',
+  guants_q:'<svg viewBox="0 0 48 48"><path d="M14 42V22l-3-8a2.5 2.5 0 0 1 4.6-1.8L18 18V8a2.5 2.5 0 0 1 5 0v10V6a2.5 2.5 0 0 1 5 0v12V8a2.5 2.5 0 0 1 5 0v14 0-8a2.5 2.5 0 0 1 5 0v16c0 7-4 12-10 12Z" fill="#3FA06A" stroke="#1E5E3A" stroke-width="2"/><path d="M20 30h10M25 25v10" stroke="#fff" stroke-width="2.5"/></svg>',
+  guants_a:'<svg viewBox="0 0 48 48"><path d="M14 42V22l-3-8a2.5 2.5 0 0 1 4.6-1.8L18 18V8a2.5 2.5 0 0 1 5 0v10V6a2.5 2.5 0 0 1 5 0v12V8a2.5 2.5 0 0 1 5 0v14 0-8a2.5 2.5 0 0 1 5 0v16c0 7-4 12-10 12Z" fill="#E04E3C" stroke="#7A1C12" stroke-width="2"/><path d="m27 22-5 8h5l-4 8" stroke="#FFE14D" stroke-width="2.5" fill="none" stroke-linejoin="round"/></svg>',
+  calcat:'<svg viewBox="0 0 48 48"><path d="M6 20h14l4 8 14 4a5 5 0 0 1 4 5v3H6Z" fill="#5A3B22"/><path d="M28 30a8 8 0 0 1 14 7" fill="#9AA6B1"/><rect x="6" y="38" width="36" height="4" rx="1" fill="#1F2933"/></svg>',
+  auditius:'<svg viewBox="0 0 48 48"><path d="M10 26a14 14 0 0 1 28 0" fill="none" stroke="#1F2933" stroke-width="3.5"/><rect x="5" y="24" width="10" height="16" rx="5" fill="#E04E3C"/><rect x="33" y="24" width="10" height="16" rx="5" fill="#E04E3C"/></svg>',
+  mascareta:'<svg viewBox="0 0 48 48"><path d="M10 18c4-6 24-6 28 0v8c0 9-6 14-14 14S10 35 10 26Z" fill="#F4F5F6" stroke="#5F6B76" stroke-width="2.5"/><circle cx="31" cy="27" r="4" fill="#9AA6B1"/><path d="M10 20 3 16M38 20l7-4" stroke="#5F6B76" stroke-width="2"/></svg>',
+  armilla:'<svg viewBox="0 0 48 48"><path d="M16 6h4l4 6 4-6h4l8 8v28H8V14Z" fill="#F7D21B" stroke="#B59400" stroke-width="2"/><rect x="8" y="26" width="32" height="4" fill="#DDE2E6"/><rect x="8" y="34" width="32" height="4" fill="#DDE2E6"/></svg>',
+  arnes:'<svg viewBox="0 0 48 48"><circle cx="24" cy="7" r="4" fill="#9AA6B1"/><path d="M14 12l10 10 10-10M14 12v28M34 12v28M14 30h20M14 40l10-6 10 6" fill="none" stroke="#E07B12" stroke-width="3.5" stroke-linejoin="round"/><circle cx="24" cy="22" r="3" fill="#5F6B76"/></svg>',
+  cap:'<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="none" stroke="#5F6B76" stroke-width="3"/><path d="m12 36 24-24" stroke="#5F6B76" stroke-width="3"/></svg>'
+};
+var AVATAR = {
+  fire:'<svg viewBox="0 0 64 64"><path d="M32 4c4 12 18 18 18 34a18 18 0 0 1-36 0c0-9 5-14 8-18 1 6 4 9 7 9-3-10 0-18 3-25Z" fill="#E0571B"/><path d="M32 30c3 6 9 9 9 17a9 9 0 0 1-18 0c0-5 4-8 5-11 1 3 2 4 4 4-1-4-1-7 0-10Z" fill="#F7C11B"/></svg>',
+  aid:'<svg viewBox="0 0 64 64"><rect x="6" y="14" width="52" height="40" rx="6" fill="#2E7D4F"/><rect x="24" y="8" width="16" height="8" rx="3" fill="none" stroke="#2E7D4F" stroke-width="4"/><path d="M27 22h10v8h8v10h-8v8H27v-8h-8V30h8Z" fill="#fff"/></svg>',
+  server:'<svg viewBox="0 0 64 64"><rect x="12" y="4" width="40" height="56" rx="4" fill="#1F2933"/><g fill="#3A4855"><rect x="16" y="9" width="32" height="9" rx="2"/><rect x="16" y="22" width="32" height="9" rx="2"/><rect x="16" y="35" width="32" height="9" rx="2"/><rect x="16" y="48" width="32" height="7" rx="2"/></g><g fill="#3FD07A"><circle cx="42" cy="13.5" r="2"/><circle cx="42" cy="26.5" r="2"/></g><circle cx="42" cy="39.5" r="2" fill="#F2C230"/></svg>',
+  talk:'<svg viewBox="0 0 64 64"><path d="M6 10h36a6 6 0 0 1 6 6v16a6 6 0 0 1-6 6H22l-10 9v-9H6a6 6 0 0 1-6-6V16a6 6 0 0 1 6-6Z" fill="#1F5A8C" transform="translate(4 0)"/><path d="M26 34h26a6 6 0 0 1 6 6v10a6 6 0 0 1-6 6h-3v7l-8-7H26a6 6 0 0 1-6-6V40a6 6 0 0 1 6-6Z" fill="#2E7D4F"/><g fill="#fff"><circle cx="18" cy="24" r="2.5"/><circle cx="27" cy="24" r="2.5"/><circle cx="36" cy="24" r="2.5"/></g></svg>',
+  inspect:'<svg viewBox="0 0 64 64"><rect x="10" y="6" width="34" height="46" rx="4" fill="#fff" stroke="#1F2933" stroke-width="3"/><path d="M17 18h20M17 26h20M17 34h12" stroke="#9AA6B1" stroke-width="3"/><circle cx="42" cy="42" r="11" fill="#E6EEF6" stroke="#1F5A8C" stroke-width="4"/><path d="m50 50 9 9" stroke="#1F5A8C" stroke-width="5" stroke-linecap="round"/></svg>',
+  phone:'<svg viewBox="0 0 64 64"><rect x="18" y="4" width="28" height="56" rx="6" fill="#1F2933"/><rect x="22" y="12" width="20" height="36" rx="2" fill="#B3261E"/><text x="32" y="35" fill="#fff" font-size="11" font-weight="700" text-anchor="middle" font-family="Arial">112</text></svg>'
+};
+
+/* ---------- Puntuació ---------- */
+function report(id, pts, max, done){
+  var prev = state[id] || {pts:0, max:max, done:false};
+  var gained = Math.max(0, pts - prev.pts);
+  state[id] = {pts: Math.max(prev.pts, pts), max: max, done: prev.done || !!done};
+  var a = $("#a-" + id), pill = a && $(".pill", a);
+  if(pill){
+    pill.textContent = state[id].pts + " / " + max + " punts";
+    if(state[id].done) pill.classList.add("won");
+  }
+  var nav = $('.hud-nav a[href="#a-' + id + '"]');
+  if(nav && state[id].done) nav.classList.add("done");
+  updateHud(gained > 0);
+  checkFinale();
+}
+function totals(){
+  var t = 0, m = 0;
+  P.activities.forEach(function(a){ var s = state[a.id]; if(s){ t += s.pts; m += s.max; } else { m += a._max || 0; } });
+  return {t:t, m:m};
+}
+function updateHud(bump){
+  var x = totals(), el = $("#pts");
+  el.textContent = x.t;
+  $("#ptsmax").textContent = "/ " + x.m;
+  if(bump){ el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
+}
+function checkFinale(){
+  var all = P.activities.every(function(a){ return state[a.id] && state[a.id].done; });
+  var f = $("#finale");
+  if(!all || !f) return;
+  var x = totals(), pct = x.m ? Math.round(100 * x.t / x.m) : 0;
+  var msg = pct >= 85 ? "Nivell expert en prevenció. Excel·lent feina!" : pct >= 60 ? "Molt bé! Repassa les activitats on has perdut punts." : "Bon començament. Torna a provar les activitats per millorar la puntuació.";
+  f.innerHTML = '<svg class="medal" viewBox="0 0 64 64"><path d="M20 2h10l4 18H24ZM34 2h10l-4 18H30Z" fill="#1F5A8C"/><circle cx="32" cy="40" r="20" fill="#C99A06"/><circle cx="32" cy="40" r="14" fill="none" stroke="#fff" stroke-width="2.5"/><path d="m32 31 2.8 5.8 6.3.7-4.7 4.3 1.3 6.2L32 45l-5.7 3 1.3-6.2-4.7-4.3 6.3-.7Z" fill="#fff"/></svg>' +
+    '<h2>Mòdul completat!</h2><div class="big">' + x.t + ' <small style="font-size:1.2rem;color:#C3CBD3">/ ' + x.m + '</small></div><p>' + msg + '</p>';
+  f.hidden = false;
+  if(!f.dataset.shown){ f.dataset.shown = "1"; confetti(); f.scrollIntoView({behavior:"smooth", block:"center"}); }
+}
+function confetti(){
+  if(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var c = h("canvas", {id:"confetti"}); document.body.appendChild(c);
+  var ctx = c.getContext("2d"), W = c.width = innerWidth, H = c.height = innerHeight;
+  var cols = ["#caa005","#2f6fd1","#0f8a6a","#c2410c","#e0661b","#f2c230"], ps = [];
+  for(var i=0;i<160;i++) ps.push({x:Math.random()*W, y:-20-Math.random()*H*.5, vx:(Math.random()-.5)*4, vy:2+Math.random()*4, r:Math.random()*6.28, vr:(Math.random()-.5)*.3, s:6+Math.random()*6, c:cols[i%cols.length]});
+  var t0 = performance.now();
+  (function tick(t){
+    ctx.clearRect(0,0,W,H);
+    ps.forEach(function(p){ p.x+=p.vx; p.y+=p.vy; p.vy+=.05; p.r+=p.vr; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.r); ctx.fillStyle=p.c; ctx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2); ctx.restore(); });
+    if(t - t0 < 3200) requestAnimationFrame(tick); else c.remove();
+  })(t0);
+}
+function fb(cls, title, text){ return '<div class="fb ' + cls + '"><strong>' + title + '</strong>' + (text||"") + '</div>'; }
+function finishBox(pts, max, again){
+  var pct = max ? pts / max : 0;
+  var msg = pct === 1 ? "Perfecte!" : pct >= .7 ? "Molt bé!" : pct >= .5 ? "Aprovat, però es pot millorar." : "Cal repassar-ho.";
+  var d = h("div", {class:"result"}, '<span class="big">' + pts + '/' + max + '</span><div><strong>' + msg + '</strong><div style="color:var(--muted);font-size:.9rem">Pots tornar-ho a provar per millorar la puntuació.</div></div>');
+  var b = h("button", {class:"btn ghost", style:"margin-left:auto", onclick:again}, "Torna-hi");
+  d.appendChild(b);
+  return d;
+}
+
+/* ---------- 1. Test ---------- */
+function quiz(a, body){
+  var qs, i, pts;
+  function start(){ qs = a.shuffle === false ? a.questions.slice() : shuffle(a.questions); i = 0; pts = 0; show(); }
+  function show(){
+    var q = qs[i];
+    body.innerHTML = '<div class="qmeta"><span>Pregunta ' + (i+1) + ' de ' + qs.length + '</span><span>Encerts: ' + pts + '</span></div><div class="bar"><i style="width:' + (100*i/qs.length) + '%"></i></div><p class="q">' + q.q + '</p>';
+    var opts = h("div", {class:"opts"});
+    var order = shuffle(q.o.map(function(t, k){ return {t:t, k:k}; }));
+    order.forEach(function(o, n){
+      var b = h("button", {class:"opt"}, '<span class="l">' + LETTERS[n] + '</span><span>' + o.t + '</span>');
+      b.addEventListener("click", function(){
+        var right = o.k === q.a;
+        if(right) pts++;
+        opts.querySelectorAll(".opt").forEach(function(x, m){ x.disabled = true; var k = order[m].k; if(k === q.a) x.classList.add("right"); else if(x === b) x.classList.add("wrong"); else x.classList.add("dim"); });
+        var box = h("div", null, fb(right ? "ok" : "ko", right ? "Correcte!" : "No és correcte.", q.e));
+        var nx = h("div", {class:"row"});
+        var nb = h("button", {class:"btn acc"}, i < qs.length - 1 ? "Següent pregunta" : "Veure resultat");
+        nb.addEventListener("click", function(){ i++; if(i < qs.length) show(); else end(); });
+        nx.appendChild(nb); box.appendChild(nx); body.appendChild(box); nb.focus();
+      });
+      opts.appendChild(b);
+    });
+    body.appendChild(opts);
+  }
+  function end(){ body.innerHTML = ""; body.appendChild(finishBox(pts, qs.length, start)); report(a.id, pts, qs.length, true); }
+  a._max = a.questions.length;
+  start();
+}
+
+/* ---------- 2. Mite o realitat (dues opcions) ---------- */
+function tf(a, body){
+  var cs, i, pts, L = a.labels || ["Mite", "Realitat"];
+  function start(){ cs = shuffle(a.cards); i = 0; pts = 0; show(); }
+  function show(){
+    var c = cs[i];
+    body.innerHTML = '<div class="qmeta"><span>Targeta ' + (i+1) + ' de ' + cs.length + '</span><span>Encerts: ' + pts + '</span></div><div class="bar"><i style="width:' + (100*i/cs.length) + '%"></i></div>';
+    var deck = h("div", {class:"deck"});
+    var card = h("div", {class:"cardq"}, '<span class="n">' + (i+1) + '/' + cs.length + '</span><p>' + c.s + '</p>');
+    var btns = h("div", {class:"tfbtns"});
+    var no = h("button", {class:"no"}, L[0]), yes = h("button", {class:"yes"}, L[1]);
+    function pick(v){
+      no.disabled = yes.disabled = true;
+      var right = v === c.v; if(right) pts++;
+      card.classList.add(v ? "out-r" : "out-l");
+      setTimeout(function(){
+        card.classList.remove("out-r","out-l");
+        card.style.background = right ? "var(--ok)" : "var(--ko)";
+        card.innerHTML = '<span class="n" style="color:#fff">' + (i+1) + '/' + cs.length + '</span><p style="font-size:1rem;opacity:.85">' + c.s + '</p><p style="margin-top:.6rem">' + (right ? "Encertat! " : "Ups! ") + 'És <u>' + (c.v ? L[1] : L[0]).toLowerCase() + '</u>.</p>';
+      }, 320);
+      var box = h("div", {style:"width:min(560px,100%)"}, fb(right ? "ok" : "ko", "Per què?", c.e));
+      var nb = h("button", {class:"btn acc"}, i < cs.length - 1 ? "Següent targeta" : "Veure resultat");
+      nb.addEventListener("click", function(){ i++; if(i < cs.length) show(); else end(); });
+      var r = h("div", {class:"row"}); r.appendChild(nb); box.appendChild(r); deck.appendChild(box);
+    }
+    no.addEventListener("click", function(){ pick(false); });
+    yes.addEventListener("click", function(){ pick(true); });
+    btns.appendChild(no); btns.appendChild(yes);
+    deck.appendChild(card); deck.appendChild(btns); body.appendChild(deck);
+  }
+  function end(){ body.innerHTML = ""; body.appendChild(finishBox(pts, cs.length, start)); report(a.id, pts, cs.length, true); }
+  a._max = a.cards.length;
+  start();
+}
+
+/* ---------- 3. Classificació ---------- */
+function classify(a, body){
+  a._max = a.items.length;
+  var sel = null, checked = false;
+  body.innerHTML = "";
+  var pool = h("div", {class:"pool", "aria-label":"Elements per classificar"});
+  var bins = h("div", {class:"bins", style:"--cols:" + Math.min(a.bins.length, a.cols || 3)});
+  var drops = {};
+  function chip(it){
+    var c = h("button", {class:"chip", draggable:"true"}, '<span>' + it.t + '</span>');
+    c._it = it;
+    c.addEventListener("click", function(e){
+      e.stopPropagation();
+      if(checked) return;
+      if(sel === c){ c.classList.remove("sel"); sel = null; arm(false); return; }
+      if(sel) sel.classList.remove("sel");
+      sel = c; c.classList.add("sel"); arm(true);
+    });
+    c.addEventListener("dragstart", function(e){ if(checked){ e.preventDefault(); return; } sel = c; c.classList.add("dragging"); e.dataTransfer.setData("text/plain", "x"); });
+    c.addEventListener("dragend", function(){ c.classList.remove("dragging"); });
+    return c;
+  }
+  function arm(on){ bins.querySelectorAll(".bin").forEach(function(b){ b.classList.toggle("armed", on); }); pool.classList.toggle("armed", on); }
+  function place(target){ if(!sel) return; target.appendChild(sel); sel.classList.remove("sel"); sel = null; arm(false); }
+  shuffle(a.items).forEach(function(it){ pool.appendChild(chip(it)); });
+  pool.addEventListener("click", function(){ if(sel && sel.parentNode !== pool) place(pool); });
+  a.bins.forEach(function(b){
+    var bin = h("div", {class:"bin", style: b.color ? "--c:" + b.color : ""}, '<h3><i></i><span>' + b.label + (b.sub ? '<small>' + b.sub + '</small>' : '') + '</span></h3>');
+    var d = h("div", {class:"drop"}); bin.appendChild(d); drops[b.id] = d;
+    bin.addEventListener("click", function(){ place(d); });
+    bin.addEventListener("dragover", function(e){ e.preventDefault(); bin.classList.add("hot"); });
+    bin.addEventListener("dragleave", function(){ bin.classList.remove("hot"); });
+    bin.addEventListener("drop", function(e){ e.preventDefault(); bin.classList.remove("hot"); place(d); });
+    bins.appendChild(bin);
+  });
+  pool.addEventListener("dragover", function(e){ e.preventDefault(); });
+  pool.addEventListener("drop", function(e){ e.preventDefault(); place(pool); });
+  var out = h("div");
+  var row = h("div", {class:"row"});
+  var chk = h("button", {class:"btn acc"}, "Comprova");
+  var sol = h("button", {class:"btn ghost"}, "Mostra la solució");
+  var rst = h("button", {class:"btn ghost"}, "Torna a començar");
+  chk.addEventListener("click", function(){
+    var left = pool.querySelectorAll(".chip").length;
+    if(left){ out.innerHTML = fb("mid", "Encara queden " + left + " elements per col·locar.", "Toca un element i després la columna on vols posar-lo (o arrossega'l)."); return; }
+    checked = true; var ok = 0;
+    a.bins.forEach(function(b){ drops[b.id].querySelectorAll(".chip").forEach(function(c){
+      var good = c._it.b === b.id; if(good) ok++;
+      c.classList.add(good ? "ok" : "ko");
+      if(c._it.e && !c.querySelector(".why")) c.insertAdjacentHTML("beforeend", '<span class="why">' + c._it.e + '</span>');
+    }); });
+    out.innerHTML = fb(ok === a.items.length ? "ok" : ok >= a.items.length/2 ? "mid" : "ko", "Has encertat " + ok + " de " + a.items.length + ".", ok === a.items.length ? (a.done || "Perfecte!") : "Els elements en vermell són a la columna equivocada. Llegeix l'explicació i torna-hi.");
+    report(a.id, ok, a.items.length, true);
+    chk.disabled = true;
+  });
+  sol.addEventListener("click", function(){
+    var all = body.querySelectorAll(".chip");
+    all.forEach(function(c){
+      drops[c._it.b].appendChild(c); c.classList.remove("ko","sel"); c.classList.add("ok");
+      if(c._it.e && !c.querySelector(".why")) c.insertAdjacentHTML("beforeend", '<span class="why">' + c._it.e + '</span>');
+    });
+    checked = true; chk.disabled = true;
+    if(!state[a.id]) report(a.id, 0, a.items.length, true);
+    out.innerHTML = fb("mid", "Aquesta és la solució.", "Fes clic a «Torna a començar» per provar-ho tu.");
+  });
+  rst.addEventListener("click", function(){ classify(a, body); });
+  row.appendChild(chk); row.appendChild(sol); row.appendChild(rst);
+  body.appendChild(pool); body.appendChild(bins); body.appendChild(row); body.appendChild(out);
+}
+
+/* ---------- 4. Ordenar ---------- */
+function order(a, body){
+  a._max = a.items.length;
+  var cur;
+  do { cur = shuffle(a.items.map(function(t, k){ return {t:t, k:k}; })); } while(cur.every(function(x, i){ return x.k === i; }));
+  body.innerHTML = "";
+  var ol = h("ol", {class:"olist"});
+  var out = h("div"), done = false;
+  function draw(flash){
+    ol.innerHTML = "";
+    cur.forEach(function(x, i){
+      var li = h("li", {class:"oitem" + (flash === i ? " flash" : "")});
+      li.innerHTML = '<span class="idx">' + (i+1) + '</span><span>' + x.t + '</span>';
+      var mv = h("div", {class:"mv"});
+      var u = h("button", {"aria-label":"Puja"}, ICON.up), d = h("button", {"aria-label":"Baixa"}, ICON.down);
+      u.disabled = i === 0 || done; d.disabled = i === cur.length - 1 || done;
+      u.addEventListener("click", function(){ var t = cur[i-1]; cur[i-1] = cur[i]; cur[i] = t; draw(i-1); ol.querySelectorAll(".mv button")[(i-1)*2].focus(); });
+      d.addEventListener("click", function(){ var t = cur[i+1]; cur[i+1] = cur[i]; cur[i] = t; draw(i+1); ol.querySelectorAll(".mv button")[(i+1)*2+1].focus(); });
+      mv.appendChild(u); mv.appendChild(d); li.appendChild(mv);
+      li._x = x; ol.appendChild(li);
+    });
+  }
+  draw();
+  var row = h("div", {class:"row"});
+  var chk = h("button", {class:"btn acc"}, "Comprova l'ordre");
+  var sol = h("button", {class:"btn ghost"}, "Mostra la solució");
+  var rst = h("button", {class:"btn ghost"}, "Barreja de nou");
+  chk.addEventListener("click", function(){
+    var ok = 0;
+    ol.querySelectorAll(".oitem").forEach(function(li, i){ var g = li._x.k === i; if(g) ok++; li.classList.remove("ok","ko"); li.classList.add(g ? "ok" : "ko"); });
+    var all = ok === a.items.length;
+    out.innerHTML = fb(all ? "ok" : "ko", all ? "Ordre correcte!" : ok + " de " + a.items.length + " posicions correctes.", all ? (a.e || "") : "Mou els passos en vermell i torna a comprovar.");
+    report(a.id, ok, a.items.length, all);
+    if(all){ done = true; draw(); ol.querySelectorAll(".oitem").forEach(function(li){ li.classList.add("ok"); }); chk.disabled = true; }
+  });
+  sol.addEventListener("click", function(){
+    cur = a.items.map(function(t, k){ return {t:t, k:k}; }); done = true; draw();
+    ol.querySelectorAll(".oitem").forEach(function(li){ li.classList.add("ok"); });
+    chk.disabled = true; if(!state[a.id] || !state[a.id].done) report(a.id, state[a.id] ? state[a.id].pts : 0, a.items.length, true);
+    out.innerHTML = fb("mid", "Aquesta és la solució.", a.e || "");
+  });
+  rst.addEventListener("click", function(){ order(a, body); });
+  row.appendChild(chk); row.appendChild(sol); row.appendChild(rst);
+  body.appendChild(ol); body.appendChild(row); body.appendChild(out);
+}
+
+/* ---------- 5. Troba l'error ---------- */
+function hotspot(a, body){
+  a._max = a.spots.length;
+  var found = {}, misses = 0, given = false;
+  body.innerHTML = "";
+  var wrap = h("div", {class:"hot-wrap"});
+  var sc = h("div", {class:"scene"}, P.scenes[a.scene]);
+  var side = h("div", {class:"side"});
+  side.innerHTML = '<div class="counter"><span class="big" data-c>0</span><span>de ' + a.spots.length + ' riscos trobats</span></div><div style="color:var(--muted);font-size:.85rem" data-m>Clics fallats: 0</div><ul class="found"></ul>';
+  var list = $(".found", side);
+  var svg = $("svg", sc);
+  var NS = "http://www.w3.org/2000/svg";
+  var byId = {}; a.spots.forEach(function(s, i){ s._n = i + 1; byId[s.id] = s; });
+  function mark(g, n, ghost){
+    var bb = g.getBBox(), cx = bb.x + bb.width/2, cy = bb.y + bb.height/2, r = Math.max(bb.width, bb.height)/2 + 8;
+    var ring = document.createElementNS(NS, "ellipse");
+    ring.setAttribute("cx", cx); ring.setAttribute("cy", cy); ring.setAttribute("rx", Math.max(bb.width/2 + 10, 22)); ring.setAttribute("ry", Math.max(bb.height/2 + 10, 22));
+    ring.setAttribute("class", ghost ? "ghost" : "ring");
+    var bd = document.createElementNS(NS, "g"); bd.setAttribute("class", "badge");
+    var vb = svg.viewBox.baseVal, bx = Math.min(cx + Math.max(bb.width/2 + 6, 18), vb.width - 15), by = Math.max(cy - Math.max(bb.height/2 + 6, 18), 15);
+    bd.innerHTML = '<circle cx="' + bx + '" cy="' + by + '" r="13" ' + (ghost ? 'style="fill:#5F6B76"' : '') + '/><text x="' + bx + '" y="' + (by + 5) + '" text-anchor="middle">' + n + '</text>';
+    svg.appendChild(ring); svg.appendChild(bd);
+    if(!ghost){ var p = ring.cloneNode(); p.setAttribute("class", "ring-pulse"); svg.appendChild(p); setTimeout(function(){ p.remove(); }, 2800); }
+  }
+  svg.addEventListener("click", function(e){
+    if(given) return;
+    var g = e.target.closest(".spot");
+    if(g && !found[g.dataset.id]){
+      var s = byId[g.dataset.id]; found[s.id] = 1; var n = Object.keys(found).length;
+      mark(g, n);
+      list.insertAdjacentHTML("afterbegin", '<li><b>' + n + '. ' + s.name + '</b><span>' + s.risk + '</span></li>');
+      $("[data-c]", side).textContent = n;
+      report(a.id, n, a.spots.length, n === a.spots.length);
+      if(n === a.spots.length){ out.innerHTML = fb("ok", "Has trobat tots els riscos!", "Ara revisa a la llista quina mesura preventiva aplicaries a cadascun (botó «Veure mesures»)."); }
+    } else if(!g){
+      misses++; $("[data-m]", side).textContent = "Clics fallats: " + misses;
+      var pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+      var q = pt.matrixTransform(svg.getScreenCTM().inverse());
+      var c = document.createElementNS(NS, "circle"); c.setAttribute("cx", q.x); c.setAttribute("cy", q.y); c.setAttribute("r", 14); c.setAttribute("class", "miss");
+      svg.appendChild(c); setTimeout(function(){ c.remove(); }, 700);
+    }
+  });
+  var out = h("div");
+  var row = h("div", {class:"row"});
+  var give = h("button", {class:"btn ghost"}, "Mostra els que falten");
+  var meas = h("button", {class:"btn acc"}, "Veure mesures preventives");
+  var rst = h("button", {class:"btn ghost"}, "Torna a començar");
+  give.addEventListener("click", function(){
+    given = true;
+    a.spots.forEach(function(s){ if(!found[s.id]){ mark($('.spot[data-id="' + s.id + '"]', svg), s._n, true); list.insertAdjacentHTML("beforeend", '<li class="missed"><b>' + s.name + '</b><span>' + s.risk + '</span></li>'); } });
+    report(a.id, Object.keys(found).length, a.spots.length, true);
+    give.disabled = true;
+  });
+  meas.addEventListener("click", function(){
+    var html = '<div class="fb"><strong>Mesures preventives</strong><ol style="padding-left:1.2rem;margin-top:.3rem">' + a.spots.map(function(s){ return '<li style="margin:.25rem 0"><b>' + s.name + ':</b> ' + s.fix + '</li>'; }).join("") + '</ol></div>';
+    out.innerHTML = html;
+  });
+  rst.addEventListener("click", function(){ hotspot(a, body); });
+  row.appendChild(meas); row.appendChild(give); row.appendChild(rst);
+  wrap.appendChild(sc); wrap.appendChild(side);
+  body.appendChild(wrap); body.appendChild(row); body.appendChild(out);
+}
+
+/* ---------- 6. Escenari amb decisions ---------- */
+function scenario(a, body){
+  a._max = a.max;
+  var pts, path;
+  function start(){ pts = 0; path = []; go(a.start); }
+  function go(id){
+    var n = a.nodes[id];
+    body.innerHTML = "";
+    var bar = h("div", {class:"path"}, path.map(function(q){ return '<i class="' + q + '"></i>'; }).join(""));
+    var st = h("div", {class:"story"});
+    st.innerHTML = '<div class="avatar">' + AVATAR[n.icon || a.icon || "talk"] + '</div>';
+    var tx = h("div", {class:"scene-text"}, (n.where ? '<span class="where">' + n.where + '</span><br>' : '') + n.text);
+    st.appendChild(tx);
+    body.appendChild(bar); body.appendChild(st);
+    if(n.end){
+      var cls = pts >= a.max * .8 ? "ok" : pts >= a.max * .5 ? "mid" : "ko";
+      body.appendChild(h("div", null, fb(cls, "Final de la història: " + pts + " de " + a.max + " punts.", (n.moral ? n.moral : ""))));
+      body.appendChild(finishBox(pts, a.max, start));
+      report(a.id, pts, a.max, true);
+      return;
+    }
+    var ch = h("div", {class:"choices"});
+    var opts = a.keep ? n.c : shuffle(n.c);
+    opts.forEach(function(c){
+      var b = h("button", {class:"choice"}, '<span class="arrow">›</span><span>' + c.t + '</span>');
+      b.addEventListener("click", function(){
+        ch.querySelectorAll(".choice").forEach(function(x){ x.disabled = true; });
+        var cls = c.q === "g" ? "best" : c.q === "y" ? "meh" : "bad";
+        b.classList.add(cls);
+        pts += c.q === "g" ? 2 : c.q === "y" ? 1 : 0;
+        path.push(c.q === "g" ? "g" : c.q === "y" ? "y" : "r");
+        var t = c.q === "g" ? "Bona decisió" : c.q === "y" ? "Es podria fer millor" : "Mala decisió";
+        var box = h("div", null, fb(c.q === "g" ? "ok" : c.q === "y" ? "mid" : "ko", t, c.e));
+        var nb = h("button", {class:"btn acc"}, "Continua");
+        nb.addEventListener("click", function(){ go(c.to); });
+        var r = h("div", {class:"row"}); r.appendChild(nb); box.appendChild(r);
+        body.appendChild(box); nb.focus();
+      });
+      ch.appendChild(b);
+    });
+    tx.appendChild(ch);
+  }
+  start();
+}
+
+/* ---------- 7. Matriu de risc ---------- */
+var PL = {B:"Baixa", M:"Mitjana", A:"Alta"}, CL = {LD:"Lleugerament nociu", D:"Nociu", ED:"Extremadament nociu"};
+var LV = {
+  "B-LD":["T","Trivial","No cal cap acció específica."],
+  "B-D":["TO","Tolerable","No calen mesures noves, però cal comprovar que les actuals funcionen."],
+  "B-ED":["MO","Moderat","Cal fer esforços per reduir el risc, amb un termini definit."],
+  "M-LD":["TO","Tolerable","No calen mesures noves, però cal comprovar que les actuals funcionen."],
+  "M-D":["MO","Moderat","Cal fer esforços per reduir el risc, amb un termini definit."],
+  "M-ED":["I","Important","No s'ha de començar la feina fins que es redueixi el risc. Si ja s'hi treballa, cal actuar ràpidament."],
+  "A-LD":["MO","Moderat","Cal fer esforços per reduir el risc, amb un termini definit."],
+  "A-D":["I","Important","No s'ha de començar la feina fins que es redueixi el risc. Si ja s'hi treballa, cal actuar ràpidament."],
+  "A-ED":["IN","Intolerable","No es pot començar ni continuar la feina fins que es redueixi el risc."]
+};
+function matrix(a, body){
+  a._max = a.cases.length;
+  var i, pts, p, c;
+  function start(){ i = 0; pts = 0; show(); }
+  function grid(pick, model){
+    var html = '<div class="h"></div>' + ["LD","D","ED"].map(function(k){ return '<div class="h">' + CL[k] + '</div>'; }).join("");
+    ["B","M","A"].forEach(function(pp){
+      html += '<div class="h">' + PL[pp] + '</div>';
+      ["LD","D","ED"].forEach(function(cc){
+        var k = pp + "-" + cc, L = LV[k];
+        html += '<div class="c lv-' + L[0] + (pick === k ? " pick" : "") + (model === k ? " model" : "") + '">' + L[1] + '</div>';
+      });
+    });
+    return '<div class="lbl" style="margin-bottom:.3rem">Probabilitat ↓ · Conseqüències →</div><div class="matrix">' + html + '</div>';
+  }
+  function show(){
+    var cs = a.cases[i]; p = null; c = null;
+    body.innerHTML = '<div class="steps">' + a.cases.map(function(_, k){ return '<i class="' + (k < i ? "g" : k === i ? "cur" : "") + '"></i>'; }).join("") + '</div>';
+    var wrap = h("div", {class:"mx-wrap"});
+    var left = h("div", {class:"case"}, '<div class="lbl">Cas ' + (i+1) + ' de ' + a.cases.length + '</div><h3>' + cs.t + '</h3><p>' + cs.d + '</p>');
+    var segP = h("div", {class:"seg"}), segC = h("div", {class:"seg"});
+    left.insertAdjacentHTML("beforeend", '<div class="lbl" style="margin-top:.8rem">Probabilitat que passi</div>'); left.appendChild(segP);
+    left.insertAdjacentHTML("beforeend", '<div class="lbl">Conseqüències si passa</div>'); left.appendChild(segC);
+    var right = h("div");
+    var lev = h("div");
+    function upd(){
+      var k = p && c ? p + "-" + c : null;
+      right.innerHTML = grid(k);
+      if(k){ var L = LV[k]; lev.innerHTML = '<div class="level lv-' + L[0] + '">Nivell de risc: ' + L[1] + '<small>' + L[2] + '</small></div>'; } else lev.innerHTML = '<div class="level" style="background:#F4F5F6;color:var(--muted)">Tria la probabilitat i les conseqüències.</div>';
+      cmp.disabled = !k;
+    }
+    ["B","M","A"].forEach(function(k){ var b = h("button", null, PL[k]); b.addEventListener("click", function(){ p = k; segP.querySelectorAll("button").forEach(function(x){ x.classList.toggle("on", x === b); }); upd(); }); segP.appendChild(b); });
+    ["LD","D","ED"].forEach(function(k){ var b = h("button", null, CL[k]); b.addEventListener("click", function(){ c = k; segC.querySelectorAll("button").forEach(function(x){ x.classList.toggle("on", x === b); }); upd(); }); segC.appendChild(b); });
+    left.appendChild(lev);
+    var row = h("div", {class:"row"}); var cmp = h("button", {class:"btn acc"}, "Compara amb la valoració del tècnic"); row.appendChild(cmp); left.appendChild(row);
+    var out = h("div"); left.appendChild(out);
+    cmp.addEventListener("click", function(){
+      var mine = p + "-" + c, model = cs.p + "-" + cs.c, ok = LV[mine][1] === LV[model][1];
+      if(ok) pts++;
+      right.innerHTML = grid(mine, model);
+      segP.querySelectorAll("button").forEach(function(x){ x.disabled = true; }); segC.querySelectorAll("button").forEach(function(x){ x.disabled = true; });
+      cmp.disabled = true;
+      out.innerHTML = fb(ok ? "ok" : "mid", (ok ? "Coincideixes amb el tècnic: " : "El tècnic ho valora diferent: ") + "probabilitat " + PL[cs.p].toLowerCase() + ", conseqüències " + CL[cs.c].toLowerCase() + " → " + LV[model][1] + ".", cs.e + '<br><b>Mesura proposada:</b> ' + cs.m);
+      var nb = h("button", {class:"btn"}, i < a.cases.length - 1 ? "Cas següent" : "Veure resultat");
+      nb.addEventListener("click", function(){ i++; if(i < a.cases.length) show(); else end(); });
+      var r2 = h("div", {class:"row"}); r2.appendChild(nb); out.appendChild(r2);
+    });
+    wrap.appendChild(left); wrap.appendChild(right); body.appendChild(wrap);
+    upd();
+  }
+  function end(){ body.innerHTML = ""; body.appendChild(finishBox(pts, a.cases.length, start)); report(a.id, pts, a.cases.length, true); }
+  start();
+}
+
+/* ---------- 8. Tria d'EPI ---------- */
+function epi(a, body){
+  a._max = a.tasks.length;
+  var i, pts, res;
+  function start(){ i = 0; pts = 0; res = []; show(); }
+  function show(){
+    var t = a.tasks[i], on = {};
+    body.innerHTML = '<div class="steps">' + a.tasks.map(function(_, k){ return '<i class="' + (k < i ? res[k] : k === i ? "cur" : "") + '"></i>'; }).join("") + '</div>';
+    var tk = h("div", {class:"epi-task"}, '<div class="lbl">Tasca ' + (i+1) + ' de ' + a.tasks.length + '</div><h3>' + t.t + '</h3><p style="color:var(--muted)">' + t.d + '</p>');
+    body.appendChild(tk);
+    var g = h("div", {class:"epi-grid"});
+    a.palette.forEach(function(p){
+      var b = h("button", {class:"epi", "aria-pressed":"false"}, EPI_ICON[p.icon] + '<span>' + p.label + '</span>');
+      b._id = p.id;
+      b.addEventListener("click", function(){
+        if(p.id === "cap"){ on = {}; g.querySelectorAll(".epi").forEach(function(x){ x.classList.remove("on"); x.setAttribute("aria-pressed","false"); }); }
+        else { delete on.cap; var cb = g.querySelector('.epi:last-child'); if(cb && cb._id === "cap"){ cb.classList.remove("on"); cb.setAttribute("aria-pressed","false"); } }
+        on[p.id] = !on[p.id]; b.classList.toggle("on", !!on[p.id]); b.setAttribute("aria-pressed", String(!!on[p.id]));
+      });
+      g.appendChild(b);
+    });
+    body.appendChild(g);
+    var row = h("div", {class:"row"}), chk = h("button", {class:"btn acc"}, "Comprova l'equip"); row.appendChild(chk); body.appendChild(row);
+    var out = h("div"); body.appendChild(out);
+    chk.addEventListener("click", function(){
+      var need = t.need.length ? t.need : ["cap"], opt = t.opt || [], miss = 0, extra = 0;
+      g.querySelectorAll(".epi").forEach(function(b){
+        b.disabled = true; var id = b._id, chosen = !!on[id];
+        if(chosen && (need.indexOf(id) > -1 || opt.indexOf(id) > -1)) b.classList.add("ok");
+        else if(chosen){ b.classList.add("ko"); extra++; }
+        else if(need.indexOf(id) > -1){ b.classList.add("miss"); miss++; }
+        b.classList.remove("on");
+      });
+      var good = !miss && !extra; if(good) pts++; res[i] = good ? "g" : "r";
+      chk.disabled = true;
+      var head = good ? "Equip correcte!" : (miss ? "Et falta " + miss + " EPI (marc discontinu vermell). " : "") + (extra ? "Has triat " + extra + " EPI que no corresponen (en vermell)." : "");
+      out.innerHTML = fb(good ? "ok" : "ko", head, t.e);
+      var nb = h("button", {class:"btn"}, i < a.tasks.length - 1 ? "Tasca següent" : "Veure resultat");
+      nb.addEventListener("click", function(){ i++; if(i < a.tasks.length) show(); else end(); });
+      var r2 = h("div", {class:"row"}); r2.appendChild(nb); out.appendChild(r2);
+    });
+  }
+  function end(){ body.innerHTML = ""; body.appendChild(finishBox(pts, a.tasks.length, start)); report(a.id, pts, a.tasks.length, true); }
+  start();
+}
+
+/* ---------- 9. Simulador de lloc amb pantalla ---------- */
+function pvd(a, body){
+  var C = [
+    {k:"scr", label:"Alçada de la pantalla", o:["Massa baixa","Vora superior a l'altura dels ulls o una mica per sota","Massa alta"], g:1, v:0,
+      tips:["Has d'abaixar el cap: tensió al coll i a les espatlles.","Correcte: mires lleugerament cap avall sense doblegar el coll.","Has d'aixecar la barbeta: tensió a les cervicals."]},
+    {k:"dist", label:"Distància dels ulls a la pantalla", o:["Massa a prop (uns 25 cm)","Entre 50 i 70 cm, més o menys un braç","Massa lluny (més d'1 m)"], g:1, v:2,
+      tips:["Els ulls s'esforcen més per enfocar i et fatigues abans.","Correcte: la distància no ha de ser inferior a 40 cm. Un braç és una bona referència.","Has d'inclinar-te endavant per llegir: mala postura i fatiga visual."]},
+    {k:"chair", label:"Alçada de la cadira", o:["Peus penjant","Peus plans a terra i genolls a uns 90°","Genolls més amunt que els malucs"], g:1, v:0,
+      tips:["Pressió a la part de darrere de les cuixes: cal abaixar la cadira o posar un reposapeus.","Correcte: la cadira és regulable per ajustar-la a cada persona.","Cadira massa baixa: carrega l'esquena i dificulta la circulació."]},
+    {k:"back", label:"Esquena", o:["Inclinada endavant, sense tocar el respatller","Recolzada al respatller, amb suport lumbar"], g:1, v:0,
+      tips:["Molta càrrega a la zona lumbar al cap de poques hores.","Correcte: el respatller ha de ser regulable i donar suport a la zona lumbar."]},
+    {k:"win", label:"Posició respecte a la finestra", o:["Finestra darrere de la pantalla","Finestra al costat (perpendicular a la pantalla)","Finestra darrere teu"], g:1, v:0,
+      tips:["Enlluernament: la llum et dona directament als ulls.","Correcte: així s'eviten enlluernaments i reflexos. A més, cortines o persianes per regular la llum.","Reflexos a la pantalla: costa llegir i forces la vista."]},
+    {k:"brk", label:"Pauses", o:["Quatre hores seguides sense parar","Pauses curtes i freqüents o canvis de tasca","Una sola pausa llarga al final del matí"], g:1, v:0,
+      tips:["La fatiga visual i postural s'acumula.","Correcte: millor pauses curtes i freqüents que pauses llargues i poc freqüents.","Ajuda poc: la fatiga ja s'ha acumulat abans de la pausa."]}
+  ];
+  a._max = C.length;
+  body.innerHTML = "";
+  var wrap = h("div", {class:"pvd"});
+  var stage = h("div", {class:"pvd-stage"});
+  var ctr = h("div");
+  var meter = h("div", null, '<div class="lbl">Ergonomia del lloc</div><div class="meter"><i></i></div>');
+  ctr.appendChild(meter);
+  C.forEach(function(c){
+    var d = h("div", {class:"ctrl"});
+    d.innerHTML = '<div class="top-l"><span class="lbl">' + c.label + '</span><span class="state"></span></div>';
+    var seg = h("div", {class:"seg"});
+    c.o.forEach(function(t, k){ var b = h("button", null, t); b.addEventListener("click", function(){ c.v = k; draw(); }); seg.appendChild(b); });
+    d.appendChild(seg); d.appendChild(h("div", {class:"tip"}));
+    c.el = d; ctr.appendChild(d);
+  });
+  var row = h("div", {class:"row"}), val = h("button", {class:"btn acc"}, "Valida el lloc de treball"); row.appendChild(val); ctr.appendChild(row);
+  var out = h("div"); ctr.appendChild(out);
+  function draw(){
+    var ok = 0;
+    C.forEach(function(c){
+      if(c.v === c.g) ok++;
+      c.el.querySelectorAll(".seg button").forEach(function(b, k){ b.classList.toggle("on", k === c.v); });
+      var s = c.el.querySelector(".state"); s.className = "state " + (c.v === c.g ? "g" : "r"); s.textContent = c.v === c.g ? "Bé" : "A millorar";
+      c.el.querySelector(".tip").textContent = c.tips[c.v];
+    });
+    $(".meter i", meter).style.width = (100 * ok / C.length) + "%";
+    stage.innerHTML = scene();
+    return ok;
+  }
+  function v(k){ for(var i=0;i<C.length;i++) if(C[i].k === k) return C[i].v; }
+  function scene(){
+    var sh = [132, 88, 48][v("scr")];          // y de la part alta de la pantalla
+    var sx = [235, 300, 395][v("dist")];       // x de la pantalla
+    var seat = [235, 260, 290][v("chair")];    // y del seient
+    var lean = v("back") === 0 ? 22 : 0;
+    var hipX = 140, hipY = seat - 8;
+    var shX = hipX + lean + 8, shY = hipY - 78;
+    var headX = shX + (v("scr") === 0 ? 18 : 10), headY = shY - 30 + (v("scr") === 0 ? 8 : v("scr") === 2 ? -4 : 0);
+    var eyeX = headX + 12, eyeY = headY - 2;
+    var footY = 330, kneeX = hipX + 62, kneeY = v("chair") === 2 ? hipY - 14 : hipY;
+    var feet = v("chair") === 0 ? footY - 22 : footY;
+    var win = v("win"), winSvg = "";
+    if(win === 0) winSvg = '<rect x="445" y="40" width="70" height="150" fill="#CFE8F7" stroke="#5F6B76" stroke-width="4"/><path d="M480 40v150M445 115h70" stroke="#5F6B76" stroke-width="3"/><path d="M445 110 L' + (eyeX+6) + ' ' + eyeY + '" stroke="#F2C230" stroke-width="6" opacity=".55"/>';
+    else if(win === 2) winSvg = '<rect x="10" y="40" width="70" height="150" fill="#CFE8F7" stroke="#5F6B76" stroke-width="4"/><path d="M45 40v150M10 115h70" stroke="#5F6B76" stroke-width="3"/><path d="M80 100 L' + (sx+4) + ' ' + (sh+30) + '" stroke="#F2C230" stroke-width="6" opacity=".55"/><rect x="' + (sx-2) + '" y="' + sh + '" width="10" height="60" fill="#fff" opacity=".7"/>';
+    else winSvg = '<rect x="250" y="22" width="120" height="26" rx="4" fill="#CFE8F7" stroke="#5F6B76" stroke-width="3"/><text x="310" y="40" text-anchor="middle" font-size="12" fill="#1F2933" font-family="IBM Plex Sans,Arial">finestra al costat</text>';
+    var brk = v("brk"), clock = '<g transform="translate(470 250)"><circle r="26" fill="#fff" stroke="#1F2933" stroke-width="3"/><path d="M0 0V-16M0 0l11 7" stroke="#1F2933" stroke-width="3" stroke-linecap="round"/>' + (brk === 1 ? '<circle r="30" fill="none" stroke="#2E7D4F" stroke-width="4" stroke-dasharray="10 9"/>' : brk === 0 ? '<text y="48" text-anchor="middle" font-size="12" fill="#B3261E" font-family="IBM Plex Sans,Arial">4 h seguides</text>' : '<text y="48" text-anchor="middle" font-size="12" fill="#B5651D" font-family="IBM Plex Sans,Arial">1 pausa</text>') + '</g>';
+    var good = C.every(function(c){ return c.v === c.g; });
+    return '<svg viewBox="0 0 540 350" role="img" aria-label="Vista lateral del lloc de treball">' +
+      '<rect width="540" height="350" fill="#F4F5F6"/><rect y="330" width="540" height="20" fill="#C9CFD5"/>' + winSvg +
+      // taula
+      '<rect x="200" y="200" width="230" height="10" rx="2" fill="#8A6A48"/><rect x="410" y="210" width="10" height="120" fill="#6F5538"/><rect x="215" y="210" width="10" height="120" fill="#6F5538"/>' +
+      // pantalla
+      '<rect x="' + (sx+2) + '" y="' + (sh+60) + '" width="6" height="' + Math.max(0, 197 - sh - 60) + '" fill="#3A4855"/><rect x="' + (sx-12) + '" y="196" width="34" height="5" rx="2" fill="#3A4855"/>' +
+      '<rect x="' + (sx-4) + '" y="' + sh + '" width="12" height="62" rx="2" fill="#1F2933"/>' +
+      // línia de visió
+      '<path d="M' + eyeX + ' ' + eyeY + ' L' + (sx-4) + ' ' + (sh+14) + '" stroke="' + (good ? "#2E7D4F" : "#1F5A8C") + '" stroke-width="2" stroke-dasharray="5 5"/>' +
+      // teclat
+      '<rect x="' + Math.max(205, sx - 85) + '" y="195" width="50" height="5" rx="2" fill="#5F6B76"/>' +
+      // cadira
+      '<rect x="88" y="' + seat + '" width="92" height="10" rx="4" fill="#3A4855"/><rect x="128" y="' + (seat+10) + '" width="8" height="' + (310-seat) + '" fill="#5F6B76"/><path d="M98 322h70" stroke="#5F6B76" stroke-width="7" stroke-linecap="round"/>' +
+      '<rect x="80" y="' + (seat-95) + '" width="10" height="100" rx="4" fill="#3A4855"/>' + (v("back") === 1 ? '<rect x="88" y="' + (seat-55) + '" width="8" height="30" rx="3" fill="#2E7D4F"/>' : '') +
+      // persona
+      '<g stroke-linecap="round" stroke-linejoin="round" fill="none">' +
+      '<path d="M' + hipX + ' ' + hipY + ' L' + kneeX + ' ' + kneeY + ' L' + (kneeX+4) + ' ' + feet + ' l22 0" stroke="#1F5A8C" stroke-width="16"/>' +
+      '<path d="M' + hipX + ' ' + hipY + ' Q' + (hipX - 10 + lean*0.4) + ' ' + ((hipY+shY)/2) + ' ' + shX + ' ' + shY + '" stroke="#B5651D" stroke-width="22"/>' +
+      '<path d="M' + shX + ' ' + (shY+6) + ' L' + (shX+28) + ' ' + (shY+52) + ' L' + Math.max(205, sx - 70) + ' 192" stroke="#B5651D" stroke-width="11"/>' +
+      '</g>' +
+      '<circle cx="' + headX + '" cy="' + headY + '" r="20" fill="#E8B48A"/><path d="M' + (headX-20) + ' ' + (headY-4) + 'a20 20 0 0 1 36-10" fill="#3A2A1F"/><circle cx="' + eyeX + '" cy="' + eyeY + '" r="2.4" fill="#1F2933"/>' +
+      clock + '</svg>';
+  }
+  val.addEventListener("click", function(){
+    var ok = draw();
+    out.innerHTML = fb(ok === C.length ? "ok" : ok >= 4 ? "mid" : "ko", "Has ajustat bé " + ok + " de " + C.length + " elements.", ok === C.length ? "Lloc de treball amb pantalla ben configurat. Recorda que l'empresa ha de facilitar equips regulables i informar-te de com ajustar-los." : "Revisa els elements marcats «A millorar» i torna a validar.");
+    report(a.id, ok, C.length, true);
+  });
+  wrap.appendChild(stage); wrap.appendChild(ctr); body.appendChild(wrap);
+  draw();
+}
+
+/* ---------- 10. Resposta oberta amb autoavaluació ---------- */
+function open(a, body){
+  a._max = a.check.length;
+  body.innerHTML = "";
+  if(a.case) body.appendChild(h("div", {class:"epi-task"}, a.case));
+  var tas = [];
+  a.qs.forEach(function(q, k){
+    var d = h("div", {class:"open-q"}); var id = a.id + "-q" + k;
+    d.innerHTML = '<label for="' + id + '">' + (k+1) + '. ' + q + '</label>';
+    var t = h("textarea", {id:id, placeholder:"Escriu la teva resposta..."}); tas.push(t); d.appendChild(t); body.appendChild(d);
+  });
+  var row = h("div", {class:"row"});
+  var show = h("button", {class:"btn acc"}, "Compara amb la resposta model");
+  var copy = h("button", {class:"btn ghost"}, "Copia les meves respostes");
+  row.appendChild(show); row.appendChild(copy); body.appendChild(row);
+  var out = h("div"); body.appendChild(out);
+  copy.addEventListener("click", function(){
+    var txt = (a.title || "") + "\n\n" + a.qs.map(function(q, k){ return (k+1) + ". " + q.replace(/<[^>]+>/g,"") + "\n" + tas[k].value; }).join("\n\n");
+    try { navigator.clipboard.writeText(txt).then(function(){ copy.textContent = "Copiat!"; }, function(){ copy.textContent = "No s'ha pogut copiar"; }); } catch(e){ copy.textContent = "No s'ha pogut copiar"; }
+  });
+  show.addEventListener("click", function(){
+    var empty = tas.some(function(t){ return t.value.trim().length < 10; });
+    if(empty){ out.innerHTML = fb("mid", "Primer escriu les teves respostes.", "Així podràs comparar-les amb la resposta model."); return; }
+    show.disabled = true;
+    var html = '<div class="model"><h4>Resposta model</h4><ul>' + a.model.map(function(m){ return '<li>' + m + '</li>'; }).join("") + '</ul>' +
+      '<h4 style="margin-top:.8rem">Autoavaluació: marca el que has inclòs a la teva resposta</h4><div class="selfcheck">' +
+      a.check.map(function(c, k){ return '<label><input type="checkbox" data-k="' + k + '"> ' + c + '</label>'; }).join("") + '</div>' +
+      '<p style="font-size:.85rem;color:var(--muted);margin-top:.6rem">El formador també valorarà aquesta activitat. Fes clic a «Copia les meves respostes» si te les demana.</p></div>';
+    out.innerHTML = html;
+    var upd = function(){ var n = out.querySelectorAll("input:checked").length; report(a.id, n, a.check.length, true); };
+    out.querySelectorAll("input").forEach(function(x){ x.addEventListener("change", upd); });
+    upd();
+  });
+}
+
+/* ---------- 11. Escape room: cadenats amb dígits i codi final ---------- */
+var LOCK_C = '<svg viewBox="0 0 40 48" aria-hidden="true"><path d="M11 22v-8a9 9 0 0 1 18 0v8" fill="none" stroke="currentColor" stroke-width="4.5"/><rect x="5" y="21" width="30" height="24" rx="5" fill="currentColor"/><circle cx="20" cy="31" r="3.2" fill="#fff"/><rect x="18.6" y="32" width="2.8" height="7" rx="1.2" fill="#fff"/></svg>';
+var LOCK_O = '<svg viewBox="0 0 40 48" aria-hidden="true"><path d="M11 22V12a9 9 0 0 1 17.5-3" fill="none" stroke="currentColor" stroke-width="4.5"/><rect x="5" y="21" width="30" height="24" rx="5" fill="currentColor"/></svg>';
+function escape(a, body){
+  var L = a.locks, i, pts, tries, digits;
+  a._max = L.length;
+  var code = L.map(function(l){ return String(l.digit); }).join("");
+  function start(){ i = 0; pts = 0; tries = 0; digits = []; intro(); }
+  function bar(){
+    var d = h("div", {class:"esc-locks", "aria-label":"Cadenats"});
+    L.forEach(function(l, k){
+      var open = k < digits.length;
+      d.appendChild(h("div", {class:"esc-lock" + (open ? " open" : "") + (k === i && !open ? " now" : "")}, (open ? LOCK_O : LOCK_C) + '<span class="dg">' + (open ? digits[k] : "?") + '</span>'));
+    });
+    return d;
+  }
+  function intro(){
+    body.innerHTML = "";
+    var s = h("div", {class:"esc-intro"}, '<div class="esc-door">' + door(false) + '</div><div><p class="esc-story">' + a.intro + '</p><p class="esc-hint">' + L.length + ' cadenats · cada un amaga un dígit del codi de la porta.</p></div>');
+    body.appendChild(s);
+    var row = h("div", {class:"row"}); var b = h("button", {class:"btn acc"}, "Entra a la sala");
+    b.addEventListener("click", show); row.appendChild(b); body.appendChild(row);
+  }
+  function show(){
+    var l = L[i]; tries = 0;
+    body.innerHTML = "";
+    body.appendChild(bar());
+    var card = h("div", {class:"esc-card"});
+    card.innerHTML = '<div class="esc-name">' + LOCK_C + '<span>' + l.name + '</span></div>' + (l.story ? '<p class="esc-story">' + l.story + '</p>' : '') + '<p class="q">' + l.q + '</p>';
+    var opts = h("div", {class:"opts"});
+    var order = shuffle(l.o.map(function(t, k){ return {t:t, k:k}; }));
+    var msg = h("div");
+    order.forEach(function(o, n){
+      var b = h("button", {class:"opt"}, '<span class="l">' + LETTERS[n] + '</span><span>' + o.t + '</span>');
+      b.addEventListener("click", function(){
+        if(o.k !== l.a){
+          tries++; b.disabled = true; b.classList.add("wrong");
+          card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+          msg.innerHTML = fb("ko", "El cadenat no s'obre.", "Torna-ho a provar. " + (l.hint ? '<br><em>Pista: ' + l.hint + '</em>' : ''));
+          return;
+        }
+        if(tries === 0) pts++;
+        digits.push(String(l.digit));
+        opts.querySelectorAll(".opt").forEach(function(x){ x.disabled = true; if(x !== b && !x.classList.contains("wrong")) x.classList.add("dim"); });
+        b.classList.add("right");
+        msg.innerHTML = fb("ok", (tries === 0 ? "Cadenat obert a la primera! +1 punt." : "Cadenat obert.") + ' Dígit: <span class="esc-digit">' + l.digit + '</span>', l.e);
+        var nx = h("div", {class:"row"});
+        var nb = h("button", {class:"btn acc"}, i < L.length - 1 ? "Següent cadenat" : "Ves a la porta");
+        nb.addEventListener("click", function(){ i++; if(i < L.length) show(); else keypad(); });
+        nx.appendChild(nb); msg.appendChild(nx); nb.focus();
+        var top = body.querySelector(".esc-locks"); if(top) top.replaceWith(bar());
+      });
+      opts.appendChild(b);
+    });
+    card.appendChild(opts); card.appendChild(msg); body.appendChild(card);
+  }
+  function keypad(){
+    body.innerHTML = "";
+    body.appendChild(bar());
+    var wrap = h("div", {class:"esc-final"});
+    var entered = "";
+    wrap.innerHTML = '<div class="esc-door" id="' + a.id + '-door">' + door(false) + '</div>';
+    var pad = h("div", {class:"esc-pad"});
+    var disp = h("div", {class:"esc-disp", "aria-live":"polite"}, "_ ".repeat(code.length).trim());
+    pad.appendChild(h("p", {class:"esc-story"}, a.final || "Introdueix el codi amb els dígits dels cadenats, en ordre."));
+    pad.appendChild(disp);
+    var keys = h("div", {class:"esc-keys"});
+    var out = h("div");
+    function paint(){ var s = ""; for(var k=0;k<code.length;k++) s += (entered[k] || "_") + " "; disp.textContent = s.trim(); }
+    "123456789C0←".split("").forEach(function(k){
+      var b = h("button", {class:"esc-key" + (k === "C" || k === "←" ? " fn" : ""), "aria-label": k === "C" ? "Esborra-ho tot" : k === "←" ? "Esborra" : k}, k);
+      b.addEventListener("click", function(){
+        if(k === "C") entered = ""; else if(k === "←") entered = entered.slice(0, -1); else if(entered.length < code.length) entered += k;
+        paint();
+        if(entered.length === code.length){
+          if(entered === code){
+            keys.querySelectorAll("button").forEach(function(x){ x.disabled = true; });
+            disp.classList.remove("ko"); disp.classList.add("ok");
+            $("#" + a.id + "-door").innerHTML = door(true);
+            out.innerHTML = fb("ok", "Porta oberta! Has escapat.", a.outro || "");
+            out.appendChild(finishBox(pts, L.length, start));
+            report(a.id, pts, L.length, true);
+          } else {
+            disp.classList.remove("ko"); void disp.offsetWidth; disp.classList.add("ko");
+            out.innerHTML = fb("ko", "Codi incorrecte.", "Mira els dígits dels cadenats, d'esquerra a dreta.");
+            entered = ""; setTimeout(paint, 500);
+          }
+        }
+      });
+      keys.appendChild(b);
+    });
+    pad.appendChild(keys); wrap.appendChild(pad); body.appendChild(wrap); body.appendChild(out);
+  }
+  function door(open){
+    return '<svg viewBox="0 0 120 170" aria-hidden="true"><rect x="8" y="6" width="104" height="160" rx="4" fill="#3A4855"/><rect x="16" y="14" width="88" height="152" fill="' + (open ? '#FFF6D6' : '#1F2933') + '"/>' +
+      (open ? '<path d="M16 14 L52 26 V158 L16 166Z" fill="var(--acc)"/><circle cx="46" cy="92" r="3" fill="#fff"/><g fill="#C99A06"><path d="m78 60 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1Z"/></g>'
+            : '<rect x="16" y="14" width="88" height="152" fill="var(--acc)"/><rect x="26" y="26" width="68" height="56" rx="3" fill="rgba(255,255,255,.14)"/><rect x="26" y="96" width="68" height="56" rx="3" fill="rgba(255,255,255,.14)"/><circle cx="92" cy="92" r="4" fill="#fff"/><rect x="40" y="40" width="40" height="22" rx="3" fill="#1F2933"/><text x="60" y="56" text-anchor="middle" font-size="12" font-weight="700" fill="#3FD07A" font-family="monospace">' + "_".repeat(code.length) + '</text>') + '</svg>';
+  }
+  start();
+}
+
+/* ---------- 12. Sonòmetre: quines mesures toquen segons el nivell ---------- */
+function meter(a, body){
+  var M = a.measures, C = a.cases, i, pts, sel;
+  var MIN = 40, MAX = 110, CX = 110, CY = 108, R = 86;
+  a._max = C.length;
+  function ang(db){ return -90 + 180 * (Math.min(MAX, Math.max(MIN, db)) - MIN) / (MAX - MIN); }
+  function pt(db, r){ var t = (ang(db) - 90) * Math.PI / 180; return [CX + r * Math.cos(t), CY + r * Math.sin(t)]; }
+  function arc(d0, d1, col){ var p0 = pt(d0, R), p1 = pt(d1, R); return '<path d="M' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + ' A' + R + ' ' + R + ' 0 0 1 ' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + '" fill="none" stroke="' + col + '" stroke-width="18"/>'; }
+  function gauge(){
+    var g = '<svg class="mt-gauge" viewBox="-6 -16 232 162" aria-hidden="true">' + arc(MIN, 80, "#3FA06A") + arc(80, 85, "#F2C230") + arc(85, 87, "#E07B12") + arc(87, MAX, "#B3261E");
+    [40, 60, 80, 85, 87, 100].forEach(function(d){ var a1 = pt(d, R - 12), a2 = pt(d, R + 12), l = pt(d, R + 24); g += '<path d="M' + a1[0].toFixed(1) + ' ' + a1[1].toFixed(1) + 'L' + a2[0].toFixed(1) + ' ' + a2[1].toFixed(1) + '" stroke="#1F2933" stroke-width="1.5"/>' + (d === 85 ? '' : '<text x="' + l[0].toFixed(1) + '" y="' + (l[1] + 3).toFixed(1) + '" font-size="9" text-anchor="middle" fill="#5F6B76" font-family="IBM Plex Sans,Arial">' + d + '</text>'); });
+    g += '<g class="mt-needle" style="transform:rotate(' + ang(MIN) + 'deg)"><path d="M' + (CX - 3) + ' ' + CY + ' L' + CX + ' ' + (CY - R + 6) + ' L' + (CX + 3) + ' ' + CY + 'Z" fill="#1F2933"/></g><circle cx="' + CX + '" cy="' + CY + '" r="7" fill="#1F2933"/>';
+    g += '<text class="mt-read" x="' + CX + '" y="' + (CY + 28) + '" text-anchor="middle" font-size="17" font-weight="700" fill="#1F2933" font-family="ui-monospace,Menlo,monospace">-- dB(A)</text></svg>';
+    return g;
+  }
+  function setGauge(box, db, now){
+    var n = box.querySelector(".mt-needle"), t = box.querySelector(".mt-read");
+    if(now) n.style.transition = "none";
+    requestAnimationFrame(function(){ n.style.transform = "rotate(" + ang(db) + "deg)"; t.textContent = db + " dB(A)"; });
+  }
+  function need(db){ return M.map(function(m){ return db >= m.from; }); }
+  function start(){ i = 0; pts = 0; show(); }
+  function show(){
+    var cs = C[i]; sel = M.map(function(){ return false; });
+    body.innerHTML = '<div class="steps">' + C.map(function(_, k){ return '<i class="' + (k < i ? "g" : k === i ? "cur" : "") + '"></i>'; }).join("") + '</div>';
+    var wrap = h("div", {class:"mt-wrap"});
+    var left = h("div", {class:"case"}, '<div class="lbl">Mesura ' + (i+1) + ' de ' + C.length + '</div><h3>' + cs.t + '</h3><p>' + cs.d + '</p>' + gauge());
+    var right = h("div", {class:"mt-list"}, '<div class="lbl">Quines mesures són obligatòries amb aquest nivell? Marca-les totes.</div>');
+    var btns = M.map(function(m, k){
+      var b = h("button", {class:"mchip", "aria-pressed":"false"}, '<span class="bx"></span><span>' + m.t + '</span>');
+      b.addEventListener("click", function(){ sel[k] = !sel[k]; b.classList.toggle("on", sel[k]); b.setAttribute("aria-pressed", sel[k]); });
+      right.appendChild(b); return b;
+    });
+    var row = h("div", {class:"row"}); var chk = h("button", {class:"btn acc"}, "Comprova");
+    row.appendChild(chk); right.appendChild(row);
+    var out = h("div"); right.appendChild(out);
+    wrap.appendChild(left); wrap.appendChild(right); body.appendChild(wrap);
+    setTimeout(function(){ setGauge(left, cs.db); }, 60);
+    chk.addEventListener("click", function(){
+      var nd = need(cs.db), ok = true;
+      btns.forEach(function(b, k){
+        b.disabled = true;
+        if(nd[k] && sel[k]) b.classList.add("ok");
+        else if(nd[k] && !sel[k]){ b.classList.add("miss"); ok = false; }
+        else if(!nd[k] && sel[k]){ b.classList.add("ko"); ok = false; }
+        else b.classList.add("dim");
+      });
+      if(ok) pts++;
+      chk.remove();
+      out.innerHTML = fb(ok ? "ok" : "ko", ok ? "Correcte! +1 punt." : "No és del tot correcte. En verd, les que calien; amb línia discontínua, les que t'has deixat; en vermell, les que no tocaven.", cs.e);
+      var nx = h("div", {class:"row"}); var nb = h("button", {class:"btn acc"}, i < C.length - 1 ? "Següent mesura" : "Veure resultat");
+      nb.addEventListener("click", function(){ i++; if(i < C.length) show(); else end(); });
+      nx.appendChild(nb); out.appendChild(nx); nb.focus();
+    });
+  }
+  function end(){
+    body.innerHTML = "";
+    body.appendChild(finishBox(pts, C.length, start));
+    report(a.id, pts, C.length, true);
+    var free = h("div", {class:"mt-free"}, '<h3>Mode lliure</h3><p class="lbl">Mou el control i mira quines mesures s\'activen a cada nivell.</p>');
+    var wrap = h("div", {class:"mt-wrap"});
+    var left = h("div", {class:"case"}, gauge());
+    var rng = h("input", {type:"range", min:String(MIN), max:String(MAX - 5), step:"1", value:"70", "aria-label":"Nivell de soroll en dB(A)"});
+    left.appendChild(rng);
+    var right = h("div", {class:"mt-list"});
+    var items = M.map(function(m){ var d = h("div", {class:"mchip ro"}, '<span class="bx"></span><span>' + m.t + '</span>'); right.appendChild(d); return d; });
+    function upd(now){ var db = +rng.value; setGauge(left, db, now); need(db).forEach(function(n, k){ items[k].classList.toggle("ok", n); items[k].classList.toggle("dim", !n); }); }
+    rng.addEventListener("input", function(){ upd(true); });
+    wrap.appendChild(left); wrap.appendChild(right); free.appendChild(wrap); body.appendChild(free);
+    upd(false);
+  }
+  start();
+}
+
+var TYPES = {quiz:quiz, tf:tf, classify:classify, order:order, hotspot:hotspot, scenario:scenario, matrix:matrix, epi:epi, pvd:pvd, open:open, escape:escape, meter:meter};
+var TNAME = {quiz:"Repte de preguntes", tf:"Targetes", classify:"Classifica", order:"Ordena", hotspot:"Troba l'error", scenario:"Tu decideixes", matrix:"Simulador", epi:"Equipa't", pvd:"Simulador", open:"Cas pràctic", escape:"Escape room", meter:"Simulador"};
+
+/* ---------- Muntatge ---------- */
+document.addEventListener("DOMContentLoaded", function(){
+  var nav = $(".hud-nav"), main = $("#acts");
+  var OFF = window.ACT_OFF || [];
+  P.activities = P.activities.filter(function(a, k){ return OFF.indexOf(k + 1) < 0; });
+  if(!P.activities.length){ main.innerHTML = '<p class="howto">' + ICON.info + '<span>Ara mateix no hi ha activitats disponibles en aquest mòdul.</span></p>'; updateHud(false); return; }
+  P.activities.forEach(function(a, n){
+    nav.appendChild(h("a", {href:"#a-" + a.id, title:a.title}, String(n+1)));
+    var sec = h("section", {class:"act", id:"a-" + a.id});
+    sec.innerHTML = '<div class="act-head"><span class="act-num">' + (n+1) + '</span><div><div class="kicker">' + (a.kicker || TNAME[a.type]) + '</div><h2>' + a.title + '</h2></div><span class="pill">0 punts</span></div>';
+    var b = h("div", {class:"act-body"});
+    if(a.note) b.appendChild(h("div", {class:"note-box"}, ICON.warn + '<div>' + a.note + '</div>'));
+    b.appendChild(h("p", {class:"howto"}, ICON.info + '<span>' + a.how + '</span>'));
+    var inner = h("div"); b.appendChild(inner);
+    sec.appendChild(b); main.appendChild(sec);
+    try { TYPES[a.type](a, inner); } catch(e){ inner.innerHTML = '<p style="color:var(--ko)">Error carregant l\'activitat.</p>'; if(window.console) console.error(e); }
+    var pill = $(".pill", sec); pill.textContent = "0 / " + (a._max || 0) + " punts";
+  });
+  updateHud(false);
+});
+})();
+
+</script>
+<script>
+(function(){
+  var root = document.documentElement;
+  try { var t = localStorage.getItem('prl-theme'); if (t) root.setAttribute('data-theme', t); } catch(e){}
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('prl-theme', next); } catch(e){}
+  });
+})();
+</script>
+</body>
+</html>

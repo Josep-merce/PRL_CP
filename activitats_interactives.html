@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Activitats interactives · Curs bàsic de PRL</title>
+<meta name="description" content="Activitats interactives dels quatre mòduls del curs bàsic de prevenció de riscos laborals.">
+<style>
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5;
+    --text:#1b2330; --muted:#5a6577; --line:#dde2ea;
+    --accent:#e0661b; --accent-soft:#fdeee4;
+    --m1:#2f6fd1; --m2:#c2410c; --m3:#0f8a6a; --m4:#caa005;
+    --radius:14px; --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+      --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+      --accent:#f08a46; --accent-soft:#2b1d14;
+      --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+      --shadow:none;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f141b; --surface:#161d27; --surface-2:#1d2631;
+    --text:#e7ecf3; --muted:#9aa6b8; --line:#2a3542;
+    --accent:#f08a46; --accent-soft:#2b1d14;
+    --m1:#6aa0f0; --m2:#f0874f; --m3:#3fc4a0; --m4:#e0c030;
+    --shadow:none;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;}
+  a{color:var(--accent)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+
+  header.hero{background:linear-gradient(135deg,#1b2330 0%,#2a3a52 100%);color:#fff;padding:40px 0 44px}
+  .back{display:inline-block;color:#cfd8e6;text-decoration:none;font-size:.9rem;font-weight:600;margin-bottom:18px}
+  .back:hover{color:#fff}
+  .hero .tag{display:inline-block;background:var(--accent);color:#fff;font-weight:600;font-size:.8rem;
+    letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+  .hero h1{font-size:clamp(1.8rem,4.5vw,2.6rem);line-height:1.15;margin:14px 0 10px}
+  .hero p{max-width:680px;color:#cfd8e6;margin:0}
+
+  section{padding:48px 0 8px}
+  h2{font-size:1.55rem;margin:0 0 6px}
+  .lead{color:var(--muted);margin:0 0 24px}
+
+  .grid{display:grid;gap:20px;grid-template-columns:repeat(2,1fr)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;box-shadow:var(--shadow)}
+  .mod{display:flex;flex-direction:column;border-top:5px solid var(--c);text-decoration:none;color:inherit;transition:transform .15s,border-color .15s}
+  .mod:hover{transform:translateY(-2px);border-color:var(--c)}
+  .mod .head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .mod .ico{flex:none;width:44px;height:44px;border-radius:12px;background:var(--c);color:#fff;
+    display:grid;place-items:center;font-size:1.3rem}
+  .mod .code{font-weight:800;color:var(--c);font-size:.85rem;letter-spacing:.05em}
+  .mod h3{margin:0;font-size:1.08rem;line-height:1.3}
+  .mod p{margin:6px 0 0;color:var(--muted);font-size:.93rem}
+  .mod .go{margin-top:auto;padding-top:14px;font-weight:700;font-size:.9rem;color:var(--c)}
+
+  footer{margin-top:56px;padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+  .theme-btn{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;
+    padding:6px 10px;cursor:pointer;font:inherit;font-size:.85rem}
+
+  @media (max-width:560px){
+    header.hero{padding:32px 0 34px}
+    .grid{grid-template-columns:1fr}
+  }
+  @media print{
+    .theme-btn,.back{display:none}
+    header.hero{background:none;color:#000}
+    .hero p{color:#000}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <a class="back" href="index.html">← Tornar a l'inici</a><br>
+    <span class="tag">Practica</span>
+    <h1>Activitats interactives</h1>
+    <p>Tria un mòdul i posa a prova el que has après. Les activitats es corregeixen al moment i les pots repetir tantes vegades com vulguis.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="moduls">
+    <h2>Tria el mòdul</h2>
+    <p class="lead">Cada targeta obre les activitats interactives del mòdul corresponent.</p>
+    <div class="grid">
+      <a class="card mod" href="m1_activitats.html" style="--c:var(--m1)">
+        <div class="head">
+          <div class="ico" aria-hidden="true">⚖️</div>
+          <div>
+            <div class="code">M1</div>
+            <h3>Activitats interactives</h3>
+          </div>
+        </div>
+        <p>Seguretat i salut en el treball: conceptes bàsics, riscos i danys, i marc jurídic.</p>
+        <span class="go">Obre les activitats →</span>
+      </a>
+      <a class="card mod" href="m2_activitats.html" style="--c:var(--m2)">
+        <div class="head">
+          <div class="ico" aria-hidden="true">🦺</div>
+          <div>
+            <div class="code">M2</div>
+            <h3>Activitats interactives</h3>
+          </div>
+        </div>
+        <p>Riscos generals i la seva prevenció: EPI, emergències i primers auxilis.</p>
+        <span class="go">Obre les activitats →</span>
+      </a>
+      <a class="card mod" href="m3_activitats.html" style="--c:var(--m3)">
+        <div class="head">
+          <div class="ico" aria-hidden="true">💻</div>
+          <div>
+            <div class="code">M3</div>
+            <h3>Activitats interactives</h3>
+          </div>
+        </div>
+        <p>Riscos específics del sector TIC: pantalles, CPD, muntatge i riscos psicosocials.</p>
+        <span class="go">Obre les activitats →</span>
+      </a>
+      <a class="card mod" href="m4_activitats.html" style="--c:var(--m4)">
+        <div class="head">
+          <div class="ico" aria-hidden="true">📋</div>
+          <div>
+            <div class="code">M4</div>
+            <h3>Activitats interactives</h3>
+          </div>
+        </div>
+        <p>Gestió de la prevenció: pla de prevenció, modalitats organitzatives i organismes.</p>
+        <span class="go">Obre les activitats →</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center">
+    <span>Curs bàsic de Prevenció de Riscos Laborals · Sector informàtica · Basat en el programa FCOS02 del SEPE</span>
+    <button class="theme-btn" id="themeBtn" type="button">🌓 Canvia el tema</button>
+  </div>
+</footer>
+
+<script>
+  // Tema clar/fosc
+  var root = document.documentElement;
+  try { var t = localStorage.getItem('prl-theme'); if (t) root.setAttribute('data-theme', t); } catch(e){}
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var cur = root.getAttribute('data-theme') ||
+      (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('prl-theme', next); } catch(e){}
+  });
+</script>
+</body>
+</html>
