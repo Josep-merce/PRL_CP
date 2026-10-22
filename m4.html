@@ -115,9 +115,11 @@
   .glossary dt:first-child{margin-top:0}
   .glossary dd{margin:2px 0 0;color:var(--muted)}
 
-  .resum{background:var(--surface-2);border-radius:var(--radius);padding:16px 18px;margin:0 0 18px}
-  .resum .tit{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;
-    color:var(--muted);margin-bottom:8px}
+  .resum{background:var(--surface-2);background:color-mix(in srgb,var(--c) 10%,var(--surface));
+    border:1px solid var(--c);border-left-width:6px;border-radius:var(--radius);
+    padding:18px 20px;margin:28px 0 36px;box-shadow:var(--shadow)}
+  .resum .tit{font-weight:800;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--c);color:color-mix(in srgb,var(--c) 65%,var(--text));margin-bottom:10px}
   .resum ul{margin:0}
 
   .scheme{background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius);
@@ -370,17 +372,6 @@
       </tbody>
     </table>
     <p>A més, l'empresari ha de notificar per escrit a l'autoritat laboral els danys a la salut dels treballadors que s'hagin produït amb motiu del treball (art. 23.3 LPRL).</p>
-
-    <div class="resum">
-      <div class="tit">Resum 4.1</div>
-      <ul>
-        <li>La prevenció s'integra en la gestió de l'empresa mitjançant el pla de prevenció (art. 16 LPRL i art. 2 RD 39/1997).</li>
-        <li>Cicle: pla → avaluació → planificació → execució → control d'eficàcia → revisió, i torna a començar.</li>
-        <li>La planificació fixa per a cada mesura termini, responsable i recursos; el control d'eficàcia comprova que funciona i s'investiguen els danys.</li>
-        <li>Informació (art. 18) i formació (art. 19): la formació es fa en contractar i quan hi ha canvis, dins la jornada i sense cost.</li>
-        <li>L'art. 23 LPRL fixa la documentació que cal conservar a disposició de l'autoritat laboral.</li>
-      </ul>
-    </div>
   </section>
 
   <!-- A20 -->
@@ -435,6 +426,18 @@
         <p class="q-score" hidden></p>
       </div>
     </div>
+  </div>
+
+  <!-- RESUM 4.1 -->
+  <div class="resum" aria-label="Resum del bloc 4.1">
+    <div class="tit">📌 Resum del bloc 4.1</div>
+    <ul>
+      <li>La prevenció s'integra en la gestió de l'empresa mitjançant el pla de prevenció (art. 16 LPRL i art. 2 RD 39/1997).</li>
+      <li>Cicle: pla → avaluació → planificació → execució → control d'eficàcia → revisió, i torna a començar.</li>
+      <li>La planificació fixa per a cada mesura termini, responsable i recursos; el control d'eficàcia comprova que funciona i s'investiguen els danys.</li>
+      <li>Informació (art. 18) i formació (art. 19): la formació es fa en contractar i quan hi ha canvis, dins la jornada i sense cost.</li>
+      <li>L'art. 23 LPRL fixa la documentació que cal conservar a disposició de l'autoritat laboral.</li>
+    </ul>
   </div>
 
   <!-- UNITAT 4.2 -->
@@ -554,16 +557,6 @@
       <div class="tit">Exemple TIC</div>
       <p>Diversos programadors es queixen al delegat de prevenció que les cadires noves no es poden regular. El delegat ho porta a la reunió trimestral del CSS, on es proposa revisar l'avaluació dels llocs amb PVD i incloure els requisits ergonòmics en el procediment de compres. Si l'empresa no actués davant un risc greu i imminent, els delegats podrien acordar per majoria la paralització de l'activitat afectada (art. 21.3 LPRL).</p>
     </div>
-
-    <div class="resum">
-      <div class="tit">Resum 4.2</div>
-      <ul>
-        <li>Quatre modalitats: assumpció per l'empresari (fins a 10, o 25 en un únic centre), treballadors designats, servei propi (obligatori a partir de 500, o de 250 amb activitats de l'annex I) i servei aliè acreditat. També hi ha el servei mancomunat.</li>
-        <li>L'empresari mai no pot assumir la vigilància de la salut.</li>
-        <li>Delegats de prevenció (art. 35): el nombre depèn de la plantilla; tenen competències (art. 36) i garanties (art. 37).</li>
-        <li>Comitè de Seguretat i Salut (art. 38): paritari, obligatori a partir de 50 treballadors, es reuneix cada trimestre.</li>
-      </ul>
-    </div>
   </section>
 
   <!-- A21 -->
@@ -624,6 +617,17 @@
     </div>
   </div>
 
+  <!-- RESUM 4.2 -->
+  <div class="resum" aria-label="Resum del bloc 4.2">
+    <div class="tit">📌 Resum del bloc 4.2</div>
+    <ul>
+      <li>Quatre modalitats: assumpció per l'empresari (fins a 10, o 25 en un únic centre), treballadors designats, servei propi (obligatori a partir de 500, o de 250 amb activitats de l'annex I) i servei aliè acreditat. També hi ha el servei mancomunat.</li>
+      <li>L'empresari mai no pot assumir la vigilància de la salut.</li>
+      <li>Delegats de prevenció (art. 35): el nombre depèn de la plantilla; tenen competències (art. 36) i garanties (art. 37).</li>
+      <li>Comitè de Seguretat i Salut (art. 38): paritari, obligatori a partir de 50 treballadors, es reuneix cada trimestre.</li>
+    </ul>
+  </div>
+
   <!-- UNITAT 4.3 -->
   <section id="u3">
     <span class="unit-no">4.3</span>
@@ -675,16 +679,6 @@
     <div class="example">
       <div class="tit">Exemple TIC</div>
       <p>Un tècnic vol preparar una sessió per al seu equip sobre les pauses en el treball amb pantalles. Al web de l'<strong>INSST</strong> troba la guia tècnica del RD 488/1997; a l'<strong>EU-OSHA</strong>, materials de la campanya europea sobre trastorns musculoesquelètics; i a l'<strong>ICSSL</strong>, un cartell en català per penjar a l'oficina. Tot és gratuït i oficial.</p>
-    </div>
-
-    <div class="resum">
-      <div class="tit">Resum 4.3</div>
-      <ul>
-        <li>OIT (mundial, tripartida, convenis) i EU-OSHA (europea, Bilbao, campanyes i eina OiRA).</li>
-        <li>INSST: òrgan científic i tècnic estatal (NTP i guies tècniques). ITSS: vigila, sanciona i pot paralitzar treballs.</li>
-        <li>CNSST: òrgan assessor amb administracions, patronals i sindicats. Fundació Estatal: promoció de la PRL a les pimes.</li>
-        <li>A Catalunya, l'ICSSL ofereix assessorament, formació i materials en català.</li>
-      </ul>
     </div>
   </section>
 
@@ -796,6 +790,17 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- RESUM 4.3 -->
+  <div class="resum" aria-label="Resum del bloc 4.3">
+    <div class="tit">📌 Resum del bloc 4.3</div>
+    <ul>
+      <li>OIT (mundial, tripartida, convenis) i EU-OSHA (europea, Bilbao, campanyes i eina OiRA).</li>
+      <li>INSST: òrgan científic i tècnic estatal (NTP i guies tècniques). ITSS: vigila, sanciona i pot paralitzar treballs.</li>
+      <li>CNSST: òrgan assessor amb administracions, patronals i sindicats. Fundació Estatal: promoció de la PRL a les pimes.</li>
+      <li>A Catalunya, l'ICSSL ofereix assessorament, formació i materials en català.</li>
+    </ul>
   </div>
 
   <!-- GLOSSARI -->

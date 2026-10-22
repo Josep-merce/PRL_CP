@@ -129,9 +129,11 @@
   .glossary dt:first-child{margin-top:0}
   .glossary dd{margin:2px 0 0;color:var(--muted)}
 
-  .resum{background:var(--surface-2);border-radius:var(--radius);padding:16px 18px;margin:0 0 18px}
-  .resum .tit{font-weight:800;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;
-    color:var(--muted);margin-bottom:8px}
+  .resum{background:var(--surface-2);background:color-mix(in srgb,var(--c) 10%,var(--surface));
+    border:1px solid var(--c);border-left-width:6px;border-radius:var(--radius);
+    padding:18px 20px;margin:28px 0 36px;box-shadow:var(--shadow)}
+  .resum .tit{font-weight:800;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--c);margin-bottom:10px}
   .resum ul{margin:0}
 
   .scheme{background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius);
@@ -498,17 +500,6 @@
         <a href="https://osha.europa.eu/ca" target="_blank" rel="noopener">EU-OSHA (TME)</a>
       </div>
     </details>
-
-    <div class="resum">
-      <div class="tit">Resum 3.1</div>
-      <ul>
-        <li>El RD 488/1997 protegeix qui fa servir la pantalla de manera habitual; segons la guia tècnica, més de 4 h diàries o 20 h setmanals.</li>
-        <li>Pantalla a ≥ 40 cm i amb la part superior a l'alçada dels ulls; teclat amb espai per recolzar-se; cadira regulable; peus recolzats; colzes i genolls a uns 90°.</li>
-        <li>Pantalla perpendicular a les finestres; uns 500 lux; sense reflexos.</li>
-        <li>Fatiga visual i TME són els danys més habituals: es prevenen amb un lloc ben condicionat, pauses curtes i freqüents (art. 3) i vigilància de la salut (art. 4).</li>
-        <li>Un portàtil fet servir de manera continuada necessita teclat, ratolí i suport o pantalla externs.</li>
-      </ul>
-    </div>
   </section>
 
   <!-- A16 -->
@@ -606,6 +597,18 @@
         <div class="tool-out" hidden></div>
       </div>
     </div>
+  </div>
+
+  <!-- RESUM 3.1 -->
+  <div class="resum" aria-label="Resum del bloc 3.1">
+    <div class="tit">📌 Resum del bloc 3.1</div>
+    <ul>
+      <li>El RD 488/1997 protegeix qui fa servir la pantalla de manera habitual; segons la guia tècnica, més de 4 h diàries o 20 h setmanals.</li>
+      <li>Pantalla a ≥ 40 cm i amb la part superior a l'alçada dels ulls; teclat amb espai per recolzar-se; cadira regulable; peus recolzats; colzes i genolls a uns 90°.</li>
+      <li>Pantalla perpendicular a les finestres; uns 500 lux; sense reflexos.</li>
+      <li>Fatiga visual i TME són els danys més habituals: es prevenen amb un lloc ben condicionat, pauses curtes i freqüents (art. 3) i vigilància de la salut (art. 4).</li>
+      <li>Un portàtil fet servir de manera continuada necessita teclat, ratolí i suport o pantalla externs.</li>
+    </ul>
   </div>
 
   <!-- UNITAT 3.2 -->
@@ -803,18 +806,6 @@
         <a href="https://www.insst.es/" target="_blank" rel="noopener">INSST (guies tècniques)</a>
       </div>
     </details>
-
-    <div class="resum">
-      <div class="tit">Resum 3.2</div>
-      <ul>
-        <li>Es treballa sempre sense tensió (art. 4 RD 614/2001): desendollar, no obrir mai fonts ni monitors, i tractar el SAI com una font de tensió. Les cinc regles d'or només les aplica personal autoritzat.</li>
-        <li>La polsera antiestàtica protegeix el component, no la persona, i només s'usa amb l'equip desendollat.</li>
-        <li>Talls: eina adequada, guants contra riscos mecànics i ulleres amb aire comprimit.</li>
-        <li>Càrregues (RD 487/1997): 25 kg com a referència; per sobre, entre dues persones o amb elevador. Rack ancorat, carregat de baix a dalt i amb un sol equip extret alhora.</li>
-        <li>Escales de mà (RD 1215/1997, annex II 4.2): 75°, de cara, una persona; mai cadires ni plaques de fals sostre.</li>
-        <li>CPD: soroll (valors d'acció a 80 i 85 dB(A), RD 286/2006) i calor als passadissos calents. Amb l'alarma d'extinció per gas, es surt sempre i no es torna a entrar fins que s'autoritzi.</li>
-      </ul>
-    </div>
   </section>
 
   <!-- A17 -->
@@ -984,6 +975,19 @@
         <div class="tool-out" hidden></div>
       </div>
     </div>
+  </div>
+
+  <!-- RESUM 3.2 -->
+  <div class="resum" aria-label="Resum del bloc 3.2">
+    <div class="tit">📌 Resum del bloc 3.2</div>
+    <ul>
+      <li>Es treballa sempre sense tensió (art. 4 RD 614/2001): desendollar, no obrir mai fonts ni monitors, i tractar el SAI com una font de tensió. Les cinc regles d'or només les aplica personal autoritzat.</li>
+      <li>La polsera antiestàtica protegeix el component, no la persona, i només s'usa amb l'equip desendollat.</li>
+      <li>Talls: eina adequada, guants contra riscos mecànics i ulleres amb aire comprimit.</li>
+      <li>Càrregues (RD 487/1997): 25 kg com a referència; per sobre, entre dues persones o amb elevador. Rack ancorat, carregat de baix a dalt i amb un sol equip extret alhora.</li>
+      <li>Escales de mà (RD 1215/1997, annex II 4.2): 75°, de cara, una persona; mai cadires ni plaques de fals sostre.</li>
+      <li>CPD: soroll (valors d'acció a 80 i 85 dB(A), RD 286/2006) i calor als passadissos calents. Amb l'alarma d'extinció per gas, es surt sempre i no es torna a entrar fins que s'autoritzi.</li>
+    </ul>
   </div>
 
   <!-- GLOSSARI -->
