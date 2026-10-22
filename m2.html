@@ -222,6 +222,9 @@
     header.hero{background:none;color:#000}
     .hero p,.hero .back{color:#000}
   }
+  .clp-cell{display:flex;align-items:center;gap:12px}
+  .clp-cell img.clp{flex:none;width:56px;height:56px;background:#fff;border-radius:4px}
+  .clp-src{font-size:.85rem;color:var(--muted);margin-top:8px}
 </style>
 </head>
 <body>
@@ -488,17 +491,18 @@
       <caption>Pictogrames de perill CLP (rombe vermell amb fons blanc)</caption>
       <thead><tr><th>Pictograma</th><th>Significat</th><th>Exemple</th></tr></thead>
       <tbody>
-        <tr><td>Bomba que explota</td><td>Explosiu</td><td>Rar en TIC</td></tr>
-        <tr><td>Flama</td><td>Inflamable</td><td>Esprai netejador, alcohol isopropílic</td></tr>
-        <tr><td>Flama sobre un cercle</td><td>Comburent</td><td>Alguns oxidants</td></tr>
-        <tr><td>Bombona de gas</td><td>Gas a pressió</td><td>Bombones de gas d'extinció</td></tr>
-        <tr><td>Corrosió (líquid sobre mà i superfície)</td><td>Corrosiu</td><td>Àcid de bateries</td></tr>
-        <tr><td>Calavera</td><td>Toxicitat aguda</td><td>Pocs productes d'ús en TIC</td></tr>
-        <tr><td>Signe d'exclamació</td><td>Irritant, nociu, somnolència</td><td>Molts netejadors</td></tr>
-        <tr><td>Silueta amb estrella al pit</td><td>Perill greu per a la salut (cancerigen, sensibilitzant respiratori...)</td><td>Alguns dissolvents</td></tr>
-        <tr><td>Arbre i peix</td><td>Perillós per al medi ambient</td><td>Piles i alguns líquids</td></tr>
+        <tr><td><div class="clp-cell"><img class="clp" src="https://commons.wikimedia.org/wiki/Special:FilePath/GHS-pictogram-explos.svg" alt="Pictograma CLP: Bomba que explota" width="56" height="56" loading="lazy"><span>Bomba que explota</span></div></td><td>Explosiu</td><td>Rar en TIC</td></tr>
+        <tr><td><div class="clp-cell"><img class="clp" src="https://commons.wikimedia.org/wiki/Special:FilePath/GHS-pictogram-flamme.svg" alt="Pictograma CLP: Flama" width="56" height="56" loading="lazy"><span>Flama</span></div></td><td>Inflamable</td><td>Esprai netejador, alcohol isopropílic</td></tr>
+        <tr><td><div class="clp-cell"><img class="clp" src="https://commons.wikimedia.org/wiki/Special:FilePath/GHS-pictogram-rondflam.svg" alt="Pictograma CLP: Flama sobre un cercle" width="56" height="56" loading="lazy"><span>Flama sobre un cercle</span></div></td><td>Comburent</td><td>Alguns oxidants</td></tr>
+        <tr><td><div class="clp-cell"><img class="clp" src="https://commons.wikimedia.org/wiki/Special:FilePath/GHS-pictogram-bottle.svg" alt="Pictograma CLP: Bombona de gas" width="56" height="56" loading="lazy"><span>Bombona de gas</span></div></td><td>Gas a pressió</td><td>Bombones de gas d'extinció</td></tr>
+        <tr><td><div class="clp-cell"><img class="clp" src="https://commons.wikimedia.org/wiki/Special:FilePath/GHS-pictogram-acid.svg" alt="Pictograma CLP: Corrosió (líquid sobre mà i superfície)" width="56" height="56" loading="lazy"><span>Corrosió (líquid sobre mà i superfície)</span></div></td><td>Corrosiu</td><td>Àcid de bateries</td></tr>
+        <tr><td><div class="clp-cell"><img class="clp" src="https://commons.wikimedia.org/wiki/Special:FilePath/GHS-pictogram-skull.svg" alt="Pictograma CLP: Calavera" width="56" height="56" loading="lazy"><span>Calavera</span></div></td><td>Toxicitat aguda</td><td>Pocs productes d'ús en TIC</td></tr>
+        <tr><td><div class="clp-cell"><img class="clp" src="https://commons.wikimedia.org/wiki/Special:FilePath/GHS-pictogram-exclam.svg" alt="Pictograma CLP: Signe d'exclamació" width="56" height="56" loading="lazy"><span>Signe d'exclamació</span></div></td><td>Irritant, nociu, somnolència</td><td>Molts netejadors</td></tr>
+        <tr><td><div class="clp-cell"><img class="clp" src="https://commons.wikimedia.org/wiki/Special:FilePath/GHS-pictogram-silhouette.svg" alt="Pictograma CLP: Silueta amb estrella al pit" width="56" height="56" loading="lazy"><span>Silueta amb estrella al pit</span></div></td><td>Perill greu per a la salut (cancerigen, sensibilitzant respiratori...)</td><td>Alguns dissolvents</td></tr>
+        <tr><td><div class="clp-cell"><img class="clp" src="https://commons.wikimedia.org/wiki/Special:FilePath/GHS-pictogram-pollu.svg" alt="Pictograma CLP: Arbre i peix" width="56" height="56" loading="lazy"><span>Arbre i peix</span></div></td><td>Perillós per al medi ambient</td><td>Piles i alguns líquids</td></tr>
       </tbody>
     </table>
+    <p class="clp-src">Pictogrames oficials del Reglament (CE) 1272/2008 (CLP). Imatges: <a href="https://commons.wikimedia.org/wiki/Category:GHS_pictograms" target="_blank" rel="noopener">Wikimedia Commons</a> (domini públic). Més informació: <a href="https://echa.europa.eu/ca/regulations/clp/clp-pictograms" target="_blank" rel="noopener">ECHA, pictogrames CLP</a>.</p>
     </div>
 
     <h3>Agents físics</h3>
